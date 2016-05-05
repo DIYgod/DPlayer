@@ -61,6 +61,7 @@ gulp.task('watch', function () {
     gulp.watch(['src/*.js'], ['compressJS']);
     gulp.watch(['src/*.scss'], ['compressCSS']);
     gulp.watch('demo/*.html').on('change', browserSync.reload);
+    gulp.watch('demo2/*.html').on('change', browserSync.reload);
     gulp.watch('demo/font/*', ['copy']);
 });
 
