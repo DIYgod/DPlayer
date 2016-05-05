@@ -1,9 +1,35 @@
 .dplayer {
     position: relative;
 
+    &:-webkit-full-screen {
+        width: 100%;
+        height: 100%;
+        background: #000;
+    }
+
+    &.dplayer-playing {
+        .dplayer-controller-mask {
+            opacity: 0;
+        }
+        .dplayer-controller {
+            opacity: 0;
+        }
+
+        &:hover {
+            .dplayer-controller-mask {
+                opacity: 1;
+            }
+            .dplayer-controller {
+                opacity: 1;
+            }
+        }
+    }
+
     .dplayer-video-wrap {
         background: #000;
         font-size: 0;
+        width: 100%;
+        height: 100%;
 
         .dplayer-video {
             width: 100%;
@@ -19,6 +45,7 @@
         position: absolute;
         bottom: 0;
         background-position: bottom;
+        transition: all 0.3s ease;
     }
 
     .dplayer-controller {
@@ -28,6 +55,8 @@
         right: 0;
         height: 41px;
         padding: 0 20px;
+        user-select: none;
+        transition: all 0.3s ease;
 
         .dplayer-bar-wrap {
             padding: 5px 0;
@@ -76,7 +105,6 @@
                         height: 11px;
                         width: 11px;
                         border-radius: 50%;
-                        background: #fff;
                         cursor: pointer !important;
                         transition: all .3s ease-in-out;
                         transform: scale(0);
@@ -109,6 +137,7 @@
                 text-shadow: 0 0 2px rgba(0,0,0,.5);
                 vertical-align: middle;
                 font-size: 13px;
+                cursor: default;
             }
 
             .dplayer-icon {
@@ -136,6 +165,71 @@
 
             .dplayer-fill {
                 fill: #fff;
+            }
+
+            .dplayer-volume {
+                position: relative;
+                display: inline-block;
+                cursor: pointer !important;
+                height: 100%;
+
+                &:hover {
+                    .dplayer-volume-bar {
+                        width: 45px !important;
+                    }
+
+                    .dplayer-thumb {
+                        transform: scale(1) !important;
+                    }
+                }
+
+                &.dplayer-volume-active {
+                    .dplayer-volume-bar {
+                        width: 45px !important;
+                    }
+
+                    .dplayer-thumb {
+                        transform: scale(1) !important;
+                    }
+                }
+
+                .dplayer-volume-bar-wrap {
+                    display: inline-block;
+                    margin: 0 5px 0 -5px;
+                    vertical-align: middle;
+                    height: 100%;
+
+                    .dplayer-volume-bar {
+                        position: relative;
+                        top: 17px;
+                        width: 0;
+                        height: 3px;
+                        background: #aaa;
+                        transition: all 0.3s ease-in-out;
+
+                        .dplayer-volume-bar-inner {
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            height: 100%;
+                            transition: all 0.1s ease;
+
+                            .dplayer-thumb {
+                                position: absolute;
+                                top: 0;
+                                right: 5px;
+                                margin-top: -4px;
+                                margin-right: -10px;
+                                height: 11px;
+                                width: 11px;
+                                border-radius: 50%;
+                                cursor: pointer !important;
+                                transition: all .3s ease-in-out;
+                                transform: scale(0);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
