@@ -25,6 +25,15 @@
         }
     }
 
+    &.dplayer-hide-controller {
+        .dplayer-controller-mask {
+            opacity: 0 !important;
+        }
+        .dplayer-controller {
+            opacity: 0 !important;
+        }
+    }
+
     .dplayer-video-wrap {
         background: #000;
         font-size: 0;
