@@ -16,6 +16,10 @@
             opacity: 0;
         }
 
+        .dplayer-danmaku-move {
+            animation-play-state: running !important;
+        }
+
         &:hover {
             .dplayer-controller-mask {
                 opacity: 1;
@@ -36,6 +40,7 @@
     }
 
     .dplayer-video-wrap {
+        position: relative;
         background: #000;
         font-size: 0;
         width: 100%;
@@ -53,16 +58,39 @@
         right: 0;
         top: 0;
         bottom: 0;
+        font-size: 24px;
+        color: #fff;
+
+        .dplayer-danmaku-item {
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            transform: translateX(100%);
+            pointer-events: none;
+            user-select: none;
+            cursor: default;
+            white-space: nowrap;
+
+            &.dplayer-danmaku-move {
+                will-change: transform;
+                animation: danmaku 5s linear;
+                animation-play-state: paused;
+            }
+        }
+
+        @keyframes danmaku {
+            from {
+                transform: translateX(100%);
+            }
+        }
     }
 
     .dplayer-controller-mask {
-        background-repeat: repeat-x;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==);
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
         height: 98px;
         width: 100%;
         position: absolute;
         bottom: 0;
-        background-position: bottom;
         transition: all 0.3s ease;
     }
 
@@ -274,6 +302,7 @@
                     &.dplayer-setting-box-narrow {
                         width: 70px;
                         height: 180px;
+                        text-align: center;
                     }
                 }
 

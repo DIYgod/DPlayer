@@ -164,6 +164,8 @@
         // get this audio object
         this.audio = this.element.getElementsByClassName('dplayer-video')[0];
 
+        this.ptime = this.element.getElementsByClassName('dplayer-ptime')[0];
+
         // hide controller if mouse stops for 2 seconds
         let hideTime = 0;
         const hideController = () => {
@@ -354,6 +356,7 @@
                     this.loop = false;
                     this.audio.loop = this.loop;
                 }
+                settingBox.classList.remove('dplayer-setting-box-open');
             });
             loopToggle.addEventListener('change', () => {
                 if (loopToggle.checked) {
@@ -364,6 +367,7 @@
                     this.loop = false;
                     this.audio.loop = this.loop;
                 }
+                settingBox.classList.remove('dplayer-setting-box-open');
             });
 
             // speed control
@@ -389,8 +393,8 @@
                     </div>
                     <div class="dplayer-setting-speed-item" data-speed="2">
                         <span class="dplayer-label">2</span>
-                    </div>
-            `;
+                    </div>`;
+
                 const speedItem = settingBox.getElementsByClassName('dplayer-setting-speed-item');
                 for (let i = 0; i < speedItem.length; i++) {
                     speedItem[i].addEventListener('click', () => {
@@ -400,6 +404,7 @@
                             settingBox.innerHTML = settingBack;
                             settingEvent();
                         }, 300);
+                        settingBox.classList.remove('dplayer-setting-box-open');
                     });
                 }
             });
@@ -455,7 +460,7 @@
             this.trigger('canplay');
         });
 
-        // multiple music play
+        // music end
         this.ended = false;
         this.audio.addEventListener('ended', () => {
             this.updateBar('played', 1, 'width');
@@ -477,14 +482,101 @@
             this.element.getElementsByClassName('dplayer-dtime')[0].innerHTML = this.audio.duration ? this.secondToTime(this.audio.duration) : '00:00';
         }
 
-        // autoplay
-        if (this.option.autoplay && !this.isMobile) {
-            this.play();
-        }
-        this.option.autoplay = true;  // autoplay next music
+        const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
+        const danWidth = danContainer.offsetWidth;
+        const danHeight = danContainer.offsetHeight;
+        const itemHeight = 30;
+        const itemY = danHeight / itemHeight;
+        let danTunnel = {};
+        window.danTunnel = danTunnel;
 
-        if (this.isMobile) {
-            this.pause();
+        const danItemRight = (ele) => {
+            return danContainer.getBoundingClientRect().right - ele.getBoundingClientRect().right;
+        };
+
+        const getTunnel = (ele) => {
+            for (let i = 0; i <= itemY - 1; i++) {
+                let item = danTunnel[i + ''];
+                if (item && item.length) {
+                    for (let j = 0; j < item.length; j++) {
+                        if (danItemRight(item[j]) <= 0) {
+                            break;
+                        }
+                        if (j === item.length - 1) {
+                            danTunnel[i + ''].push(ele);
+                            ele.addEventListener('animationend', () => {
+                                danTunnel[i + ''].splice(0, 1);
+                            });
+                            return i;
+                        }
+                    }
+                }
+                else {
+                    danTunnel[i + ''] = [ele];
+                    ele.addEventListener('animationend', () => {
+                        danTunnel[i + ''].splice(0, 1);
+                    });
+                    return i;
+                }
+            }
+        };
+
+        this.danmakuIn = (text, color, type) => {
+            let item = document.createElement(`div`);
+            let content = document.createTextNode(text);
+            item.classList.add(`dplayer-danmaku-item`);
+            item.style.color = color;
+            item.appendChild(content);
+
+            // insert
+            danContainer.appendChild(item);
+
+            // adjust
+            item.style.width = (item.offsetWidth + 1) + 'px';
+            item.style.transform = `translateX(-${danWidth}px)`;
+            item.style.top = itemHeight * getTunnel(item) + 'px';
+            item.addEventListener('animationend', () => {
+                danContainer.removeChild(item);
+            });
+
+            // move
+            item.classList.add(`dplayer-danmaku-move`);
+        };
+        
+        // danmaku
+        if (this.option.danmaku) {
+            this.danIndex = 0;
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                        this.dan = JSON.parse(xhr.responseText).danmaku;
+                        console.log(this.dan);
+
+                        // autoplay
+                        if (this.option.autoplay && !this.isMobile) {
+                            this.play();
+                        }
+                        else if (this.isMobile) {
+                            this.pause();
+                        }
+                    }
+                    else {
+                        console.log('Request was unsuccessful: ' + xhr.status);
+                    }
+                }
+            };
+            xhr.open('get', this.option.danmaku.get, true);
+            xhr.send(null);
+        }
+        else {
+            // autoplay
+            if (this.option.autoplay && !this.isMobile) {
+                this.play();
+            }
+            else if (this.isMobile) {
+                this.pause();
+            }
         }
     }
 
@@ -499,11 +591,26 @@
             if (this.playedTime) {
                 clearInterval(this.playedTime);
             }
-            this.playedTime = setInterval(() => {
-                this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
-                this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
-                this.trigger('playing');
-            }, 100);
+            if (this.option.danmaku) {
+                this.playedTime = setInterval(() => {
+                    this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
+                    this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
+                    this.trigger('playing');
+
+                    const item = this.dan[this.danIndex];
+                    if (item && this.audio.currentTime >= item.time) {
+                        this.danmakuIn(item.text, item.color, item.type);
+                        this.danIndex++;
+                    }
+                }, 100);
+            }
+            else {
+                this.playedTime = setInterval(() => {
+                    this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
+                    this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
+                    this.trigger('playing');
+                }, 100);
+            }
             this.element.classList.add('dplayer-playing');
             this.trigger('play');
         }
