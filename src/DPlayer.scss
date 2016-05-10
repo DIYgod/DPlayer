@@ -39,6 +39,20 @@
         }
     }
 
+    .dplayer-mask {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        display: none;
+
+        &.dplayer-mask-show {
+            display: block;
+        }
+    }
+
     .dplayer-video-wrap {
         position: relative;
         background: #000;
@@ -58,7 +72,7 @@
         right: 0;
         top: 0;
         bottom: 0;
-        font-size: 24px;
+        font-size: 22px;
         color: #fff;
 
         .dplayer-danmaku-item {
@@ -200,6 +214,10 @@
                 &:hover {
                     opacity: 1;
                 }
+
+                &.dplayer-comment-icon {
+                    padding: 10px 9px 9px;
+                }
             }
 
             .dplayer-svg-shadow {
@@ -294,6 +312,7 @@
                     padding: 7px 0;
                     transition: all .3s ease-in-out;
                     overflow: hidden;
+                    z-index: 2;
 
                     &.dplayer-setting-box-open {
                         transform: translateX(0);
@@ -317,6 +336,11 @@
                         background-color: rgba(255,255,255,.1);
                     }
                 }
+            }
+
+            .dplayer-comment {
+                display: inline-block;
+                height: 100%;
             }
 
             .dplayer-label {

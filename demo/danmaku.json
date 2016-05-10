@@ -2,51 +2,51 @@
     "danmaku": [
         {
             "author": "DIYgod",
+            "time": "2.8",
+            "text": "此生无悔入",
+            "color": "#f00",
+            "type": "right"
+        },
+        {
+            "author": "DIYgod",
+            "time": "1.6",
+            "text": "此生无悔入四月来世愿做友人A",
+            "color": "#ff0",
+            "type": "right"
+        },
+        {
+            "author": "DIYgod",
             "time": "0.4",
-            "text": "比♂利比♂利爱1",
+            "text": "此生无悔入四月来世",
             "color": "#f00",
             "type": "right"
         },
         {
             "author": "DIYgod",
             "time": "0.8",
-            "text": "比♂利比♂利比♂利爱1.2",
+            "text": "此生无悔入四月来世愿做友人A此生无悔入四月来世愿做",
             "color": "#0f0",
             "type": "right"
         },
         {
             "author": "DIYgod",
             "time": "1.2",
-            "text": "比♂利比♂利爱1.4比♂利比♂利爱1.4比♂利比♂利爱1.4比♂利比♂利爱1.4比♂利比♂利爱1.4比♂利比♂利爱1.4",
+            "text": "此生无悔入四月来世愿做友人",
             "color": "#00f",
             "type": "right"
         },
         {
             "author": "DIYgod",
-            "time": "1.6",
-            "text": "比♂利比♂利爱1.6",
-            "color": "#ff0",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
             "time": "2.0",
-            "text": "比♂利比♂利比♂利爱1.8",
+            "text": "此生无悔入四月来世愿做友人A",
             "color": "#f0f",
             "type": "right"
         },
         {
             "author": "DIYgod",
             "time": "2.4",
-            "text": "比♂利比♂利比♂利爱2",
+            "text": "此生无悔入四月来世愿做友人A",
             "color": "#0ff",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "2.8",
-            "text": "比♂利比♂利爱2.2",
-            "color": "#f00",
             "type": "right"
         }
     ]
