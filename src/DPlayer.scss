@@ -1,6 +1,7 @@
 .dplayer {
     position: relative;
     overflow: hidden;
+    user-select: none;
 
     &:-webkit-full-screen {
         width: 100%;
@@ -84,6 +85,9 @@
             user-select: none;
             cursor: default;
             white-space: nowrap;
+            font-weight: bolder;
+            opacity: .7;
+            text-shadow: .5px .5px .5px rgba(0,0,0,.5);
 
             &.dplayer-danmaku-move {
                 will-change: transform;
@@ -218,6 +222,10 @@
                 &.dplayer-comment-icon {
                     padding: 10px 9px 9px;
                 }
+
+                &.dplayer-setting-icon {
+                    padding-top: 8.5px;
+                }
             }
 
             .dplayer-svg-shadow {
@@ -341,6 +349,157 @@
             .dplayer-comment {
                 display: inline-block;
                 height: 100%;
+
+                .dplayer-comment-box {
+                    position: absolute;
+                    right: 0;
+                    bottom: 50px;
+                    transform: translateX(382px);
+                    border-radius: 2px;
+                    transition: all .3s ease-in-out;
+                    z-index: 2;
+
+                    &.dplayer-comment-box-open {
+                        transform: translateX(0);
+                    }
+
+                    .dplayer-comment-setting {
+                        height: 20px;
+                        width: 20px;
+                        position: absolute;
+                        top: 7px;
+                        left: 7px;
+                        border-radius: 50%;
+                        background: #ddd;
+                        cursor: pointer;
+                        transition: all .2s ease-in-out;
+
+                        &:hover {
+                            background: #aaa;
+                        }
+                    }
+
+                    .dplayer-comment-setting-box {
+                        position: absolute;
+                        background: #fff;
+                        bottom: 40px;
+                        left: -60px;
+                        box-shadow: 0 0 25px rgba(0,0,0,.3);
+                        border-radius: 4px;
+                        padding: 5px;
+                        font-size: 14px;
+                        width: 144px;
+                        transition: all .3s ease-in-out;
+                        transform: scale(0);
+
+                        &.dplayer-comment-setting-open {
+                            transform: scale(1);
+                        }
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 100%;
+                            left: 50%;
+                            margin-left: -12px;
+                            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12"><path fill="#FFF" d="M23.7,0c-1.2,0-2.4,0.5-3.2,1.3l-7.7,7.8c-0.4,0.4-1.1,0.4-1.5,0L3.5,1.3C2.7,0.5,1.5,0,0.3,0"/></svg>');
+                            width: 24px;
+                            height: 12px;
+                        }
+
+                        input[type=radio] {
+                            display: none;
+                        }
+
+                        input:checked+span {
+                            background: #666;
+                            color: #FFF;
+                        }
+
+                        span {
+                            transition: all .1s ease-in-out;
+                        }
+
+                        label {
+                            cursor: pointer;
+                        }
+
+                        .dplayer-comment-setting-type {
+                            margin-bottom: 10px;
+
+                            span {
+                                padding: 8px;
+                                line-height: 16px;
+                                display: inline-block;
+                                border-radius: 4px;
+                            }
+                        }
+
+                        .dplayer-comment-setting-color {
+                            font-size: 0;
+
+                            label {
+                                font-size: 0;
+                                padding: 6px;
+                                display: inline-block;
+                            }
+
+                            span {
+                                width: 24px;
+                                height: 24px;
+                                display: inline-block;
+                                border-radius: 50%;
+                                box-sizing: border-box;
+                                cursor: pointer;
+                            }
+
+                            input[type=color] {
+                                width: 0;
+                                height: 0;
+                                border: 0;
+                                padding: 0;
+                                outline: 0;
+                                opacity: 0;
+                            }
+                        }
+                    }
+
+                    .dplayer-comment-input {
+                        outline: none;
+                        border: none;
+                        padding: 8px 31px;
+                        font-size: 14px;
+                        line-height: 18px;
+                        text-align: center;
+                        border-radius: 4px;
+                        width: 300px;
+                    }
+
+                    .dplayer-send-icon {
+                        height: 22px;
+                        width: 22px;
+                        position: absolute;
+                        top: 6px;
+                        right: 7px;
+                        padding: 0;
+                        opacity: 1;
+
+                        &:hover {
+                            .dplayer-fill {
+                                fill: #aaa;
+                            }
+                        }
+
+                        .dplayer-fill {
+                            transition: all .2s ease-in-out;
+                            fill: #ddd;
+                        }
+
+                        .dplayer-svg-shadow {
+                            stroke: none;
+                        }
+                    }
+                }
             }
 
             .dplayer-label {
