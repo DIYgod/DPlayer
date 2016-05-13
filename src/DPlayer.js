@@ -685,7 +685,7 @@
                     }
                 }
             };
-            xhr.open('get', this.option.danmaku.add, true);
+            xhr.open('get', this.option.danmaku.get, true);
             xhr.send(null);
         }
         else {
@@ -791,7 +791,7 @@
                     }
                 }
             };
-            xhr.open('post', this.option.danmaku.get, true);
+            xhr.open('post', this.option.danmaku.add, true);
             xhr.send(JSON.stringify(danmakuData));
 
             commentInput.value = '';
