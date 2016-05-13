@@ -46,7 +46,7 @@ gulp.task('compressJS', function() {
 // Build css files
 gulp.task('compressCSS', function() {
     gulp.src('src/*.scss')
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(cssNano())
         .pipe(rename({

@@ -33,10 +33,20 @@
 
     &.dplayer-hide-controller {
         .dplayer-controller-mask {
-            opacity: 0 !important;
+            opacity: 0;
+            transform: translateY(100%);
         }
         .dplayer-controller {
-            opacity: 0 !important;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+    }
+    &.dplayer-show-controller {
+        .dplayer-controller-mask {
+            opacity: 1;
+        }
+        .dplayer-controller {
+            opacity: 1;
         }
     }
 
@@ -373,6 +383,7 @@
                         background: #ddd;
                         cursor: pointer;
                         transition: all .2s ease-in-out;
+                        box-sizing: border-box;
 
                         &:hover {
                             background: #aaa;
@@ -411,11 +422,6 @@
                             display: none;
                         }
 
-                        input:checked+span {
-                            background: #666;
-                            color: #FFF;
-                        }
-
                         span {
                             transition: all .1s ease-in-out;
                         }
@@ -432,6 +438,11 @@
                                 line-height: 16px;
                                 display: inline-block;
                                 border-radius: 4px;
+                            }
+
+                            input:checked+span {
+                                background: #666;
+                                color: #FFF;
                             }
                         }
 
@@ -453,13 +464,8 @@
                                 cursor: pointer;
                             }
 
-                            input[type=color] {
-                                width: 0;
-                                height: 0;
-                                border: 0;
-                                padding: 0;
-                                outline: 0;
-                                opacity: 0;
+                            input:checked+span {
+                                transform: scale(1.2);
                             }
                         }
                     }

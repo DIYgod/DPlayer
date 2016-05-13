@@ -33,6 +33,10 @@ $ npm install
 $ npm run build
 ```
 
+## Related Projects
+
+- [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
+
 ## Todo
 
 - [ ] 缓冲提示

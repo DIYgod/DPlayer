@@ -138,50 +138,50 @@
                             <div class="dplayer-comment-setting-box">
                                 <div class="dplayer-comment-setting-type">
                                     <label>
-                                        <input type="radio" name="type" value="none" checked>
+                                        <input type="radio" name="dplayer-danmaku-type" value="right" checked>
                                         <span>正常</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="type" value="top">
+                                        <input type="radio" name="dplayer-danmaku-type" value="top">
                                         <span>顶部</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="type" value="bottom">
+                                        <input type="radio" name="dplayer-danmaku-type" value="bottom">
                                         <span>底部</span>
                                     </label>
                                 </div>
                                 <div class="dplayer-comment-setting-color">
                                     <label>
-                                        <input type="radio" name="color" value="#fff">
+                                        <input type="radio" name="dplayer-danmaku-color" value="#fff" checked>
                                         <span style="background: #fff; border: 1px solid rgba(0,0,0,.1);"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="color" value="#e54256">
+                                        <input type="radio" name="dplayer-danmaku-color" value="#e54256">
                                         <span style="background: #e54256"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="color" value="#ffe133">
+                                        <input type="radio" name="dplayer-danmaku-color" value="#ffe133">
                                         <span style="background: #ffe133"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="color" value="#39ccff">
+                                        <input type="radio" name="dplayer-danmaku-color" value="#39ccff">
                                         <span style="background: #39ccff"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="color" value="#f424ff">
+                                        <input type="radio" name="dplayer-danmaku-color" value="#f424ff">
                                         <span style="background: #f424ff"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="color" value="#ff9d33">
+                                        <input type="radio" name="dplayer-danmaku-color" value="#ff9d33">
                                         <span style="background: #ff9d33"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="color" value="#bde846">
+                                        <input type="radio" name="dplayer-danmaku-color" value="#bde846">
                                         <span style="background: #bde846"></span>
                                     </label>
                                     <label>
-                                        <input type="color" name="scolor">
-                                        <span style="background: #fff; border: 1px dashed rgba(0,0,0,.4);"></span>
+                                        <input type="radio" name="dplayer-danmaku-color" value="#444">
+                                        <span style="background: #444;"></span>
                                     </label>
                                 </div>
                             </div>
@@ -231,7 +231,8 @@
         this.element.getElementsByClassName('dplayer-video-wrap')[0].addEventListener('click', this.toggle);
         this.element.getElementsByClassName('dplayer-controller-mask')[0].addEventListener('click', this.toggle);
 
-        /*
+
+        /**
          * control play progress
          */
         this.playedBar = this.element.getElementsByClassName('dplayer-played')[0];
@@ -307,7 +308,8 @@
             document.addEventListener('mouseup', thumbUp);
         });
 
-        /*
+
+        /**
          * control volume
          */
         this.volumeBar = this.element.getElementsByClassName('dplayer-volume-bar-inner')[0];
@@ -400,7 +402,27 @@
             return actualTop - elementScrollTop;
         }
 
+
         /**
+         * auto hide controller
+         */
+        let hideTime = 0;
+        const hideController = () => {
+            this.element.classList.remove('dplayer-hide-controller');
+            clearTimeout(hideTime);
+            hideTime = setTimeout(() => {
+                if (this.audio.played.length) {
+                    this.element.classList.add('dplayer-hide-controller');
+                    closeSetting();
+                    closeComment();
+                }
+            }, 2000);
+        };
+        this.element.addEventListener('mousemove', hideController);
+        this.element.addEventListener('click', hideController);
+
+
+        /***
          * setting
          */
         const settingHTML = {
@@ -516,97 +538,8 @@
         };
         settingEvent();
 
-        /*
-         * comment
-         */
-        const commentIcon = this.element.getElementsByClassName('dplayer-comment-icon')[0];
-        const commentBox = this.element.getElementsByClassName('dplayer-comment-box')[0];
-        const commentSettingIcon = this.element.getElementsByClassName('dplayer-comment-setting')[0];
-        const commentSettingBox = this.element.getElementsByClassName('dplayer-comment-setting-box')[0];
 
-        const closeCommentSetting = () => {
-            if (commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
-                commentSettingBox.classList.remove('dplayer-comment-setting-open');
-            }
-        };
-        const toggleCommentSetting = () => {
-            if (commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
-                commentSettingBox.classList.remove('dplayer-comment-setting-open');
-            }
-            else {
-                commentSettingBox.classList.add('dplayer-comment-setting-open');
-            }
-        };
-
-        const closeComment = () => {
-            if (commentBox.classList.contains('dplayer-comment-box-open')) {
-                commentBox.classList.remove('dplayer-comment-box-open');
-                mask.classList.remove('dplayer-mask-show');
-            }
-        };
-        const openComment = () => {
-            commentBox.classList.add('dplayer-comment-box-open');
-            mask.classList.add('dplayer-mask-show');
-        };
-
-        mask.addEventListener('click', () => {
-            closeComment();
-            closeCommentSetting();
-        });
-        commentIcon.addEventListener('click', () => {
-            openComment();
-        });
-        commentSettingIcon.addEventListener('click', () => {
-            toggleCommentSetting();
-        });
-
-        /*
-         * auto hide controller
-         */
-        let hideTime = 0;
-        const hideController = () => {
-            this.element.classList.remove('dplayer-hide-controller');
-            clearTimeout(hideTime);
-            hideTime = setTimeout(() => {
-                if (this.audio.played.length) {
-                    this.element.classList.add('dplayer-hide-controller');
-                    closeSetting();
-                    closeComment();
-                    closeCommentSetting();
-                }
-            }, 2000);
-        };
-        this.element.addEventListener('mousemove', hideController);
-        this.element.addEventListener('click', hideController);
-
-        /*
-         * full screen
-         */
-        this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
-            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
-                if (this.element.requestFullscreen) {
-                    this.element.requestFullscreen();
-                }
-                else if (this.element.mozRequestFullScreen) {
-                    this.element.mozRequestFullScreen();
-                }
-                else if (this.element.webkitRequestFullscreen) {
-                    this.element.webkitRequestFullscreen();
-                }
-            } else {
-                if (document.cancelFullScreen) {
-                    document.cancelFullScreen();
-                }
-                else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                }
-                else if (document.webkitCancelFullScreen) {
-                    document.webkitCancelFullScreen();
-                }
-            }
-        });
-
-        /*
+        /**
          * audio events
          */
         // show audio time: the metadata has loaded or changed
@@ -655,14 +588,15 @@
             this.element.getElementsByClassName('dplayer-dtime')[0].innerHTML = this.audio.duration ? this.secondToTime(this.audio.duration) : '00:00';
         }
 
-        /*
+
+        /**
          * danmaku display
          */
         const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
-        const danWidth = danContainer.offsetWidth;
-        const danHeight = danContainer.offsetHeight;
         const itemHeight = 30;
-        const itemY = danHeight / itemHeight;
+        let danWidth;
+        let danHeight;
+        let itemY;
         let danTunnel = {};
 
         const danItemRight = (ele) => {
@@ -703,7 +637,10 @@
             }
         };
 
-        this.danmakuIn = (text, color, type) => {
+        this.danmakuIn = (text, color, type) => {  // Todo
+            danWidth = danContainer.offsetWidth;
+            danHeight = danContainer.offsetHeight;
+            itemY = danHeight / itemHeight;
             let item = document.createElement(`div`);
             let content = document.createTextNode(text);
             item.classList.add(`dplayer-danmaku-item`);
@@ -748,7 +685,7 @@
                     }
                 }
             };
-            xhr.open('get', this.option.danmaku.get, true);
+            xhr.open('get', this.option.danmaku.add, true);
             xhr.send(null);
         }
         else {
@@ -760,6 +697,154 @@
                 this.pause();
             }
         }
+
+
+        /**
+         * comment
+         */
+        const commentInput = this.element.getElementsByClassName('dplayer-comment-input')[0];
+        const commentIcon = this.element.getElementsByClassName('dplayer-comment-icon')[0];
+        const commentBox = this.element.getElementsByClassName('dplayer-comment-box')[0];
+        const commentSettingIcon = this.element.getElementsByClassName('dplayer-comment-setting')[0];
+        const commentSettingBox = this.element.getElementsByClassName('dplayer-comment-setting-box')[0];
+        const commentSendIcon = this.element.getElementsByClassName('dplayer-send-icon')[0];
+
+        const closeCommentSetting = () => {
+            if (commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
+                commentSettingBox.classList.remove('dplayer-comment-setting-open');
+            }
+        };
+        const toggleCommentSetting = () => {
+            if (commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
+                commentSettingBox.classList.remove('dplayer-comment-setting-open');
+            }
+            else {
+                commentSettingBox.classList.add('dplayer-comment-setting-open');
+            }
+        };
+
+        let disableHide = 0;
+        const closeComment = () => {
+            if (commentBox.classList.contains('dplayer-comment-box-open')) {
+                commentBox.classList.remove('dplayer-comment-box-open');
+                mask.classList.remove('dplayer-mask-show');
+                clearInterval(disableHide);
+                this.element.classList.remove('dplayer-show-controller');
+                closeCommentSetting();
+            }
+        };
+        const openComment = () => {
+            commentBox.classList.add('dplayer-comment-box-open');
+            mask.classList.add('dplayer-mask-show');
+            disableHide = setInterval(() => {
+                clearTimeout(hideTime);
+            }, 1000);
+            this.element.classList.add('dplayer-show-controller');
+        };
+
+        mask.addEventListener('click', () => {
+            closeComment();
+        });
+        commentIcon.addEventListener('click', () => {
+            openComment();
+            setTimeout(() => {
+                commentInput.focus();
+            }, 300);
+        });
+        commentSettingIcon.addEventListener('click', () => {
+            toggleCommentSetting();
+        });
+
+        // comment setting box
+        this.element.getElementsByClassName('dplayer-comment-setting-color')[0].addEventListener('click', () => {
+            const sele = this.element.querySelector('input[name="dplayer-danmaku-color"]:checked+span');
+            if (sele) {
+                commentSettingIcon.setAttribute('style', sele.getAttribute('style'));
+            }
+        });
+
+        commentInput.addEventListener('click', () => {
+            closeCommentSetting();
+        });
+
+        commentSendIcon.addEventListener('click', () => {
+            // text can't be empty
+            if (!commentInput.value.replace(/^\s+|\s+$/g, '')) {
+                alert('要输入弹幕内容啊喂！');
+                return;
+            }
+
+            const danmakuData = {
+                time: this.audio.currentTime,
+                text: commentInput.value,
+                color: this.element.querySelector('input[name="dplayer-danmaku-color"]:checked').value,
+                type: this.element.querySelector('input[name="dplayer-danmaku-type"]:checked').value
+            };
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                        console.log(JSON.parse(xhr.responseText));
+                    }
+                    else {
+                        console.log('Request was unsuccessful: ' + xhr.status);
+                    }
+                }
+            };
+            xhr.open('post', this.option.danmaku.get, true);
+            xhr.send(JSON.stringify(danmakuData));
+
+            commentInput.value = '';
+            closeComment();
+            this.danmakuIn(danmakuData.text, danmakuData.color, danmakuData.type);
+        });
+
+
+        /**
+         * full screen
+         */
+        const resetAnimation = () => {
+            danWidth = danContainer.offsetWidth;
+            const items = this.element.getElementsByClassName('dplayer-danmaku-item');
+            for (let i = 0; i < items.length; i++) {
+                items[i].style.transform = `translateX(-${danWidth}px)`;
+            }
+        };
+
+        this.element.addEventListener('fullscreenchange', () => {
+            resetAnimation();
+        });
+        this.element.addEventListener('mozfullscreenchange', () => {
+            resetAnimation();
+        });
+        this.element.addEventListener('webkitfullscreenchange', () => {
+            resetAnimation();
+        });
+        this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
+            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+                if (this.element.requestFullscreen) {
+                    this.element.requestFullscreen();
+                }
+                else if (this.element.mozRequestFullScreen) {
+                    this.element.mozRequestFullScreen();
+                }
+                else if (this.element.webkitRequestFullscreen) {
+                    this.element.webkitRequestFullscreen();
+                }
+            }
+            else {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen();
+                }
+                else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                }
+                else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+            }
+            resetAnimation();
+        });
     }
 
     /**
