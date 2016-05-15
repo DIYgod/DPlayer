@@ -1,169 +1,106 @@
 {
+    "code": 1,
     "danmaku": [
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "2.8",
+            "time": 2.8,
             "text": "此生无悔入",
             "color": "#f00",
             "type": "right"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "1.6",
+            "time": 1.6,
             "text": "此生无悔入四月来世愿做友人A",
             "color": "#ff0",
             "type": "right"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "0.4",
+            "time": 0.4,
             "text": "此生无悔入四月来世",
             "color": "#f00",
             "type": "right"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "0.8",
+            "time": 0.8,
             "text": "此生无悔入四月来世愿做友人A此生无悔入四月来世愿做",
             "color": "#0f0",
             "type": "right"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "1.2",
+            "time": 1.2,
             "text": "此生无悔入四月来世愿做友人",
             "color": "#00f",
             "type": "right"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "2.0",
+            "time": 2.0,
             "text": "此生无悔入四月来世愿做友人A",
             "color": "#f0f",
             "type": "right"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "2.4",
+            "time": 2.4,
             "text": "此生无悔入四月来世愿做友人A",
             "color": "#0ff",
             "type": "right"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "88.4",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#fff",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "88.4",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#fff",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "88.4",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#fff",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "87.8",
-            "text": "此生无悔入",
-            "color": "#f00",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "86.6",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#ff0",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "85.4",
-            "text": "此生无悔入四月来世",
-            "color": "#f00",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "85.8",
-            "text": "此生无悔入四月来世愿做友人A此生无悔入四月来世愿做",
-            "color": "#0f0",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "86.2",
-            "text": "此生无悔入四月来世愿做友人",
-            "color": "#00f",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "87.0",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#f0f",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "87.4",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#0ff",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "88.4",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#fff",
-            "type": "right"
-        },
-        {
-            "author": "DIYgod",
-            "time": "2.4",
+            "time": 2.4,
             "text": "此生无悔入四月来世",
             "color": "#f00",
             "type": "top"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "2.8",
+            "time": 2.8,
             "text": "此生无悔入四月",
             "color": "#0f0",
             "type": "top"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "4.0",
+            "time": 4.0,
             "text": "此生无悔入四月来世愿做友人A",
             "color": "#ff0",
             "type": "top"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "4.0",
+            "time": 4.0,
             "text": "此生无悔入四做友人A",
             "color": "#f0f",
             "type": "top"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "6",
+            "time": 6,
             "text": "此生无悔入",
             "color": "#f00",
             "type": "bottom"
         },
         {
+            "player": "9E2E3368B56CDBB4",
             "author": "DIYgod",
-            "time": "6.4",
+            "time": 6.4,
             "text": "此生无悔入四月来世愿做友人A",
             "color": "#f0f",
             "type": "bottom"

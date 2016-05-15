@@ -1,0 +1,13 @@
+{
+  "name": "DPlayer_nodejs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "author": "DIYgod",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongoose": "^4.1.9"
+  }
+}

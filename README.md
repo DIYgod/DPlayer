@@ -49,8 +49,6 @@ $ npm run build
 
 - [ ] 右键
 
-- [ ] 全屏进度控制
-
 ## LICENSE
 
 MIT © [DIYgod](http://github.com/DIYgod)

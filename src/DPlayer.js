@@ -300,7 +300,7 @@
                     this.trigger('playing');
 
                     const item = this.dan[this.danIndex];
-                    if (item && this.audio.currentTime >= item.time) {
+                    if (item && this.audio.currentTime >= parseFloat(item.time)) {
                         this.danmakuIn(item.text, item.color, item.type);
                         this.danIndex++;
                     }
@@ -780,7 +780,7 @@
                     }
                 }
             };
-            xhr.open('get', this.option.danmaku.get, true);
+            xhr.open('get', this.option.danmaku.api + '?id=' + this.option.danmaku.id, true);
             xhr.send(null);
         }
         else {
@@ -870,6 +870,7 @@
             }
 
             const danmakuData = {
+                id: this.option.danmaku.id,
                 time: this.audio.currentTime,
                 text: commentInput.value,
                 color: this.element.querySelector('input[name="dplayer-danmaku-color"]:checked').value,
@@ -886,7 +887,7 @@
                     }
                 }
             };
-            xhr.open('post', this.option.danmaku.add, true);
+            xhr.open('post', this.option.danmaku.api, true);
             xhr.send(JSON.stringify(danmakuData));
 
             commentInput.value = '';
