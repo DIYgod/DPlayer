@@ -84,12 +84,12 @@
         // define DPlayer events
         this.eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
         this.event = {};
-        for (let type of this.eventTypes) {
-            this.event[type] = [];
+        for (let i = 0; i < this.eventTypes.length; i++) {
+            this.event[this.eventTypes[i]] = [];
         }
         this.trigger = (type) => {
-            for (let func of this.event[type]) {
-                func();
+            for (let i = 0; i < this.event[type].length; i++) {
+                this.event[type][i]();
             }
         }
     }
@@ -235,6 +235,47 @@
         /**
          * control play progress
          */
+        // get element's view position
+        const getElementViewLeft = (element) => {
+            let actualLeft = element.offsetLeft;
+            let current = element.offsetParent;
+            let elementScrollLeft;
+            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+                while (current !== null) {
+                    actualLeft += current.offsetLeft;
+                    current = current.offsetParent;
+                }
+            }
+            else {
+                while (current !== null && current !== this.element) {
+                    actualLeft += current.offsetLeft;
+                    current = current.offsetParent;
+                }
+            }
+            elementScrollLeft = document.body.scrollLeft + document.documentElement.scrollLeft;
+            return actualLeft - elementScrollLeft;
+        };
+
+        const getElementViewTop = (element) => {
+            let actualTop = element.offsetTop;
+            let current = element.offsetParent;
+            let elementScrollTop;
+            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+                while (current !== null) {
+                    actualTop += current.offsetTop;
+                    current = current.offsetParent;
+                }
+            }
+            else {
+                while (current !== null && current !== this.element) {
+                    actualTop += current.offsetTop;
+                    current = current.offsetParent;
+                }
+            }
+            elementScrollTop = document.body.scrollTop + document.documentElement.scrollTop;
+            return actualTop - elementScrollTop;
+        };
+
         this.playedBar = this.element.getElementsByClassName('dplayer-played')[0];
         this.loadedBar = this.element.getElementsByClassName('dplayer-loaded')[0];
         this.bar = this.element.getElementsByClassName('dplayer-bar-wrap')[0];
@@ -377,31 +418,6 @@
             }
         });
 
-        // get element's view position
-        function getElementViewLeft(element) {
-            let actualLeft = element.offsetLeft;
-            let current = element.offsetParent;
-            let elementScrollLeft;
-            while (current !== null) {
-                actualLeft += current.offsetLeft;
-                current = current.offsetParent;
-            }
-            elementScrollLeft = document.body.scrollLeft + document.documentElement.scrollLeft;
-            return actualLeft - elementScrollLeft;
-        }
-
-        function getElementViewTop(element) {
-            let actualTop = element.offsetTop;
-            let current = element.offsetParent;
-            let elementScrollTop;
-            while (current !== null) {
-                actualTop += current.offsetTop;
-                current = current.offsetParent;
-            }
-            elementScrollTop = document.body.scrollTop + document.documentElement.scrollTop;
-            return actualTop - elementScrollTop;
-        }
-
 
         /**
          * auto hide controller
@@ -425,6 +441,7 @@
         /***
          * setting
          */
+        this.danOpacity = 0.7;
         const settingHTML = {
             'original': `
                     <div class="dplayer-setting-item dplayer-setting-loop">
@@ -439,6 +456,16 @@
                         <div class="dplayer-toggle">`
                 +           this.getSVG('right')
                 + `     </div>
+                    </div>
+                    <div class="dplayer-setting-item dplayer-setting-danmaku">
+                        <span class="dplayer-label">弹幕透明度</span>
+                        <div class="dplayer-danmaku-bar-wrap">
+                            <div class="dplayer-danmaku-bar">
+                                <div class="dplayer-danmaku-bar-inner" style="width: ${this.danOpacity * 100}%">
+                                    <span class="dplayer-thumb"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>`,
             'speed': `
                     <div class="dplayer-setting-speed-item" data-speed="0.5">
@@ -535,6 +562,50 @@
                     });
                 }
             });
+
+            // danmaku opacity
+            this.danmakuBar = this.element.getElementsByClassName('dplayer-danmaku-bar-inner')[0];
+            const danmakuBarWrapWrap = this.element.getElementsByClassName('dplayer-danmaku-bar-wrap')[0];
+            const danmakuBarWrap = this.element.getElementsByClassName('dplayer-danmaku-bar')[0];
+            const danmakuSettingBox = this.element.getElementsByClassName('dplayer-setting-danmaku')[0];
+            const dWidth = 130;
+            this.updateBar('danmaku', this.danOpacity, 'width');
+
+            const danmakuMove = (event) => {
+                const e = event || window.event;
+                let percentage = (e.clientX - getElementViewLeft(danmakuBarWrap)) / dWidth;
+                percentage = percentage > 0 ? percentage : 0;
+                percentage = percentage < 1 ? percentage : 1;
+                this.updateBar('danmaku', percentage, 'width');
+                const items = this.element.getElementsByClassName('dplayer-danmaku-item');
+                for (let i = 0; i < items.length; i++) {
+                    items[i].style.opacity = percentage;
+                }
+                this.danOpacity = percentage;
+            };
+            const danmakuUp = () => {
+                document.removeEventListener('mouseup', danmakuUp);
+                document.removeEventListener('mousemove', danmakuMove);
+                danmakuSettingBox.classList.remove('dplayer-setting-danmaku-active');
+            };
+
+            danmakuBarWrapWrap.addEventListener('click', (event) => {
+                const e = event || window.event;
+                let percentage = (e.clientX - getElementViewLeft(danmakuBarWrap)) / dWidth;
+                percentage = percentage > 0 ? percentage : 0;
+                percentage = percentage < 1 ? percentage : 1;
+                this.updateBar('danmaku', percentage, 'width');
+                const items = this.element.getElementsByClassName('dplayer-danmaku-item');
+                for (let i = 0; i < items.length; i++) {
+                    items[i].style.opacity = percentage;
+                }
+                this.danOpacity = percentage;
+            });
+            danmakuBarWrapWrap.addEventListener('mousedown', () => {
+                document.addEventListener('mousemove', danmakuMove);
+                document.addEventListener('mouseup', danmakuUp);
+                danmakuSettingBox.classList.add('dplayer-setting-danmaku-active');
+            });
         };
         settingEvent();
 
@@ -597,7 +668,11 @@
         let danWidth;
         let danHeight;
         let itemY;
-        let danTunnel = {};
+        let danTunnel = {
+            right: {},
+            top: {},
+            bottom: {}
+        };
 
         const danItemRight = (ele) => {
             return danContainer.getBoundingClientRect().right - ele.getBoundingClientRect().right;
@@ -607,11 +682,11 @@
             return (danWidth + ele.offsetWidth) / 5;
         };
 
-        const getTunnel = (ele) => {
+        const getTunnel = (ele, type) => {
             const tmp = danWidth / danSpeed(ele);
 
-            for (let i = 0; i <= itemY - 1; i++) {
-                let item = danTunnel[i + ''];
+            for (let i = 0; ; i++) {
+                let item = danTunnel[type][i + ''];
                 if (item && item.length) {
                     for (let j = 0; j < item.length; j++) {
                         const danRight = danItemRight(item[j]) - 10;
@@ -619,44 +694,64 @@
                             break;
                         }
                         if (j === item.length - 1) {
-                            danTunnel[i + ''].push(ele);
+                            danTunnel[type][i + ''].push(ele);
                             ele.addEventListener('animationend', () => {
-                                danTunnel[i + ''].splice(0, 1);
+                                danTunnel[type][i + ''].splice(0, 1);
                             });
-                            return i;
+                            return i % itemY;
                         }
                     }
                 }
                 else {
-                    danTunnel[i + ''] = [ele];
+                    danTunnel[type][i + ''] = [ele];
                     ele.addEventListener('animationend', () => {
-                        danTunnel[i + ''].splice(0, 1);
+                        danTunnel[type][i + ''].splice(0, 1);
                     });
-                    return i;
+                    return i % itemY;
                 }
             }
         };
 
-        this.danmakuIn = (text, color, type) => {  // Todo
+        this.danmakuIn = (text, color, type) => {
             danWidth = danContainer.offsetWidth;
             danHeight = danContainer.offsetHeight;
             itemY = danHeight / itemHeight;
             let item = document.createElement(`div`);
             let content = document.createTextNode(text);
             item.classList.add(`dplayer-danmaku-item`);
-            item.style.color = color;
+            item.classList.add(`dplayer-danmaku-${type}`);
             item.appendChild(content);
+            item.style.opacity = this.danOpacity;
 
             // insert
             danContainer.appendChild(item);
 
             // adjust
-            item.style.width = (item.offsetWidth + 1) + 'px';
-            item.style.transform = `translateX(-${danWidth}px)`;
-            item.style.top = itemHeight * getTunnel(item) + 'px';
-            item.addEventListener('animationend', () => {
-                danContainer.removeChild(item);
-            });
+            item.style.color = color;
+            switch (type) {
+                case 'right':
+                    item.style.top = itemHeight * getTunnel(item, type) + 'px';
+                    item.style.width = (item.offsetWidth + 1) + 'px';
+                    item.style.transform = `translateX(-${danWidth}px)`;
+                    item.addEventListener('animationend', () => {
+                        danContainer.removeChild(item);
+                    });
+                    break;
+                case 'top':
+                    item.style.top = itemHeight * getTunnel(item, type) + 'px';
+                    item.addEventListener('animationend', () => {
+                        danContainer.removeChild(item);
+                    });
+                    break;
+                case 'bottom':
+                    item.style.bottom = itemHeight * getTunnel(item, type) + 'px';
+                    item.addEventListener('animationend', () => {
+                        danContainer.removeChild(item);
+                    });
+                    break;
+                default:
+                    console.error(`Can't handled danmaku type: ${type}`);
+            }
 
             // move
             item.classList.add(`dplayer-danmaku-move`);

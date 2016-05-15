@@ -128,17 +128,45 @@
         },
         {
             "author": "DIYgod",
-            "time": "88.4",
-            "text": "此生无悔入四月来世愿做友人A",
-            "color": "#fff",
-            "type": "right"
+            "time": "2.4",
+            "text": "此生无悔入四月来世",
+            "color": "#f00",
+            "type": "top"
         },
         {
             "author": "DIYgod",
-            "time": "88.4",
+            "time": "2.8",
+            "text": "此生无悔入四月",
+            "color": "#0f0",
+            "type": "top"
+        },
+        {
+            "author": "DIYgod",
+            "time": "4.0",
             "text": "此生无悔入四月来世愿做友人A",
-            "color": "#fff",
-            "type": "right"
+            "color": "#ff0",
+            "type": "top"
+        },
+        {
+            "author": "DIYgod",
+            "time": "4.0",
+            "text": "此生无悔入四做友人A",
+            "color": "#f0f",
+            "type": "top"
+        },
+        {
+            "author": "DIYgod",
+            "time": "6",
+            "text": "此生无悔入",
+            "color": "#f00",
+            "type": "bottom"
+        },
+        {
+            "author": "DIYgod",
+            "time": "6.4",
+            "text": "此生无悔入四月来世愿做友人A",
+            "color": "#f0f",
+            "type": "bottom"
         }
     ]
 }

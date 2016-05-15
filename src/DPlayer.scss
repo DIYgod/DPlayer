@@ -88,16 +88,18 @@
 
         .dplayer-danmaku-item {
             display: inline-block;
-            position: absolute;
-            right: 0;
-            transform: translateX(100%);
             pointer-events: none;
             user-select: none;
             cursor: default;
             white-space: nowrap;
             font-weight: bolder;
-            opacity: .7;
             text-shadow: .5px .5px .5px rgba(0,0,0,.5);
+        }
+
+        .dplayer-danmaku-right {
+            position: absolute;
+            right: 0;
+            transform: translateX(100%);
 
             &.dplayer-danmaku-move {
                 will-change: transform;
@@ -109,6 +111,29 @@
         @keyframes danmaku {
             from {
                 transform: translateX(100%);
+            }
+        }
+
+        .dplayer-danmaku-top,
+        .dplayer-danmaku-bottom {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            visibility: hidden;
+
+            &.dplayer-danmaku-move {
+                will-change: visibility;
+                animation: danmaku-center 5s linear;
+                animation-play-state: paused;
+            }
+        }
+
+        @keyframes danmaku-center {
+            from {
+                visibility: visible;
+            }
+            to {
+                visibility: visible;
             }
         }
     }
@@ -161,6 +186,7 @@
                     background: rgba(255, 255, 255, .4);
                     height: 3px;
                     transition: all 0.5s ease;
+                    will-change: width;
                 }
 
                 .dplayer-played {
@@ -169,6 +195,7 @@
                     top: 0;
                     bottom: 0;
                     height: 3px;
+                    will-change: width;
 
                     .dplayer-thumb {
                         position: absolute;
@@ -295,6 +322,7 @@
                             left: 0;
                             height: 100%;
                             transition: all 0.1s ease;
+                            will-change: width;
 
                             .dplayer-thumb {
                                 position: absolute;
@@ -324,7 +352,7 @@
                     bottom: 50px;
                     transform: translateX(170px);
                     width: 150px;
-                    height: 60px;
+                    height: 90px;
                     border-radius: 2px;
                     background: rgba(28, 28, 28, 0.9);
                     padding: 7px 0;
@@ -352,6 +380,75 @@
 
                     &:hover {
                         background-color: rgba(255,255,255,.1);
+                    }
+                }
+
+                .dplayer-setting-danmaku {
+                    padding: 5px 0;
+
+                    .dplayer-label {
+                        padding: 0 10px;
+                        display: inline;
+                    }
+
+                    &:hover {
+                        .dplayer-label {
+                            display: none;
+                        }
+                        .dplayer-danmaku-bar-wrap {
+                            display: inline-block;
+                        }
+                    }
+
+                    &.dplayer-setting-danmaku-active {
+                        .dplayer-label {
+                            display: none;
+                        }
+                        .dplayer-danmaku-bar-wrap {
+                            display: inline-block;
+                        }
+                    }
+
+                    .dplayer-danmaku-bar-wrap {
+                        padding: 0 10px;
+                        box-sizing: border-box;
+                        display: none;
+                        vertical-align: middle;
+                        height: 100%;
+                        width: 100%;
+
+                        .dplayer-danmaku-bar {
+                            position: relative;
+                            top: 8.5px;
+                            width: 100%;
+                            height: 3px;
+                            background: #fff;
+                            transition: all 0.3s ease-in-out;
+
+                            .dplayer-danmaku-bar-inner {
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                height: 100%;
+                                transition: all 0.1s ease;
+                                background: #aaa;
+                                will-change: width;
+
+                                .dplayer-thumb {
+                                    position: absolute;
+                                    top: 0;
+                                    right: 5px;
+                                    margin-top: -4px;
+                                    margin-right: -10px;
+                                    height: 11px;
+                                    width: 11px;
+                                    border-radius: 50%;
+                                    cursor: pointer !important;
+                                    transition: all .3s ease-in-out;
+                                    background: #aaa;
+                                }
+                            }
+                        }
                     }
                 }
             }
