@@ -870,7 +870,7 @@
             }
 
             const danmakuData = {
-                id: this.option.danmaku.id,
+                player: this.option.danmaku.id,
                 time: this.audio.currentTime,
                 text: commentInput.value,
                 color: this.element.querySelector('input[name="dplayer-danmaku-color"]:checked').value,
