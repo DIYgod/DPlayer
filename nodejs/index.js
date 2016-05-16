@@ -3,7 +3,7 @@ var url = require('url');
 var util = require('util');
 var querystring = require('querystring');
 var mongoose = require('mongoose');
-var mongodbUrl = 'mongodb://localhost:27017/danmaku';
+var mongodbUrl = 'mongodb://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD + '@' + process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_PORT_27017_TCP_PORT + '/' + process.env.MONGODB_INSTANCE_NAME;
 var express = require('express');
 var app = express();
 
