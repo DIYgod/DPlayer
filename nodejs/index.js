@@ -1,12 +1,8 @@
-var http = require('http');
 var url = require('url');
-var util = require('util');
-var querystring = require('querystring');
 var mongoose = require('mongoose');
 var mongodbUrl = 'mongodb://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD + '@' + process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_PORT_27017_TCP_PORT + '/' + process.env.MONGODB_INSTANCE_NAME;
 var express = require('express');
 var app = express();
-
 
 var danmakuSchema = new mongoose.Schema({
     player: String,
@@ -69,7 +65,6 @@ app.post('/', function (req, res) {
         } catch (err) {
             jsonStr = null;
         }
-        // jsonStr ? res.send({"status":"success", "name": jsonStr.test}) : res.send({"status":"error"});
 
         var dan = new danmaku({player: jsonStr.player, author: jsonStr.author, time: jsonStr.time, text: jsonStr.text, color: jsonStr.color, type: jsonStr.type});
         dan.save(function (err, d) {
