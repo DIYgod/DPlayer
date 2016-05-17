@@ -7,7 +7,7 @@
 [![Travis](https://img.shields.io/travis/DIYgod/DPlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/DPlayer)
 [![%e2%9d%a4](https://img.shields.io/badge/made%20with-%e2%9d%a4-ff69b4.svg?style=flat-square)](https://www.anotherhome.net/)
 
-Wow, such a lovely HTML5 danmaku video player
+> Wow, such a lovely HTML5 danmaku video player
 
 ## Introduction
 
@@ -42,8 +42,6 @@ $ npm run build
 - [ ] 缓冲提示
 
 - [ ] 快捷键: 空格暂停，双击全屏, 方向键控制进度
-
-- [ ] 弹幕相关
 
 - [ ] icon 动画
 
