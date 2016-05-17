@@ -145,7 +145,6 @@ app.post('/', function (req, res) {
         }
 
         // check data
-        console.log(jsonStr.player, jsonStr.author, jsonStr.time, jsonStr.text, jsonStr.color, jsonStr.type);
         if (jsonStr.player === undefined
             || jsonStr.author === undefined
             || jsonStr.time === undefined
