@@ -58,10 +58,10 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/', function (req, res) {
-    var ip = req.headers['x-forwarded-for']
-             || req.connection.remoteAddress
-             || req.socket.remoteAddress
-             || req.connection.socket.remoteAddress;
+    var ip = req.headers['x-forwarded-for'] ||
+             req.connection.remoteAddress ||
+             req.socket.remoteAddress ||
+             req.connection.socket.remoteAddress;
     logger.info(`GET form IP: ${ip}`);
 
     mongoose.connect(mongodbUrl);
@@ -104,10 +104,10 @@ app.post('/', function (req, res) {
     var body = '';
     var jsonStr;
     var db;
-    var ip = req.headers['x-forwarded-for']
-             || req.connection.remoteAddress
-             || req.socket.remoteAddress
-             || req.connection.socket.remoteAddress;
+    var ip = req.headers['x-forwarded-for'] ||
+             req.connection.remoteAddress ||
+             req.socket.remoteAddress ||
+             req.connection.socket.remoteAddress;
 
     // check black ip
     var blanklist = fs.readFileSync('blacklist').toString().split('\n');
