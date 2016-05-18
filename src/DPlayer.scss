@@ -17,7 +17,7 @@
             opacity: 0;
         }
 
-        .dplayer-danmaku-move {
+        .dplayer-danmaku .dplayer-danmaku-move {
             animation-play-state: running !important;
         }
 
@@ -28,6 +28,16 @@
             .dplayer-controller {
                 opacity: 1;
             }
+        }
+    }
+
+    &.dplayer-loading {
+        .dplayer-bezel .diplayer-loading-icon {
+            display: block;
+        }
+
+        .dplayer-danmaku .dplayer-danmaku-move {
+            animation-play-state: paused !important;
         }
     }
 
@@ -134,6 +144,94 @@
             }
             to {
                 visibility: visible;
+            }
+        }
+    }
+
+    .dplayer-bezel {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        font-size: 22px;
+        color: #fff;
+        pointer-events: none;
+
+        .dplayer-fill {
+            fill: rgba(255, 255, 255, .8);
+        }
+
+        .dplayer-bezel-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -26px 0 0 -26px;
+            height: 52px;
+            width: 52px;
+            padding: 12px;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, .5);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+
+            &.dplayer-bezel-transition {
+                animation: bezel-hide .5s linear;
+            }
+
+            @keyframes bezel-hide {
+                from {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                to {
+                    opacity: 0;
+                    transform: scale(2);
+                }
+            }
+        }
+
+        .diplayer-loading-icon {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -18px 0 0 -18px;
+            height: 36px;
+            width: 36px;
+            pointer-events: none;
+
+            .diplayer-loading-hide {
+                display: none;
+            }
+
+            .diplayer-loading-dot {
+                animation: diplayer-loading-dot-fade .8s ease infinite;
+                opacity: 0;
+                fill: #fff;
+                transform-origin: 4px 4px;
+
+                @for $i from 7 through 1 {
+                    &.diplayer-loading-dot-#{$i} {
+                        animation-delay: .1s * $i;
+                    }
+                }
+            }
+
+            @keyframes diplayer-loading-dot-fade {
+                0% {
+                    opacity:.7;
+                    transform:scale(1.2,1.2)
+                }
+                50% {
+                    opacity:.25;
+                    transform:scale(.9,.9)
+                }
+                to {
+                    opacity:.25;
+                    transform:scale(.85,.85)
+                }
             }
         }
     }
