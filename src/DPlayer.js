@@ -258,11 +258,11 @@
             this.playButton = this.element.getElementsByClassName('dplayer-play-icon')[0];
             this.shouldpause = true;
             this.toggle = () => {
-                if (!this.shouldpause || this.ended) {
-                    this.pause();
+                if (this.audio.paused) {
+                    this.play();
                 }
                 else {
-                    this.play();
+                    this.pause();
                 }
             };
             this.playButton.addEventListener('click', this.toggle);
@@ -329,28 +329,29 @@
                     }
                 }
             });
-    
+
+            let lastPlayPos = 0;
+            let currentPlayPos = 0;
+            let bufferingDetected = false;
             this.setTime = () => {
                 if (this.option.danmaku) {
                     this.playedTime = setInterval(() => {
-                        if (!this.element.classList.contains('dplayer-loading')) {
-                            if (!this.audio.buffered.length || this.audio.buffered.end(this.audio.buffered.length - 1) - this.audio.currentTime <= 10) {
-                                this.element.classList.add('dplayer-loading');
-                                this.audio.pause();
-                                return;
-                            }
+                        // whether the video is buffering
+                        currentPlayPos = this.audio.currentTime;
+                        if (!bufferingDetected
+                            && currentPlayPos < (lastPlayPos + 0.01)
+                            && !this.audio.paused) {
+                            this.element.classList.add('dplayer-loading');
+                            bufferingDetected = true
                         }
-                        else {
-                            if (this.audio.buffered.length && this.audio.buffered.end(this.audio.buffered.length - 1) - this.audio.currentTime > 15) {
-                                this.element.classList.remove('dplayer-loading');
-                                if (!this.shouldpause) {
-                                    this.audio.play();
-                                }
-                            }
-                            else {
-                                return;
-                            }
+                        if (bufferingDetected
+                            && currentPlayPos > (lastPlayPos + 0.01)
+                            && !this.audio.paused) {
+                            this.element.classList.remove('dplayer-loading');
+                            bufferingDetected = false
                         }
+                        lastPlayPos = currentPlayPos;
+
                         this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
                         this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
                         this.trigger('playing');
@@ -364,6 +365,22 @@
                 }
                 else {
                     this.playedTime = setInterval(() => {
+                        // whether the video is buffering
+                        currentPlayPos = this.audio.currentTime;
+                        if (!bufferingDetected
+                            && currentPlayPos < (lastPlayPos + 0.01)
+                            && !this.audio.paused) {
+                            this.element.classList.add('dplayer-loading');
+                            bufferingDetected = true
+                        }
+                        if (bufferingDetected
+                            && currentPlayPos > (lastPlayPos + 0.01)
+                            && !this.audio.paused) {
+                            this.element.classList.remove('dplayer-loading');
+                            bufferingDetected = false
+                        }
+                        lastPlayPos = currentPlayPos;
+
                         this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
                         this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
                         this.trigger('playing');
@@ -1021,12 +1038,7 @@
 
                 this.playButton.innerHTML = this.getSVG('pause');
 
-                if (!this.audio.buffered.length
-                    || this.element.classList.contains('dplayer-loading') && this.audio.buffered.end(this.audio.buffered.length - 1) - this.audio.currentTime > 15
-                    || !this.element.classList.contains('dplayer-loading') && this.audio.buffered.end(this.audio.buffered.length - 1) - this.audio.currentTime > 10) {
-                    this.element.classList.remove('dplayer-loading');
-                    this.audio.play();
-                }
+                this.audio.play();
                 if (this.playedTime) {
                     clearInterval(this.playedTime);
                 }
