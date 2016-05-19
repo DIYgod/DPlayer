@@ -111,7 +111,7 @@ app.post('/', function (req, res) {
 
     // check black ip
     var blanklist = fs.readFileSync('blacklist').toString().split('\n');
-    if (blanklist.indexOf(ip) !== -1) {
+    if (blanklist.indexOf(ip.split(',')[0]) !== -1) {
         logger.info(`Reject POST form ${ip} for black ip.`);
         res.send(`{"code": -1, "msg": "Rejected for black ip."}`);
         return;
@@ -150,7 +150,8 @@ app.post('/', function (req, res) {
             || jsonStr.time === undefined
             || jsonStr.text === undefined
             || jsonStr.color === undefined
-            || jsonStr.type === undefined) {
+            || jsonStr.type === undefined
+            || jsonStr.text.length >= 30) {
             logger.info(`Reject POST form ${ip} for illegal data: ${JSON.stringify(jsonStr)}`);
             res.send(`{"code": -3, "msg": "Rejected for illegal data"}`);
             return;

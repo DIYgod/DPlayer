@@ -13,10 +13,78 @@
 
 **Notice:** This player is still under development.
 
+[Demo](http://diygod.github.io/DPlayer/demo/)
+
 ## Install
 
 ```
 $ npm install dplayer --save
+```
+
+## Usage
+
+### HTML
+
+```HTML
+<link rel="stylesheet" href="DPlayer.min.css">
+<!-- ... -->
+<div id="player1" class="dplayer"></div>
+<!-- ... -->
+<script src="DPlayer.min.js"></script>
+```
+
+### JS
+
+```JS
+var dp = new DPlayer(option);
+dp.init();
+```
+
+#### Options
+
+```JS
+var option = {
+    element: document.getElementById('player1'),                       // Optional, player element
+    autoplay: false,                                                   // Optional, autoplay video, not supported by mobile browsers
+    theme: '#FADFA3',                                                  // Optional, theme color, default: #b7daff
+    loop: true,                                                        // Optional, loop play music, default: true
+    video: {                                                           // Required, video info
+        url: '若能绽放光芒.mp4',                                         // Required, video url
+        pic: '若能绽放光芒.png'                                          // Optional, music picture
+    },
+    danmaku: {                                                         // Optional, showing danmaku
+        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, MUST BE UNIQUE
+        api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
+        token: 'tokendemo'                                             // Optional, danmaku token for api
+    }
+}
+```
+
+#### API
+
++ `dp.init()`
++ `dp.play()`
++ `dp.pause()`
+
+#### Event binding
+
+`dp.on(event, handler)`
+
+`event`:
++ `play`: Triggered when DPlayer start play
++ `pause`: Triggered when DPlayer paused
++ `canplay`: Triggered when enough data is available that DPlayer can be played
++ `playing`: Triggered periodically when DPlayer is playing
++ `ended`: Triggered when DPlayer ended
++ `error`: Triggered when an error occurs
+
+#### Work with module bundler
+
+```js
+var DPlayer = require('DPlayer');
+var dp = new DPlayer({
+    // ...
+});
 ```
 
 ## Run in development
@@ -39,15 +107,13 @@ $ npm run build
 
 ## Todo
 
-- [ ] 无弹幕
+- [ ] 中英文切换
 
-- [ ] 保存刚发的弹幕
+- [ ] 微博登录
 
-- [ ] 快捷键: 空格暂停，双击全屏, 方向键控制进度
+- [ ] 锁定IP规则
 
 - [ ] icon 动画
-
-- [ ] 右键
 
 ## LICENSE
 

@@ -99,11 +99,14 @@
          */
         init() {
             this.element = this.option.element;
+            if (!this.option.danmaku) {
+                this.element.classList.add('dplayer-no-danmaku');
+            }
     
             this.element.innerHTML = `
                 <div class="dplayer-mask"></div>
                 <div class="dplayer-video-wrap">
-                    <video class="dplayer-video" poster="${this.option.video.pic}">
+                    <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``}>
                         <source src="${this.option.video.url}" type="video/mp4">
                     </video>
                     <div class="dplayer-danmaku"></div>
@@ -216,7 +219,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <input class="dplayer-comment-input" type="text" placeholder="输入弹幕，回车发送">
+                                <input class="dplayer-comment-input" type="text" placeholder="输入弹幕，回车发送" maxlength="30">
                                 <button class="dplayer-icon dplayer-send-icon">`
                 +                   this.getSVG('send')
                 + `             </button>
@@ -241,11 +244,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="dplayer-menu">
+                    <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="http://diygod.me/">关于作者</a></span></div>
+                    <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer">关于 DPlayer 播放器</a></span></div>
+                </div>
             `;
     
             // get this audio object
             this.audio = this.element.getElementsByClassName('dplayer-video')[0];
-            window.audio = this.audio // Todo
 
             this.bezel = this.element.getElementsByClassName('dplayer-bezel-icon')[0];
             this.bezel.addEventListener('animationend', () => {
@@ -318,17 +324,17 @@
             this.loadedBar = this.element.getElementsByClassName('dplayer-loaded')[0];
             this.bar = this.element.getElementsByClassName('dplayer-bar-wrap')[0];
             let barWidth;
-    
-            this.audio.addEventListener('seeked', () => {
-                if (this.option.danmaku) {
+
+            if (this.option.danmaku) {
+                this.audio.addEventListener('seeked', () => {
                     for (let i = 0; i < this.dan.length; i++) {
                         if (this.dan[i].time >= this.audio.currentTime) {
                             this.danIndex = i;
                             return;
                         }
                     }
-                }
-            });
+                });
+            }
 
             let lastPlayPos = 0;
             let currentPlayPos = 0;
@@ -342,13 +348,13 @@
                             && currentPlayPos < (lastPlayPos + 0.01)
                             && !this.audio.paused) {
                             this.element.classList.add('dplayer-loading');
-                            bufferingDetected = true
+                            bufferingDetected = true;
                         }
                         if (bufferingDetected
                             && currentPlayPos > (lastPlayPos + 0.01)
                             && !this.audio.paused) {
                             this.element.classList.remove('dplayer-loading');
-                            bufferingDetected = false
+                            bufferingDetected = false;
                         }
                         lastPlayPos = currentPlayPos;
 
@@ -395,7 +401,6 @@
                 percentage = percentage > 0 ? percentage : 0;
                 percentage = percentage < 1 ? percentage : 1;
                 this.updateBar('played', percentage, 'width');
-                this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = this.secondToTime(percentage * this.audio.duration);
                 this.audio.currentTime = parseFloat(this.playedBar.style.width) / 100 * this.audio.duration;
             });
     
@@ -490,8 +495,8 @@
                     this.updateBar('volume', 0, 'width');
                 }
             });
-    
-    
+
+
             /**
              * auto hide controller
              */
@@ -635,50 +640,52 @@
                         });
                     }
                 });
-    
-                // danmaku opacity
-                this.danmakuBar = this.element.getElementsByClassName('dplayer-danmaku-bar-inner')[0];
-                const danmakuBarWrapWrap = this.element.getElementsByClassName('dplayer-danmaku-bar-wrap')[0];
-                const danmakuBarWrap = this.element.getElementsByClassName('dplayer-danmaku-bar')[0];
-                const danmakuSettingBox = this.element.getElementsByClassName('dplayer-setting-danmaku')[0];
-                const dWidth = 130;
-                this.updateBar('danmaku', this.danOpacity, 'width');
-    
-                const danmakuMove = (event) => {
-                    const e = event || window.event;
-                    let percentage = (e.clientX - getElementViewLeft(danmakuBarWrap)) / dWidth;
-                    percentage = percentage > 0 ? percentage : 0;
-                    percentage = percentage < 1 ? percentage : 1;
-                    this.updateBar('danmaku', percentage, 'width');
-                    const items = this.element.getElementsByClassName('dplayer-danmaku-item');
-                    for (let i = 0; i < items.length; i++) {
-                        items[i].style.opacity = percentage;
-                    }
-                    this.danOpacity = percentage;
-                };
-                const danmakuUp = () => {
-                    document.removeEventListener('mouseup', danmakuUp);
-                    document.removeEventListener('mousemove', danmakuMove);
-                    danmakuSettingBox.classList.remove('dplayer-setting-danmaku-active');
-                };
-    
-                danmakuBarWrapWrap.addEventListener('click', (event) => {
-                    const e = event || window.event;
-                    let percentage = (e.clientX - getElementViewLeft(danmakuBarWrap)) / dWidth;
-                    percentage = percentage > 0 ? percentage : 0;
-                    percentage = percentage < 1 ? percentage : 1;
-                    this.updateBar('danmaku', percentage, 'width');
-                    const items = this.element.getElementsByClassName('dplayer-danmaku-item');
-                    for (let i = 0; i < items.length; i++) {
-                        items[i].style.opacity = percentage;
-                    }
-                    this.danOpacity = percentage;
-                });
-                danmakuBarWrapWrap.addEventListener('mousedown', () => {
-                    document.addEventListener('mousemove', danmakuMove);
-                    document.addEventListener('mouseup', danmakuUp);
-                    danmakuSettingBox.classList.add('dplayer-setting-danmaku-active');
-                });
+
+                if (this.option.danmaku) {
+                    // danmaku opacity
+                    this.danmakuBar = this.element.getElementsByClassName('dplayer-danmaku-bar-inner')[0];
+                    const danmakuBarWrapWrap = this.element.getElementsByClassName('dplayer-danmaku-bar-wrap')[0];
+                    const danmakuBarWrap = this.element.getElementsByClassName('dplayer-danmaku-bar')[0];
+                    const danmakuSettingBox = this.element.getElementsByClassName('dplayer-setting-danmaku')[0];
+                    const dWidth = 130;
+                    this.updateBar('danmaku', this.danOpacity, 'width');
+
+                    const danmakuMove = (event) => {
+                        const e = event || window.event;
+                        let percentage = (e.clientX - getElementViewLeft(danmakuBarWrap)) / dWidth;
+                        percentage = percentage > 0 ? percentage : 0;
+                        percentage = percentage < 1 ? percentage : 1;
+                        this.updateBar('danmaku', percentage, 'width');
+                        const items = this.element.getElementsByClassName('dplayer-danmaku-item');
+                        for (let i = 0; i < items.length; i++) {
+                            items[i].style.opacity = percentage;
+                        }
+                        this.danOpacity = percentage;
+                    };
+                    const danmakuUp = () => {
+                        document.removeEventListener('mouseup', danmakuUp);
+                        document.removeEventListener('mousemove', danmakuMove);
+                        danmakuSettingBox.classList.remove('dplayer-setting-danmaku-active');
+                    };
+
+                    danmakuBarWrapWrap.addEventListener('click', (event) => {
+                        const e = event || window.event;
+                        let percentage = (e.clientX - getElementViewLeft(danmakuBarWrap)) / dWidth;
+                        percentage = percentage > 0 ? percentage : 0;
+                        percentage = percentage < 1 ? percentage : 1;
+                        this.updateBar('danmaku', percentage, 'width');
+                        const items = this.element.getElementsByClassName('dplayer-danmaku-item');
+                        for (let i = 0; i < items.length; i++) {
+                            items[i].style.opacity = percentage;
+                        }
+                        this.danOpacity = percentage;
+                    });
+                    danmakuBarWrapWrap.addEventListener('mousedown', () => {
+                        document.addEventListener('mousemove', danmakuMove);
+                        document.addEventListener('mouseup', danmakuUp);
+                        danmakuSettingBox.classList.add('dplayer-setting-danmaku-active');
+                    });
+                }
             };
             settingEvent();
     
@@ -731,8 +738,8 @@
             if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
                 this.element.getElementsByClassName('dplayer-dtime')[0].innerHTML = this.audio.duration ? this.secondToTime(this.audio.duration) : '00:00';
             }
-    
-    
+
+
             /**
              * danmaku display
              */
@@ -746,18 +753,18 @@
                 top: {},
                 bottom: {}
             };
-    
+
             const danItemRight = (ele) => {
                 return danContainer.getBoundingClientRect().right - ele.getBoundingClientRect().right;
             };
-    
+
             const danSpeed = (ele) => {
                 return (danWidth + ele.offsetWidth) / 5;
             };
-    
+
             const getTunnel = (ele, type) => {
                 const tmp = danWidth / danSpeed(ele);
-    
+
                 for (let i = 0; ; i++) {
                     let item = danTunnel[type][i + ''];
                     if (item && item.length) {
@@ -784,7 +791,7 @@
                     }
                 }
             };
-    
+
             this.danmakuIn = (text, color, type) => {
                 danWidth = danContainer.offsetWidth;
                 danHeight = danContainer.offsetHeight;
@@ -795,10 +802,10 @@
                 item.classList.add(`dplayer-danmaku-${type}`);
                 item.appendChild(content);
                 item.style.opacity = this.danOpacity;
-    
+
                 // insert
                 danContainer.appendChild(item);
-    
+
                 // adjust
                 item.style.color = color;
                 switch (type) {
@@ -825,11 +832,11 @@
                     default:
                         console.error(`Can't handled danmaku type: ${type}`);
                 }
-    
+
                 // move
                 item.classList.add(`dplayer-danmaku-move`);
             };
-            
+
             // danmaku
             if (this.option.danmaku) {
                 this.danIndex = 0;
@@ -838,8 +845,7 @@
                     if (xhr.readyState === 4) {
                         if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
                             this.dan = JSON.parse(xhr.responseText).danmaku.sort((a, b) => a.time - b.time);
-                            console.log(this.dan);
-    
+
                             // autoplay
                             if (this.option.autoplay && !this.isMobile) {
                                 this.play();
@@ -865,8 +871,8 @@
                     this.pause();
                 }
             }
-    
-    
+
+
             /**
              * comment
              */
@@ -897,7 +903,7 @@
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4) {
                         if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                            console.log(JSON.parse(xhr.responseText));
+                            console.log('Post danmaku: ', JSON.parse(xhr.responseText));
                         }
                         else {
                             console.log('Request was unsuccessful: ' + xhr.status);
@@ -909,9 +915,11 @@
 
                 commentInput.value = '';
                 closeComment();
+                this.dan.splice(this.danIndex, 0, danmakuData);
+                this.danIndex++;
                 this.danmakuIn(danmakuData.text, danmakuData.color, danmakuData.type);
             };
-    
+
             const closeCommentSetting = () => {
                 if (commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
                     commentSettingBox.classList.remove('dplayer-comment-setting-open');
@@ -925,7 +933,7 @@
                     commentSettingBox.classList.add('dplayer-comment-setting-open');
                 }
             };
-    
+
             let disableHide = 0;
             const closeComment = () => {
                 if (commentBox.classList.contains('dplayer-comment-box-open')) {
@@ -944,7 +952,7 @@
                 }, 1000);
                 this.element.classList.add('dplayer-show-controller');
             };
-    
+
             mask.addEventListener('click', () => {
                 closeComment();
             });
@@ -957,7 +965,7 @@
             commentSettingIcon.addEventListener('click', () => {
                 toggleCommentSetting();
             });
-    
+
             // comment setting box
             this.element.getElementsByClassName('dplayer-comment-setting-color')[0].addEventListener('click', () => {
                 const sele = this.element.querySelector('input[name="dplayer-danmaku-color"]:checked+span');
@@ -965,7 +973,7 @@
                     commentSettingIcon.setAttribute('style', sele.getAttribute('style'));
                 }
             });
-    
+
             commentInput.addEventListener('click', () => {
                 closeCommentSetting();
             });
@@ -975,7 +983,7 @@
                     sendComment();
                 }
             });
-    
+
             commentSendIcon.addEventListener('click', sendComment);
     
     
@@ -1023,6 +1031,70 @@
                     }
                 }
                 resetAnimation();
+            });
+
+            /**
+             * hot key
+             */
+            document.addEventListener('keydown', (e) => {
+                const event = e || window.event;
+                let percentage;
+                switch (event.keyCode) {
+                    case 32:
+                        event.preventDefault();
+                        this.toggle();
+                        break;
+                    case 37:
+                        event.preventDefault();
+                        this.audio.currentTime = this.audio.currentTime -5;
+                        break;
+                    case 39:
+                        event.preventDefault();
+                        this.audio.currentTime = this.audio.currentTime + 5;
+                        break;
+                    case 38:
+                        event.preventDefault();
+                        percentage = this.audio.volume + 0.1;
+                        percentage = percentage > 0 ? percentage : 0;
+                        percentage = percentage < 1 ? percentage : 1;
+                        this.updateBar('volume', percentage, 'width');
+                        this.audio.volume = percentage;
+                        if (this.audio.muted) {
+                            this.audio.muted = false;
+                        }
+                        switchVolumeIcon();
+                        break;
+                    case 40:
+                        event.preventDefault();
+                        percentage = this.audio.volume - 0.1;
+                        percentage = percentage > 0 ? percentage : 0;
+                        percentage = percentage < 1 ? percentage : 1;
+                        this.updateBar('volume', percentage, 'width');
+                        this.audio.volume = percentage;
+                        if (this.audio.muted) {
+                            this.audio.muted = false;
+                        }
+                        switchVolumeIcon();
+                        break;
+                }
+            });
+
+            /**
+             * right key
+             */
+            this.menu = this.element.getElementsByClassName('dplayer-menu')[0];
+            this.element.addEventListener('contextmenu', (e) => {
+                const event = e || window.event;
+                event.preventDefault();
+                this.menu.style.left = event.clientX - this.element.getBoundingClientRect().left + 'px';
+                this.menu.style.top = event.clientY - this.element.getBoundingClientRect().top + 'px';
+                this.menu.classList.add('dplayer-menu-show');
+
+                mask.classList.add('dplayer-mask-show');
+                mask.addEventListener('click', () => {
+                    mask.classList.remove('dplayer-mask-show');
+                    this.menu.classList.remove('dplayer-menu-show');
+                });
             });
         }
     
