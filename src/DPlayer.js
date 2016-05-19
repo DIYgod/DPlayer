@@ -332,6 +332,7 @@
                             this.danIndex = i;
                             return;
                         }
+                        this.danIndex = this.dan.length;
                     }
                 });
             }
