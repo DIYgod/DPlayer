@@ -24,6 +24,15 @@ var logger = log4js.getLogger('DPlayer');
 logger.setLevel('INFO');
 logger.info(`🍻 DPlayer start! Cheers!`);
 
+function htmlEncode(str) {
+    return str.replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#x27;")
+        .replace(/\//g, "&#x2f;");
+}
+
 var postIP = [];
 
 var mongodbUrl;
@@ -185,12 +194,12 @@ app.post('/', function (req, res) {
             cleandbListener();
 
             var dan = new danmaku({
-                player: jsonStr.player,
-                author: jsonStr.author,
+                player: htmlEncode(jsonStr.player),
+                author: htmlEncode(jsonStr.author),
                 time: jsonStr.time,
-                text: jsonStr.text,
-                color: jsonStr.color,
-                type: jsonStr.type
+                text: htmlEncode(jsonStr.text),
+                color: htmlEncode(jsonStr.color),
+                type: htmlEncode(jsonStr.type)
             });
             dan.save(function (err, d) {
                 if (err) {

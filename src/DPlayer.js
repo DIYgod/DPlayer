@@ -800,10 +800,9 @@
                 danHeight = danContainer.offsetHeight;
                 itemY = danHeight / itemHeight;
                 let item = document.createElement(`div`);
-                let content = document.createTextNode(text);
                 item.classList.add(`dplayer-danmaku-item`);
                 item.classList.add(`dplayer-danmaku-${type}`);
-                item.appendChild(content);
+                item.innerHTML = text;
                 item.style.opacity = this.danOpacity;
 
                 // insert
@@ -886,6 +885,15 @@
             const commentSettingBox = this.element.getElementsByClassName('dplayer-comment-setting-box')[0];
             const commentSendIcon = this.element.getElementsByClassName('dplayer-send-icon')[0];
 
+            const htmlEncode = (str) => {
+                return str.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#x27;")
+                    .replace(/\//g, "&#x2f;");
+            };
+
             const sendComment = () => {
                 // text can't be empty
                 if (!commentInput.value.replace(/^\s+|\s+$/g, '')) {
@@ -920,7 +928,7 @@
                 closeComment();
                 this.dan.splice(this.danIndex, 0, danmakuData);
                 this.danIndex++;
-                this.danmakuIn(danmakuData.text, danmakuData.color, danmakuData.type);
+                this.danmakuIn(htmlEncode(danmakuData.text), danmakuData.color, danmakuData.type);
             };
 
             const closeCommentSetting = () => {
