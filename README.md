@@ -131,8 +131,6 @@ $ npm run build
 
 - [ ] icon 动画
 
-- [ ] bug: 弹幕发送框隐藏再输入页面出错; 输入空格; 全屏弹幕过快
-
 ## LICENSE
 
 MIT © [DIYgod](http://github.com/DIYgod)

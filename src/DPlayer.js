@@ -895,6 +895,8 @@
             };
 
             const sendComment = () => {
+                commentInput.blur();
+
                 // text can't be empty
                 if (!commentInput.value.replace(/^\s+|\s+$/g, '')) {
                     alert('要输入弹幕内容啊喂！');
@@ -953,6 +955,7 @@
                     clearInterval(disableHide);
                     this.element.classList.remove('dplayer-show-controller');
                     closeCommentSetting();
+                    document.addEventListener('keydown', handleKeyDown);
                 }
             };
             const openComment = () => {
@@ -962,6 +965,7 @@
                     clearTimeout(hideTime);
                 }, 1000);
                 this.element.classList.add('dplayer-show-controller');
+                document.removeEventListener('keydown', handleKeyDown);
             };
 
             mask.addEventListener('click', () => {
@@ -1047,7 +1051,7 @@
             /**
              * hot key
              */
-            document.addEventListener('keydown', (e) => {
+            const handleKeyDown = (e) => {
                 const event = e || window.event;
                 let percentage;
                 switch (event.keyCode) {
@@ -1088,7 +1092,8 @@
                         switchVolumeIcon();
                         break;
                 }
-            });
+            };
+            document.addEventListener('keydown', handleKeyDown);
 
             /**
              * right key

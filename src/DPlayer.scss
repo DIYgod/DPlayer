@@ -8,6 +8,19 @@
         width: 100%;
         height: 100%;
         background: #000;
+
+        .dplayer-danmaku-top,
+        .dplayer-danmaku-bottom {
+            &.dplayer-danmaku-move {
+                animation: danmaku-center 8s linear !important;
+            }
+        }
+
+        .dplayer-danmaku-right {
+            &.dplayer-danmaku-move {
+                animation: danmaku 8s linear !important;;
+            }
+        }
     }
 
     &.dplayer-no-danmaku {
