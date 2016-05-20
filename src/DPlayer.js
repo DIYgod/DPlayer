@@ -172,12 +172,12 @@
                                 <div class="dplayer-comment-setting-box">
                                     <div class="dplayer-comment-setting-type">
                                         <label>
-                                            <input type="radio" name="dplayer-danmaku-type" value="right" checked>
-                                            <span>正常</span>
-                                        </label>
-                                        <label>
                                             <input type="radio" name="dplayer-danmaku-type" value="top">
                                             <span>顶部</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="dplayer-danmaku-type" value="right" checked>
+                                            <span>滚动</span>
                                         </label>
                                         <label>
                                             <input type="radio" name="dplayer-danmaku-type" value="bottom">
