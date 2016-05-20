@@ -15,6 +15,9 @@
 
 [Demo](http://diygod.github.io/DPlayer/demo/)
 
+Screenshot
+![image](http://i.imgur.com/9IUHIj1.jpg)
+
 ## Install
 
 ```
