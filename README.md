@@ -56,7 +56,7 @@ var option = {
         pic: '若能绽放光芒.png'                                          // Optional, music picture
     },
     danmaku: {                                                         // Optional, showing danmaku
-        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, MUST BE UNIQUE
+        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, MUST BE UNIQUE, CAN NOT USE THESE IN YOUR NEW PLAYER: `https://dplayer.daoapp.io/list`
         api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
         token: 'tokendemo'                                             // Optional, danmaku token for api
     }
@@ -89,6 +89,19 @@ var dp = new DPlayer({
     // ...
 });
 ```
+
+### Danmaku back-end
+
+**Ready-made API:**
+
+`https://dplayer.daoapp.io/`
+
+**Build yourself:**
+
+Required environment
+
+- Node.js
+- Mongodb
 
 ## Run in development
 

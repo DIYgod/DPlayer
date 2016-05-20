@@ -35,7 +35,9 @@ else {
 }
 
 var danmakuSchema = new mongoose.Schema({
-    player: String,
+    player: {
+        type: [String], index: true
+    },
     author: String,
     time: Number,
     text: String,
@@ -215,6 +217,38 @@ app.post('/', function (req, res) {
     function cleanListener () {
         req.removeListener('data', dataListener);
         req.removeListener('end', endListener);
+    }
+});
+
+app.get('/list', function (req, res) {
+    mongoose.connect(mongodbUrl);
+    var db = mongoose.connection;
+    db.on('error', errorListener);
+
+    db.once('open', function() {
+        cleanListener();
+        danmaku.distinct('player', function (err, data) {
+            if (err) {
+                logger.error(err);
+            }
+
+            var json = ``;
+            for (var i = 0; i < data.length; i++) {
+                json += data[i] + `<br>`;
+            }
+            res.send(json);
+            db.close();
+        })
+    });
+
+    function errorListener (err) {
+        cleanListener();
+        logger.error(err);
+        res.send(`{"code": 0, "msg": "Error happens, please contact system administrator."}`);
+    }
+
+    function cleanListener () {
+        db.removeListener('error', errorListener);
     }
 });
 
