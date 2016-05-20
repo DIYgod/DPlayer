@@ -43,7 +43,7 @@ var dp = new DPlayer(option);
 dp.init();
 ```
 
-#### Options
+**Options**
 
 ```JS
 var option = {
@@ -63,13 +63,13 @@ var option = {
 }
 ```
 
-#### API
+**API**
 
 + `dp.init()`
 + `dp.play()`
 + `dp.pause()`
 
-#### Event binding
+**Event binding**
 
 `dp.on(event, handler)`
 
@@ -81,7 +81,7 @@ var option = {
 + `ended`: Triggered when DPlayer ended
 + `error`: Triggered when an error occurs
 
-#### Work with module bundler
+**Work with module bundler**
 
 ```js
 var DPlayer = require('DPlayer');
