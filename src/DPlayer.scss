@@ -583,20 +583,28 @@
                         transform: translateX(0);
                     }
 
-                    .dplayer-comment-setting {
-                        height: 20px;
-                        width: 20px;
+                    .dplayer-comment-setting-icon {
+                        height: 24px;
+                        width: 24px;
                         position: absolute;
-                        top: 7px;
+                        top: 5px;
                         left: 7px;
-                        border-radius: 50%;
-                        background: #ddd;
-                        cursor: pointer;
-                        transition: all .2s ease-in-out;
-                        box-sizing: border-box;
+                        padding: 0;
+                        opacity: 1;
 
                         &:hover {
-                            background: #aaa;
+                            .dplayer-fill {
+                                fill: #aaa;
+                            }
+                        }
+
+                        .dplayer-fill {
+                            transition: all .2s ease-in-out;
+                            fill: #ddd;
+                        }
+
+                        .dplayer-svg-shadow {
+                            stroke: none;
                         }
                     }
 
@@ -604,7 +612,7 @@
                         position: absolute;
                         background: #fff;
                         bottom: 40px;
-                        left: -60px;
+                        left: -82.5px;
                         box-shadow: 0 0 25px rgba(0,0,0,.3);
                         border-radius: 4px;
                         padding: 5px;
@@ -671,7 +679,7 @@
                                 width: 24px;
                                 height: 24px;
                                 display: inline-block;
-                                border-radius: 50%;
+                                border-radius: 7px;
                                 box-sizing: border-box;
                                 cursor: pointer;
 

@@ -168,7 +168,9 @@
                 +               this.getSVG('comment')
                 + `         </button>
                             <div class="dplayer-comment-box">
-                                <div class="dplayer-comment-setting"></div>
+                                <button class="dplayer-icon dplayer-comment-setting-icon">`
+                +                   this.getSVG('setting')
+                + `             </button>
                                 <div class="dplayer-comment-setting-box">
                                     <div class="dplayer-comment-setting-type">
                                         <label>
@@ -194,24 +196,24 @@
                                             <span style="background: #e54256"></span>
                                         </label>
                                         <label>
+                                            <input type="radio" name="dplayer-danmaku-color" value="#FFAB00">
+                                            <span style="background: #FFAB00"></span>
+                                        </label>
+                                        <label>
                                             <input type="radio" name="dplayer-danmaku-color" value="#ffe133">
                                             <span style="background: #ffe133"></span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="dplayer-danmaku-color" value="#64DD17">
+                                            <span style="background: #64DD17"></span>
                                         </label>
                                         <label>
                                             <input type="radio" name="dplayer-danmaku-color" value="#39ccff">
                                             <span style="background: #39ccff"></span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="dplayer-danmaku-color" value="#f424ff">
-                                            <span style="background: #f424ff"></span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="dplayer-danmaku-color" value="#ff9d33">
-                                            <span style="background: #ff9d33"></span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="dplayer-danmaku-color" value="#bde846">
-                                            <span style="background: #bde846"></span>
+                                            <input type="radio" name="dplayer-danmaku-color" value="#D500F9">
+                                            <span style="background: #D500F9"></span>
                                         </label>
                                         <label>
                                             <input type="radio" name="dplayer-danmaku-color" value="#444">
@@ -880,7 +882,7 @@
             const commentInput = this.element.getElementsByClassName('dplayer-comment-input')[0];
             const commentIcon = this.element.getElementsByClassName('dplayer-comment-icon')[0];
             const commentBox = this.element.getElementsByClassName('dplayer-comment-box')[0];
-            const commentSettingIcon = this.element.getElementsByClassName('dplayer-comment-setting')[0];
+            const commentSettingIcon = this.element.getElementsByClassName('dplayer-comment-setting-icon')[0];
             const commentSettingBox = this.element.getElementsByClassName('dplayer-comment-setting-box')[0];
             const commentSendIcon = this.element.getElementsByClassName('dplayer-send-icon')[0];
 
@@ -971,7 +973,7 @@
             this.element.getElementsByClassName('dplayer-comment-setting-color')[0].addEventListener('click', () => {
                 const sele = this.element.querySelector('input[name="dplayer-danmaku-color"]:checked+span');
                 if (sele) {
-                    commentSettingIcon.setAttribute('style', sele.getAttribute('style'));
+                    commentSettingIcon.getElementsByClassName('dplayer-fill')[0].style.fill = this.element.querySelector('input[name="dplayer-danmaku-color"]:checked').value;
                 }
             });
 
