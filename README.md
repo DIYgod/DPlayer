@@ -120,6 +120,7 @@ $ npm run build
 ## Related Projects
 
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
+- [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
 
 ## Todo
 
