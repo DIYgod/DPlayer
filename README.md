@@ -11,8 +11,6 @@
 
 ## Introduction
 
-**Notice:** This player is still under development.
-
 [Demo](http://diygod.github.io/DPlayer/demo/)
 
 Screenshot
@@ -58,7 +56,8 @@ var option = {
     danmaku: {                                                         // Optional, showing danmaku
         id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, MUST BE UNIQUE, CAN NOT USE THESE IN YOUR NEW PLAYER: `https://dplayer.daoapp.io/list`
         api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
-        token: 'tokendemo'                                             // Optional, danmaku token for api
+        token: 'tokendemo',                                            // Optional, danmaku token for api
+        maximum: 1000                                                  // Optional, maximum quantity of danmaku
     }
 }
 ```
@@ -85,9 +84,8 @@ var option = {
 
 ```js
 var DPlayer = require('DPlayer');
-var dp = new DPlayer({
-    // ...
-});
+var dp = new DPlayer(option);
+dp.init();
 ```
 
 ### Danmaku back-end
@@ -124,6 +122,8 @@ $ npm run build
 
 ## Todo
 
+- [ ] 记录播放位置 记录透明度
+
 - [ ] 中英文切换
 
 - [ ] 微博登录
@@ -131,6 +131,8 @@ $ npm run build
 - [ ] 锁定IP规则
 
 - [ ] icon 动画
+
+- [ ] 字体
 
 ## LICENSE
 

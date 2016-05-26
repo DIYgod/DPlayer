@@ -25,7 +25,7 @@
             this.getSVG = (type) => {
                 return `
                     <svg xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" version="1.1" viewBox="${this.svg[type][0]}" width="100%">
-                        <use class="dplayer-svg-shadow" xlink:href="#dplayer-${type}"></use>
+                        <use xlink:href="#dplayer-${type}"></use>
                         <path class="dplayer-fill" d="${this.svg[type][1]}" id="dplayer-${type}"></path>
                     </svg>
                 `;
@@ -248,6 +248,7 @@
                 </div>
                 <div class="dplayer-menu">
                     <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="http://diygod.me/">关于作者</a></span></div>
+                    <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer/issues">播放器意见反馈</a></span></div>
                     <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer">关于 DPlayer 播放器</a></span></div>
                 </div>
             `;
@@ -328,7 +329,7 @@
             let barWidth;
 
             if (this.option.danmaku) {
-                this.audio.addEventListener('seeked', () => {
+                this.audio.addEventListener('seeking', () => {
                     for (let i = 0; i < this.dan.length; i++) {
                         if (this.dan[i].time >= this.audio.currentTime) {
                             this.danIndex = i;
@@ -343,57 +344,42 @@
             let currentPlayPos = 0;
             let bufferingDetected = false;
             this.setTime = () => {
-                if (this.option.danmaku) {
-                    this.playedTime = setInterval(() => {
-                        // whether the video is buffering
-                        currentPlayPos = this.audio.currentTime;
-                        if (!bufferingDetected
-                            && currentPlayPos < (lastPlayPos + 0.01)
-                            && !this.audio.paused) {
-                            this.element.classList.add('dplayer-loading');
-                            bufferingDetected = true;
-                        }
-                        if (bufferingDetected
-                            && currentPlayPos > (lastPlayPos + 0.01)
-                            && !this.audio.paused) {
-                            this.element.classList.remove('dplayer-loading');
-                            bufferingDetected = false;
-                        }
-                        lastPlayPos = currentPlayPos;
+                this.playedTime = setInterval(() => {
+                    // whether the video is buffering
+                    currentPlayPos = this.audio.currentTime;
+                    if (!bufferingDetected
+                        && currentPlayPos < (lastPlayPos + 0.01)
+                        && !this.audio.paused) {
+                        this.element.classList.add('dplayer-loading');
+                        bufferingDetected = true;
+                    }
+                    if (bufferingDetected
+                        && currentPlayPos > (lastPlayPos + 0.01)
+                        && !this.audio.paused) {
+                        this.element.classList.remove('dplayer-loading');
+                        bufferingDetected = false;
+                    }
+                    lastPlayPos = currentPlayPos;
 
-                        this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
-                        this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
-                        this.trigger('playing');
-    
-                        const item = this.dan[this.danIndex];
-                        if (item && this.audio.currentTime >= parseFloat(item.time)) {
+                    this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
+                    this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
+                    this.trigger('playing');
+                }, 100);
+                if (this.option.danmaku) {
+                    this.danmakuTime = setInterval(() => {
+                        let item = this.dan[this.danIndex];
+                        while (item && this.audio.currentTime >= parseFloat(item.time)) {
                             this.danmakuIn(item.text, item.color, item.type);
                             this.danIndex++;
+                            item = this.dan[this.danIndex];
                         }
-                    }, 100);
+                    }, 0);
                 }
-                else {
-                    this.playedTime = setInterval(() => {
-                        // whether the video is buffering
-                        currentPlayPos = this.audio.currentTime;
-                        if (!bufferingDetected
-                            && currentPlayPos < (lastPlayPos + 0.01)
-                            && !this.audio.paused) {
-                            this.element.classList.add('dplayer-loading');
-                            bufferingDetected = true
-                        }
-                        if (bufferingDetected
-                            && currentPlayPos > (lastPlayPos + 0.01)
-                            && !this.audio.paused) {
-                            this.element.classList.remove('dplayer-loading');
-                            bufferingDetected = false
-                        }
-                        lastPlayPos = currentPlayPos;
-
-                        this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
-                        this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
-                        this.trigger('playing');
-                    }, 100);
+            };
+            this.clearTime = () => {
+                clearInterval(this.playedTime);
+                if (this.option.danmaku) {
+                    clearInterval(this.danmakuTime);
                 }
             };
     
@@ -425,7 +411,7 @@
     
             this.bar.addEventListener('mousedown', () => {
                 barWidth = this.bar.clientWidth;
-                clearInterval(this.playedTime);
+                this.clearTime();
                 document.addEventListener('mousemove', thumbMove);
                 document.addEventListener('mouseup', thumbUp);
             });
@@ -773,7 +759,7 @@
                     if (item && item.length) {
                         for (let j = 0; j < item.length; j++) {
                             const danRight = danItemRight(item[j]) - 10;
-                            if (danRight <= 640 - (tmp * danSpeed(item[j])) || danRight <= 0) {
+                            if (danRight <= danWidth - (tmp * danSpeed(item[j])) || danRight <= 0) {
                                 break;
                             }
                             if (j === item.length - 1) {
@@ -798,7 +784,7 @@
             this.danmakuIn = (text, color, type) => {
                 danWidth = danContainer.offsetWidth;
                 danHeight = danContainer.offsetHeight;
-                itemY = danHeight / itemHeight;
+                itemY = parseInt(danHeight / itemHeight);
                 let item = document.createElement(`div`);
                 item.classList.add(`dplayer-danmaku-item`);
                 item.classList.add(`dplayer-danmaku-${type}`);
@@ -846,14 +832,26 @@
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4) {
                         if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                            this.dan = JSON.parse(xhr.responseText).danmaku.sort((a, b) => a.time - b.time);
-
-                            // autoplay
-                            if (this.option.autoplay && !this.isMobile) {
-                                this.play();
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.code !== 1) {
+                                alert(response.msg);
                             }
-                            else if (this.isMobile) {
-                                this.pause();
+                            else {
+                                if (this.option.danmaku.maximum) {
+                                    this.maximum = parseInt(this.option.danmaku.maximum);
+                                    this.dan = response.danmaku.splice(-this.maximum, this.maximum).sort((a, b) => a.time - b.time);
+                                }
+                                else {
+                                    this.dan = response.danmaku.sort((a, b) => a.time - b.time);
+                                }
+
+                                // autoplay
+                                if (this.option.autoplay && !this.isMobile) {
+                                    this.play();
+                                }
+                                else if (this.isMobile) {
+                                    this.pause();
+                                }
                             }
                         }
                         else {
@@ -916,7 +914,13 @@
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4) {
                         if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                            console.log('Post danmaku: ', JSON.parse(xhr.responseText));
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.code !== 1) {
+                                alert(response.msg);
+                            }
+                            else {
+                                console.log('Post danmaku: ', JSON.parse(xhr.responseText));
+                            }
                         }
                         else {
                             console.log('Request was unsuccessful: ' + xhr.status);
@@ -1128,7 +1132,7 @@
 
                 this.audio.play();
                 if (this.playedTime) {
-                    clearInterval(this.playedTime);
+                    this.clearTime();
                 }
                 this.setTime();
                 this.element.classList.add('dplayer-playing');
@@ -1150,7 +1154,7 @@
                 this.ended = false;
                 this.playButton.innerHTML = this.getSVG('play');
                 this.audio.pause();
-                clearInterval(this.playedTime);
+                this.clearTime();
                 this.element.classList.remove('dplayer-playing');
                 this.trigger('pause');
             }

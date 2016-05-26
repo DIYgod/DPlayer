@@ -9,16 +9,20 @@
         height: 100%;
         background: #000;
 
-        .dplayer-danmaku-top,
-        .dplayer-danmaku-bottom {
-            &.dplayer-danmaku-move {
-                animation: danmaku-center 8s linear !important;
+        .dplayer-danmaku {
+            .dplayer-danmaku-top,
+            .dplayer-danmaku-bottom {
+                &.dplayer-danmaku-move {
+                    animation: danmaku-center 6s linear;
+                    animation-play-state: paused;
+                }
             }
-        }
 
-        .dplayer-danmaku-right {
-            &.dplayer-danmaku-move {
-                animation: danmaku 8s linear !important;;
+            .dplayer-danmaku-right {
+                &.dplayer-danmaku-move {
+                    animation: danmaku 8s linear;
+                    animation-play-state: paused;
+                }
             }
         }
     }
@@ -161,7 +165,7 @@
 
             &.dplayer-danmaku-move {
                 will-change: visibility;
-                animation: danmaku-center 5s linear;
+                animation: danmaku-center 4s linear;
                 animation-play-state: paused;
             }
         }
@@ -391,13 +395,6 @@
                 }
             }
 
-            .dplayer-svg-shadow {
-                stroke: #000;
-                stroke-opacity: .1;
-                stroke-width: 2px;
-                fill: none;
-            }
-
             .dplayer-fill {
                 fill: #fff;
             }
@@ -615,10 +612,6 @@
                             transition: all .2s ease-in-out;
                             fill: #ddd;
                         }
-
-                        .dplayer-svg-shadow {
-                            stroke: none;
-                        }
                     }
 
                     .dplayer-comment-setting-box {
@@ -739,10 +732,6 @@
                             transition: all .2s ease-in-out;
                             fill: #ddd;
                         }
-
-                        .dplayer-svg-shadow {
-                            stroke: none;
-                        }
                     }
                 }
             }
@@ -828,7 +817,7 @@
         width: 150px;
         border-radius: 2px;
         background: rgba(28, 28, 28, 0.9);
-        padding: 7px 0;
+        padding: 5px 0;
         overflow: hidden;
         z-index: 3;
         display: none;
