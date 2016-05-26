@@ -54,6 +54,7 @@
     <hr>
     <div class="dplayer"></div>
 </div>
+<script src="https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
 <script src="../dist/DPlayer.min.js"></script>
 <script>
     var dp = new DPlayer({
@@ -73,6 +74,19 @@
         }
     });
     dp.init();
+
+    // stats.js: JavaScript Performance Monitor
+    var stats = new Stats();
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.dom);
+    function animate() {
+        stats.begin();
+        // monitored code goes here
+        stats.end();
+
+        requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
 </script>
 </body>
 </html>
