@@ -119,6 +119,7 @@ $ npm run build
 
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
 - [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
+- [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
 
 ## Todo
 
