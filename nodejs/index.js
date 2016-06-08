@@ -79,7 +79,10 @@ app.get('/', function (req, res) {
     var db = mongoose.connection;
     db.on('error', errorListener);
 
-    var id = url.parse(req.url,true).query.id;
+    var query = url.parse(req.url,true).query;
+    var id = query.id;
+    var max = query.max;
+    var length;
     db.once('open', function() {
         cleanListener();
         danmaku.find({player: id}, function (err, data) {
@@ -88,9 +91,10 @@ app.get('/', function (req, res) {
             }
 
             var json = `{"code": 1,"danmaku":[`;
-            for (var i = 0; i < data.length; i++) {
+            length = max ? Math.min(data.length, max) : data.length;
+            for (var i = 0; i < length; i++) {
                 json += JSON.stringify(data[i]);
-                if (i !== data.length - 1) {
+                if (i !== length - 1) {
                     json += `,`;
                 }
             }

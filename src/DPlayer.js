@@ -837,13 +837,7 @@
                                 alert(response.msg);
                             }
                             else {
-                                if (this.option.danmaku.maximum) {
-                                    this.maximum = parseInt(this.option.danmaku.maximum);
-                                    this.dan = response.danmaku.splice(-this.maximum, this.maximum).sort((a, b) => a.time - b.time);
-                                }
-                                else {
-                                    this.dan = response.danmaku.sort((a, b) => a.time - b.time);
-                                }
+                                this.dan = response.danmaku.sort((a, b) => a.time - b.time);
 
                                 // autoplay
                                 if (this.option.autoplay && !this.isMobile) {
@@ -859,7 +853,14 @@
                         }
                     }
                 };
-                xhr.open('get', this.option.danmaku.api + '?id=' + this.option.danmaku.id, true);
+                let apiurl;
+                if (this.option.danmaku.maximum) {
+                    apiurl = `${this.option.danmaku.api}?id=${this.option.danmaku.id}&max=${this.option.danmaku.maximum}`;
+                }
+                else {
+                    apiurl = `${this.option.danmaku.api}?id=${this.option.danmaku.id}`;
+                }
+                xhr.open('get', apiurl, true);
                 xhr.send(null);
             }
             else {
