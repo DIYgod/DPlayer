@@ -224,6 +224,17 @@
             }
         }
 
+        .dplayer-danloading {
+            position: absolute;
+            top: 50%;
+            margin-top: -7px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            line-height: 14px;
+            animation: my-face 5s infinite ease-in-out;
+        }
+
         .diplayer-loading-icon {
             display: none;
             position: absolute;

@@ -1,7 +1,7 @@
 # DPlayer
 
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
+[![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/dplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/DPlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [![Travis](https://img.shields.io/travis/DIYgod/DPlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/DPlayer)
@@ -11,7 +11,7 @@
 
 ## Introduction
 
-[Demo](http://diygod.github.io/DPlayer/demo/)
+[Demo](http://dplayer.js.org/)
 
 Screenshot
 ![image](http://i.imgur.com/207ch36.jpg)
@@ -118,7 +118,9 @@ $ npm run build
 ## Related Projects
 
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
+
 - [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
+
 - [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
 
 ## Todo
