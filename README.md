@@ -124,22 +124,6 @@ $ npm run build
 
 - [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
 
-## Todo
-
-- [ ] 截图
-
-- [ ] 记录播放位置 记录透明度
-
-- [ ] 国际化
-
-- [ ] 微博登录
-
-- [ ] 锁定IP规则
-
-- [ ] icon 动画
-
-- [ ] 字体
-
 ## LICENSE
 
 [The Star And Thank Author License (SATA)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)

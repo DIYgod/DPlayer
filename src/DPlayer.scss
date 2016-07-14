@@ -42,23 +42,26 @@
     }
 
     &.dplayer-playing {
-        .dplayer-controller-mask {
-            opacity: 0;
-        }
-        .dplayer-controller {
-            opacity: 0;
-        }
 
         .dplayer-danmaku .dplayer-danmaku-move {
             animation-play-state: running !important;
         }
 
-        &:hover {
+        @media (min-width: 900px) {
             .dplayer-controller-mask {
-                opacity: 1;
+                opacity: 0;
             }
             .dplayer-controller {
-                opacity: 1;
+                opacity: 0;
+            }
+
+            &:hover {
+                .dplayer-controller-mask {
+                    opacity: 1;
+                }
+                .dplayer-controller {
+                    opacity: 1;
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 require('./DPlayer.scss');
+const Hls = require('hls.js');
 
 class DPlayer {
     /**
@@ -277,6 +278,18 @@ class DPlayer {
         // get this audio object
         this.audio = this.element.getElementsByClassName('dplayer-video')[0];
 
+        // Support HTTP Live Streaming
+        if (this.option.video.url.match(/(m3u8)$/i) || Hls.isSupported()) {
+            const hls = new Hls();
+            hls.attachMedia(this.audio);
+            hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+                hls.loadSource(this.option.video.url);
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    console.log("manifest loaded, found " + data.levels.length + " quality level");
+                });
+            });
+        }
+
         this.bezel = this.element.getElementsByClassName('dplayer-bezel-icon')[0];
         this.bezel.addEventListener('animationend', () => {
             this.bezel.classList.remove('dplayer-bezel-transition');
@@ -296,8 +309,25 @@ class DPlayer {
             }
         };
         this.playButton.addEventListener('click', this.toggle);
-        this.element.getElementsByClassName('dplayer-video-wrap')[0].addEventListener('click', this.toggle);
-        this.element.getElementsByClassName('dplayer-controller-mask')[0].addEventListener('click', this.toggle);
+
+        const videoWrap = this.element.getElementsByClassName('dplayer-video-wrap')[0];
+        const conMask = this.element.getElementsByClassName('dplayer-controller-mask')[0];
+        if (!this.isMobile) {
+            videoWrap.addEventListener('click', this.toggle);
+            conMask.addEventListener('click', this.toggle);
+        }
+        else {
+            const toggleController = () => {
+                if (this.element.classList.contains('dplayer-hide-controller')) {
+                    this.element.classList.remove('dplayer-hide-controller');
+                }
+                else {
+                    this.element.classList.add('dplayer-hide-controller');
+                }
+            };
+            videoWrap.addEventListener('click', toggleController);
+            conMask.addEventListener('click', toggleController);
+        }
 
 
         /**
@@ -510,20 +540,22 @@ class DPlayer {
         /**
          * auto hide controller
          */
-        let hideTime = 0;
-        const hideController = () => {
-            this.element.classList.remove('dplayer-hide-controller');
-            clearTimeout(hideTime);
-            hideTime = setTimeout(() => {
-                if (this.audio.played.length) {
-                    this.element.classList.add('dplayer-hide-controller');
-                    closeSetting();
-                    closeComment();
-                }
-            }, 2000);
-        };
-        this.element.addEventListener('mousemove', hideController);
-        this.element.addEventListener('click', hideController);
+        if (!this.isMobile) {
+            let hideTime = 0;
+            const hideController = () => {
+                this.element.classList.remove('dplayer-hide-controller');
+                clearTimeout(hideTime);
+                hideTime = setTimeout(() => {
+                    if (this.audio.played.length) {
+                        this.element.classList.add('dplayer-hide-controller');
+                        closeSetting();
+                        closeComment();
+                    }
+                }, 2000);
+            };
+            this.element.addEventListener('mousemove', hideController);
+            this.element.addEventListener('click', hideController);
+        }
 
 
         /***
