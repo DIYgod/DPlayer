@@ -373,6 +373,11 @@
                 }
             }
 
+            #dplayer-menu {
+                stroke: #ddd;
+                stroke-width: 1px;
+            }
+
             .dplayer-time {
                 line-height: 38px;
                 color: #eee;
@@ -629,12 +634,12 @@
                         position: absolute;
                         background: #fff;
                         bottom: 40px;
-                        left: -82.5px;
+                        left: -93px;
                         box-shadow: 0 0 25px rgba(0,0,0,.3);
                         border-radius: 4px;
-                        padding: 5px;
+                        padding: 10px 10px 16px;
                         font-size: 14px;
-                        width: 193px;
+                        width: 204px;
                         transition: all .3s ease-in-out;
                         transform: scale(0);
 
@@ -661,25 +666,44 @@
                             cursor: pointer;
                         }
 
+                        .dplayer-comment-setting-title {
+                            font-size: 14px;
+                            color: #555;
+                            padding: 6px;
+                        }
+
                         .dplayer-comment-setting-type {
-                            width: 44px;
-                            float: left;
-                            margin-right: 5px;
+                            font-size: 0;
 
-                            span {
-                                padding: 4px 6px;
-                                line-height: 16px;
-                                display: inline-block;
-                                border-radius: 4px;
-
-                                &:hover {
-                                    animation: my-face 5s infinite ease-in-out;
+                            label {
+                                &:nth-child(2) {
+                                    span {
+                                        border-radius: 4px 0 0 4px;
+                                    }
+                                }
+                                &:nth-child(4) {
+                                    span {
+                                        border-radius: 0 4px 4px 0;
+                                    }
                                 }
                             }
 
+                            span {
+                                width: 33%;
+                                padding: 4px 6px;
+                                line-height: 16px;
+                                display: inline-block;
+                                font-size: 12px;
+                                color: #555;
+                                border: 1px solid #E4E4E6;
+                                margin-right: -1px;
+                                box-sizing: border-box;
+                                text-align: center;
+                                cursor: pointer;
+                            }
+
                             input:checked+span {
-                                background: #aaa;
-                                color: #FFF;
+                                background: #E4E4E6;
                             }
                         }
 
@@ -693,10 +717,10 @@
                             }
 
                             span {
-                                width: 24px;
-                                height: 24px;
+                                width: 22px;
+                                height: 22px;
                                 display: inline-block;
-                                border-radius: 7px;
+                                border-radius: 50%;
                                 box-sizing: border-box;
                                 cursor: pointer;
 

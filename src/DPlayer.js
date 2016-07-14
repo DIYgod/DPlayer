@@ -20,7 +20,8 @@ class DPlayer {
             'right': ['0 0 32 32', 'M22 16l-10.105-10.6-1.895 1.987 8.211 8.613-8.211 8.612 1.895 1.988 8.211-8.613z'],
             'comment': ['0 0 32 32', 'M27.128 0.38h-22.553c-2.336 0-4.229 1.825-4.229 4.076v16.273c0 2.251 1.893 4.076 4.229 4.076h4.229v-2.685h8.403l-8.784 8.072 1.566 1.44 7.429-6.827h9.71c2.335 0 4.229-1.825 4.229-4.076v-16.273c0-2.252-1.894-4.076-4.229-4.076zM28.538 19.403c0 1.5-1.262 2.717-2.819 2.717h-8.36l-0.076-0.070-0.076 0.070h-11.223c-1.557 0-2.819-1.217-2.819-2.717v-13.589c0-1.501 1.262-2.718 2.819-2.718h19.734c1.557 0 2.819-0.141 2.819 1.359v14.947zM9.206 10.557c-1.222 0-2.215 0.911-2.215 2.036s0.992 2.035 2.215 2.035c1.224 0 2.216-0.911 2.216-2.035s-0.992-2.036-2.216-2.036zM22.496 10.557c-1.224 0-2.215 0.911-2.215 2.036s0.991 2.035 2.215 2.035c1.224 0 2.215-0.911 2.215-2.035s-0.991-2.036-2.215-2.036zM15.852 10.557c-1.224 0-2.215 0.911-2.215 2.036s0.991 2.035 2.215 2.035c1.222 0 2.215-0.911 2.215-2.035s-0.992-2.036-2.215-2.036z'],
             'comment-off': ['0 0 32 32', 'M27.090 0.131h-22.731c-2.354 0-4.262 1.839-4.262 4.109v16.401c0 2.269 1.908 4.109 4.262 4.109h4.262v-2.706h8.469l-8.853 8.135 1.579 1.451 7.487-6.88h9.787c2.353 0 4.262-1.84 4.262-4.109v-16.401c0-2.27-1.909-4.109-4.262-4.109v0zM28.511 19.304c0 1.512-1.272 2.738-2.841 2.738h-8.425l-0.076-0.070-0.076 0.070h-11.311c-1.569 0-2.841-1.226-2.841-2.738v-13.696c0-1.513 1.272-2.739 2.841-2.739h19.889c1.569 0 2.841-0.142 2.841 1.37v15.064z'],
-            'send': ['0 0 32 32', 'M13.725 30l3.9-5.325-3.9-1.125v6.45zM0 17.5l11.050 3.35 13.6-11.55-10.55 12.425 11.8 3.65 6.1-23.375-32 15.5z']
+            'send': ['0 0 32 32', 'M13.725 30l3.9-5.325-3.9-1.125v6.45zM0 17.5l11.050 3.35 13.6-11.55-10.55 12.425 11.8 3.65 6.1-23.375-32 15.5z'],
+            'menu': ['0 0 22 32', 'M20.8 14.4q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2zM1.6 11.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2zM20.8 20.8q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2z']
         };
         this.getSVG = (type) => {
             return `
@@ -42,7 +43,8 @@ class DPlayer {
             element: document.getElementsByClassName('dplayer')[0],
             autoplay: false,
             theme: '#b7daff',
-            loop: false
+            loop: false,
+            lang: 'en'
         };
         for (let defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -52,6 +54,30 @@ class DPlayer {
 
         this.option = option;
         this.loop = option.loop;
+
+        this.tranZH = {
+            'Danmaku is loading': '弹幕加载中',
+            'Top': '顶部',
+            'Bottom': '底部',
+            'Rolling': '滚动',
+            'Input danmaku, hit Enter': '输入弹幕，回车发送',
+            'About author': '关于作者',
+            'DPlayer feedback': '播放器意见反馈',
+            'About DPlayer': '关于 DPlay 播放器',
+            'Loop': '洗脑循环',
+            'Speed': '速度',
+            'Opacity for danmaku': '弹幕透明度',
+            'Normal': '正常',
+            'Please input danmaku!': '要输入弹幕内容啊喂！'
+        };
+        this.getTran = (text) => {
+            if (this.option.lang === 'en') {
+                return text;
+            }
+            else if (this.option.lang === 'zh') {
+                return this.tranZH[text];
+            }
+        };
 
         /**
          * Parse second to 00:00 format
@@ -112,7 +138,7 @@ class DPlayer {
                 <div class="dplayer-danmaku"></div>
                 <div class="dplayer-bezel">
                     <span class="dplayer-bezel-icon"></span>
-                   ${this.option.danmaku ? `<span class="dplayer-danloading">弹幕加载中</span>` : ``}
+                   ${this.option.danmaku ? `<span class="dplayer-danloading">${this.getTran('Danmaku is loading')}</span>` : ``}
                     <span class="diplayer-loading-icon">
                         <svg height="100%" version="1.1" viewBox="0 0 22 22" width="100%">
                             <svg x="7" y="1">
@@ -170,24 +196,11 @@ class DPlayer {
             + `         </button>
                         <div class="dplayer-comment-box">
                             <button class="dplayer-icon dplayer-comment-setting-icon">`
-            +                   this.getSVG('setting')
+            +                   this.getSVG('menu')
             + `             </button>
                             <div class="dplayer-comment-setting-box">
-                                <div class="dplayer-comment-setting-type">
-                                    <label>
-                                        <input type="radio" name="dplayer-danmaku-type" value="top">
-                                        <span>顶部</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="dplayer-danmaku-type" value="right" checked>
-                                        <span>滚动</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="dplayer-danmaku-type" value="bottom">
-                                        <span>底部</span>
-                                    </label>
-                                </div>
                                 <div class="dplayer-comment-setting-color">
+                                   <div class="dplayer-comment-setting-title">设置弹幕颜色</div>
                                     <label>
                                         <input type="radio" name="dplayer-danmaku-color" value="#fff" checked>
                                         <span style="background: #fff; border: 1px solid rgba(0,0,0,.1);"></span>
@@ -195,10 +208,6 @@ class DPlayer {
                                     <label>
                                         <input type="radio" name="dplayer-danmaku-color" value="#e54256">
                                         <span style="background: #e54256"></span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#FFAB00">
-                                        <span style="background: #FFAB00"></span>
                                     </label>
                                     <label>
                                         <input type="radio" name="dplayer-danmaku-color" value="#ffe133">
@@ -216,13 +225,24 @@ class DPlayer {
                                         <input type="radio" name="dplayer-danmaku-color" value="#D500F9">
                                         <span style="background: #D500F9"></span>
                                     </label>
+                                </div>
+                                <div class="dplayer-comment-setting-type">
+                                   <div class="dplayer-comment-setting-title">设置弹幕类型</div>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#444">
-                                        <span style="background: #444;"></span>
+                                        <input type="radio" name="dplayer-danmaku-type" value="top">
+                                        <span>${this.getTran('Top')}</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="dplayer-danmaku-type" value="right" checked>
+                                        <span>${this.getTran('Rolling')}</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="dplayer-danmaku-type" value="bottom">
+                                        <span>${this.getTran('Bottom')}</span>
                                     </label>
                                 </div>
                             </div>
-                            <input class="dplayer-comment-input" type="text" placeholder="输入弹幕，回车发送" maxlength="30">
+                            <input class="dplayer-comment-input" type="text" placeholder="${this.getTran('Input danmaku, hit Enter')}" maxlength="30">
                             <button class="dplayer-icon dplayer-send-icon">`
             +                   this.getSVG('send')
             + `             </button>
@@ -248,9 +268,9 @@ class DPlayer {
                 </div>
             </div>
             <div class="dplayer-menu">
-                <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="http://diygod.me/">关于作者</a></span></div>
-                <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer/issues">播放器意见反馈</a></span></div>
-                <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer">关于 DPlayer 播放器</a></span></div>
+                <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="http://diygod.me/">${this.getTran('About author')}</a></span></div>
+                <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer/issues">${this.getTran('DPlayer feedback')}</a></span></div>
+                <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer">${this.getTran('About DPlayer')}</a></span></div>
             </div>
         `;
 
@@ -513,20 +533,20 @@ class DPlayer {
         const settingHTML = {
             'original': `
                     <div class="dplayer-setting-item dplayer-setting-loop">
-                        <span class="dplayer-label">洗脑循环</span>
+                        <span class="dplayer-label">${this.getTran('Loop')}</span>
                         <div class="dplayer-toggle">
                             <input class="dplayer-toggle-setting-input" type="checkbox" name="dplayer-toggle" id="dplayer-toggle">
                             <label for="dplayer-toggle"></label>
                         </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-speed">
-                        <span class="dplayer-label">速度</span>
+                        <span class="dplayer-label">${this.getTran('Speed')}</span>
                         <div class="dplayer-toggle">`
                 +           this.getSVG('right')
                 + `     </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-danmaku">
-                        <span class="dplayer-label">弹幕透明度</span>
+                        <span class="dplayer-label">${this.getTran('Opacity for danmaku')}</span>
                         <div class="dplayer-danmaku-bar-wrap">
                             <div class="dplayer-danmaku-bar">
                                 <div class="dplayer-danmaku-bar-inner" style="width: ${this.danOpacity * 100}%">
@@ -543,7 +563,7 @@ class DPlayer {
                         <span class="dplayer-label">0.75</span>
                     </div>
                     <div class="dplayer-setting-speed-item" data-speed="1">
-                        <span class="dplayer-label">正常</span>
+                        <span class="dplayer-label">${this.getTran('Normal')}</span>
                     </div>
                     <div class="dplayer-setting-speed-item" data-speed="1.25">
                         <span class="dplayer-label">1.25</span>
@@ -900,7 +920,7 @@ class DPlayer {
 
             // text can't be empty
             if (!commentInput.value.replace(/^\s+|\s+$/g, '')) {
-                alert('要输入弹幕内容啊喂！');
+                alert(this.getTran('Please input danmaku!'));
                 return;
             }
 

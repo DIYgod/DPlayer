@@ -49,6 +49,7 @@ var option = {
     autoplay: false,                                                   // Optional, autoplay video, not supported by mobile browsers
     theme: '#FADFA3',                                                  // Optional, theme color, default: #b7daff
     loop: true,                                                        // Optional, loop play music, default: true
+    lang: zh,                                                          // Optional, language, `zh` for Chinese, `en` for English, default: en
     video: {                                                           // Required, video info
         url: '若能绽放光芒.mp4',                                         // Required, video url
         pic: '若能绽放光芒.png'                                          // Optional, music picture
