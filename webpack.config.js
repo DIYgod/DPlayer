@@ -23,7 +23,7 @@ module.exports = {
     },
 
     module: {
-        noParse: /node_modules\/hls.js\/dist\/hls.js/,
+        // noParse: /node_modules\/hls.js\/dist\/hls.js/,
         loaders: [
             {
                 test: /\.js$/,

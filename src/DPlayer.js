@@ -1,5 +1,5 @@
 require('./DPlayer.scss');
-const Hls = require('hls.js');
+// const Hls = require('hls.js');
 
 class DPlayer {
     /**
@@ -279,16 +279,16 @@ class DPlayer {
         this.audio = this.element.getElementsByClassName('dplayer-video')[0];
 
         // Support HTTP Live Streaming
-        if (this.option.video.url.match(/(m3u8)$/i) || Hls.isSupported()) {
-            const hls = new Hls();
-            hls.attachMedia(this.audio);
-            hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-                hls.loadSource(this.option.video.url);
-                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    console.log("manifest loaded, found " + data.levels.length + " quality level");
-                });
-            });
-        }
+        // if (this.option.video.url.match(/(m3u8)$/i) || Hls.isSupported()) {
+        //     const hls = new Hls();
+        //     hls.attachMedia(this.audio);
+        //     hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        //         hls.loadSource(this.option.video.url);
+        //         hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+        //             console.log("manifest loaded, found " + data.levels.length + " quality level");
+        //         });
+        //     });
+        // }
 
         this.bezel = this.element.getElementsByClassName('dplayer-bezel-icon')[0];
         this.bezel.addEventListener('animationend', () => {
