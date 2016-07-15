@@ -421,8 +421,7 @@ class DPlayer {
                     let item = this.dan[this.danIndex];
                     while (item && this.audio.currentTime >= parseFloat(item.time)) {
                         this.danmakuIn(item.text, item.color, item.type);
-                        this.danIndex++;
-                        item = this.dan[this.danIndex];
+                        item = this.dan[++this.danIndex];
                     }
                 }, 0);
             }
@@ -843,12 +842,12 @@ class DPlayer {
             item.classList.add(`dplayer-danmaku-${type}`);
             item.innerHTML = text;
             item.style.opacity = this.danOpacity;
+            item.style.color = color;
 
             // insert
             danContainer.appendChild(item);
 
             // adjust
-            item.style.color = color;
             switch (type) {
                 case 'right':
                     item.style.top = itemHeight * getTunnel(item, type) + 'px';
@@ -1176,7 +1175,10 @@ class DPlayer {
     /**
      * Play music
      */
-    play() {
+    play(time) {
+        if (Object.prototype.toString.call(time) === '[object Number]') {
+            this.audio.currentTime = time;
+        }
         if (this.audio.paused) {
             this.shouldpause = false;
 

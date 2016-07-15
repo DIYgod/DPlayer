@@ -65,9 +65,11 @@ var option = {
 
 **API**
 
-+ `dp.init()`
-+ `dp.play()`
-+ `dp.pause()`
++ `dp.init()`                       // Load player
++ `dp.play()`                       // Resume play
++ `dp.play(time)`                   // Set currentTime
++ `dp.pause()`                      // Pause
++ `ap.on(event, handler)`           // Event binding
 
 **Event binding**
 
