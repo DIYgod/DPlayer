@@ -134,7 +134,7 @@ class DPlayer {
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``}>
+                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} crossorigin="anonymous">
                     <source src="${this.option.video.url}" type="video/mp4">
                 </video>
                 <div class="dplayer-danmaku"></div>
