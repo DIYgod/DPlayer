@@ -400,6 +400,8 @@
                 opacity: .8;
                 transition: all .2s ease-in-out;
                 vertical-align: middle;
+                box-sizing: border-box;
+                display: inline-block;
 
                 &:hover {
                     opacity: 1;
