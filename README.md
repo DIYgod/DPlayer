@@ -49,10 +49,10 @@ var option = {
     autoplay: false,                                                   // Optional, autoplay video, not supported by mobile browsers
     theme: '#FADFA3',                                                  // Optional, theme color, default: #b7daff
     loop: true,                                                        // Optional, loop play music, default: true
-    lang: 'zh',                                                        // Optional, language, `zh` for Chinese, `en` for English, default: en
+    lang: 'zh',                                                        // Optional, language, `zh` for Chinese, `en` for English, default: Navigator language
     video: {                                                           // Required, video info
-        url: '若能绽放光芒.mp4',                                         // Required, video url
-        pic: '若能绽放光芒.png'                                          // Optional, music picture
+        url: '若能绽放光芒.mp4',                                       // Required, video url
+        pic: '若能绽放光芒.png'                                        // Optional, music picture
     },
     danmaku: {                                                         // Optional, showing danmaku
         id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, MUST BE UNIQUE, CAN NOT USE THESE IN YOUR NEW PLAYER: `https://dplayer.daoapp.io/list`

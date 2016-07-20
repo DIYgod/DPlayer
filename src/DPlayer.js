@@ -46,7 +46,7 @@ class DPlayer {
             autoplay: false,
             theme: '#b7daff',
             loop: false,
-            lang: 'en'
+            lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en'
         };
         for (let defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -70,7 +70,9 @@ class DPlayer {
             'Speed': '速度',
             'Opacity for danmaku': '弹幕透明度',
             'Normal': '正常',
-            'Please input danmaku!': '要输入弹幕内容啊喂！'
+            'Please input danmaku!': '要输入弹幕内容啊喂！',
+            'Set danmaku color': '设置弹幕颜色',
+            'Set danmaku type': '设置弹幕类型'
         };
         this.getTran = (text) => {
             if (this.option.lang === 'en') {
@@ -205,7 +207,7 @@ class DPlayer {
             + `             </button>
                             <div class="dplayer-comment-setting-box">
                                 <div class="dplayer-comment-setting-color">
-                                   <div class="dplayer-comment-setting-title">设置弹幕颜色</div>
+                                   <div class="dplayer-comment-setting-title">${this.getTran('Set danmaku color')}</div>
                                     <label>
                                         <input type="radio" name="dplayer-danmaku-color" value="#fff" checked>
                                         <span style="background: #fff; border: 1px solid rgba(0,0,0,.1);"></span>
@@ -232,7 +234,7 @@ class DPlayer {
                                     </label>
                                 </div>
                                 <div class="dplayer-comment-setting-type">
-                                   <div class="dplayer-comment-setting-title">设置弹幕类型</div>
+                                   <div class="dplayer-comment-setting-title">${this.getTran('Set danmaku type')}</div>
                                     <label>
                                         <input type="radio" name="dplayer-danmaku-type" value="top">
                                         <span>${this.getTran('Top')}</span>
