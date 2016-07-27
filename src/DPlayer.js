@@ -137,7 +137,7 @@ class DPlayer {
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``}>
+                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} crossorigin="anonymous">
                     <source src="${this.option.video.url}">
                 </video>
                 <div class="dplayer-danmaku"></div>
@@ -1218,7 +1218,6 @@ class DPlayer {
          */
         const camareIcon = this.element.getElementsByClassName('dplayer-camera-icon')[0];
         camareIcon.addEventListener('click', () => {
-            this.audio.crossorigin= 'anonymous';
             const canvas = document.createElement("canvas");
             canvas.width = this.audio.videoWidth;
             canvas.height = this.audio.videoHeight;
