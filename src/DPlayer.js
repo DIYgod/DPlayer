@@ -579,14 +579,14 @@ class DPlayer {
                     <div class="dplayer-setting-item dplayer-setting-loop">
                         <span class="dplayer-label">${this.getTran('Loop')}</span>
                         <div class="dplayer-toggle">
-                            <input class="dplayer-toggle-setting-input" type="checkbox" name="dplayer-toggle" id="dplayer-toggle">
+                            <input class="dplayer-toggle-setting-input" type="checkbox" name="dplayer-toggle">
                             <label for="dplayer-toggle"></label>
                         </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-showdan">
                         <span class="dplayer-label">${this.getTran('Danmaku')}</span>
                         <div class="dplayer-toggle">
-                            <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan" id="dplayer-toggle">
+                            <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan">
                             <label for="dplayer-toggle-dan"></label>
                         </div>
                     </div>
@@ -660,18 +660,8 @@ class DPlayer {
             loopToggle.checked = this.loop;
 
             loopEle.addEventListener('click', () => {
+                console.log('loop1');
                 loopToggle.checked = !loopToggle.checked;
-                if (loopToggle.checked) {
-                    this.loop = true;
-                    this.audio.loop = this.loop;
-                }
-                else {
-                    this.loop = false;
-                    this.audio.loop = this.loop;
-                }
-                closeSetting();
-            });
-            loopToggle.addEventListener('change', () => {
                 if (loopToggle.checked) {
                     this.loop = true;
                     this.audio.loop = this.loop;
@@ -697,36 +687,7 @@ class DPlayer {
                         for (let i = 0; i < this.dan.length; i++) {
                             if (this.dan[i].time >= this.audio.currentTime) {
                                 this.danIndex = i;
-                                return;
-                            }
-                            this.danIndex = this.dan.length;
-                        }
-                        this.danmakuTime = setInterval(() => {
-                            let item = this.dan[this.danIndex];
-                            while (item && this.audio.currentTime >= parseFloat(item.time)) {
-                                this.danmakuIn(item.text, item.color, item.type);
-                                item = this.dan[++this.danIndex];
-                            }
-                        }, 0);
-                    }
-                }
-                else {
-                    this.showdan = false;
-                    if (this.option.danmaku) {
-                        clearInterval(this.danmakuTime);
-                        danContainer.innerHTML = '';
-                    }
-                }
-                closeSetting();
-            });
-            showDanToggle.addEventListener('change', () => {
-                if (showDanToggle.checked) {
-                    this.showdan = true;
-                    if (this.option.danmaku) {
-                        for (let i = 0; i < this.dan.length; i++) {
-                            if (this.dan[i].time >= this.audio.currentTime) {
-                                this.danIndex = i;
-                                return;
+                                break;
                             }
                             this.danIndex = this.dan.length;
                         }
