@@ -72,7 +72,8 @@ class DPlayer {
             'Normal': '正常',
             'Please input danmaku!': '要输入弹幕内容啊喂！',
             'Set danmaku color': '设置弹幕颜色',
-            'Set danmaku type': '设置弹幕类型'
+            'Set danmaku type': '设置弹幕类型',
+            'Danmaku': '弹幕'
         };
         this.getTran = (text) => {
             if (this.option.lang === 'en') {
@@ -136,13 +137,13 @@ class DPlayer {
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} crossorigin="anonymous">
-                    <source src="${this.option.video.url}" type="video/mp4">
+                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``}>
+                    <source src="${this.option.video.url}">
                 </video>
                 <div class="dplayer-danmaku"></div>
                 <div class="dplayer-bezel">
                     <span class="dplayer-bezel-icon"></span>
-                   ${this.option.danmaku ? `<span class="dplayer-danloading">${this.getTran('Danmaku is loading')}</span>` : ``}
+                    ${this.option.danmaku ? `<span class="dplayer-danloading">${this.getTran('Danmaku is loading')}</span>` : ``}
                     <span class="diplayer-loading-icon">
                         <svg height="100%" version="1.1" viewBox="0 0 22 22" width="100%">
                             <svg x="7" y="1">
@@ -234,7 +235,7 @@ class DPlayer {
                                     </label>
                                 </div>
                                 <div class="dplayer-comment-setting-type">
-                                   <div class="dplayer-comment-setting-title">${this.getTran('Set danmaku type')}</div>
+                                    <div class="dplayer-comment-setting-title">${this.getTran('Set danmaku type')}</div>
                                     <label>
                                         <input type="radio" name="dplayer-danmaku-type" value="top">
                                         <span>${this.getTran('Top')}</span>
@@ -569,6 +570,12 @@ class DPlayer {
         this.danOpacity = 0.7;
         const settingHTML = {
             'original': `
+                    <div class="dplayer-setting-item dplayer-setting-speed">
+                        <span class="dplayer-label">${this.getTran('Speed')}</span>
+                        <div class="dplayer-toggle">`
+            +           this.getSVG('right')
+            + `     </div>
+                    </div>
                     <div class="dplayer-setting-item dplayer-setting-loop">
                         <span class="dplayer-label">${this.getTran('Loop')}</span>
                         <div class="dplayer-toggle">
@@ -576,11 +583,12 @@ class DPlayer {
                             <label for="dplayer-toggle"></label>
                         </div>
                     </div>
-                    <div class="dplayer-setting-item dplayer-setting-speed">
-                        <span class="dplayer-label">${this.getTran('Speed')}</span>
-                        <div class="dplayer-toggle">`
-                +           this.getSVG('right')
-                + `     </div>
+                    <div class="dplayer-setting-item dplayer-setting-showdan">
+                        <span class="dplayer-label">${this.getTran('Danmaku')}</span>
+                        <div class="dplayer-toggle">
+                            <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan" id="dplayer-toggle">
+                            <label for="dplayer-toggle-dan"></label>
+                        </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-danmaku">
                         <span class="dplayer-label">${this.getTran('Opacity for danmaku')}</span>
@@ -642,6 +650,8 @@ class DPlayer {
             openSetting();
         });
 
+        const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
+        this.showdan = true;
         const settingEvent = () => {
             // loop control
             const loopEle = this.element.getElementsByClassName('dplayer-setting-loop')[0];
@@ -669,6 +679,72 @@ class DPlayer {
                 else {
                     this.loop = false;
                     this.audio.loop = this.loop;
+                }
+                closeSetting();
+            });
+
+            // show danmaku control
+            const showDanEle = this.element.getElementsByClassName('dplayer-setting-showdan')[0];
+            const showDanToggle = showDanEle.getElementsByClassName('dplayer-showdan-setting-input')[0];
+
+            showDanToggle.checked = this.showdan;
+
+            showDanEle.addEventListener('click', () => {
+                showDanToggle.checked = !showDanToggle.checked;
+                if (showDanToggle.checked) {
+                    this.showdan = true;
+                    if (this.option.danmaku) {
+                        for (let i = 0; i < this.dan.length; i++) {
+                            if (this.dan[i].time >= this.audio.currentTime) {
+                                this.danIndex = i;
+                                return;
+                            }
+                            this.danIndex = this.dan.length;
+                        }
+                        this.danmakuTime = setInterval(() => {
+                            let item = this.dan[this.danIndex];
+                            while (item && this.audio.currentTime >= parseFloat(item.time)) {
+                                this.danmakuIn(item.text, item.color, item.type);
+                                item = this.dan[++this.danIndex];
+                            }
+                        }, 0);
+                    }
+                }
+                else {
+                    this.showdan = false;
+                    if (this.option.danmaku) {
+                        clearInterval(this.danmakuTime);
+                        danContainer.innerHTML = '';
+                    }
+                }
+                closeSetting();
+            });
+            showDanToggle.addEventListener('change', () => {
+                if (showDanToggle.checked) {
+                    this.showdan = true;
+                    if (this.option.danmaku) {
+                        for (let i = 0; i < this.dan.length; i++) {
+                            if (this.dan[i].time >= this.audio.currentTime) {
+                                this.danIndex = i;
+                                return;
+                            }
+                            this.danIndex = this.dan.length;
+                        }
+                        this.danmakuTime = setInterval(() => {
+                            let item = this.dan[this.danIndex];
+                            while (item && this.audio.currentTime >= parseFloat(item.time)) {
+                                this.danmakuIn(item.text, item.color, item.type);
+                                item = this.dan[++this.danIndex];
+                            }
+                        }, 0);
+                    }
+                }
+                else {
+                    this.showdan = false;
+                    if (this.option.danmaku) {
+                        clearInterval(this.danmakuTime);
+                        danContainer.innerHTML = '';
+                    }
                 }
                 closeSetting();
             });
@@ -790,7 +866,6 @@ class DPlayer {
         /**
          * danmaku display
          */
-        const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
         const itemHeight = 30;
         let danWidth;
         let danHeight;
@@ -1182,6 +1257,7 @@ class DPlayer {
          */
         const camareIcon = this.element.getElementsByClassName('dplayer-camera-icon')[0];
         camareIcon.addEventListener('click', () => {
+            this.audio.crossorigin= 'anonymous';
             const canvas = document.createElement("canvas");
             canvas.width = this.audio.videoWidth;
             canvas.height = this.audio.videoHeight;
