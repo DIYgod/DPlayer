@@ -46,7 +46,8 @@ class DPlayer {
             autoplay: false,
             theme: '#b7daff',
             loop: false,
-            lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en'
+            lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
+            screenshot: false
         };
         for (let defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -137,7 +138,7 @@ class DPlayer {
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} crossorigin="anonymous">
+                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} ${this.option.screenshot ? `crossorigin="anonymous"` : ``}>
                     <source src="${this.option.video.url}">
                 </video>
                 <div class="dplayer-danmaku"></div>
@@ -195,9 +196,11 @@ class DPlayer {
                     <span class="dplayer-time"><span class="dplayer-ptime">0:00</span> / <span class="dplayer-dtime">0:00</span></span>
                 </div>
                 <div class="dplayer-icons dplayer-icons-right">
+                    ${this.option.screenshot ? `
                     <a href="#" class="dplayer-icon dplayer-camera-icon">`
             +           this.getSVG('camera')
             + `     </a>
+                    ` : ``}
                     <div class="dplayer-comment">
                         <button class="dplayer-icon dplayer-comment-icon">`
             +               this.getSVG('comment')
@@ -546,8 +549,8 @@ class DPlayer {
         /**
          * auto hide controller
          */
+        let hideTime = 0;
         if (!this.isMobile) {
-            let hideTime = 0;
             const hideController = () => {
                 this.element.classList.remove('dplayer-hide-controller');
                 clearTimeout(hideTime);
@@ -660,7 +663,6 @@ class DPlayer {
             loopToggle.checked = this.loop;
 
             loopEle.addEventListener('click', () => {
-                console.log('loop1');
                 loopToggle.checked = !loopToggle.checked;
                 if (loopToggle.checked) {
                     this.loop = true;
@@ -1055,7 +1057,6 @@ class DPlayer {
                 clearInterval(disableHide);
                 this.element.classList.remove('dplayer-show-controller');
                 closeCommentSetting();
-                document.addEventListener('keydown', handleKeyDown);
             }
         };
         const openComment = () => {
@@ -1065,7 +1066,6 @@ class DPlayer {
                 clearTimeout(hideTime);
             }, 1000);
             this.element.classList.add('dplayer-show-controller');
-            document.removeEventListener('keydown', handleKeyDown);
         };
 
         mask.addEventListener('click', () => {
@@ -1152,45 +1152,47 @@ class DPlayer {
          * hot key
          */
         const handleKeyDown = (e) => {
-            const event = e || window.event;
-            let percentage;
-            switch (event.keyCode) {
-                case 32:
-                    event.preventDefault();
-                    this.toggle();
-                    break;
-                case 37:
-                    event.preventDefault();
-                    this.audio.currentTime = this.audio.currentTime -5;
-                    break;
-                case 39:
-                    event.preventDefault();
-                    this.audio.currentTime = this.audio.currentTime + 5;
-                    break;
-                case 38:
-                    event.preventDefault();
-                    percentage = this.audio.volume + 0.1;
-                    percentage = percentage > 0 ? percentage : 0;
-                    percentage = percentage < 1 ? percentage : 1;
-                    this.updateBar('volume', percentage, 'width');
-                    this.audio.volume = percentage;
-                    if (this.audio.muted) {
-                        this.audio.muted = false;
-                    }
-                    switchVolumeIcon();
-                    break;
-                case 40:
-                    event.preventDefault();
-                    percentage = this.audio.volume - 0.1;
-                    percentage = percentage > 0 ? percentage : 0;
-                    percentage = percentage < 1 ? percentage : 1;
-                    this.updateBar('volume', percentage, 'width');
-                    this.audio.volume = percentage;
-                    if (this.audio.muted) {
-                        this.audio.muted = false;
-                    }
-                    switchVolumeIcon();
-                    break;
+            if (document.activeElement.tagName.toUpperCase() !== 'INPUT') {
+                const event = e || window.event;
+                let percentage;
+                switch (event.keyCode) {
+                    case 32:
+                        event.preventDefault();
+                        this.toggle();
+                        break;
+                    case 37:
+                        event.preventDefault();
+                        this.audio.currentTime = this.audio.currentTime -5;
+                        break;
+                    case 39:
+                        event.preventDefault();
+                        this.audio.currentTime = this.audio.currentTime + 5;
+                        break;
+                    case 38:
+                        event.preventDefault();
+                        percentage = this.audio.volume + 0.1;
+                        percentage = percentage > 0 ? percentage : 0;
+                        percentage = percentage < 1 ? percentage : 1;
+                        this.updateBar('volume', percentage, 'width');
+                        this.audio.volume = percentage;
+                        if (this.audio.muted) {
+                            this.audio.muted = false;
+                        }
+                        switchVolumeIcon();
+                        break;
+                    case 40:
+                        event.preventDefault();
+                        percentage = this.audio.volume - 0.1;
+                        percentage = percentage > 0 ? percentage : 0;
+                        percentage = percentage < 1 ? percentage : 1;
+                        this.updateBar('volume', percentage, 'width');
+                        this.audio.volume = percentage;
+                        if (this.audio.muted) {
+                            this.audio.muted = false;
+                        }
+                        switchVolumeIcon();
+                        break;
+                }
             }
         };
         document.addEventListener('keydown', handleKeyDown);
@@ -1210,22 +1212,24 @@ class DPlayer {
             mask.addEventListener('click', () => {
                 mask.classList.remove('dplayer-mask-show');
                 this.menu.classList.remove('dplayer-menu-show');
-            });
+           });
         });
 
         /**
          * Screenshot
          */
-        const camareIcon = this.element.getElementsByClassName('dplayer-camera-icon')[0];
-        camareIcon.addEventListener('click', () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = this.audio.videoWidth;
-            canvas.height = this.audio.videoHeight;
-            canvas.getContext('2d').drawImage(this.audio, 0, 0, canvas.width, canvas.height);
+        if (this.option.screenshot) {
+            const camareIcon = this.element.getElementsByClassName('dplayer-camera-icon')[0];
+            camareIcon.addEventListener('click', () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = this.audio.videoWidth;
+                canvas.height = this.audio.videoHeight;
+                canvas.getContext('2d').drawImage(this.audio, 0, 0, canvas.width, canvas.height);
 
-            camareIcon.href = canvas.toDataURL();
-            camareIcon.download = "Screenshot_from_DPlayer.png";
-        });
+                camareIcon.href = canvas.toDataURL();
+                camareIcon.download = "Screenshot_from_DPlayer.png";
+            });
+        }
     }
 
     /**

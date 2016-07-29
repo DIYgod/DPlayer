@@ -50,12 +50,13 @@ var option = {
     theme: '#FADFA3',                                                  // Optional, theme color, default: #b7daff
     loop: true,                                                        // Optional, loop play music, default: true
     lang: 'zh',                                                        // Optional, language, `zh` for Chinese, `en` for English, default: Navigator language
+    screenshot: true,                                                  // Optional, enable screenshot function, default: false, NOTICE: if set it to true, video and video poster must enable Cross-Origin
     video: {                                                           // Required, video info
-        url: '若能绽放光芒.mp4',                                       // Required, video url
-        pic: '若能绽放光芒.png'                                        // Optional, music picture
+        url: '若能绽放光芒.mp4',                                         // Required, video url
+        pic: '若能绽放光芒.png'                                          // Optional, music picture
     },
     danmaku: {                                                         // Optional, showing danmaku
-        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, MUST BE UNIQUE, CAN NOT USE THESE IN YOUR NEW PLAYER: `https://dplayer.daoapp.io/list`
+        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://dplayer.daoapp.io/list`
         api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
         token: 'tokendemo',                                            // Optional, danmaku token for api
         maximum: 1000                                                  // Optional, maximum quantity of danmaku
