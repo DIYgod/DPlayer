@@ -289,7 +289,7 @@ class DPlayer {
         this.audio = this.element.getElementsByClassName('dplayer-video')[0];
 
         // Support HTTP Live Streaming
-        if (this.option.video.url.match(/(m3u8)$/i) || Hls.isSupported()) {
+        if (this.option.video.url.match(/(m3u8)$/i) && Hls.isSupported()) {
             this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
             const hls = new Hls();
             hls.attachMedia(this.audio);
