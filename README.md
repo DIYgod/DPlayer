@@ -27,11 +27,9 @@ $ npm install dplayer --save
 ### HTML
 
 ```HTML
-<link rel="stylesheet" href="DPlayer.min.css">
-<!-- ... -->
 <div id="player1" class="dplayer"></div>
 <!-- ... -->
-<script src="DPlayer.min.js"></script>
+<script src="dist/DPlayer.min.js"></script>
 ```
 
 ### JS
@@ -55,7 +53,7 @@ var option = {
         url: '若能绽放光芒.mp4',                                         // Required, video url
         pic: '若能绽放光芒.png'                                          // Optional, music picture
     },
-    danmaku: {                                                         // Optional, showing danmaku
+    danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
         id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://dplayer.daoapp.io/list`
         api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
         token: 'tokendemo',                                            // Optional, danmaku token for api
@@ -83,6 +81,30 @@ var option = {
 + `playing`: Triggered periodically when DPlayer is playing
 + `ended`: Triggered when DPlayer ended
 + `error`: Triggered when an error occurs
+
+**Live Video (HTTP Live Streaming, M3U8 format)**
+
+It requires the library [hls.js](https://github.com/dailymotion/hls.js) and it should be loaded before DPlayer.min.js.
+
+Not supporting live danamku for now.
+
+```HTML
+<div id="player1" class="dplayer"></div>
+<!-- ... -->
+<script src="plugin/hls.min.js"></script>
+<script src="dist/DPlayer.min.js"></script>
+
+<script>
+var dp = new DPlayer({
+    // ...
+    video: {
+        url: 'xxx.m3u8'
+        // ...
+    }
+});
+dp.init();
+</script>
+```
 
 **Work with module bundler**
 
