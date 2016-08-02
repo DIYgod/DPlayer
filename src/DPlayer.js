@@ -570,7 +570,7 @@ class DPlayer {
         /***
          * setting
          */
-        this.danOpacity = 0.7;
+        this.danOpacity = localStorage.getItem('DPlayer-opacity') || 0.7;
         const settingHTML = {
             'original': `
                     <div class="dplayer-setting-item dplayer-setting-speed">
@@ -747,6 +747,7 @@ class DPlayer {
                         items[i].style.opacity = percentage;
                     }
                     this.danOpacity = percentage;
+                    localStorage.setItem('DPlayer-opacity', this.danOpacity);
                 };
                 const danmakuUp = () => {
                     document.removeEventListener('mouseup', danmakuUp);
@@ -765,6 +766,7 @@ class DPlayer {
                         items[i].style.opacity = percentage;
                     }
                     this.danOpacity = percentage;
+                    localStorage.setItem('DPlayer-opacity', this.danOpacity);
                 });
                 danmakuBarWrapWrap.addEventListener('mousedown', () => {
                     document.addEventListener('mousemove', danmakuMove);
@@ -1227,7 +1229,7 @@ class DPlayer {
                 canvas.getContext('2d').drawImage(this.audio, 0, 0, canvas.width, canvas.height);
 
                 camareIcon.href = canvas.toDataURL();
-                camareIcon.download = "Screenshot_from_DPlayer.png";
+                camareIcon.download = "DPlayer.png";
             });
         }
     }
