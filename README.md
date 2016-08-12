@@ -68,7 +68,14 @@ var option = {
 + `dp.play()`                       // Resume play
 + `dp.play(time)`                   // Set currentTime
 + `dp.pause()`                      // Pause
-+ `ap.on(event, handler)`           // Event binding
++ `dp.toggle()`                     // Toggle between play and pause
++ `dp.on(event, handler)`           // Event binding
++ `dp.dan`                          // Return danmaku info
++ `dp.danIndex`                     // Return danmaku index
++ `dp.video`                        // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
+ + `dp.video.currentTime`           // Returns the current playback position
+ + `dp.video.loop`                  // Returns whether the video should start over again when finished
+ + Most [native api](http://www.w3schools.com/tags/ref_av_dom.asp)
 
 **Event binding**
 
@@ -86,7 +93,7 @@ var option = {
 
 It requires the library [hls.js](https://github.com/dailymotion/hls.js) and it should be loaded before DPlayer.min.js.
 
-Not supporting live danamku for now.
+Live danamku is not supported  yet.
 
 ```HTML
 <div id="player1" class="dplayer"></div>
