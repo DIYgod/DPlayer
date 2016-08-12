@@ -73,7 +73,27 @@
             maximum: 3000
         }
     });
-    dp.init();
+    dp.on('play', function () {
+        console.log('play');
+    });
+    dp.on('play', function () {
+        console.log('play play');
+    });
+    dp.on('pause', function () {
+        console.log('pause');
+    });
+    dp.on('canplay', function () {
+        console.log('canplay');
+    });
+    dp.on('playing', function () {
+        console.log('playing');
+    });
+    dp.on('ended', function () {
+        console.log('ended');
+    });
+    dp.on('error', function () {
+        console.log('error');
+    });
 
     // stats.js: JavaScript Performance Monitor
     var stats = new Stats();
