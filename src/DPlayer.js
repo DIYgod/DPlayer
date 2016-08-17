@@ -119,7 +119,9 @@ class DPlayer {
                 <video class="dplayer-video" ${option.video.pic ? `poster="${option.video.pic}"` : ``} ${option.screenshot ? `crossorigin="anonymous"` : ``}>
                     <source src="${option.video.url}">
                 </video>
-                <div class="dplayer-danmaku"></div>
+                <div class="dplayer-danmaku">
+                    <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
+                </div>
                 <div class="dplayer-bezel">
                     <span class="dplayer-bezel-icon"></span>
                     ${option.danmaku ? `<span class="dplayer-danloading">${getTran('Danmaku is loading')}</span>` : ``}
@@ -687,7 +689,7 @@ class DPlayer {
                     showdan = false;
                     if (option.danmaku) {
                         clearInterval(danmakuTime);
-                        danContainer.innerHTML = '';
+                        danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
                     }
                 }
                 closeSetting();
@@ -860,6 +862,8 @@ class DPlayer {
             }
         };
 
+        const itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
+
         const danmakuIn = (text, color, type) => {
             danWidth = danContainer.offsetWidth;
             danHeight = danContainer.offsetHeight;
@@ -870,11 +874,13 @@ class DPlayer {
             item.innerHTML = text;
             item.style.opacity = danOpacity;
             item.style.color = color;
+            item.addEventListener('animationend', () => {
+                danContainer.removeChild(item);
+            });
 
-            // insert
-            danContainer.appendChild(item);
-
-            let itemWidth = item.offsetWidth;
+            // measure
+            itemDemo.innerHTML = text;
+            let itemWidth = itemDemo.offsetWidth;
 
             // adjust
             switch (type) {
@@ -882,25 +888,19 @@ class DPlayer {
                     item.style.top = itemHeight * getTunnel(item, type, itemWidth) + 'px';
                     item.style.width = (itemWidth + 1) + 'px';
                     item.style.transform = `translateX(-${danWidth}px)`;
-                    item.addEventListener('animationend', () => {
-                        danContainer.removeChild(item);
-                    });
                     break;
                 case 'top':
                     item.style.top = itemHeight * getTunnel(item, type) + 'px';
-                    item.addEventListener('animationend', () => {
-                        danContainer.removeChild(item);
-                    });
                     break;
                 case 'bottom':
                     item.style.bottom = itemHeight * getTunnel(item, type) + 'px';
-                    item.addEventListener('animationend', () => {
-                        danContainer.removeChild(item);
-                    });
                     break;
                 default:
                     console.error(`Can't handled danmaku type: ${type}`);
             }
+
+            // insert
+            danContainer.appendChild(item);
 
             // move
             item.classList.add(`dplayer-danmaku-move`);
@@ -1100,12 +1100,15 @@ class DPlayer {
 
         this.element.addEventListener('fullscreenchange', () => {
             resetAnimation();
+            console.log(danContainer.offsetHeight);
         });
         this.element.addEventListener('mozfullscreenchange', () => {
             resetAnimation();
+            console.log(danContainer.offsetHeight);
         });
         this.element.addEventListener('webkitfullscreenchange', () => {
             resetAnimation();
+            console.log(danContainer.offsetHeight);
         });
         this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
             if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
@@ -1254,10 +1257,10 @@ class DPlayer {
     volume(percentage) {
         percentage = percentage > 0 ? percentage : 0;
         percentage = percentage < 1 ? percentage : 1;
-        this.updateBar('volume', percentage, 'height');
-        this.audio.volume = percentage;
-        if (this.audio.muted) {
-            this.audio.muted = false;
+        this.updateBar('volume', percentage, 'width');
+        this.video.volume = percentage;
+        if (this.video.muted) {
+            this.video.muted = false;
         }
         this.switchVolumeIcon();
     }

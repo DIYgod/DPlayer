@@ -139,6 +139,11 @@
             white-space: nowrap;
             font-weight: bolder;
             text-shadow: .5px .5px .5px rgba(0,0,0,.5);
+
+            &--demo {
+                position: absolute;
+                visibility: hidden;
+            }
         }
 
         .dplayer-danmaku-right {
