@@ -904,6 +904,8 @@ class DPlayer {
 
             // move
             item.classList.add(`dplayer-danmaku-move`);
+
+            return item;
         };
 
         // danmaku
@@ -1017,7 +1019,8 @@ class DPlayer {
             closeComment();
             this.dan.splice(this.danIndex, 0, danmakuData);
             this.danIndex++;
-            danmakuIn(htmlEncode(danmakuData.text), danmakuData.color, danmakuData.type);
+            const item = danmakuIn(htmlEncode(danmakuData.text), danmakuData.color, danmakuData.type);
+            item.style.border = `2px solid ${option.theme}`;
         };
 
         const closeCommentSetting = () => {
