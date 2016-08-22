@@ -50,6 +50,7 @@ var option = {
     loop: true,                                                        // Optional, loop play music, default: true
     lang: 'zh',                                                        // Optional, language, `zh` for Chinese, `en` for English, default: Navigator language
     screenshot: true,                                                  // Optional, enable screenshot function, default: false, NOTICE: if set it to true, video and video poster must enable Cross-Origin
+    hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
     video: {                                                           // Required, video info
         url: '若能绽放光芒.mp4',                                         // Required, video url
         pic: '若能绽放光芒.png'                                          // Optional, music picture

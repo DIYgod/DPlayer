@@ -1,4 +1,4 @@
-console.log("\n %c DPlayer 1.0.5 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c DPlayer 1.0.6 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
 
@@ -48,7 +48,8 @@ class DPlayer {
             theme: '#b7daff',
             loop: false,
             lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
-            screenshot: false
+            screenshot: false,
+            hotkey: true
         };
         for (let defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -1143,7 +1144,9 @@ class DPlayer {
          * hot key
          */
         const handleKeyDown = (e) => {
-            if (document.activeElement.tagName.toUpperCase() !== 'INPUT') {
+            const tag = document.activeElement.tagName.toUpperCase();
+            const editable = document.activeElement.getAttribute('contenteditable');
+            if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
                 const event = e || window.event;
                 let percentage;
                 switch (event.keyCode) {
@@ -1172,7 +1175,9 @@ class DPlayer {
                 }
             }
         };
-        document.addEventListener('keydown', handleKeyDown);
+        if (option.hotkey) {
+            document.addEventListener('keydown', handleKeyDown);
+        }
 
         /**
          * right key
