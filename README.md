@@ -37,7 +37,6 @@ $ npm install dplayer --save
 
 ```JS
 var dp = new DPlayer(option);
-dp.init();
 ```
 
 **Options**
@@ -66,7 +65,6 @@ var option = {
 
 **API**
 
-+ `dp.init()`                       // Load player
 + `dp.play()`                       // Resume play
 + `dp.play(time)`                   // Set currentTime
 + `dp.pause()`                      // Pause
@@ -111,7 +109,6 @@ var dp = new DPlayer({
         // ...
     }
 });
-dp.init();
 </script>
 ```
 
@@ -120,7 +117,6 @@ dp.init();
 ```js
 var DPlayer = require('DPlayer');
 var dp = new DPlayer(option);
-dp.init();
 ```
 
 ### Danmaku back-end
