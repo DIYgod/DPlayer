@@ -49,7 +49,8 @@ class DPlayer {
             loop: false,
             lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
             screenshot: false,
-            hotkey: true
+            hotkey: true,
+            preload: 'auto'
         };
         for (let defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -117,7 +118,7 @@ class DPlayer {
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${option.video.pic ? `poster="${option.video.pic}"` : ``} ${option.screenshot ? `crossorigin="anonymous"` : ``}>
+                <video class="dplayer-video" ${option.video.pic ? `poster="${option.video.pic}"` : ``} ${option.screenshot ? `crossorigin="anonymous"` : ``} preload="${option.preload}">
                     <source src="${option.video.url}">
                 </video>
                 <div class="dplayer-danmaku">
