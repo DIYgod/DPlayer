@@ -1,4 +1,4 @@
-console.log("\n %c DPlayer 1.0.7 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c DPlayer 1.0.8 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
 
@@ -692,6 +692,11 @@ class DPlayer {
                     if (option.danmaku) {
                         clearInterval(danmakuTime);
                         danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
+                        let danTunnel = {
+                            right: {},
+                            top: {},
+                            bottom: {}
+                        };
                     }
                 }
                 closeSetting();
