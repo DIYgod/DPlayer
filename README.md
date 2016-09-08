@@ -157,6 +157,10 @@ $ npm run build
 
 - [纸飞机视频区插件(DPlayer for Discuz!)](https://coding.net/u/Click_04/p/video/git)
 
+- [dplayer_py_backend](https://github.com/dixyes/dplayer_py_backend)
+
+- [dplayer_lua_backend](https://github.com/dixyes/dplayer_lua_backend)
+
 ## LICENSE
 
 [The Star And Thank Author License (SATA)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
