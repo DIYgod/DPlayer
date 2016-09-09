@@ -1,3 +1,4 @@
 FROM node:4.4-onbuild
 EXPOSE 1207
-ENTRYPOINT node index.js
+RUN npm install -g forever
+ENTRYPOINT forever start index.js
