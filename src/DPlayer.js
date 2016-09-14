@@ -2,6 +2,8 @@ console.log("\n %c DPlayer 1.0.8 %c http://dplayer.js.org \n\n","color: #fadfa3;
 
 require('./DPlayer.scss');
 
+let index = 0;
+
 class DPlayer {
     /**
      * DPlayer constructor function
@@ -195,42 +197,42 @@ class DPlayer {
                                 <div class="dplayer-comment-setting-color">
                                    <div class="dplayer-comment-setting-title">${getTran('Set danmaku color')}</div>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#fff" checked>
+                                        <input type="radio" name="dplayer-danmaku-color-${index}" value="#fff" checked>
                                         <span style="background: #fff; border: 1px solid rgba(0,0,0,.1);"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#e54256">
+                                        <input type="radio" name="dplayer-danmaku-color-${index}" value="#e54256">
                                         <span style="background: #e54256"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#ffe133">
+                                        <input type="radio" name="dplayer-danmaku-color-${index}" value="#ffe133">
                                         <span style="background: #ffe133"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#64DD17">
+                                        <input type="radio" name="dplayer-danmaku-color-${index}" value="#64DD17">
                                         <span style="background: #64DD17"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#39ccff">
+                                        <input type="radio" name="dplayer-danmaku-color-${index}" value="#39ccff">
                                         <span style="background: #39ccff"></span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-color" value="#D500F9">
+                                        <input type="radio" name="dplayer-danmaku-color-${index}" value="#D500F9">
                                         <span style="background: #D500F9"></span>
                                     </label>
                                 </div>
                                 <div class="dplayer-comment-setting-type">
                                     <div class="dplayer-comment-setting-title">${getTran('Set danmaku type')}</div>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-type" value="top">
+                                        <input type="radio" name="dplayer-danmaku-type-${index}" value="top">
                                         <span>${getTran('Top')}</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-type" value="right" checked>
+                                        <input type="radio" name="dplayer-danmaku-type-${index}" value="right" checked>
                                         <span>${getTran('Rolling')}</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="dplayer-danmaku-type" value="bottom">
+                                        <input type="radio" name="dplayer-danmaku-type-${index}" value="bottom">
                                         <span>${getTran('Bottom')}</span>
                                     </label>
                                 </div>
@@ -999,8 +1001,8 @@ class DPlayer {
                 author: 'DIYgod',
                 time: this.video.currentTime,
                 text: commentInput.value,
-                color: this.element.querySelector('input[name="dplayer-danmaku-color"]:checked').value,
-                type: this.element.querySelector('input[name="dplayer-danmaku-type"]:checked').value
+                color: this.element.querySelector('.dplayer-comment-setting-color input:checked').value,
+                type: this.element.querySelector('.dplayer-comment-setting-type input:checked').value
             };
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = () => {
@@ -1078,9 +1080,9 @@ class DPlayer {
 
         // comment setting box
         this.element.getElementsByClassName('dplayer-comment-setting-color')[0].addEventListener('click', () => {
-            const sele = this.element.querySelector('input[name="dplayer-danmaku-color"]:checked+span');
+            const sele = this.element.querySelector('input[name="dplayer-danmaku-color-${index}"]:checked+span');
             if (sele) {
-                commentSettingIcon.getElementsByClassName('dplayer-fill')[0].style.fill = this.element.querySelector('input[name="dplayer-danmaku-color"]:checked').value;
+                commentSettingIcon.getElementsByClassName('dplayer-fill')[0].style.fill = this.element.querySelector('input[name="dplayer-danmaku-color-${index}"]:checked').value;
             }
         });
 
@@ -1218,6 +1220,8 @@ class DPlayer {
                 camareIcon.download = "DPlayer.png";
             });
         }
+
+        index++;
     }
 
     /**
