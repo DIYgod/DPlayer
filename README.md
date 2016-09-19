@@ -161,6 +161,8 @@ $ npm run build
 
 - [dplayer_lua_backend](https://github.com/dixyes/dplayer_lua_backend)
 
+- [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
+
 ## LICENSE
 
 [The Star And Thank Author License (SATA)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
