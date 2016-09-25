@@ -37,7 +37,7 @@ class DPlayer {
             `;
         };
 
-        const isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+        const isMobile = /mobile/i.test(window.navigator.userAgent);
         // compatibility: some mobile browsers don't suppose autoplay
         if (isMobile) {
             option.autoplay = false;
@@ -115,6 +115,16 @@ class DPlayer {
         this.element = option.element;
         if (!option.danmaku) {
             this.element.classList.add('dplayer-no-danmaku');
+        }
+
+        if (isMobile) {
+            this.element.innerHTML = `
+                <div class="dplayer-video-wrap">
+                    <video class="dplayer-video" ${option.video.pic ? `poster="${option.video.pic}"` : ``} preload="${option.preload}" controls>
+                        <source src="${option.video.url}">
+                    </video>
+                </div>`;
+            return;
         }
 
         this.element.innerHTML = `
@@ -1305,4 +1315,4 @@ class DPlayer {
     }
 }
 
-export {DPlayer};
+module.exports = DPlayer;

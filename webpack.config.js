@@ -14,6 +14,7 @@ module.exports = {
     output: {
         path: BUILD_PATH,
         filename: 'DPlayer.min.js',
+        library: 'DPlayer',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
