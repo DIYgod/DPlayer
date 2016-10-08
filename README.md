@@ -71,6 +71,7 @@ var option = {
 + `dp.pause()`                      // Pause
 + `dp.toggle()`                     // Toggle between play and pause
 + `dp.on(event, handler)`           // Event binding
++ `switchVideo(video, danmaku)`     // Switch to a new video, the format of `video` and `danmaku` is the same as option
 + `dp.dan`                          // Return danmaku info
 + `dp.danIndex`                     // Return danmaku index
 + `dp.video`                        // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported

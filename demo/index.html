@@ -52,6 +52,8 @@
     <p>Made by <a href="https://www.anotherhome.net/" target="_blank">DIYgod</a>. Available on <a href="https://github.com/DIYgod/DPlayer" target="_blank">GitHub</a>. Licensed SATA.</p>
     <hr>
     <div class="dplayer"></div>
+    <br>
+    <button onclick="switchDPlayer()">Switch Video</button>
 </div>
 <script src="https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
 <script src="../dist/DPlayer.min.js"></script>
@@ -74,6 +76,32 @@
             maximum: 3000
         }
     });
+    function switchDPlayer() {
+        if (dp.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
+            dp.switchVideo({
+                        url: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.mp4',
+                        pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg'
+                    },
+                    {
+                        id: '5rGf5Y2X55qu6Z2p',
+                        api: 'https://dplayer.daoapp.io/',
+                        token: 'tokendemo',
+                        maximum: 3000
+                    });
+        }
+        else {
+            dp.switchVideo({
+                        url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
+                        pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
+                    },
+                    {
+                        id: '9E2E3368B56CDBB4',
+                        api: 'https://dplayer.daoapp.io/',
+                        token: 'tokendemo',
+                        maximum: 3000
+                    });
+        }
+    }
 
     // stats.js: JavaScript Performance Monitor
     var stats = new Stats();
