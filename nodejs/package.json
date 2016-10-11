@@ -9,6 +9,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "log4js": "^0.6.36",
-    "mongoose": "^4.1.9"
+    "mongoose": "^4.1.9",
+    "node-fetch": "^1.6.3",
+    "xml2js": "^0.4.17"
   }
 }

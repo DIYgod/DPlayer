@@ -60,6 +60,7 @@ var option = {
         api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
         token: 'tokendemo',                                            // Optional, danmaku token for api
         maximum: 1000                                                  // Optional, maximum quantity of danmaku
+        addition: ['https://dplayer.daoapp.io/bilibili?aid=4157142']   // Optional, additional danmaku, see: `Bilibili 弹幕支持`
     }
 }
 ```
@@ -90,6 +91,17 @@ var option = {
 + `playing`: Triggered periodically when DPlayer is playing
 + `ended`: Triggered when DPlayer ended
 + `error`: Triggered when an error occurs
+
+**Bilibili 弹幕支持**
+
+```JS
+var option = {
+    danmaku: {
+        // ...
+        addition: ['https://dplayer.daoapp.io/bilibili?aid=【bilibili视频AV号】']
+    }
+}
+```
 
 **Live Video (HTTP Live Streaming, M3U8 format)**
 

@@ -9,4 +9,5 @@ app.all('*', require('./routes/all'));
 app.get('/', require('./routes/get'));
 app.post('/', require('./routes/post'));
 app.get('/list', require('./routes/list'));
+app.get('/bilibili', require('./routes/bilibili'));
 app.listen(1207);

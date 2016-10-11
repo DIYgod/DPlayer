@@ -1,4 +1,4 @@
-console.log("\n %c DPlayer 1.0.11 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c DPlayer 1.1.0 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
 
@@ -860,7 +860,7 @@ class DPlayer {
                 if (item && item.length) {
                     for (let j = 0; j < item.length; j++) {
                         const danRight = danItemRight(item[j]) - 10;
-                        if (danRight <= danWidth - (tmp * danSpeed(item[j])) || danRight <= 0) {
+                        if (danRight <= danWidth - (tmp * danSpeed(item[j].offsetWidth)) || danRight <= 0) {
                             break;
                         }
                         if (j === item.length - 1) {
@@ -940,15 +940,46 @@ class DPlayer {
                             alert(response.msg);
                         }
                         else {
-                            this.dan = response.danmaku.sort((a, b) => a.time - b.time);
-                            this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
+                            if (this.option.danmaku.addition) {
+                                xhr.onreadystatechange = () => {
+                                    if (xhr.readyState === 4) {
+                                        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                                            const response2 = JSON.parse(xhr.responseText);
+                                            if (response2.code !== 1) {
+                                                alert(response2.msg);
+                                            }
+                                            else {
+                                                this.dan = response.danmaku.concat(response2.danmaku).sort((a, b) => a.time - b.time);
+                                                this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
 
-                            // autoplay
-                            if (this.option.autoplay && !isMobile) {
-                                this.play();
+                                                // autoplay
+                                                if (this.option.autoplay && !isMobile) {
+                                                    this.play();
+                                                }
+                                                else if (isMobile) {
+                                                    this.pause();
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            console.log('Request was unsuccessful: ' + xhr.status);
+                                        }
+                                    }
+                                };
+                                xhr.open('get', this.option.danmaku.addition[0], true);
+                                xhr.send(null);
                             }
-                            else if (isMobile) {
-                                this.pause();
+                            else {
+                                this.dan = response.danmaku.sort((a, b) => a.time - b.time);
+                                this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
+
+                                // autoplay
+                                if (this.option.autoplay && !isMobile) {
+                                    this.play();
+                                }
+                                else if (isMobile) {
+                                    this.pause();
+                                }
                             }
                         }
                     }
