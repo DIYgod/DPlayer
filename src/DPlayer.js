@@ -1,4 +1,4 @@
-console.log("\n %c DPlayer 1.1.0 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c DPlayer 1.1.1 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
 
@@ -119,20 +119,10 @@ class DPlayer {
             this.element.classList.add('dplayer-no-danmaku');
         }
 
-        if (isMobile) {
-            this.element.innerHTML = `
-                <div class="dplayer-video-wrap">
-                    <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} preload="${this.option.preload}" controls>
-                        <source src="${this.option.video.url}">
-                    </video>
-                </div>`;
-            return;
-        }
-
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} ${this.option.screenshot ? `crossorigin="anonymous"` : ``} preload="${this.option.preload}" src="${this.option.video.url}"></video>
+                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} webkit-playsinline ${this.option.screenshot ? `crossorigin="anonymous"` : ``} preload="${this.option.preload}" src="${this.option.video.url}"></video>
                 <div class="dplayer-danmaku">
                     <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
                 </div>
@@ -175,7 +165,7 @@ class DPlayer {
                     <button class="dplayer-icon dplayer-play-icon">`
             +           this.getSVG('play')
             + `     </button>
-                    <div class="dplayer-volume">
+                    <div class="dplayer-volume" ${isMobile ? 'style="display: none;"' : ''}>
                         <button class="dplayer-icon dplayer-volume-icon">`
             +               this.getSVG('volume-down')
             + `         </button>
@@ -191,7 +181,7 @@ class DPlayer {
                 </div>
                 <div class="dplayer-icons dplayer-icons-right">
                     ${this.option.screenshot ? `
-                    <a href="#" class="dplayer-icon dplayer-camera-icon">`
+                    <a href="#" class="dplayer-icon dplayer-camera-icon" ${isMobile ? 'style="display: none;"' : ''}dplayer-volume>`
             +           this.getSVG('camera')
             + `     </a>
                     ` : ``}
@@ -278,6 +268,14 @@ class DPlayer {
                 <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer">${getTran('About DPlayer')}</a></span></div>
             </div>
         `;
+
+        // arrow style
+        var arrow = this.element.offsetWidth <= 500;
+        if (arrow) {
+            var arrowStyle = document.createElement('style');
+            arrowStyle.innerHTML = `.dplayer .dplayer-danmaku{font-size:18px}`;
+            document.head.appendChild(arrowStyle);
+        }
 
         // get this video object
         this.video = this.element.getElementsByClassName('dplayer-video')[0];
@@ -834,7 +832,7 @@ class DPlayer {
         /**
          * danmaku display
          */
-        const itemHeight = 30;
+        const itemHeight = arrow ? 24: 30;
         let danWidth;
         let danHeight;
         let itemY;
@@ -1383,16 +1381,48 @@ class DPlayer {
                             alert(response.msg);
                         }
                         else {
-                            this.danIndex = 0;
-                            this.dan = response.danmaku.sort((a, b) => a.time - b.time);
-                            this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
+                            if (this.option.danmaku.addition) {
+                                xhr.onreadystatechange = () => {
+                                    if (xhr.readyState === 4) {
+                                        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                                            const response2 = JSON.parse(xhr.responseText);
+                                            if (response2.code !== 1) {
+                                                alert(response2.msg);
+                                            }
+                                            else {
+                                                this.danIndex = 0;
+                                                this.dan = response.danmaku.concat(response2.danmaku).sort((a, b) => a.time - b.time);
+                                                this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
 
-                            // autoplay
-                            if (this.option.autoplay && !isMobile) {
-                                this.play();
+                                                // autoplay
+                                                if (this.option.autoplay && !isMobile) {
+                                                    this.play();
+                                                }
+                                                else if (isMobile) {
+                                                    this.pause();
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            console.log('Request was unsuccessful: ' + xhr.status);
+                                        }
+                                    }
+                                };
+                                xhr.open('get', this.option.danmaku.addition[0], true);
+                                xhr.send(null);
                             }
-                            else if (isMobile) {
-                                this.pause();
+                            else {
+                                this.danIndex = 0;
+                                this.dan = response.danmaku.sort((a, b) => a.time - b.time);
+                                this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
+
+                                // autoplay
+                                if (this.option.autoplay && !isMobile) {
+                                    this.play();
+                                }
+                                else if (isMobile) {
+                                    this.pause();
+                                }
                             }
                         }
                     }

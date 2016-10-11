@@ -59,7 +59,7 @@ var option = {
         id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://dplayer.daoapp.io/list`
         api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
         token: 'tokendemo',                                            // Optional, danmaku token for api
-        maximum: 1000                                                  // Optional, maximum quantity of danmaku
+        maximum: 1000,                                                 // Optional, maximum quantity of danmaku
         addition: ['https://dplayer.daoapp.io/bilibili?aid=4157142']   // Optional, additional danmaku, see: `Bilibili 弹幕支持`
     }
 }
