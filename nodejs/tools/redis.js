@@ -1,6 +1,17 @@
 var logger = require('./logger');
 var redis = require("redis");
-var client = redis.createClient();
+var client;
+if (process.env.REDIS_PORT_6379_TCP_ADDR && process.env.REDIS_PORT_6379_TCP_PORT && process.env.REDIS_PASSWORD) {
+    client = redis.createClient({
+        host: process.env.REDIS_PORT_6379_TCP_ADDR,
+        port: process.env.REDIS_PORT_6379_TCP_PORT,
+        password: process.env.REDIS_PASSWORD
+    });
+}
+else {
+    client = redis.createClient();
+}
+
 
 client.on("error", function (err) {
     logger.error('Redis Error ' + err);
