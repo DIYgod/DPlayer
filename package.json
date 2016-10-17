@@ -31,7 +31,7 @@
     "exports-loader": "^0.6.3",
     "file-loader": "^0.9.0",
     "node-sass": "^3.8.0",
-    "postcss-loader": "^0.13.0",
+    "postcss-loader": "^1.0.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
