@@ -14,7 +14,7 @@
 
 [Demo](http://dplayer.js.org/)
 
-Using APlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/issues/31)
+Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/issues/31)
 
 Screenshot
 ![image](http://i.imgur.com/207ch36.jpg)
