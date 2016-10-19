@@ -94,7 +94,11 @@ var option = {
 + `ended`: Triggered when DPlayer ended
 + `error`: Triggered when an error occurs
 
-**Bilibili 弹幕支持**
+**bilibili 弹幕及直链支持**
+
+弹幕
+
+API: `https://dplayer.daoapp.io/bilibili?aid=【bilibili视频AV号】`
 
 ```JS
 var option = {
@@ -103,6 +107,34 @@ var option = {
         addition: ['https://dplayer.daoapp.io/bilibili?aid=【bilibili视频AV号】']
     }
 }
+```
+
+直链
+
+API: `https://dplayer.daoapp.io/video/bilibili?aid=【bilibili视频AV号】`
+
+```JS
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+            var response = JSON.parse(xhr.responseText);
+            var dp1 = new DPlayer({
+                // options
+                screenshot: false,
+                video: {
+                    url: response.durl[0].url
+                    // options
+                }
+            });
+        }
+        else {
+            console.log('Request was unsuccessful: ' + xhr.status);
+        }
+    }
+};
+xhr.open('get', 'https://dplayer.daoapp.io/video/bilibili?aid=【bilibili视频AV号】', true);
+xhr.send(null);
 ```
 
 **Live Video (HTTP Live Streaming, M3U8 format)**
