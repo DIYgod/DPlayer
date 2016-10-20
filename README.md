@@ -1,5 +1,6 @@
 # DPlayer
 
+[![CDNJS](https://img.shields.io/cdnjs/v/dplayer.svg?style=flat-square)](https://cdnjs.com/libraries/dplayer)
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/dplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/DPlayer#info=devDependencies)
