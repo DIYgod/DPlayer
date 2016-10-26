@@ -293,6 +293,16 @@ class DPlayer {
             });
         }
 
+        // Support FLV
+        if (this.option.video.url.match(/(flv)$/i) && flvjs.isSupported()) {
+            const flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: this.option.video.url
+            });
+            flvPlayer.attachMediaElement(this.video);
+            flvPlayer.load();
+        }
+
         this.bezel = this.element.getElementsByClassName('dplayer-bezel-icon')[0];
         this.bezel.addEventListener('animationend', () => {
             this.bezel.classList.remove('dplayer-bezel-transition');

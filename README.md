@@ -141,7 +141,7 @@ xhr.open('get', 'https://dplayer.daoapp.io/video/bilibili?aid=【bilibili视频A
 xhr.send(null);
 ```
 
-**Live Video (HTTP Live Streaming, M3U8 format)**
+**Live Video (HTTP Live Streaming, M3U8 format) support**
 
 It requires the library [hls.js](https://github.com/dailymotion/hls.js) and it should be loaded before DPlayer.min.js.
 
@@ -158,6 +158,27 @@ var dp = new DPlayer({
     // ...
     video: {
         url: 'xxx.m3u8'
+        // ...
+    }
+});
+</script>
+```
+
+**FLV format support**
+
+It requires the library [flv.js](https://github.com/Bilibili/flv.js) and it should be loaded before DPlayer.min.js.
+
+```HTML
+<div id="player1" class="dplayer"></div>
+<!-- ... -->
+<script src="plugin/flv.min.js"></script>
+<script src="dist/DPlayer.min.js"></script>
+
+<script>
+var dp = new DPlayer({
+    // ...
+    video: {
+        url: 'xxx.flv'
         // ...
     }
 });
