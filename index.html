@@ -51,15 +51,24 @@
     <h2>Wow, such a lovely HTML5 danmaku video player</h2>
     <p>Made by <a href="https://www.anotherhome.net/" target="_blank">DIYgod</a>. Available on <a href="https://github.com/DIYgod/DPlayer" target="_blank">GitHub</a>. Licensed SATA.</p>
     <hr>
-    <div class="dplayer"></div>
-    <br>
+    <h3>Normal</h3>
+    <div class="dplayer" id="dplayer1"></div>
     <button onclick="switchDPlayer()">Switch Video</button>
+    <h3>Bilibili video and danmaku support</h3>
+    <div class="dplayer" id="dplayer2"></div>
+    <h3>Live Video (HTTP Live Streaming, M3U8 format) support</h3>
+    <div class="dplayer" id="dplayer3"></div>
+    <h3>FLV format support</h3>
+    <div class="dplayer" id="dplayer4"></div>
 </div>
 <script src="https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
+<script src="plugin/flv.min.js"></script>
+<script src="plugin/hls.min.js"></script>
 <script src="DPlayer.min.js"></script>
 <script>
-    var dp = new DPlayer({
-        element: document.getElementsByClassName('dplayer')[0],
+    // Normal
+    var dp1 = new DPlayer({
+        element: document.getElementById('dplayer1'),
         autoplay: false,
         theme: '#FADFA3',
         loop: true,
@@ -76,30 +85,9 @@
             maximum: 3000
         }
     });
-    dp.on('play', function () {
-        console.log('play');
-    });
-    dp.on('play', function () {
-        console.log('play play');
-    });
-    dp.on('pause', function () {
-        console.log('pause');
-    });
-    dp.on('canplay', function () {
-        console.log('canplay');
-    });
-    dp.on('playing', function () {
-        console.log('playing');
-    });
-    dp.on('ended', function () {
-        console.log('ended');
-    });
-    dp.on('error', function () {
-        console.log('error');
-    });
     function switchDPlayer() {
-        if (dp.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
-            dp.switchVideo({
+        if (dp1.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
+            dp1.switchVideo({
                         url: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.mp4',
                         pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg'
                     },
@@ -111,7 +99,7 @@
                     });
         }
         else {
-            dp.switchVideo({
+            dp1.switchVideo({
                         url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
                         pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
                     },
@@ -123,6 +111,79 @@
                     });
         }
     }
+
+    // Bilibili video and danmaku support
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                const response = JSON.parse(xhr.responseText);
+                var dp2 = new DPlayer({
+                    element: document.getElementById('dplayer2'),
+                    autoplay: false,
+                    theme: '#FADFA3',
+                    loop: true,
+                    screenshot: false,
+                    video: {
+                        url: response.durl[0].url,
+                        pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg'
+                    },
+                    danmaku: {
+                        id: '5rGf5Y2X55qu6Z2p',
+                        api: 'https://dplayer.daoapp.io/',
+                        token: 'tokendemo',
+                        maximum: 3000,
+                        addition: ['https://dplayer.daoapp.io/bilibili?aid=4045652']
+                    }
+                });
+            }
+            else {
+                console.log('Request was unsuccessful: ' + xhr.status);
+            }
+        }
+    };
+    xhr.open('get', 'https://dplayer.daoapp.io/video/bilibili?aid=4045652', true);
+    xhr.send(null);
+
+    // Live Video (HTTP Live Streaming, M3U8 format) support
+    var dp3 = new DPlayer({
+        element: document.getElementById('dplayer3'),
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: true,
+        screenshot: true,
+        hotkey: true,
+        video: {
+            url: 'http://devtest.qiniudn.com/若能绽放光芒5.m3u8',
+            pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
+        },
+        danmaku: {
+            id: '9E2E3368B56CDBB42',
+            api: 'https://dplayer.daoapp.io/',
+            token: 'tokendemo',
+            maximum: 3000
+        }
+    });
+
+    // FLV format support
+    var dp4 = new DPlayer({
+        element: document.getElementById('dplayer4'),
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: true,
+        screenshot: true,
+        hotkey: true,
+        video: {
+            url: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.flv',
+            pic: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.jpg'
+        },
+        danmaku: {
+            id: '9E2E3368B56CDBB43',
+            api: 'https://dplayer.daoapp.io/',
+            token: 'tokendemo',
+            maximum: 3000
+        }
+    });
 
     // stats.js: JavaScript Performance Monitor
     var stats = new Stats();
