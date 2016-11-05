@@ -29,6 +29,8 @@ $ npm install dplayer --save
 
 [cdnjs](https://cdnjs.com/libraries/dplayer)
 
+[BootCDN](http://www.bootcdn.cn/dplayer/)
+
 ## Usage
 
 ### HTML
