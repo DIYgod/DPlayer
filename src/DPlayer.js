@@ -283,7 +283,7 @@ class DPlayer {
         this.video = this.element.getElementsByClassName('dplayer-video')[0];
 
         // Support HTTP Live Streaming
-        if (this.option.video.url.match(/(m3u8)$/i) && Hls.isSupported()) {
+        if (/(m3u8\?|m3u8$)/i.exec(this.option.video.url) && Hls.isSupported()) {
             this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
             const hls = new Hls();
             hls.attachMedia(this.video);
@@ -296,7 +296,7 @@ class DPlayer {
         }
 
         // Support FLV
-        if (this.option.video.url.match(/(flv)$/i) && flvjs.isSupported()) {
+        if (/(flv\?|flv$)/i.exec(this.option.video.url) && flvjs.isSupported()) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
                 url: this.option.video.url
