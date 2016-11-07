@@ -64,11 +64,11 @@ var option = {
         pic: '若能绽放光芒.png'                                          // Optional, music picture
     },
     danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
-        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://dplayer.daoapp.io/list`
-        api: 'https://dplayer.daoapp.io/',                             // Required, danmaku api
+        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://api.prprpr.me/dplayer/list`
+        api: 'https://api.prprpr.me/dplayer/',                             // Required, danmaku api
         token: 'tokendemo',                                            // Optional, danmaku token for api
         maximum: 1000,                                                 // Optional, maximum quantity of danmaku
-        addition: ['https://dplayer.daoapp.io/bilibili?aid=4157142']   // Optional, additional danmaku, see: `Bilibili 弹幕支持`
+        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142']   // Optional, additional danmaku, see: `Bilibili 弹幕支持`
     }
 }
 ```
@@ -104,20 +104,20 @@ var option = {
 
 弹幕
 
-API: `https://dplayer.daoapp.io/bilibili?aid=【bilibili视频AV号】`
+API: `https://api.prprpr.me/dplayer/bilibili?aid=【bilibili视频AV号】`
 
 ```JS
 var option = {
     danmaku: {
         // ...
-        addition: ['https://dplayer.daoapp.io/bilibili?aid=【bilibili视频AV号】']
+        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=【bilibili视频AV号】']
     }
 }
 ```
 
 直链
 
-API: `https://dplayer.daoapp.io/video/bilibili?aid=【bilibili视频AV号】`
+API: `https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】`
 
 ```JS
 var xhr = new XMLHttpRequest();
@@ -139,7 +139,7 @@ xhr.onreadystatechange = function () {
         }
     }
 };
-xhr.open('get', 'https://dplayer.daoapp.io/video/bilibili?aid=【bilibili视频AV号】', true);
+xhr.open('get', 'https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】', true);
 xhr.send(null);
 ```
 
@@ -198,7 +198,7 @@ var dp = new DPlayer(option);
 
 **Ready-made API:**
 
-`https://dplayer.daoapp.io/`
+`https://api.prprpr.me/dplayer/`
 
 **Build yourself:**
 
