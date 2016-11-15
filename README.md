@@ -106,7 +106,9 @@ var option = {
 
 API:
 
-`https://api.prprpr.me/dplayer/bilibili?aid=【bilibili视频AV号】` 或 `https://api.prprpr.me/dplayer/bilibili?cid=【bilibili视频cid】`
+`https://api.prprpr.me/dplayer/bilibili?aid=【bilibili视频AV号】`
+
+或 `https://api.prprpr.me/dplayer/bilibili?cid=【bilibili视频cid】`
 
 ```JS
 var option = {
@@ -121,7 +123,9 @@ var option = {
 
 API:
 
-`https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】` 或 `https://api.prprpr.me/dplayer/video/bilibili?cid=【bilibili视频cid】`
+`https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】`
+
+或 `https://api.prprpr.me/dplayer/video/bilibili?cid=【bilibili视频cid】`
 
 ```JS
 var xhr = new XMLHttpRequest();
