@@ -2,6 +2,7 @@ var url = require('url');
 var fs = require('fs');
 var logger = require('../tools/logger');
 var danmaku = require('../models/danmaku');
+var redis = require('../tools/redis');
 
 function htmlEncode(str) {
     return str.replace(/&/g, "&amp;")
@@ -104,6 +105,7 @@ module.exports = function (req, res) {
             }
             else {
                 res.send(`{"code": 1, "data": ${JSON.stringify(d)}}`);
+                redis.client.del(`dplayer${htmlEncode(jsonStr.player)}`);
             }
         });
     }

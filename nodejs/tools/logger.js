@@ -3,7 +3,7 @@ log4js.configure({
     appenders: [
         {
             type: "file",
-            filename: 'DPlayer.log',
+            filename: 'logs/DPlayer.log',
             maxLogSize: 20480,
             backups: 3,
             category: [ 'DPlayer','console' ]

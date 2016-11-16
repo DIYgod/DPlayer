@@ -2,4 +2,5 @@
 node_modules
 demo2
 npm-debug.log
-DPlayer.log
+DPlayer.log*
+wxw

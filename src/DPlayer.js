@@ -1,6 +1,7 @@
-console.log("\n %c DPlayer 1.0.10 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c DPlayer 1.1.2 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
+const defaultApiBackend = require('./api.js');
 
 let index = 0;
 
@@ -37,10 +38,12 @@ class DPlayer {
             `;
         };
 
+        this.option = option;
+
         const isMobile = /mobile/i.test(window.navigator.userAgent);
         // compatibility: some mobile browsers don't suppose autoplay
         if (isMobile) {
-            option.autoplay = false;
+            this.option.autoplay = false;
         }
 
         // default options
@@ -52,11 +55,12 @@ class DPlayer {
             lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
             screenshot: false,
             hotkey: true,
-            preload: 'auto'
+            preload: 'auto',
+            apiBackend: defaultApiBackend
         };
         for (let defaultKey in defaultOption) {
-            if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
-                option[defaultKey] = defaultOption[defaultKey];
+            if (defaultOption.hasOwnProperty(defaultKey) && !this.option.hasOwnProperty(defaultKey)) {
+                this.option[defaultKey] = defaultOption[defaultKey];
             }
         }
 
@@ -79,10 +83,10 @@ class DPlayer {
             'Danmaku': '弹幕'
         };
         const getTran = (text) => {
-            if (option.lang === 'en') {
+            if (this.option.lang === 'en') {
                 return text;
             }
-            else if (option.lang === 'zh') {
+            else if (this.option.lang === 'zh') {
                 return tranZH[text];
             }
         };
@@ -112,33 +116,21 @@ class DPlayer {
             }
         };
 
-        this.element = option.element;
-        if (!option.danmaku) {
+        this.element = this.option.element;
+        if (!this.option.danmaku) {
             this.element.classList.add('dplayer-no-danmaku');
-        }
-
-        if (isMobile) {
-            this.element.innerHTML = `
-                <div class="dplayer-video-wrap">
-                    <video class="dplayer-video" ${option.video.pic ? `poster="${option.video.pic}"` : ``} preload="${option.preload}" controls>
-                        <source src="${option.video.url}">
-                    </video>
-                </div>`;
-            return;
         }
 
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${option.video.pic ? `poster="${option.video.pic}"` : ``} ${option.screenshot ? `crossorigin="anonymous"` : ``} preload="${option.preload}">
-                    <source src="${option.video.url}">
-                </video>
+                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} webkit-playsinline ${this.option.screenshot ? `crossorigin="anonymous"` : ``} preload="${this.option.preload}" src="${this.option.video.url}"></video>
                 <div class="dplayer-danmaku">
                     <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
                 </div>
                 <div class="dplayer-bezel">
                     <span class="dplayer-bezel-icon"></span>
-                    ${option.danmaku ? `<span class="dplayer-danloading">${getTran('Danmaku is loading')}</span>` : ``}
+                    ${this.option.danmaku ? `<span class="dplayer-danloading">${getTran('Danmaku is loading')}</span>` : ``}
                     <span class="diplayer-loading-icon">
                         <svg height="100%" version="1.1" viewBox="0 0 22 22" width="100%">
                             <svg x="7" y="1">
@@ -175,14 +167,14 @@ class DPlayer {
                     <button class="dplayer-icon dplayer-play-icon">`
             +           this.getSVG('play')
             + `     </button>
-                    <div class="dplayer-volume">
+                    <div class="dplayer-volume" ${isMobile ? 'style="display: none;"' : ''}>
                         <button class="dplayer-icon dplayer-volume-icon">`
             +               this.getSVG('volume-down')
             + `         </button>
                         <div class="dplayer-volume-bar-wrap">
                             <div class="dplayer-volume-bar">
-                                <div class="dplayer-volume-bar-inner" style="width: 70%; background: ${option.theme};">
-                                    <span class="dplayer-thumb" style="background: ${option.theme}"></span>
+                                <div class="dplayer-volume-bar-inner" style="width: 70%; background: ${this.option.theme};">
+                                    <span class="dplayer-thumb" style="background: ${this.option.theme}"></span>
                                 </div>
                             </div>
                         </div>
@@ -190,8 +182,8 @@ class DPlayer {
                     <span class="dplayer-time"><span class="dplayer-ptime">0:00</span> / <span class="dplayer-dtime">0:00</span></span>
                 </div>
                 <div class="dplayer-icons dplayer-icons-right">
-                    ${option.screenshot ? `
-                    <a href="#" class="dplayer-icon dplayer-camera-icon">`
+                    ${this.option.screenshot ? `
+                    <a href="#" class="dplayer-icon dplayer-camera-icon" ${isMobile ? 'style="display: none;"' : ''}dplayer-volume>`
             +           this.getSVG('camera')
             + `     </a>
                     ` : ``}
@@ -266,8 +258,8 @@ class DPlayer {
                 <div class="dplayer-bar-wrap">
                     <div class="dplayer-bar">
                         <div class="dplayer-loaded" style="width: 0;"></div>
-                        <div class="dplayer-played" style="width: 0; background: ${option.theme}">
-                            <span class="dplayer-thumb" style="background: ${option.theme}"></span>
+                        <div class="dplayer-played" style="width: 0; background: ${this.option.theme}">
+                            <span class="dplayer-thumb" style="background: ${this.option.theme}"></span>
                         </div>
                     </div>
                 </div>
@@ -279,20 +271,38 @@ class DPlayer {
             </div>
         `;
 
+        // arrow style
+        var arrow = this.element.offsetWidth <= 500;
+        if (arrow) {
+            var arrowStyle = document.createElement('style');
+            arrowStyle.innerHTML = `.dplayer .dplayer-danmaku{font-size:18px}`;
+            document.head.appendChild(arrowStyle);
+        }
+
         // get this video object
         this.video = this.element.getElementsByClassName('dplayer-video')[0];
 
         // Support HTTP Live Streaming
-        if (option.video.url.match(/(m3u8)$/i) && Hls.isSupported()) {
+        if (/(m3u8\?|m3u8$)/i.exec(this.option.video.url) && Hls.isSupported()) {
             this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
             const hls = new Hls();
             hls.attachMedia(this.video);
             hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-                hls.loadSource(option.video.url);
+                hls.loadSource(this.option.video.url);
                 hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
                     console.log("manifest loaded, found " + data.levels.length + " quality level");
                 });
             });
+        }
+
+        // Support FLV
+        if (/(flv\?|flv$)/i.exec(this.option.video.url) && flvjs.isSupported()) {
+            const flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: this.option.video.url
+            });
+            flvPlayer.attachMediaElement(this.video);
+            flvPlayer.load();
         }
 
         this.bezel = this.element.getElementsByClassName('dplayer-bezel-icon')[0];
@@ -396,7 +406,7 @@ class DPlayer {
         const pbar = this.element.getElementsByClassName('dplayer-bar-wrap')[0];
         let barWidth;
 
-        if (option.danmaku) {
+        if (this.option.danmaku) {
             this.video.addEventListener('seeking', () => {
                 for (let i = 0; i < this.dan.length; i++) {
                     if (this.dan[i].time >= this.video.currentTime) {
@@ -434,7 +444,7 @@ class DPlayer {
                 this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = secondToTime(this.video.currentTime);
                 this.trigger('playing');
             }, 100);
-            if (option.danmaku) {
+            if (this.option.danmaku) {
                 danmakuTime = setInterval(() => {
                     let item = this.dan[this.danIndex];
                     while (item && this.video.currentTime >= parseFloat(item.time)) {
@@ -446,7 +456,7 @@ class DPlayer {
         };
         this.clearTime = () => {
             clearInterval(this.playedTime);
-            if (option.danmaku) {
+            if (this.option.danmaku) {
                 clearInterval(danmakuTime);
             }
         };
@@ -649,7 +659,7 @@ class DPlayer {
             openSetting();
         });
 
-        let loop = option.loop;
+        let loop = this.option.loop;
         const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
         let showdan = true;
         const settingEvent = () => {
@@ -682,7 +692,7 @@ class DPlayer {
                 showDanToggle.checked = !showDanToggle.checked;
                 if (showDanToggle.checked) {
                     showdan = true;
-                    if (option.danmaku) {
+                    if (this.option.danmaku) {
                         for (let i = 0; i < this.dan.length; i++) {
                             if (this.dan[i].time >= this.video.currentTime) {
                                 this.danIndex = i;
@@ -701,14 +711,15 @@ class DPlayer {
                 }
                 else {
                     showdan = false;
-                    if (option.danmaku) {
+                    if (this.option.danmaku) {
                         clearInterval(danmakuTime);
                         danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
-                        let danTunnel = {
+                        this.danTunnel = {
                             right: {},
                             top: {},
                             bottom: {}
                         };
+                        this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
                     }
                 }
                 closeSetting();
@@ -729,7 +740,7 @@ class DPlayer {
                 }
             });
 
-            if (option.danmaku) {
+            if (this.option.danmaku) {
                 // danmaku opacity
                 bar.danmakuBar = this.element.getElementsByClassName('dplayer-danmaku-bar-inner')[0];
                 const danmakuBarWrapWrap = this.element.getElementsByClassName('dplayer-danmaku-bar-wrap')[0];
@@ -833,11 +844,11 @@ class DPlayer {
         /**
          * danmaku display
          */
-        const itemHeight = 30;
+        const itemHeight = arrow ? 24: 30;
         let danWidth;
         let danHeight;
         let itemY;
-        let danTunnel = {
+        this.danTunnel = {
             right: {},
             top: {},
             bottom: {}
@@ -855,33 +866,33 @@ class DPlayer {
             const tmp = danWidth / danSpeed(width);
 
             for (let i = 0; ; i++) {
-                let item = danTunnel[type][i + ''];
+                let item = this.danTunnel[type][i + ''];
                 if (item && item.length) {
                     for (let j = 0; j < item.length; j++) {
                         const danRight = danItemRight(item[j]) - 10;
-                        if (danRight <= danWidth - (tmp * danSpeed(item[j])) || danRight <= 0) {
+                        if (danRight <= danWidth - (tmp * danSpeed(item[j].offsetWidth)) || danRight <= 0) {
                             break;
                         }
                         if (j === item.length - 1) {
-                            danTunnel[type][i + ''].push(ele);
+                            this.danTunnel[type][i + ''].push(ele);
                             ele.addEventListener('animationend', () => {
-                                danTunnel[type][i + ''].splice(0, 1);
+                                this.danTunnel[type][i + ''].splice(0, 1);
                             });
                             return i % itemY;
                         }
                     }
                 }
                 else {
-                    danTunnel[type][i + ''] = [ele];
+                    this.danTunnel[type][i + ''] = [ele];
                     ele.addEventListener('animationend', () => {
-                        danTunnel[type][i + ''].splice(0, 1);
+                        this.danTunnel[type][i + ''].splice(0, 1);
                     });
                     return i % itemY;
                 }
             }
         };
 
-        const itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
+        this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
 
         const danmakuIn = (text, color, type) => {
             danWidth = danContainer.offsetWidth;
@@ -898,8 +909,8 @@ class DPlayer {
             });
 
             // measure
-            itemDemo.innerHTML = text;
-            let itemWidth = itemDemo.offsetWidth;
+            this.itemDemo.innerHTML = text;
+            let itemWidth = this.itemDemo.offsetWidth;
 
             // adjust
             switch (type) {
@@ -928,47 +939,13 @@ class DPlayer {
         };
 
         // danmaku
-        if (option.danmaku) {
+        if (this.option.danmaku) {
             this.danIndex = 0;
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response.code !== 1) {
-                            alert(response.msg);
-                        }
-                        else {
-                            this.dan = response.danmaku.sort((a, b) => a.time - b.time);
-                            this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
-
-                            // autoplay
-                            if (option.autoplay && !isMobile) {
-                                this.play();
-                            }
-                            else if (isMobile) {
-                                this.pause();
-                            }
-                        }
-                    }
-                    else {
-                        console.log('Request was unsuccessful: ' + xhr.status);
-                    }
-                }
-            };
-            let apiurl;
-            if (option.danmaku.maximum) {
-                apiurl = `${option.danmaku.api}?id=${option.danmaku.id}&max=${option.danmaku.maximum}`;
-            }
-            else {
-                apiurl = `${option.danmaku.api}?id=${option.danmaku.id}`;
-            }
-            xhr.open('get', apiurl, true);
-            xhr.send(null);
+            this.readDanmaku();
         }
         else {
             // autoplay
-            if (option.autoplay && !isMobile) {
+            if (this.option.autoplay && !isMobile) {
                 this.play();
             }
             else if (isMobile) {
@@ -1006,40 +983,22 @@ class DPlayer {
             }
 
             const danmakuData = {
-                token: option.danmaku.token,
-                player: option.danmaku.id,
+                token: this.option.danmaku.token,
+                player: this.option.danmaku.id,
                 author: 'DIYgod',
                 time: this.video.currentTime,
                 text: commentInput.value,
                 color: this.element.querySelector('.dplayer-comment-setting-color input:checked').value,
                 type: this.element.querySelector('.dplayer-comment-setting-type input:checked').value
             };
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response.code !== 1) {
-                            alert(response.msg);
-                        }
-                        else {
-                            console.log('Post danmaku: ', JSON.parse(xhr.responseText));
-                        }
-                    }
-                    else {
-                        console.log('Request was unsuccessful: ' + xhr.status);
-                    }
-                }
-            };
-            xhr.open('post', option.danmaku.api, true);
-            xhr.send(JSON.stringify(danmakuData));
+            this.option.apiBackend.send(this.option.danmaku.api, danmakuData);
 
             commentInput.value = '';
             closeComment();
             this.dan.splice(this.danIndex, 0, danmakuData);
             this.danIndex++;
             const item = danmakuIn(htmlEncode(danmakuData.text), danmakuData.color, danmakuData.type);
-            item.style.border = `2px solid ${option.theme}`;
+            item.style.border = `2px solid ${this.option.theme}`;
         };
 
         const closeCommentSetting = () => {
@@ -1193,7 +1152,7 @@ class DPlayer {
                 }
             }
         };
-        if (option.hotkey) {
+        if (this.option.hotkey) {
             document.addEventListener('keydown', handleKeyDown);
         }
 
@@ -1218,7 +1177,7 @@ class DPlayer {
         /**
          * Screenshot
          */
-        if (option.screenshot) {
+        if (this.option.screenshot) {
             const camareIcon = this.element.getElementsByClassName('dplayer-camera-icon')[0];
             camareIcon.addEventListener('click', () => {
                 const canvas = document.createElement("canvas");
@@ -1311,6 +1270,94 @@ class DPlayer {
     on(name, func) {
         if (typeof func === 'function') {
             this.event[name].push(func);
+        }
+    }
+
+    /**
+     * Asynchronously read danmaku from all API endpoints
+     */
+    _readAllEndpoints (endpoints, finish) {
+        let results = [];
+        let readCount = 0;
+        let cbk = (i) => (err, data) => {
+            ++readCount;
+            if (err) {
+                if (err.response)
+                    alert(err.response.msg);
+                else
+                    console.log('Request was unsuccessful: ' + err.status);
+                results[i] = [];
+            }
+            else {
+                results[i] = data;
+            }
+            if (readCount == endpoints.length) {
+                return finish(results);
+            }
+        };
+
+        for (let i = 0; i < endpoints.length; ++i) {
+            this.option.apiBackend.read(endpoints[i], cbk(i));
+        }
+    }
+
+    /**
+     * Read danmaku from API
+     */
+    readDanmaku() {
+        const isMobile = /mobile/i.test(window.navigator.userAgent);
+        let apiurl;
+        if (this.option.danmaku.maximum) {
+            apiurl = `${this.option.danmaku.api}?id=${this.option.danmaku.id}&max=${this.option.danmaku.maximum}`;
+        }
+        else {
+            apiurl = `${this.option.danmaku.api}?id=${this.option.danmaku.id}`;
+        }
+        let endpoints = (this.option.danmaku.addition || []).slice(0);
+        endpoints.push(apiurl);
+
+        this._readAllEndpoints(endpoints, (results) => {
+            this.danIndex = 0;
+            this.dan = [].concat.apply([], results).sort((a, b) => a.time - b.time);
+            this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
+
+            // autoplay
+            if (this.option.autoplay && !isMobile) {
+                this.play();
+            }
+            else if (isMobile) {
+                this.pause();
+            }
+        });
+    }
+
+    /**
+     * Switch to a new video
+     *
+     * @param {Object} video - new video info
+     * @param {Object} danmaku - new danmaku info
+     */
+    switchVideo(video, danmaku) {
+        this.video.src = video.url;
+        this.video.poster = video.pic ? video.pic : '';
+        this.video.currentTime = 0;
+        this.pause();
+        if (danmaku) {
+            this.dan = [];
+            this.danIndex = 0;
+            this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'block';
+            this.updateBar('played', 0, 'width');
+            this.updateBar('loaded', 0, 'width');
+            this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = '00:00';
+            this.element.getElementsByClassName('dplayer-danmaku')[0].innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
+            this.danTunnel = {
+                right: {},
+                top: {},
+                bottom: {}
+            };
+            this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
+            this.option.danmaku = danmaku;
+            this.readDanmaku();
         }
     }
 }
