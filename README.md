@@ -195,6 +195,17 @@ var dp = new DPlayer({
 </script>
 ```
 
+**macOS Picture-in-Picture support**
+
+It requires the plugin pip.min.js and it should be loaded after DPlayer.min.js.
+
+```HTML
+<div id="player1" class="dplayer"></div>
+<!-- ... -->
+<script src="dist/DPlayer.min.js"></script>
+<script src="plugin/pip.min.js"></script>
+```
+
 **Work with module bundler**
 
 ```js
