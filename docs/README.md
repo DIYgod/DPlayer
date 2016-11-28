@@ -217,14 +217,14 @@ xhr.send(null);
 
 ```
 $ npm install
-$ npm run dev
+$ npm run start
 ```
 
 ## Make a release
 
 ```
 $ npm install
-$ npm run build
+$ npm run test
 ```
 
 ## Related Projects
