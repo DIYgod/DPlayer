@@ -33,18 +33,22 @@ $ npm install dplayer --save
 
 [BootCDN](http://www.bootcdn.cn/dplayer/)
 
+## Usage
+
+See [docs](http://dplayer.js.org/docs)
+
 ## Run in development
 
 ```
 $ npm install
-$ npm run dev
+$ npm run start
 ```
 
 ## Make a release
 
 ```
 $ npm install
-$ npm run build
+$ npm run test
 ```
 
 ## Related Projects
