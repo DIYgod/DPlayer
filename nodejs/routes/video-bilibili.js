@@ -8,10 +8,10 @@ var appkey = '4ebafd7c4951b366';
 var secret = '8cb98205e9b2ad3669aad0fce12a4c13';
 function getData(cid, res) {
     var sign = md5(`appkey=${appkey}&cid=${cid}&otype=json&quality=2&type=mp4${secret}`);
-    fetch(`https://interface.bilibili.com/playurl?appkey=${appkey}&cid=${cid}&otype=json&quality=2&type=mp4&sign=${sign}`).then(
+    fetch(`https://interface.bilibili.com/playurl?cid=${cid}&appkey=${appkey}&otype=json&type=mp4&quality=2&sign=${sign}`).then(
         response => response.text()
     ).then((data) => {
-            res.send(data);
+            res.send(data.replace(/http/g, 'https'));
         }
     ).catch(
         e => logger.error("Bilibilib Error: getting data", e)
