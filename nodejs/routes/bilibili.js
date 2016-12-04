@@ -15,7 +15,7 @@ module.exports = function (req, res) {
     var cid = query.cid;
 
     function addZero(str, length){
-        return new Array(length - str.length + 1).join("0") + str;
+        return new Array(Math.max(length - str.length + 1, 0)).join("0") + str;
     }
 
     if (cid) {
