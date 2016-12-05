@@ -6,16 +6,22 @@ var md5 = require('blueimp-md5');
 
 var appkey = '4ebafd7c4951b366';
 var secret = '8cb98205e9b2ad3669aad0fce12a4c13';
-function getData(cid, res) {
+function getData(cid, res, type) {
     var sign = md5(`appkey=${appkey}&cid=${cid}&otype=json&quality=2&type=mp4${secret}`);
-    fetch(`https://interface.bilibili.com/playurl?cid=${cid}&appkey=${appkey}&otype=json&type=mp4&quality=2&sign=${sign}`).then(
-        response => response.text()
-    ).then((data) => {
-            res.send(data.replace(/http/g, 'https'));
-        }
-    ).catch(
-        e => logger.error("Bilibilib Error: getting data", e)
-    );
+    var api = `https://interface.bilibili.com/playurl?cid=${cid}&appkey=${appkey}&otype=json&type=mp4&quality=2&sign=${sign}`;
+    if (type === '1') {
+        res.send(api);
+    }
+    else {
+        fetch(api).then(
+            response => response.text()
+        ).then((data) => {
+                res.send(data.replace(/http/g, 'https'));
+            }
+        ).catch(
+            e => logger.error("Bilibilib Error: getting data", e)
+        );
+    }
 }
 
 module.exports = function (req, res) {
@@ -27,16 +33,17 @@ module.exports = function (req, res) {
     var query = url.parse(req.url,true).query;
     var aid = query.aid;
     var cid = query.cid;
+    var type = query.type;
 
     if (cid) {
         logger.info(`Bilibili cid2video ${cid}, IP: ${ip}`);
-        getData(cid, res);
+        getData(cid, res, type);
     }
     else {
         redis.client.get(`bilibiliaid2cid${aid}`, function(err, reply) {
             if (reply) {
                 logger.info(`Bilibili aid2video ${aid} form redis, IP: ${ip}`);
-                getData(reply, res);
+                getData(reply, res, type);
             }
             else {
                 logger.info(`Bilibili aid2video ${aid} form origin, IP: ${ip}`);
@@ -45,7 +52,7 @@ module.exports = function (req, res) {
                     response => response.json()
                 ).then((data) => {
                         redis.set(`bilibiliaid2cid${aid}`, data[0].cid);
-                        getData(data[0].cid, res);
+                        getData(data[0].cid, res, type);
                     }
                 ).catch(
                     e => logger.error("Bilibili aid2video Error: getting cid", e)
