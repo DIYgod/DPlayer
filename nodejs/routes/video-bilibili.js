@@ -3,12 +3,14 @@ var logger = require('../tools/logger');
 var redis = require('../tools/redis');
 var fetch = require('node-fetch');
 var md5 = require('blueimp-md5');
+var xml2js = require('xml2js');
+var parseString = xml2js.parseString;
 
-var appkey = '4ebafd7c4951b366';
-var secret = '8cb98205e9b2ad3669aad0fce12a4c13';
+var appkey = 'f3bb208b3d081dc8';
+var secret = '1c15888dc316e05a15fdd0a02ed6584f';
 function getData(cid, res, type) {
-    var sign = md5(`appkey=${appkey}&cid=${cid}&otype=json&quality=2&type=mp4${secret}`);
-    var api = `https://interface.bilibili.com/playurl?cid=${cid}&appkey=${appkey}&otype=json&type=mp4&quality=2&sign=${sign}`;
+    var sign = md5(`cid=${cid}&from=miniplay&player=1${secret}`);
+    var api = `https://interface.bilibili.com/playurl?&cid=${cid}&from=miniplay&player=1&sign=${sign}`;
     if (type === '1') {
         res.send(api);
     }
@@ -16,7 +18,9 @@ function getData(cid, res, type) {
         fetch(api).then(
             response => response.text()
         ).then((data) => {
-                res.send(data.replace(/http/g, 'https'));
+            parseString(data, {explicitArray: false}, function (err, result) {
+                    res.send(result);
+                });
             }
         ).catch(
             e => logger.error("Bilibilib Error: getting data", e)
