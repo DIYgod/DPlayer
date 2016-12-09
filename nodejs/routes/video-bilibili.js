@@ -16,7 +16,10 @@ function getData(cid, res, type) {
         res.send(api);
     }
     else {
-        fetch(api, { agent:new HttpProxyAgent('http://183.61.236.54:3128/')}).then(
+        fetch(api, {
+            headers: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36'},
+            agent: new HttpProxyAgent('http://183.61.236.54:3128/')
+        }).then(
             response => response.text()
         ).then((data) => {
             parseString(data, {explicitArray: false}, function (err, result) {
