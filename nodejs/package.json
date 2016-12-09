@@ -9,6 +9,7 @@
   "dependencies": {
     "blueimp-md5": "^2.4.0",
     "express": "^4.13.4",
+    "http-proxy-agent": "^1.0.0",
     "log4js": "^0.6.36",
     "mongoose": "^4.1.9",
     "node-fetch": "^1.6.3",
