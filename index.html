@@ -117,7 +117,7 @@
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
             if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                const response = JSON.parse(xhr.responseText);
+                var response = JSON.parse(xhr.responseText);
                 var dp2 = new DPlayer({
                     element: document.getElementById('dplayer2'),
                     autoplay: false,
@@ -125,7 +125,7 @@
                     loop: true,
                     screenshot: false,
                     video: {
-                        url: response.durl[0].url,
+                        url: response.video.durl.url,
                         pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg'
                     },
                     danmaku: {
@@ -136,14 +136,13 @@
                         addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4045652']
                     }
                 });
-            }
-            else {
+            } else {
                 console.log('Request was unsuccessful: ' + xhr.status);
             }
         }
     };
-    xhr.open('get', 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652', true);
-    xhr.send(null);
+    xhr.open('GET', 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652', true);
+    xhr.send();
 
     // Live Video (HTTP Live Streaming, M3U8 format) support
     var dp3 = new DPlayer({
@@ -200,3 +199,4 @@
 </script>
 </body>
 </html>
+
