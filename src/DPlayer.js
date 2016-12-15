@@ -421,7 +421,7 @@ class DPlayer {
         let lastPlayPos = 0;
         let currentPlayPos = 0;
         let bufferingDetected = false;
-        let danmakuTime;
+        this.danmakuTime = {};
         this.setTime = () => {
             this.playedTime = setInterval(() => {
                 // whether the video is buffering
@@ -445,7 +445,7 @@ class DPlayer {
                 this.trigger('playing');
             }, 100);
             if (this.option.danmaku) {
-                danmakuTime = setInterval(() => {
+                this.danmakuTime = setInterval(() => {
                     let item = this.dan[this.danIndex];
                     while (item && this.video.currentTime >= parseFloat(item.time)) {
                         danmakuIn(item.text, item.color, item.type);
@@ -457,7 +457,7 @@ class DPlayer {
         this.clearTime = () => {
             clearInterval(this.playedTime);
             if (this.option.danmaku) {
-                clearInterval(danmakuTime);
+                clearInterval(this.danmakuTime);
             }
         };
 
@@ -661,7 +661,9 @@ class DPlayer {
 
         let loop = this.option.loop;
         const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
-        let showdan = true;
+        this.danContainer = danContainer;
+        // let showdan = true;
+        this.showdan = true;
         const settingEvent = () => {
             // loop control
             const loopEle = this.element.getElementsByClassName('dplayer-setting-loop')[0];
@@ -686,42 +688,39 @@ class DPlayer {
             const showDanEle = this.element.getElementsByClassName('dplayer-setting-showdan')[0];
             const showDanToggle = showDanEle.getElementsByClassName('dplayer-showdan-setting-input')[0];
 
-            showDanToggle.checked = showdan;
+            showDanToggle.checked = this.showdan;
 
             showDanEle.addEventListener('click', () => {
-                showDanToggle.checked = !showDanToggle.checked;
-                if (showDanToggle.checked) {
-                    showdan = true;
-                    if (this.option.danmaku) {
-                        for (let i = 0; i < this.dan.length; i++) {
-                            if (this.dan[i].time >= this.video.currentTime) {
-                                this.danIndex = i;
-                                break;
-                            }
-                            this.danIndex = this.dan.length;
+                this.showdan = !this.showdan;
+                showDanToggle.checked = this.showdan;
+
+                if(this.showdan && this.option.danmaku) {
+                    for (let i = 0; i < this.dan.length; i++) {
+                        if (this.dan[i].time >= this.video.currentTime) {
+                            this.danIndex = i;
+                            break;
                         }
-                        danmakuTime = setInterval(() => {
-                            let item = this.dan[this.danIndex];
-                            while (item && this.video.currentTime >= parseFloat(item.time)) {
-                                danmakuIn(item.text, item.color, item.type);
-                                item = this.dan[++this.danIndex];
-                            }
-                        }, 0);
+                        this.danIndex = this.dan.length;
                     }
+                    this.danmakuTime = setInterval(() => {
+                        let item = this.dan[this.danIndex];
+                        while (item && this.video.currentTime >= parseFloat(item.time)) {
+                            danmakuIn(item.text, item.color, item.type);
+                            item = this.dan[++this.danIndex];
+                        }
+                    }, 0);
+
+                } else if (this.option.danmaku) {
+                    clearInterval(this.danmakuTime);
+                    danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
+                    this.danTunnel = {
+                        right: {},
+                        top: {},
+                        bottom: {}
+                    };
+                    this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
                 }
-                else {
-                    showdan = false;
-                    if (this.option.danmaku) {
-                        clearInterval(danmakuTime);
-                        danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
-                        this.danTunnel = {
-                            right: {},
-                            top: {},
-                            bottom: {}
-                        };
-                        this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
-                    }
-                }
+
                 closeSetting();
             });
 
@@ -1215,6 +1214,7 @@ class DPlayer {
             this.setTime();
             this.element.classList.add('dplayer-playing');
             this.trigger('play');
+            this.shouldHideDanmaku();
         }
     }
 
@@ -1358,6 +1358,17 @@ class DPlayer {
             this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
             this.option.danmaku = danmaku;
             this.readDanmaku();
+        }
+    }
+
+    hideDanmaku() {
+        clearInterval(this.danmakuTime);
+        this.danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
+    }
+
+    shouldHideDanmaku() {
+        if(!this.showdan && this.option.danmaku) {
+            this.hideDanmaku();
         }
     }
 }
