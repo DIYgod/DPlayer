@@ -1214,7 +1214,7 @@ class DPlayer {
             this.setTime();
             this.element.classList.add('dplayer-playing');
             this.trigger('play');
-            this.shouldHideDanmaku();
+            this.ifShouldHideDanmaku();
         }
     }
 
@@ -1366,7 +1366,7 @@ class DPlayer {
         this.danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
     }
 
-    shouldHideDanmaku() {
+    ifShouldHideDanmaku() {
         if(!this.showdan && this.option.danmaku) {
             this.hideDanmaku();
         }
