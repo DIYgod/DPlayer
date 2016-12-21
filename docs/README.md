@@ -66,7 +66,7 @@ var dp = new DPlayer({
         maximum: 1000,                                                 // Optional, maximum quantity of danmaku
         addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142']   // Optional, additional danmaku, see: `Bilibili 弹幕支持`
     }
-})
+});
 ```
 
 ### API
