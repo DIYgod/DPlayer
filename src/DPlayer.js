@@ -444,7 +444,7 @@ class DPlayer {
                 this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = secondToTime(this.video.currentTime);
                 this.trigger('playing');
             }, 100);
-            if (this.option.danmaku) {
+            if (this.option.danmaku && showdan) {
                 danmakuTime = setInterval(() => {
                     let item = this.dan[this.danIndex];
                     while (item && this.video.currentTime >= parseFloat(item.time)) {
