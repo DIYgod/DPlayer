@@ -1162,10 +1162,15 @@ class DPlayer {
         const menu = this.element.getElementsByClassName('dplayer-menu')[0];
         this.element.addEventListener('contextmenu', (e) => {
             const event = e || window.event;
-            event.preventDefault();
-            menu.style.left = event.clientX - this.element.getBoundingClientRect().left + 'px';
-            menu.style.top = event.clientY - this.element.getBoundingClientRect().top + 'px';
             menu.classList.add('dplayer-menu-show');
+            event.preventDefault();
+            let clientRect = this.element.getBoundingClientRect();
+            let menuLeft = event.clientX - clientRect.left;
+            let menuTop = event.clientY - clientRect.top;
+            menuLeft = menuLeft + menu.offsetWidth >= clientRect.width ? clientRect.width - menu.offsetWidth : menuLeft;
+            menuTop = menuTop + menu.offsetHeight >= clientRect.height ? clientRect.height - menu.offsetHeight : menuTop;
+            menu.style.left = menuLeft + 'px';
+            menu.style.top = menuTop + 'px';
 
             mask.classList.add('dplayer-mask-show');
             mask.addEventListener('click', () => {
