@@ -1163,9 +1163,28 @@ class DPlayer {
         this.element.addEventListener('contextmenu', (e) => {
             const event = e || window.event;
             event.preventDefault();
-            menu.style.left = event.clientX - this.element.getBoundingClientRect().left + 'px';
-            menu.style.top = event.clientY - this.element.getBoundingClientRect().top + 'px';
+
             menu.classList.add('dplayer-menu-show');
+
+            const clientRect = this.element.getBoundingClientRect();
+            const menuLeft = event.clientX - clientRect.left;
+            const menuTop = event.clientY - clientRect.top;
+            if (menuLeft + menu.offsetWidth >= clientRect.width) {
+                menu.style.right = clientRect.width - menuLeft + 'px';
+                menu.style.left = 'initial';
+            }
+            else {
+                menu.style.left = event.clientX - this.element.getBoundingClientRect().left + 'px';
+                menu.style.right = 'initial';
+            }
+            if (menuTop + menu.offsetHeight >= clientRect.height) {
+                menu.style.bottom = clientRect.height - menuTop + 'px';
+                menu.style.top = 'initial';
+            }
+            else {
+                menu.style.top = event.clientY - this.element.getBoundingClientRect().top + 'px';
+                menu.style.bottom = 'initial';
+            }
 
             mask.classList.add('dplayer-mask-show');
             mask.addEventListener('click', () => {
