@@ -10,4 +10,9 @@ self.$config = {
       link: 'http://weibo.com/anotherhome'
     }
   ],
+  plugins: [
+    disqus({
+      shortname: 'dplayer'
+    })
+  ]
 }
