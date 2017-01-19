@@ -2,29 +2,42 @@ var webpack = require('webpack');
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 
+var libraryName = 'DPlayer';
+var env = process.env.WEBPACK_ENV;
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
-module.exports = {
-    devtool: 'source-map',
+var plugins = [];
+if (env !== 'dev') {
+    plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            minimize: true
+        })
+    );
+}
 
-    entry: './src/DPlayer.js',
+module.exports = {
+    entry: './src/' + libraryName + '.js',
 
     output: {
         path: BUILD_PATH,
-        filename: 'DPlayer.min.js',
-        library: 'DPlayer',
+        filename: libraryName + '.min.js',
+        library: libraryName,
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
 
+    devtool: 'source-map',
+
     devServer: {
-        publicPath: "/dist/"
+        publicPath: "/dist/",
     },
 
     module: {
-        // noParse: /node_modules\/hls.js\/dist\/hls.js/,
         loaders: [
             {
                 test: /\.js$/,
@@ -46,13 +59,7 @@ module.exports = {
         ]
     },
 
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
-    ],
+    plugins: plugins,
 
     postcss: [
         autoprefixer({

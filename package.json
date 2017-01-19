@@ -5,7 +5,8 @@
   "main": "dist/DPlayer.min.js",
   "scripts": {
     "test": "webpack",
-    "start": "webpack-dev-server --hot --progress --inline --host 0.0.0.0"
+    "build": "webpack",
+    "dev": "WEBPACK_ENV=dev webpack-dev-server --hot --progress --inline --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
