@@ -12,10 +12,7 @@ var plugins = [];
 if (env !== 'dev') {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            minimize: true
+            sourceMap: true
         })
     );
 }
@@ -38,32 +35,31 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 include: APP_PATH,
-                query: {
+                options: {
                     presets: ['es2015']
                 }
             },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css', 'postcss', 'sass'],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ],
                 include: APP_PATH
             },
             {
                 test: /\.(png|jpg)$/,
-                loader: 'url?limit=40000'
+                loader: 'url-loader?limit=40000'
             }
         ]
     },
 
-    plugins: plugins,
-
-    postcss: [
-        autoprefixer({
-            browsers: ['last 15 versions', '> 1%', 'ie 8', 'ie 7']
-        })
-    ]
+    plugins: plugins
 };

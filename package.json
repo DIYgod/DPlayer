@@ -9,8 +9,8 @@
     "dev": "WEBPACK_ENV=dev webpack-dev-server --hot --progress --inline --host 0.0.0.0"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DIYgod/DPlayer.git"
+    "url": "git+https://github.com/DIYgod/DPlayer.git",
+    "type": "git"
   },
   "keywords": [
     "player",
@@ -25,19 +25,19 @@
   },
   "homepage": "https://github.com/DIYgod/DPlayer#readme",
   "devDependencies": {
-    "autoprefixer": "^6.4.0",
-    "babel-core": "^6.18.0",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.13.2",
-    "css-loader": "^0.26.0",
+    "autoprefixer": "^6.7.2",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "css-loader": "^0.26.1",
     "exports-loader": "^0.6.3",
-    "file-loader": "^0.9.0",
-    "node-sass": "^4.3.0",
-    "postcss-loader": "^1.0.0",
-    "sass-loader": "^4.0.0",
+    "file-loader": "^0.10.0",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^1.2.2",
+    "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   }
 }
