@@ -1,4 +1,4 @@
-console.log("\n %c DPlayer 1.1.2 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c DPlayer 1.1.3 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
 const defaultApiBackend = require('./api.js');
@@ -124,7 +124,7 @@ class DPlayer {
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
             <div class="dplayer-video-wrap">
-                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} webkit-playsinline ${this.option.screenshot ? `crossorigin="anonymous"` : ``} preload="${this.option.preload}" src="${this.option.video.url}"></video>
+                <video class="dplayer-video" ${this.option.video.pic ? `poster="${this.option.video.pic}"` : ``} webkit-playsinline playsinline ${this.option.screenshot ? `crossorigin="anonymous"` : ``} preload="${this.option.preload}" src="${this.option.video.url}"></video>
                 <div class="dplayer-danmaku">
                     <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
                 </div>
@@ -312,7 +312,7 @@ class DPlayer {
 
         // play and pause button
         this.playButton = this.element.getElementsByClassName('dplayer-play-icon')[0];
-        this.shouldpause = true;
+        this.paused = true;
         this.playButton.addEventListener('click', () => {
             this.toggle();
         });
@@ -829,6 +829,18 @@ class DPlayer {
             }
         });
 
+        this.video.addEventListener('play', () => {
+            if (this.paused) {
+                this.play();
+            }
+        });
+
+        this.video.addEventListener('pause', () => {
+            if (!this.paused) {
+                this.pause();
+            }
+        });
+
         // control volume
         this.video.volume = parseInt(this.element.getElementsByClassName('dplayer-volume-bar-inner')[0].style.width) / 100;
 
@@ -1081,15 +1093,12 @@ class DPlayer {
 
         this.element.addEventListener('fullscreenchange', () => {
             resetAnimation();
-            console.log(danContainer.offsetHeight);
         });
         this.element.addEventListener('mozfullscreenchange', () => {
             resetAnimation();
-            console.log(danContainer.offsetHeight);
         });
         this.element.addEventListener('webkitfullscreenchange', () => {
             resetAnimation();
-            console.log(danContainer.offsetHeight);
         });
         this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
             if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
@@ -1101,6 +1110,9 @@ class DPlayer {
                 }
                 else if (this.element.webkitRequestFullscreen) {
                     this.element.webkitRequestFullscreen();
+                }
+                else if (this.video.webkitEnterFullscreen) {   // Safari for iOS
+                    this.video.webkitEnterFullscreen();
                 }
             }
             else {
@@ -1219,42 +1231,41 @@ class DPlayer {
         if (Object.prototype.toString.call(time) === '[object Number]') {
             this.video.currentTime = time;
         }
+        this.paused = false;
         if (this.video.paused) {
-            this.shouldpause = false;
-
             this.bezel.innerHTML = this.getSVG('play');
             this.bezel.classList.add('dplayer-bezel-transition');
+        }    
 
-            this.playButton.innerHTML = this.getSVG('pause');
+        this.playButton.innerHTML = this.getSVG('pause');
 
-            this.video.play();
-            if (this.playedTime) {
-                this.clearTime();
-            }
-            this.setTime();
-            this.element.classList.add('dplayer-playing');
-            this.trigger('play');
+        this.video.play();
+        if (this.playedTime) {
+            this.clearTime();
         }
+        this.setTime();
+        this.element.classList.add('dplayer-playing');
+        this.trigger('play');
     }
 
     /**
      * Pause music
      */
     pause() {
-        if (!this.shouldpause || this.ended) {
-            this.shouldpause = true;
-            this.element.classList.remove('dplayer-loading');
+        this.paused = true;
+        this.element.classList.remove('dplayer-loading');
 
+        if (!this.video.paused) {
             this.bezel.innerHTML = this.getSVG('pause');
             this.bezel.classList.add('dplayer-bezel-transition');
-
-            this.ended = false;
-            this.playButton.innerHTML = this.getSVG('play');
-            this.video.pause();
-            this.clearTime();
-            this.element.classList.remove('dplayer-playing');
-            this.trigger('pause');
         }
+
+        this.ended = false;
+        this.playButton.innerHTML = this.getSVG('play');
+        this.video.pause();
+        this.clearTime();
+        this.element.classList.remove('dplayer-playing');
+        this.trigger('pause');
     }
 
     /**

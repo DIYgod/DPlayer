@@ -5,8 +5,8 @@
     line-height: 1;
 
     &:-webkit-full-screen {
-        width: 100%;
-        height: 100%;
+        width: 100% !important;
+        height: 100% !important;
         background: #000;
 
         .dplayer-danmaku {
