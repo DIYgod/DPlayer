@@ -1,4 +1,4 @@
-console.log("\n %c DPlayer 1.1.3 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c DPlayer 1.1.4 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
 const defaultApiBackend = require('./api.js');
@@ -21,6 +21,7 @@ class DPlayer {
             'volume-off': ['0 0 21 32', 'M13.728 6.272v19.456q0 0.448-0.352 0.8t-0.8 0.32-0.8-0.32l-5.952-5.952h-4.672q-0.48 0-0.8-0.352t-0.352-0.8v-6.848q0-0.48 0.352-0.8t0.8-0.352h4.672l5.952-5.952q0.32-0.32 0.8-0.32t0.8 0.32 0.352 0.8z'],
             'loop': ['0 0 32 32', 'M1.882 16.941c0 4.152 3.221 7.529 7.177 7.529v1.882c-4.996 0-9.060-4.222-9.060-9.412s4.064-9.412 9.060-9.412h7.96l-3.098-3.098 1.331-1.331 5.372 5.37-5.37 5.372-1.333-1.333 3.1-3.098h-7.962c-3.957 0-7.177 3.377-7.177 7.529zM22.94 7.529v1.882c3.957 0 7.177 3.377 7.177 7.529s-3.221 7.529-7.177 7.529h-7.962l3.098-3.098-1.331-1.331-5.37 5.37 5.372 5.372 1.331-1.331-3.1-3.1h7.96c4.998 0 9.062-4.222 9.062-9.412s-4.064-9.412-9.060-9.412z'],
             'full': ['0 0 32 33', 'M6.667 28h-5.333c-0.8 0-1.333-0.533-1.333-1.333v-5.333c0-0.8 0.533-1.333 1.333-1.333s1.333 0.533 1.333 1.333v4h4c0.8 0 1.333 0.533 1.333 1.333s-0.533 1.333-1.333 1.333zM30.667 28h-5.333c-0.8 0-1.333-0.533-1.333-1.333s0.533-1.333 1.333-1.333h4v-4c0-0.8 0.533-1.333 1.333-1.333s1.333 0.533 1.333 1.333v5.333c0 0.8-0.533 1.333-1.333 1.333zM30.667 12c-0.8 0-1.333-0.533-1.333-1.333v-4h-4c-0.8 0-1.333-0.533-1.333-1.333s0.533-1.333 1.333-1.333h5.333c0.8 0 1.333 0.533 1.333 1.333v5.333c0 0.8-0.533 1.333-1.333 1.333zM1.333 12c-0.8 0-1.333-0.533-1.333-1.333v-5.333c0-0.8 0.533-1.333 1.333-1.333h5.333c0.8 0 1.333 0.533 1.333 1.333s-0.533 1.333-1.333 1.333h-4v4c0 0.8-0.533 1.333-1.333 1.333z'],
+            'full-in': ['0 0 32 33', 'M24.965 24.38h-18.132c-1.366 0-2.478-1.113-2.478-2.478v-11.806c0-1.364 1.111-2.478 2.478-2.478h18.132c1.366 0 2.478 1.113 2.478 2.478v11.806c0 1.364-1.11 2.478-2.478 2.478zM6.833 10.097v11.806h18.134l-0.002-11.806h-18.132zM2.478 28.928h5.952c0.684 0 1.238-0.554 1.238-1.239 0-0.684-0.554-1.238-1.238-1.238h-5.952v-5.802c0-0.684-0.554-1.239-1.238-1.239s-1.239 0.556-1.239 1.239v5.802c0 1.365 1.111 2.478 2.478 2.478zM30.761 19.412c-0.684 0-1.238 0.554-1.238 1.238v5.801h-5.951c-0.686 0-1.239 0.554-1.239 1.238 0 0.686 0.554 1.239 1.239 1.239h5.951c1.366 0 2.478-1.111 2.478-2.478v-5.801c0-0.683-0.554-1.238-1.239-1.238zM0 5.55v5.802c0 0.683 0.554 1.238 1.238 1.238s1.238-0.555 1.238-1.238v-5.802h5.952c0.684 0 1.238-0.554 1.238-1.238s-0.554-1.238-1.238-1.238h-5.951c-1.366-0.001-2.478 1.111-2.478 2.476zM32 11.35v-5.801c0-1.365-1.11-2.478-2.478-2.478h-5.951c-0.686 0-1.239 0.554-1.239 1.238s0.554 1.238 1.239 1.238h5.951v5.801c0 0.683 0.554 1.237 1.238 1.237 0.686 0.002 1.239-0.553 1.239-1.236z'],
             'setting': ['0 0 32 28', 'M28.633 17.104c0.035 0.21 0.026 0.463-0.026 0.76s-0.14 0.598-0.262 0.904c-0.122 0.306-0.271 0.581-0.445 0.825s-0.367 0.419-0.576 0.524c-0.209 0.105-0.393 0.157-0.55 0.157s-0.332-0.035-0.524-0.105c-0.175-0.052-0.393-0.1-0.655-0.144s-0.528-0.052-0.799-0.026c-0.271 0.026-0.541 0.083-0.812 0.17s-0.502 0.236-0.694 0.445c-0.419 0.437-0.664 0.934-0.734 1.493s0.009 1.092 0.236 1.598c0.175 0.349 0.148 0.699-0.079 1.048-0.105 0.14-0.271 0.284-0.498 0.432s-0.476 0.284-0.747 0.406-0.555 0.218-0.851 0.288c-0.297 0.070-0.559 0.105-0.786 0.105-0.157 0-0.306-0.061-0.445-0.183s-0.236-0.253-0.288-0.393h-0.026c-0.192-0.541-0.52-1.009-0.982-1.402s-1-0.589-1.611-0.589c-0.594 0-1.131 0.197-1.611 0.589s-0.816 0.851-1.009 1.375c-0.087 0.21-0.218 0.362-0.393 0.458s-0.367 0.144-0.576 0.144c-0.244 0-0.52-0.044-0.825-0.131s-0.611-0.197-0.917-0.327c-0.306-0.131-0.581-0.284-0.825-0.458s-0.428-0.349-0.55-0.524c-0.087-0.122-0.135-0.266-0.144-0.432s0.057-0.397 0.197-0.694c0.192-0.402 0.266-0.86 0.223-1.375s-0.266-0.991-0.668-1.428c-0.244-0.262-0.541-0.432-0.891-0.511s-0.681-0.109-0.995-0.092c-0.367 0.017-0.742 0.087-1.127 0.21-0.244 0.070-0.489 0.052-0.734-0.052-0.192-0.070-0.371-0.231-0.537-0.485s-0.314-0.533-0.445-0.838c-0.131-0.306-0.231-0.62-0.301-0.943s-0.087-0.59-0.052-0.799c0.052-0.384 0.227-0.629 0.524-0.734 0.524-0.21 0.995-0.555 1.415-1.035s0.629-1.017 0.629-1.611c0-0.611-0.21-1.144-0.629-1.598s-0.891-0.786-1.415-0.996c-0.157-0.052-0.288-0.179-0.393-0.38s-0.157-0.406-0.157-0.616c0-0.227 0.035-0.48 0.105-0.76s0.162-0.55 0.275-0.812 0.244-0.502 0.393-0.72c0.148-0.218 0.31-0.38 0.485-0.485 0.14-0.087 0.275-0.122 0.406-0.105s0.275 0.052 0.432 0.105c0.524 0.21 1.070 0.275 1.637 0.197s1.070-0.327 1.506-0.747c0.21-0.209 0.362-0.467 0.458-0.773s0.157-0.607 0.183-0.904c0.026-0.297 0.026-0.568 0-0.812s-0.048-0.419-0.065-0.524c-0.035-0.105-0.066-0.227-0.092-0.367s-0.013-0.262 0.039-0.367c0.105-0.244 0.293-0.458 0.563-0.642s0.563-0.336 0.878-0.458c0.314-0.122 0.62-0.214 0.917-0.275s0.533-0.092 0.707-0.092c0.227 0 0.406 0.074 0.537 0.223s0.223 0.301 0.275 0.458c0.192 0.471 0.507 0.886 0.943 1.244s0.952 0.537 1.546 0.537c0.611 0 1.153-0.17 1.624-0.511s0.803-0.773 0.996-1.297c0.070-0.14 0.179-0.284 0.327-0.432s0.301-0.223 0.458-0.223c0.244 0 0.511 0.035 0.799 0.105s0.572 0.166 0.851 0.288c0.279 0.122 0.537 0.279 0.773 0.472s0.423 0.402 0.563 0.629c0.087 0.14 0.113 0.293 0.079 0.458s-0.070 0.284-0.105 0.354c-0.227 0.506-0.297 1.039-0.21 1.598s0.341 1.048 0.76 1.467c0.419 0.419 0.934 0.651 1.546 0.694s1.179-0.057 1.703-0.301c0.14-0.087 0.31-0.122 0.511-0.105s0.371 0.096 0.511 0.236c0.262 0.244 0.493 0.616 0.694 1.113s0.336 1 0.406 1.506c0.035 0.297-0.013 0.528-0.144 0.694s-0.266 0.275-0.406 0.327c-0.542 0.192-1.004 0.528-1.388 1.009s-0.576 1.026-0.576 1.637c0 0.594 0.162 1.113 0.485 1.559s0.747 0.764 1.27 0.956c0.122 0.070 0.227 0.14 0.314 0.21 0.192 0.157 0.323 0.358 0.393 0.602v0zM16.451 19.462c0.786 0 1.528-0.149 2.227-0.445s1.305-0.707 1.821-1.231c0.515-0.524 0.921-1.131 1.218-1.821s0.445-1.428 0.445-2.214c0-0.786-0.148-1.524-0.445-2.214s-0.703-1.292-1.218-1.808c-0.515-0.515-1.122-0.921-1.821-1.218s-1.441-0.445-2.227-0.445c-0.786 0-1.524 0.148-2.214 0.445s-1.292 0.703-1.808 1.218c-0.515 0.515-0.921 1.118-1.218 1.808s-0.445 1.428-0.445 2.214c0 0.786 0.149 1.524 0.445 2.214s0.703 1.297 1.218 1.821c0.515 0.524 1.118 0.934 1.808 1.231s1.428 0.445 2.214 0.445v0z'],
             'right': ['0 0 32 32', 'M22 16l-10.105-10.6-1.895 1.987 8.211 8.613-8.211 8.612 1.895 1.988 8.211-8.613z'],
             'comment': ['0 0 32 32', 'M27.128 0.38h-22.553c-2.336 0-4.229 1.825-4.229 4.076v16.273c0 2.251 1.893 4.076 4.229 4.076h4.229v-2.685h8.403l-8.784 8.072 1.566 1.44 7.429-6.827h9.71c2.335 0 4.229-1.825 4.229-4.076v-16.273c0-2.252-1.894-4.076-4.229-4.076zM28.538 19.403c0 1.5-1.262 2.717-2.819 2.717h-8.36l-0.076-0.070-0.076 0.070h-11.223c-1.557 0-2.819-1.217-2.819-2.717v-13.589c0-1.501 1.262-2.718 2.819-2.718h19.734c1.557 0 2.819-0.141 2.819 1.359v14.947zM9.206 10.557c-1.222 0-2.215 0.911-2.215 2.036s0.992 2.035 2.215 2.035c1.224 0 2.216-0.911 2.216-2.035s-0.992-2.036-2.216-2.036zM22.496 10.557c-1.224 0-2.215 0.911-2.215 2.036s0.991 2.035 2.215 2.035c1.224 0 2.215-0.911 2.215-2.035s-0.991-2.036-2.215-2.036zM15.852 10.557c-1.224 0-2.215 0.911-2.215 2.036s0.991 2.035 2.215 2.035c1.222 0 2.215-0.911 2.215-2.035s-0.992-2.036-2.215-2.036z'],
@@ -62,6 +63,9 @@ class DPlayer {
             if (defaultOption.hasOwnProperty(defaultKey) && !this.option.hasOwnProperty(defaultKey)) {
                 this.option[defaultKey] = defaultOption[defaultKey];
             }
+        }
+        if (!this.option.video.hasOwnProperty('type')) {
+            this.option.video.type = 'auto';
         }
 
         const tranZH = {
@@ -120,6 +124,9 @@ class DPlayer {
         if (!this.option.danmaku) {
             this.element.classList.add('dplayer-no-danmaku');
         }
+        if (isMobile) {
+            this.element.classList.add('dplayer-mobile');
+        }
 
         this.element.innerHTML = `
             <div class="dplayer-mask"></div>
@@ -167,7 +174,7 @@ class DPlayer {
                     <button class="dplayer-icon dplayer-play-icon">`
             +           this.getSVG('play')
             + `     </button>
-                    <div class="dplayer-volume" ${isMobile ? 'style="display: none;"' : ''}>
+                    <div class="dplayer-volume">
                         <button class="dplayer-icon dplayer-volume-icon">`
             +               this.getSVG('volume-down')
             + `         </button>
@@ -183,9 +190,9 @@ class DPlayer {
                 </div>
                 <div class="dplayer-icons dplayer-icons-right">
                     ${this.option.screenshot ? `
-                    <a href="#" class="dplayer-icon dplayer-camera-icon" ${isMobile ? 'style="display: none;"' : ''}dplayer-volume>`
-            +           this.getSVG('camera')
-            + `     </a>
+                    <a href="#" class="dplayer-icon dplayer-camera-icon"}dplayer-volume>`
+                +           this.getSVG('camera')
+                + `     </a>
                     ` : ``}
                     <div class="dplayer-comment">
                         <button class="dplayer-icon dplayer-comment-icon">`
@@ -251,9 +258,14 @@ class DPlayer {
             + `         </button>
                         <div class="dplayer-setting-box"></div>
                     </div>
-                    <button class="dplayer-icon dplayer-full-icon">`
-            +           this.getSVG('full')
-            + `     </button>
+                    <div class="dplayer-full">
+                        <button class="dplayer-icon dplayer-full-in-icon">`
+            +               this.getSVG('full-in')
+            + `         </button>
+                        <button class="dplayer-icon dplayer-full-icon">`
+            +               this.getSVG('full')
+            + `         </button>
+                    </div>
                 </div>
                 <div class="dplayer-bar-wrap">
                     <div class="dplayer-bar">
@@ -283,8 +295,18 @@ class DPlayer {
         this.video = this.element.getElementsByClassName('dplayer-video')[0];
 
         // Support HTTP Live Streaming
-        if (/(m3u8\?|m3u8$)/i.exec(this.option.video.url) && Hls.isSupported()) {
-            this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
+        let enablehls;
+        if (this.option.video.type === 'auto') {
+            enablehls = /m3u8(#|\?|$)/i.exec(this.option.video.url);
+        }
+        else if (this.option.video.type === 'hls') {
+            enablehls = true;
+        }
+        else {
+            enableflv = false;
+        }
+        if (enablehls && Hls.isSupported()) {
+            // this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
             const hls = new Hls();
             hls.attachMedia(this.video);
             hls.on(Hls.Events.MEDIA_ATTACHED, () => {
@@ -296,7 +318,17 @@ class DPlayer {
         }
 
         // Support FLV
-        if (/(flv\?|flv$)/i.exec(this.option.video.url) && flvjs.isSupported()) {
+        let enableflv;
+        if (this.option.video.type === 'auto') {
+            enableflv = /.flv(#|\?|$)/i.exec(this.option.video.url);
+        }
+        else if (this.option.video.type === 'flv') {
+            enableflv = true;
+        }
+        else {
+            enableflv = false;
+        }
+        if (enableflv && flvjs.isSupported()) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
                 url: this.option.video.url
@@ -447,7 +479,7 @@ class DPlayer {
             if (this.option.danmaku && showdan) {
                 danmakuTime = setInterval(() => {
                     let item = this.dan[this.danIndex];
-                    while (item && this.video.currentTime >= parseFloat(item.time)) {
+                    while (item && this.video.currentTime > parseFloat(item.time)) {
                         danmakuIn(item.text, item.color, item.type);
                         item = this.dan[++this.danIndex];
                     }
@@ -856,7 +888,7 @@ class DPlayer {
         /**
          * danmaku display
          */
-        const itemHeight = arrow ? 24: 30;
+        const itemHeight = arrow ? 24 : 30;
         let danWidth;
         let danHeight;
         let itemY;
@@ -907,6 +939,9 @@ class DPlayer {
         this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
 
         const danmakuIn = (text, color, type) => {
+            if (!type) {
+                type = 'right';
+            }
             danWidth = danContainer.offsetWidth;
             danHeight = danContainer.offsetHeight;
             itemY = parseInt(danHeight / itemHeight);
@@ -1100,6 +1135,7 @@ class DPlayer {
         this.element.addEventListener('webkitfullscreenchange', () => {
             resetAnimation();
         });
+        // browser full screen
         this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
             if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
                 if (this.element.requestFullscreen) {
@@ -1127,6 +1163,16 @@ class DPlayer {
                 }
             }
             resetAnimation();
+        });
+        // web full screen
+        this.element.getElementsByClassName('dplayer-full-in-icon')[0].addEventListener('click', () => {
+            if (this.element.classList.contains('dplayer-fulled')) {
+                this.element.classList.remove('dplayer-fulled');
+            }
+            else {
+                this.element.classList.add('dplayer-fulled');
+                resetAnimation();
+            }
         });
 
         /**
@@ -1167,6 +1213,16 @@ class DPlayer {
         if (this.option.hotkey) {
             document.addEventListener('keydown', handleKeyDown);
         }
+        document.addEventListener('keydown', (e) => {              // Press ESC to quit web full screen
+            const event = e || window.event;
+            switch (event.keyCode) {
+                case 27:
+                    if (this.element.classList.contains('dplayer-fulled')) {
+                        this.element.classList.remove('dplayer-fulled');
+                    }
+                    break;
+            }
+        });
 
         /**
          * right key

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DPlayer Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -76,7 +76,8 @@
         hotkey: true,
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
-            pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
+            pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+            type: 'auto',
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
@@ -88,62 +89,52 @@
     function switchDPlayer() {
         if (dp1.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
             dp1.switchVideo({
-                        url: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.mp4',
-                        pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg'
-                    },
-                    {
-                        id: '5rGf5Y2X55qu6Z2p',
-                        api: 'https://api.prprpr.me/dplayer/',
-                        token: 'tokendemo',
-                        maximum: 3000
-                    });
+                url: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.mp4',
+                pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg',
+                type: 'auto',
+            },
+                {
+                    id: '5rGf5Y2X55qu6Z2p',
+                    api: 'https://api.prprpr.me/dplayer/',
+                    token: 'tokendemo',
+                    maximum: 3000
+                });
         }
         else {
             dp1.switchVideo({
-                        url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
-                        pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
-                    },
-                    {
-                        id: '9E2E3368B56CDBB4',
-                        api: 'https://api.prprpr.me/dplayer/',
-                        token: 'tokendemo',
-                        maximum: 3000
-                    });
+                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
+                pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+                type: 'auto',
+            },
+                {
+                    id: '9E2E3368B56CDBB4',
+                    api: 'https://api.prprpr.me/dplayer/',
+                    token: 'tokendemo',
+                    maximum: 3000
+                });
         }
     }
 
     // Bilibili video and danmaku support
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                const response = JSON.parse(xhr.responseText);
-                var dp2 = new DPlayer({
-                    element: document.getElementById('dplayer2'),
-                    autoplay: false,
-                    theme: '#FADFA3',
-                    loop: true,
-                    screenshot: false,
-                    video: {
-                        url: response.durl[0].url,
-                        pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg'
-                    },
-                    danmaku: {
-                        id: '5rGf5Y2X55qu6Z2p',
-                        api: 'https://api.prprpr.me/dplayer/',
-                        token: 'tokendemo',
-                        maximum: 3000,
-                        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4045652']
-                    }
-                });
-            }
-            else {
-                console.log('Request was unsuccessful: ' + xhr.status);
-            }
+    var dp2 = new DPlayer({
+        element: document.getElementById('dplayer2'),
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: true,
+        screenshot: false,
+        video: {
+            url: 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652',
+            pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg',
+            type: 'auto',
+        },
+        danmaku: {
+            id: '5rGf5Y2X55qu6Z2p',
+            api: 'https://api.prprpr.me/dplayer/',
+            token: 'tokendemo',
+            maximum: 3000,
+            addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4045652']
         }
-    };
-    xhr.open('get', 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652', true);
-    xhr.send(null);
+    });
 
     // Live Video (HTTP Live Streaming, M3U8 format) support
     var dp3 = new DPlayer({
@@ -155,7 +146,8 @@
         hotkey: true,
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒5.m3u8',
-            pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
+            pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+            type: 'hls',
         },
         danmaku: {
             id: '9E2E3368B56CDBB42',
@@ -175,7 +167,8 @@
         hotkey: true,
         video: {
             url: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.flv',
-            pic: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.jpg'
+            pic: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.jpg',
+            type: 'flv',
         },
         danmaku: {
             id: '9E2E3368B56CDBB43',

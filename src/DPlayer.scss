@@ -5,9 +5,13 @@
     line-height: 1;
 
     &:-webkit-full-screen {
-        width: 100% !important;
-        height: 100% !important;
+        width: 100%;
+        height: 100%;
         background: #000;
+        position: fixed;
+        z-index: 100000;
+        left: 0;
+        top: 0;
 
         .dplayer-danmaku {
             .dplayer-danmaku-top,
@@ -92,6 +96,41 @@
         }
         .dplayer-controller {
             opacity: 1;
+        }
+    }
+    &.dplayer-fulled {
+        position: fixed;
+        z-index: 100000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    &.dplayer-mobile {
+        .dplayer-volume,
+        .dplayer-camera-icon {
+            display: none !important;
+        }
+
+        .dplayer-full-in-icon {
+            position: static !important;
+            display: inline-block !important;
+        }
+
+        .dplayer-controller .dplayer-icons .dplayer-comment .dplayer-comment-box .dplayer-comment-input {
+            width: 200px;
+        }
+
+        .dplayer-comment-setting-title {
+            display: none;
+        }
+
+        .dplayer-controller .dplayer-icons .dplayer-comment .dplayer-comment-box .dplayer-comment-setting-box {
+            left: 17px;
+        }
+
+        .dplayer-controller .dplayer-icons .dplayer-icon {
+            width: 40px;
         }
     }
 
@@ -599,6 +638,25 @@
                             }
                         }
                     }
+                }
+            }
+
+            .dplayer-full {
+                display: inline-block;
+                height: 100%;
+                position: relative;
+
+                &:hover {
+                    .dplayer-full-in-icon {
+                        display: block;
+                    }
+                }
+
+                .dplayer-full-in-icon {
+                    position: absolute;
+                    top: -30px;
+                    z-index: 1;
+                    display: none;
                 }
             }
 
