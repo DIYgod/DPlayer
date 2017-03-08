@@ -113,36 +113,24 @@
     }
 
     // Bilibili video and danmaku support
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                var response = JSON.parse(xhr.responseText);
-                var dp2 = new DPlayer({
-                    element: document.getElementById('dplayer2'),
-                    autoplay: false,
-                    theme: '#FADFA3',
-                    loop: true,
-                    screenshot: false,
-                    video: {
-                        url: response.video.durl.url,
-                        pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg'
-                    },
-                    danmaku: {
-                        id: '5rGf5Y2X55qu6Z2p',
-                        api: 'https://api.prprpr.me/dplayer/',
-                        token: 'tokendemo',
-                        maximum: 3000,
-                        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4045652']
-                    }
-                });
-            } else {
-                console.log('Request was unsuccessful: ' + xhr.status);
-            }
+    var dp2 = new DPlayer({
+        element: document.getElementById('dplayer2'),
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: true,
+        screenshot: false,
+        video: {
+            url: response.video.durl.url,
+            pic: 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652'
+        },
+        danmaku: {
+            id: '5rGf5Y2X55qu6Z2p',
+            api: 'https://api.prprpr.me/dplayer/',
+            token: 'tokendemo',
+            maximum: 3000,
+            addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4045652']
         }
-    };
-    xhr.open('GET', 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652', true);
-    xhr.send();
+    });
 
     // Live Video (HTTP Live Streaming, M3U8 format) support
     var dp3 = new DPlayer({
