@@ -10,8 +10,8 @@ var parseString = xml2js.parseString;
 var appkey = 'f3bb208b3d081dc8';
 var secret = '1c15888dc316e05a15fdd0a02ed6584f';
 function getData(cid, res, type) {
-    var sign = md5(`cid=${cid}&from=miniplay&player=1${secret}`);
-    var api = `http://interface.bilibili.com/playurl?&cid=${cid}&from=miniplay&player=1&sign=${sign}`;
+    var sign = md5(`cid=${cid}&from=miniplay&player=1&type=mp4${secret}`);
+    var api = `http://interface.bilibili.com/playurl?&cid=${cid}&from=miniplay&player=1&type=mp4&sign=${sign}`;
     if (type === '1') {
         res.send(api);
     }
@@ -22,8 +22,9 @@ function getData(cid, res, type) {
         }).then(
             response => response.text()
         ).then((data) => {
-            parseString(data, {explicitArray: false}, function (err, result) {
-                    res.send(result);
+            parseString(data, { explicitArray: false }, function (err, result) {
+                // res.send(result.video.durl.url.replace('http://', 'https://'));
+                res.redirect(301, result.video.durl.url.replace('http://', 'https://'));
                 });
             }
         ).catch(
