@@ -56,8 +56,9 @@ var dp = new DPlayer({
     hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
     preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
     video: {                                                           // Required, video info
-        url: '若能绽放光芒.mp4',                                         // Required, video url
-        pic: '若能绽放光芒.png'                                          // Optional, music picture
+        url: '若能绽放光芒.mp4',                                         // Required, video link
+        pic: '若能绽放光芒.png',                                         // Optional, video poster
+        type: 'auto'                                                   // Optional, video type, `flv` for flv format, `hls` for m3u8 format, `normal` for mp4 ogg and webm format, `auto` for automatic detection, default: `auto`
     },
     danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
         id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://api.prprpr.me/dplayer/list`
@@ -113,7 +114,8 @@ Live danamku is not supported  yet.
 var dp = new DPlayer({
     // ...
     video: {
-        url: 'xxx.m3u8'
+        url: 'xxx.m3u8',
+        type: 'hls'
         // ...
     }
 });
@@ -134,7 +136,8 @@ It requires the library [flv.js](https://github.com/Bilibili/flv.js) and it shou
 var dp = new DPlayer({
     // ...
     video: {
-        url: 'xxx.flv'
+        url: 'xxx.flv',
+        type: 'flv'
         // ...
     }
 });
@@ -183,35 +186,9 @@ var option = {
 
 **Video link**
 
-API:
-
 `https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】`
 
 or `https://api.prprpr.me/dplayer/video/bilibili?cid=【bilibili视频cid】`
-
-```JS
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-            var response = JSON.parse(xhr.responseText);
-            var dp1 = new DPlayer({
-                // options
-                screenshot: false,
-                video: {
-                    url: response.durl[0].url
-                    // options
-                }
-            });
-        }
-        else {
-            console.log('Request was unsuccessful: ' + xhr.status);
-        }
-    }
-};
-xhr.open('get', 'https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】', true);
-xhr.send(null);
-```
 
 ## Run in development
 
@@ -245,4 +222,4 @@ $ npm run build
 
 ## LICENSE
 
-[The Star And Thank Author License (SATA)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
+[The Star And Thank Author License (SATA)](https://github.com/zTrix/sata-license)
