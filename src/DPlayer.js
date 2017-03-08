@@ -1219,6 +1219,7 @@ class DPlayer {
                 case 27:
                     if (this.element.classList.contains('dplayer-fulled')) {
                         this.element.classList.remove('dplayer-fulled');
+                        resetAnimation();
                     }
                     break;
             }
