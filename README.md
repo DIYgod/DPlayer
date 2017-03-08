@@ -29,6 +29,8 @@ $ npm install dplayer --save
 
 ## CDN
 
+[unpkg](https://unpkg.com/dplayer)
+
 [cdnjs](https://cdnjs.com/libraries/dplayer)
 
 [BootCDN](http://www.bootcdn.cn/dplayer/)
