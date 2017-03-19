@@ -1,4 +1,4 @@
-self.$config = {
+docute.init({
   title: 'DPlayer docs',
   repo: 'DIYgod/DPlayer',
   'edit-link': 'https://github.com/DIYgod/DPlayer/blob/gh-pages/docs',
@@ -15,4 +15,4 @@ self.$config = {
       shortname: 'dplayer'
     })
   ]
-}
+})
