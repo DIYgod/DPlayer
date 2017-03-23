@@ -58,8 +58,8 @@ class DPlayer {
         this.element.innerHTML = html.main(option, index, tran);
 
         // arrow style
-        var arrow = this.element.offsetWidth <= 500;
-        if (arrow) {
+        this.arrow = this.element.offsetWidth <= 500;
+        if (this.arrow) {
             var arrowStyle = document.createElement('style');
             arrowStyle.innerHTML = `.dplayer .dplayer-danmaku{font-size:18px}`;
             document.head.appendChild(arrowStyle);
@@ -254,10 +254,10 @@ class DPlayer {
                 danmakuTime = setInterval(() => {
                     let item = this.dan[this.danIndex];
                     while (item && this.video.currentTime > parseFloat(item.time)) {
-                        danmakuIn(item.text, item.color, item.type);
+                        this.pushDanmaku(item.text, item.color, item.type);
                         item = this.dan[++this.danIndex];
                     }
-                }, 0);
+                }, 100);
             }
         };
         this.clearTime = () => {
@@ -382,7 +382,7 @@ class DPlayer {
         /***
          * setting
          */
-        let danOpacity = localStorage.getItem('DPlayer-opacity') || 0.7;
+        this.danOpacity = localStorage.getItem('DPlayer-opacity') || 0.7;
         const settingHTML = html.setting(tran);
 
         // toggle setting box
@@ -458,7 +458,7 @@ class DPlayer {
                         danmakuTime = setInterval(() => {
                             let item = this.dan[this.danIndex];
                             while (item && this.video.currentTime >= parseFloat(item.time)) {
-                                danmakuIn(item.text, item.color, item.type);
+                                this.pushDanmaku(item.text, item.color, item.type);
                                 item = this.dan[++this.danIndex];
                             }
                         }, 0);
@@ -502,7 +502,7 @@ class DPlayer {
                 const danmakuBarWrap = this.element.getElementsByClassName('dplayer-danmaku-bar')[0];
                 const danmakuSettingBox = this.element.getElementsByClassName('dplayer-setting-danmaku')[0];
                 const dWidth = 130;
-                this.updateBar('danmaku', danOpacity, 'width');
+                this.updateBar('danmaku', this.danOpacity, 'width');
 
                 const danmakuMove = (event) => {
                     const e = event || window.event;
@@ -514,8 +514,8 @@ class DPlayer {
                     for (let i = 0; i < items.length; i++) {
                         items[i].style.opacity = percentage;
                     }
-                    danOpacity = percentage;
-                    localStorage.setItem('DPlayer-opacity', danOpacity);
+                    this.danOpacity = percentage;
+                    localStorage.setItem('DPlayer-opacity', this.danOpacity);
                 };
                 const danmakuUp = () => {
                     document.removeEventListener('mouseup', danmakuUp);
@@ -533,8 +533,8 @@ class DPlayer {
                     for (let i = 0; i < items.length; i++) {
                         items[i].style.opacity = percentage;
                     }
-                    danOpacity = percentage;
-                    localStorage.setItem('DPlayer-opacity', danOpacity);
+                    this.danOpacity = percentage;
+                    localStorage.setItem('DPlayer-opacity', this.danOpacity);
                 });
                 danmakuBarWrapWrap.addEventListener('mousedown', () => {
                     document.addEventListener('mousemove', danmakuMove);
@@ -607,108 +607,14 @@ class DPlayer {
             this.element.getElementsByClassName('dplayer-dtime')[0].innerHTML = this.video.duration ? secondToTime(this.video.duration) : '00:00';
         }
 
-
-        /**
-         * danmaku display
-         */
-        const itemHeight = arrow ? 24 : 30;
-        let danWidth;
-        let danHeight;
-        let itemY;
+        // danmaku
         this.danTunnel = {
             right: {},
             top: {},
             bottom: {}
         };
-
-        const danItemRight = (ele) => {
-            return danContainer.getBoundingClientRect().right - ele.getBoundingClientRect().right;
-        };
-
-        const danSpeed = (width) => {
-            return (danWidth + width) / 5;
-        };
-
-        const getTunnel = (ele, type, width) => {
-            const tmp = danWidth / danSpeed(width);
-
-            for (let i = 0; ; i++) {
-                let item = this.danTunnel[type][i + ''];
-                if (item && item.length) {
-                    for (let j = 0; j < item.length; j++) {
-                        const danRight = danItemRight(item[j]) - 10;
-                        if (danRight <= danWidth - (tmp * danSpeed(item[j].offsetWidth)) || danRight <= 0) {
-                            break;
-                        }
-                        if (j === item.length - 1) {
-                            this.danTunnel[type][i + ''].push(ele);
-                            ele.addEventListener('animationend', () => {
-                                this.danTunnel[type][i + ''].splice(0, 1);
-                            });
-                            return i % itemY;
-                        }
-                    }
-                }
-                else {
-                    this.danTunnel[type][i + ''] = [ele];
-                    ele.addEventListener('animationend', () => {
-                        this.danTunnel[type][i + ''].splice(0, 1);
-                    });
-                    return i % itemY;
-                }
-            }
-        };
-
         this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
 
-        const danmakuIn = (text, color, type) => {
-            if (!type) {
-                type = 'right';
-            }
-            danWidth = danContainer.offsetWidth;
-            danHeight = danContainer.offsetHeight;
-            itemY = parseInt(danHeight / itemHeight);
-            let item = document.createElement(`div`);
-            item.classList.add(`dplayer-danmaku-item`);
-            item.classList.add(`dplayer-danmaku-${type}`);
-            item.innerHTML = text;
-            item.style.opacity = danOpacity;
-            item.style.color = color;
-            item.addEventListener('animationend', () => {
-                danContainer.removeChild(item);
-            });
-
-            // measure
-            this.itemDemo.innerHTML = text;
-            let itemWidth = this.itemDemo.offsetWidth;
-
-            // adjust
-            switch (type) {
-                case 'right':
-                    item.style.top = itemHeight * getTunnel(item, type, itemWidth) + 'px';
-                    item.style.width = (itemWidth + 1) + 'px';
-                    item.style.transform = `translateX(-${danWidth}px)`;
-                    break;
-                case 'top':
-                    item.style.top = itemHeight * getTunnel(item, type) + 'px';
-                    break;
-                case 'bottom':
-                    item.style.bottom = itemHeight * getTunnel(item, type) + 'px';
-                    break;
-                default:
-                    console.error(`Can't handled danmaku type: ${type}`);
-            }
-
-            // insert
-            danContainer.appendChild(item);
-
-            // move
-            item.classList.add(`dplayer-danmaku-move`);
-
-            return item;
-        };
-
-        // danmaku
         if (this.option.danmaku) {
             this.danIndex = 0;
             this.readDanmaku();
@@ -767,7 +673,7 @@ class DPlayer {
             closeComment();
             this.dan.splice(this.danIndex, 0, danmakuData);
             this.danIndex++;
-            const item = danmakuIn(htmlEncode(danmakuData.text), danmakuData.color, danmakuData.type);
+            const item = this.pushDanmaku(htmlEncode(danmakuData.text), danmakuData.color, danmakuData.type);
             item.style.border = `2px solid ${this.option.theme}`;
         };
 
@@ -1140,6 +1046,107 @@ class DPlayer {
             }
         });
     }
+
+    /**
+     * Push a danmaku into DPlayer
+     *
+     * @param {String} text - danmaku content
+     * @param {String} color - danmaku color, default: `#fff`
+     * @param {String} type - danmaku type, `right` `top` `bottom`, default: `right`
+     */
+    pushDanmaku(text, color, type) {
+        const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
+        const itemHeight = this.arrow ? 24 : 30;
+        let danWidth;
+        let danHeight;
+        let itemY;
+
+        const danItemRight = (ele) => {
+            return danContainer.getBoundingClientRect().right - ele.getBoundingClientRect().right;
+        };
+
+        const danSpeed = (width) => {
+            return (danWidth + width) / 5;
+        };
+
+        const getTunnel = (ele, type, width) => {
+            const tmp = danWidth / danSpeed(width);
+
+            for (let i = 0; ; i++) {
+                let item = this.danTunnel[type][i + ''];
+                if (item && item.length) {
+                    for (let j = 0; j < item.length; j++) {
+                        const danRight = danItemRight(item[j]) - 10;
+                        if (danRight <= danWidth - (tmp * danSpeed(item[j].offsetWidth)) || danRight <= 0) {
+                            break;
+                        }
+                        if (j === item.length - 1) {
+                            this.danTunnel[type][i + ''].push(ele);
+                            ele.addEventListener('animationend', () => {
+                                this.danTunnel[type][i + ''].splice(0, 1);
+                            });
+                            return i % itemY;
+                        }
+                    }
+                }
+                else {
+                    this.danTunnel[type][i + ''] = [ele];
+                    ele.addEventListener('animationend', () => {
+                        this.danTunnel[type][i + ''].splice(0, 1);
+                    });
+                    return i % itemY;
+                }
+            }
+        };
+
+        if (!type) {
+            type = 'right';
+        }
+        if (!color) {
+            color = '#fff';
+        }
+        danWidth = danContainer.offsetWidth;
+        danHeight = danContainer.offsetHeight;
+        itemY = parseInt(danHeight / itemHeight);
+        let item = document.createElement(`div`);
+        item.classList.add(`dplayer-danmaku-item`);
+        item.classList.add(`dplayer-danmaku-${type}`);
+        item.innerHTML = text;
+        item.style.opacity = this.danOpacity;
+        item.style.color = color;
+        item.addEventListener('animationend', () => {
+            danContainer.removeChild(item);
+        });
+
+        // measure
+        this.itemDemo.innerHTML = text;
+        let itemWidth = this.itemDemo.offsetWidth;
+
+        // adjust
+        switch (type) {
+            case 'right':
+                item.style.top = itemHeight * getTunnel(item, type, itemWidth) + 'px';
+                item.style.width = (itemWidth + 1) + 'px';
+                item.style.transform = `translateX(-${danWidth}px)`;
+                break;
+            case 'top':
+                item.style.top = itemHeight * getTunnel(item, type) + 'px';
+                break;
+            case 'bottom':
+                item.style.bottom = itemHeight * getTunnel(item, type) + 'px';
+                break;
+            default:
+                console.error(`Can't handled danmaku type: ${type}`);
+        }
+
+        // insert
+        danContainer.appendChild(item);
+
+        // move
+        item.classList.add(`dplayer-danmaku-move`);
+
+        return item;
+    };
 
     /**
      * Switch to a new video
