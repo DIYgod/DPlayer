@@ -10,8 +10,10 @@ var parseString = xml2js.parseString;
 var appkey = 'f3bb208b3d081dc8';
 var secret = '1c15888dc316e05a15fdd0a02ed6584f';
 function getData(cid, res, type) {
-    var sign = md5(`cid=${cid}&from=miniplay&player=1&type=mp4${secret}`);
-    var api = `http://interface.bilibili.com/playurl?&cid=${cid}&from=miniplay&player=1&type=mp4&sign=${sign}`;
+    var para = `cid=${cid}&from=miniplay&player=1&quality=2&type=mp4`;
+    var sign = md5(`${para}${secret}`);
+    var api = `http://interface.bilibili.com/playurl?${para}&sign=${sign}`;
+
     if (type === '1') {
         res.send(api);
     }
