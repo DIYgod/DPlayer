@@ -72,18 +72,19 @@ var dp = new DPlayer({
 
 ### API
 
-+ `dp.play()`                       // Resume play
-+ `dp.play(time)`                   // Set currentTime
-+ `dp.pause()`                      // Pause
-+ `dp.toggle()`                     // Toggle between play and pause
-+ `dp.on(event, handler)`           // Event binding
-+ `dp.switchVideo(video, danmaku)`  // Switch to a new video, the format of `video` and `danmaku` is the same as option
-+ `dp.dan`                          // Return danmaku info
-+ `dp.danIndex`                     // Return danmaku index
-+ `dp.video`                        // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
- + `dp.video.currentTime`           // Returns the current playback position
- + `dp.video.loop`                  // Returns whether the video should start over again when finished
- + `dp.vidio.paused`                // Returns whether the video paused
++ `dp.play()`                         // Resume play
++ `dp.play(time)`                     // Set currentTime
++ `dp.pause()`                        // Pause
++ `dp.toggle()`                       // Toggle between play and pause
++ `dp.on(event, handler)`             // Event binding
++ `dp.switchVideo(video, danmaku)`    // Switch to a new video, the format of `video` and `danmaku` is the same as option
++ `dp.pushDanmaku(text, color, type)` // Push a custom danmaku into DPlayer in real time, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this custom danmaku will not be saved to back-end automatically.
++ `dp.dan`                            // Return danmaku info
++ `dp.danIndex`                       // Return danmaku index
++ `dp.video`                          // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
+ + `dp.video.currentTime`             // Returns the current playback position
+ + `dp.video.loop`                    // Returns whether the video should start over again when finished
+ + `dp.vidio.paused`                  // Returns whether the video paused
  + Most [native api](http://www.w3schools.com/tags/ref_av_dom.asp)
 
 ### Event binding
