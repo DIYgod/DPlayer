@@ -55,6 +55,8 @@ $ npm run build
 
 ## Related Projects
 
+- [Official danmaku data (https://api.prprpr.me/dplayer/)](https://github.com/DIYgod/DPlayer-data)
+
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
 
 - [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
