@@ -154,9 +154,13 @@ var dp = new DPlayer(option);
 
 ### Danmaku back-end
 
-**Ready-made API:**
+**Official API:**
 
 `https://api.prprpr.me/dplayer/`
+
+**Official danmaku data**
+
+https://github.com/DIYgod/DPlayer-data
 
 **Build yourself:**
 
@@ -206,6 +210,8 @@ $ npm run build
 ```
 
 ## Related Projects
+
+- [Official danmaku data (https://api.prprpr.me/dplayer/)](https://github.com/DIYgod/DPlayer-data)
 
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
 
