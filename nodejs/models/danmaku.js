@@ -7,7 +7,9 @@ var danmakuSchema = new mongoose.Schema({
     time: Number,
     text: String,
     color: String,
-    type: String
+    type: String,
+    ip: String,
+    referer: String
 });
 var danmaku = mongoose.model('dan', danmakuSchema);
 

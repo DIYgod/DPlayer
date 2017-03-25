@@ -1,4 +1,3 @@
-var url = require('url');
 var fs = require('fs');
 var logger = require('../tools/logger');
 var danmaku = require('../models/danmaku');
@@ -17,7 +16,7 @@ var postIP = [];
 
 module.exports = function (req, res) {
     var body = '';
-    var jsonStr;
+    var jsonStr = {};
     var ip = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
@@ -55,7 +54,7 @@ module.exports = function (req, res) {
         try {
             jsonStr = JSON.parse(body);
         } catch (err) {
-            jsonStr = null;
+            jsonStr = {};
         }
 
         // check data
@@ -96,7 +95,9 @@ module.exports = function (req, res) {
             time: jsonStr.time,
             text: htmlEncode(jsonStr.text),
             color: htmlEncode(jsonStr.color),
-            type: htmlEncode(jsonStr.type)
+            type: htmlEncode(jsonStr.type),
+            ip: ip,
+            referer: req.headers.referer
         });
         dan.save(function (err, d) {
             if (err) {
