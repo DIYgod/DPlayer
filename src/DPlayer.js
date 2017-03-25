@@ -1,7 +1,6 @@
 console.log("\n %c DPlayer 1.1.4 %c http://dplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./DPlayer.scss');
-const defaultApiBackend = require('./api.js');
 const svg = require('./svg.js');
 const handleOption = require('./option.js');
 const i18n = require('./i18n.js');
@@ -252,10 +251,12 @@ class DPlayer {
             }, 100);
             if (this.option.danmaku && showdan) {
                 danmakuTime = setInterval(() => {
-                    let item = this.dan[this.danIndex];
-                    while (item && this.video.currentTime > parseFloat(item.time)) {
-                        this.pushDanmaku(item.text, item.color, item.type);
-                        item = this.dan[++this.danIndex];
+                    if (this.dan) {
+                        let item = this.dan[this.danIndex];
+                        while (item && this.video.currentTime > parseFloat(item.time)) {
+                            this.pushDanmaku(item.text, item.color, item.type);
+                            item = this.dan[++this.danIndex];
+                        }
                     }
                 }, 100);
             }
@@ -661,7 +662,7 @@ class DPlayer {
             const danmakuData = {
                 token: this.option.danmaku.token,
                 player: this.option.danmaku.id,
-                author: 'DIYgod',
+                author: this.option.danmaku.user,
                 time: this.video.currentTime,
                 text: commentInput.value,
                 color: this.element.querySelector('.dplayer-comment-setting-color input:checked').value,
@@ -748,7 +749,7 @@ class DPlayer {
          * full screen
          */
         const resetAnimation = () => {
-            danWidth = danContainer.offsetWidth;
+            let danWidth = danContainer.offsetWidth;
             const items = this.element.getElementsByClassName('dplayer-danmaku-item');
             for (let i = 0; i < items.length; i++) {
                 items[i].style.transform = `translateX(-${danWidth}px)`;

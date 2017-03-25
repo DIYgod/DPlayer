@@ -27,6 +27,9 @@ module.exports = (option) => {
     if (!option.video.hasOwnProperty('type')) {
         option.video.type = 'auto';
     }
+    if (!option.danmaku.hasOwnProperty('user')) {
+        option.danmaku.user = 'DIYgod';
+    }
 
     return option;
 };
