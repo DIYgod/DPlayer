@@ -62,10 +62,11 @@ var dp = new DPlayer({
     },
     danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
         id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://api.prprpr.me/dplayer/list`
-        api: 'https://api.prprpr.me/dplayer/',                             // Required, danmaku api
+        api: 'https://api.prprpr.me/dplayer/',                         // Required, danmaku api
         token: 'tokendemo',                                            // Optional, danmaku token for api
         maximum: 1000,                                                 // Optional, maximum quantity of danmaku
-        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142']   // Optional, additional danmaku, see: `Bilibili 弹幕支持`
+        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142'] // Optional, additional danmaku, see: `Bilibili 弹幕支持`,
+        user: 'DIYgod'                                                 // Optional, current user's name, default: 'DIYgod'
     }
 });
 ```
@@ -226,6 +227,8 @@ $ npm run build
 - [dplayer_lua_backend](https://github.com/dixyes/dplayer_lua_backend)
 
 - [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
+
+- [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
 
 ## LICENSE
 
