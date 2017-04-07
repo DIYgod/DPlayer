@@ -71,6 +71,8 @@ $ npm run build
 
 - [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
 
+- [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
+
 ## LICENSE
 
 [The Star And Thank Author License (SATA)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
