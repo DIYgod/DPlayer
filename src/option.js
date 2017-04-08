@@ -24,10 +24,10 @@ module.exports = (option) => {
             option[defaultKey] = defaultOption[defaultKey];
         }
     }
-    if (!option.video.hasOwnProperty('type')) {
+    if (option.video && !option.video.hasOwnProperty('type')) {
         option.video.type = 'auto';
     }
-    if (!option.danmaku.hasOwnProperty('user')) {
+    if (option.danmaku && !option.danmaku.hasOwnProperty('user')) {
         option.danmaku.user = 'DIYgod';
     }
 
