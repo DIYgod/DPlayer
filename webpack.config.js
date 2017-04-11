@@ -9,7 +9,8 @@ var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
 var plugins = [];
-if (env !== 'dev') {
+var dev = env === 'dev';
+if (!dev) {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true
@@ -28,7 +29,7 @@ module.exports = {
         umdNamedDefine: true
     },
 
-    devtool: 'source-map',
+    devtool: dev ? 'eval-source-map' : 'source-map',
 
     devServer: {
         publicPath: "/dist/",
