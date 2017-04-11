@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var autoprefixer = require('autoprefixer');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var libraryName = 'DPlayer';
 var env = process.env.WEBPACK_ENV;
@@ -8,15 +9,28 @@ var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
-var plugins = [];
 var dev = env === 'dev';
-if (!dev) {
-    plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true
-        })
-    );
-}
+var plugins = [].concat(dev ? [] : [
+    new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        compressor: {
+            warnings: false,
+            conditionals: true,
+            unused: true,
+            comparisons: true,
+            sequences: true,
+            dead_code: true,
+            evaluate: true,
+            if_return: true,
+            join_vars: true,
+            negate_iife: false
+        },
+        output: {
+            comments: false
+        }
+    }),
+    new ExtractTextPlugin(`${libraryName}.min.css`)
+]);
 
 module.exports = {
     entry: './src/' + libraryName + '.js',
@@ -47,12 +61,9 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    'sass-loader'
-                ],
+                use: dev ? ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'] : ExtractTextPlugin.extract({
+                    use: ['css-loader?minimize&-autoprefixer', 'postcss-loader', 'sass-loader']
+                }),
                 include: APP_PATH
             },
             {
