@@ -8,6 +8,9 @@
     "build": "webpack",
     "dev": "WEBPACK_ENV=dev webpack-dev-server --hot --progress --inline --host 0.0.0.0"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "url": "git+https://github.com/DIYgod/DPlayer.git",
     "type": "git"
