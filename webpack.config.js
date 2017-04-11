@@ -59,7 +59,14 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader?limit=40000'
             }
-        ]
+        ].concat(dev ? [] : [
+            {
+                test: /\.js$/,
+                loader: 'strip-loader?strip[]=console.log',
+                enforce: 'pre',
+                include: APP_PATH,
+            }
+        ])
     },
 
     plugins: plugins
