@@ -29,6 +29,8 @@ $ npm install dplayer --save
 
 ## CDN
 
+[unpkg](https://unpkg.com/dplayer)
+
 [cdnjs](https://cdnjs.com/libraries/dplayer)
 
 [BootCDN](http://www.bootcdn.cn/dplayer/)
@@ -38,6 +40,8 @@ $ npm install dplayer --save
 ### HTML structure
 
 ```HTML
+<link rel="stylesheet" href="dist/DPlayer.min.css">
+<!-- ... -->
 <div id="player1" class="dplayer"></div>
 <!-- ... -->
 <script src="dist/DPlayer.min.js"></script>
@@ -149,7 +153,9 @@ var dp = new DPlayer({
 ### Work with module bundler
 
 ```js
+require('DPlayer/dist/DPlayer.min.css');
 var DPlayer = require('DPlayer');
+
 var dp = new DPlayer(option);
 ```
 
@@ -209,6 +215,12 @@ $ npm run dev
 $ npm install
 $ npm run build
 ```
+
+## Communication Groups
+
+[Telegram Group](https://t.me/adplayer)
+
+[QQ Group: 415835947](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17)
 
 ## Related Projects
 
