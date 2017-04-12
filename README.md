@@ -1,7 +1,6 @@
 # DPlayer
 
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![CDNJS](https://img.shields.io/cdnjs/v/dplayer.svg?style=flat-square)](https://cdnjs.com/libraries/dplayer)
 [![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/dplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/DPlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
@@ -52,6 +51,12 @@ $ npm run dev
 $ npm install
 $ npm run build
 ```
+
+## Communication Groups
+
+[Telegram Group](https://t.me/adplayer)
+
+[QQ Groups: 415835947](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17)
 
 ## Related Projects
 
