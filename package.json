@@ -3,11 +3,15 @@
   "version": "1.1.5",
   "description": "Wow, such a lovely HTML5 danmaku video player",
   "main": "dist/DPlayer.min.js",
+  "style": "dist/DPlayer.min.css",
   "scripts": {
     "test": "webpack",
     "build": "webpack",
     "dev": "WEBPACK_ENV=dev webpack-dev-server --hot --progress --inline --host 0.0.0.0"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "url": "git+https://github.com/DIYgod/DPlayer.git",
     "type": "git"
@@ -31,10 +35,12 @@
     "babel-preset-es2015": "^6.22.0",
     "css-loader": "^0.28.0",
     "exports-loader": "^0.6.3",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.0",
     "node-sass": "^4.5.0",
     "postcss-loader": "^1.2.2",
     "sass-loader": "^6.0.2",
+    "strip-loader": "^0.1.2",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
