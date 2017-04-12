@@ -693,22 +693,31 @@ class DPlayer {
         };
 
         let disableHide = 0;
+        let commentFocusTimeout = 0;
         const closeComment = () => {
-            if (commentBox.classList.contains('dplayer-comment-box-open')) {
-                commentBox.classList.remove('dplayer-comment-box-open');
-                mask.classList.remove('dplayer-mask-show');
-                clearInterval(disableHide);
-                this.element.classList.remove('dplayer-show-controller');
-                closeCommentSetting();
-            }
+            if (!commentBox.classList.contains('dplayer-comment-box-open')) return;
+
+            commentBox.classList.remove('dplayer-comment-box-open');
+            mask.classList.remove('dplayer-mask-show');
+            this.element.classList.remove('dplayer-show-controller');
+
+            clearInterval(disableHide);
+            clearTimeout(commentFocusTimeout);
+            closeCommentSetting();
         };
         const openComment = () => {
+            if (commentBox.classList.contains('dplayer-comment-box-open')) return;
+
             commentBox.classList.add('dplayer-comment-box-open');
             mask.classList.add('dplayer-mask-show');
+            this.element.classList.add('dplayer-show-controller');
+
             disableHide = setInterval(() => {
                 clearTimeout(hideTime);
             }, 1000);
-            this.element.classList.add('dplayer-show-controller');
+            commentFocusTimeout = setTimeout(() => {
+                commentInput.focus();
+            }, 300);
         };
 
         mask.addEventListener('click', () => {
@@ -716,9 +725,6 @@ class DPlayer {
         });
         commentIcon.addEventListener('click', () => {
             openComment();
-            setTimeout(() => {
-                commentInput.focus();
-            }, 300);
         });
         commentSettingIcon.addEventListener('click', () => {
             toggleCommentSetting();
@@ -922,7 +928,7 @@ class DPlayer {
         if (this.video.paused) {
             this.bezel.innerHTML = svg('play');
             this.bezel.classList.add('dplayer-bezel-transition');
-        }    
+        }
 
         this.playButton.innerHTML = svg('pause');
 
