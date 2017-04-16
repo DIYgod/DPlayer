@@ -5,6 +5,8 @@ var fetch = require('node-fetch');
 var parseString = require('xml2js').parseString;
 
 module.exports = function (req, res) {
+    res.header('content-type', 'application/json; charset=utf-8');
+    
     var ip = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||

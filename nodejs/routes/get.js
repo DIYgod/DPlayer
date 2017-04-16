@@ -4,6 +4,8 @@ var danmaku = require('../models/danmaku');
 var redis = require('../tools/redis');
 
 module.exports = function (req, res) {
+    res.header('content-type', 'application/json; charset=utf-8');
+
     var ip = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
