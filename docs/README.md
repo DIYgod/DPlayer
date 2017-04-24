@@ -159,7 +159,9 @@ var DPlayer = require('DPlayer');
 var dp = new DPlayer(option);
 ```
 
-### Danmaku back-end
+## Back-end
+
+### Danmaku
 
 **Official API:**
 
@@ -171,15 +173,19 @@ https://github.com/DIYgod/DPlayer-data
 
 **Build yourself:**
 
+[Node.js version](https://github.com/DIYgod/DPlayer/tree/master/nodejs)
+
 Required environment
 
 - Node.js
 - Mongodb
 - Redis
 
+[Other version](http://dplayer.js.org/docs/#/?id=related-projects)
+
 ### Bilibili danmaku and video link
 
-**Danmaku**
+**Bilibili  Danmaku**
 
 API:
 
@@ -196,7 +202,7 @@ var option = {
 }
 ```
 
-**Video link**
+**Bilibili Video link**
 
 `https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】`
 
