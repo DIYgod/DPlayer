@@ -209,6 +209,7 @@ class DPlayer {
         bar.playedBar = this.element.getElementsByClassName('dplayer-played')[0];
         bar.loadedBar = this.element.getElementsByClassName('dplayer-loaded')[0];
         const pbar = this.element.getElementsByClassName('dplayer-bar-wrap')[0];
+        const pbarTimeTips = this.element.getElementsByClassName('dplayer-bar-time')[0];
         let barWidth;
 
         if (this.option.danmaku) {
@@ -277,6 +278,15 @@ class DPlayer {
             this.updateBar('played', percentage, 'width');
             this.video.currentTime = parseFloat(bar.playedBar.style.width) / 100 * this.video.duration;
         });
+
+        this.isTipsShow = false
+        this.timeTipsHandler = this.timeTipsHandler(
+            pbar, pbarTimeTips, secondToTime).bind(this)
+        pbar.addEventListener('mousemove', this.timeTipsHandler)
+        pbar.addEventListener('mouseover', this.timeTipsHandler)
+        pbar.addEventListener('mouseenter', this.timeTipsHandler)
+        pbar.addEventListener('mouseout', this.timeTipsHandler)
+        pbar.addEventListener('mouseleave', this.timeTipsHandler)
 
         const thumbMove = (event) => {
             const e = event || window.event;
@@ -1182,6 +1192,47 @@ class DPlayer {
             this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
             this.option.danmaku = danmaku;
             this.readDanmaku();
+        }
+    }
+
+    timeTipsHandler(pbar, timeTips, secondToTime) {
+        // http://stackoverflow.com/questions/1480133/how-can-i-get-an-objects-absolute-position-on-the-page-in-javascript
+        const cumulativeOffset = function(element) {
+            var top = 0, left = 0;
+            do {
+                top += element.offsetTop  || 0;
+                left += element.offsetLeft || 0;
+                element = element.offsetParent;
+            } while(element);
+
+            return {
+                top: top,
+                left: left
+            };
+        };
+
+        return (e) => {
+            if (!this.video.duration) return
+            const { clientX, target } = e;
+            const px = cumulativeOffset(pbar).left
+            const tx = clientX - px;
+            timeTips.innerText = secondToTime(this.video.duration * (tx/pbar.offsetWidth));
+            timeTips.style.left = `${(tx - 20)}px`;
+            switch(e.type) {
+                case 'mouseenter':
+                case 'mouseover':
+                case 'mousemove':
+                    if (this.isTipsShow) return
+                    timeTips.classList.remove('hidden')
+                    this.isTipsShow = true
+                    break;
+                case 'mouseleave':
+                case 'mouseout':
+                    if (!this.isTipsShow) return
+                    timeTips.classList.add('hidden')
+                    this.isTipsShow = false
+                    break;
+            }
         }
     }
 }
