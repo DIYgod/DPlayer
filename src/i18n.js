@@ -6,7 +6,7 @@ const tranZH = {
     'Input danmaku, hit Enter': '输入弹幕，回车发送',
     'About author': '关于作者',
     'DPlayer feedback': '播放器意见反馈',
-    'About DPlayer': '关于 DPlay 播放器',
+    'About DPlayer': '关于 DPlayer 播放器',
     'Loop': '洗脑循环',
     'Speed': '速度',
     'Opacity for danmaku': '弹幕透明度',
