@@ -52,6 +52,15 @@ module.exports = {
     module: {
         rules: [
             {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                include: APP_PATH,
+                options: {
+                    configFile: './.eslintrc'
+                },
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: APP_PATH,

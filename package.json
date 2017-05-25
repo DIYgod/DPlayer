@@ -29,21 +29,23 @@
   },
   "homepage": "https://github.com/DIYgod/DPlayer#readme",
   "devDependencies": {
-    "autoprefixer": "^6.7.2",
+    "autoprefixer": "^7.1.1",
     "babel-core": "^6.24.1",
-    "babel-loader": "^6.4.1",
+    "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^0.28.0",
+    "eslint": "^3.19.0",
+    "eslint-loader": "^1.7.1",
     "exports-loader": "^0.6.4",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "node-sass": "^4.5.0",
-    "postcss-loader": "^1.3.3",
+    "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.2",
     "strip-loader": "^0.1.2",
-    "style-loader": "^0.16.1",
+    "style-loader": "^0.18.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.3.3",
-    "webpack-dev-server": "^2.4.2"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

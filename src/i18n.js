@@ -26,5 +26,5 @@ module.exports = function (lang) {
         else if (this.lang === 'zh') {
             return tranZH[text];
         }
-    }
+    };
 };

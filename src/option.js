@@ -19,7 +19,7 @@ module.exports = (option) => {
         preload: 'auto',
         apiBackend: defaultApiBackend
     };
-    for (let defaultKey in defaultOption) {
+    for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
             option[defaultKey] = defaultOption[defaultKey];
         }
