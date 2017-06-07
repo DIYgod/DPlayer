@@ -1,10 +1,15 @@
 const svg = require('./svg.js');
 
 module.exports = {
-    main: (option, index, tran) => `
+    main: (option, index, tran) => {
+        let videos = ``;
+        for (let i = 0; i < option.video.url.length; i++) {
+            videos += `<video class="dplayer-video ${i === 0 ? `dplayer-video-current"` : ``}" ${option.video.pic ? `poster="${option.video.pic}"` : ``} webkit-playsinline playsinline ${option.screenshot ? `crossorigin="anonymous"` : ``} preload="${option.video.url.length ? 'metadata' : option.preload}" src="${option.video.url[i]}"></video>`;
+        }
+        return `
         <div class="dplayer-mask"></div>
         <div class="dplayer-video-wrap">
-            <video class="dplayer-video" ${option.video.pic ? `poster="${option.video.pic}"` : ``} webkit-playsinline playsinline ${option.screenshot ? `crossorigin="anonymous"` : ``} preload="${option.preload}" src="${option.video.url}"></video>
+            ${videos}
             <div class="dplayer-danmaku">
                 <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
             </div>
@@ -154,8 +159,8 @@ module.exports = {
             <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="http://diygod.me/">${tran('About author')}</a></span></div>
             <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer/issues">${tran('DPlayer feedback')}</a></span></div>
             <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer">${tran('About DPlayer')}</a></span></div>
-        </div>
-    `,
+        </div>`;
+    },
 
     setting: (tran) => ({
         'original': `

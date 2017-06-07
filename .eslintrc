@@ -17,7 +17,6 @@
         "no-implicit-globals": 1,
         "no-labels": 1,
         "no-multi-str": 1,
-        "no-unused-expressions": 1,
         "comma-spacing": 1,
         "comma-style": 1,
         "func-call-spacing": 1,

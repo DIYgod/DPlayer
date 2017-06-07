@@ -161,6 +161,11 @@
         .dplayer-video {
             width: 100%;
             height: 100%;
+            display: none;
+        }
+
+        .dplayer-video-current {
+            display: block;
         }
     }
 

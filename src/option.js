@@ -24,6 +24,9 @@ module.exports = (option) => {
             option[defaultKey] = defaultOption[defaultKey];
         }
     }
+    if (Object.prototype.toString.call(option.video.url) !== '[object Array]') {
+        option.video.url = [option.video.url];
+    }
     if (option.video && !option.video.hasOwnProperty('type')) {
         option.video.type = 'auto';
     }
