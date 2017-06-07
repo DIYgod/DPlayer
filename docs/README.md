@@ -150,6 +150,18 @@ var dp = new DPlayer({
 </script>
 ```
 
+### Segmented videos support (unstable)
+
+```
+var dp = new DPlayer({
+    // ...
+    video: {
+        url: ['1.mp4, 2.mp4, 3.mp4'],
+        // ...
+    }
+});
+```
+
 ### Work with module bundler
 
 ```js
