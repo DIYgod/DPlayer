@@ -34,6 +34,8 @@ $ npm install dplayer --save
 
 [BootCDN](http://www.bootcdn.cn/dplayer/)
 
+[RawGit](https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.js)
+
 ## Usage
 
 See [docs](http://dplayer.js.org/docs)
