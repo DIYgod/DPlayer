@@ -17,7 +17,21 @@ module.exports = (option) => {
         screenshot: false,
         hotkey: true,
         preload: 'auto',
-        apiBackend: defaultApiBackend
+        apiBackend: defaultApiBackend,
+        contextmenu: [
+            {
+                text: '关于作者',
+                link: 'http://diygod.me'
+            },
+            {
+                text: '播放器意见反馈',
+                link: 'https://github.com/DIYgod/DPlayer/issues'
+            },
+            {
+                text: '关于 DPlayer 播放器',
+                link: 'https://github.com/DIYgod/DPlayer'
+            }
+        ]
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -32,6 +46,10 @@ module.exports = (option) => {
     }
     if (option.danmaku && !option.danmaku.hasOwnProperty('user')) {
         option.danmaku.user = 'DIYgod';
+    }
+
+    if (option.video.quality) {
+        option.video.url = [option.video.quality[option.video.defaultQuality].url];
     }
 
     return option;

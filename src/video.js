@@ -1,19 +1,21 @@
 class Video {
-    constructor (videos) {
+    constructor (videos, duration) {
         this.videos = videos;
         this.multi = this.videos.length > 1;
         this.index = 0;
         this.current = this.videos[this.index];
 
-        this.duration = 0;
+        this.duration = duration || 0;
         this.durationArr = [];
         this.eventAll = [];
         this.eventCurrent = [];
-
+        
         this.on('all', 'durationchange', (i, video) => {
             if (video.duration !== 1) {           // some Android browsers will output 1 at first
                 this.durationArr[i] = video.duration;
-                this.duration = this.durationArr.reduce((sum, cur) => sum + cur);
+                if (!duration) {
+                    this.duration = this.durationArr.reduce((sum, cur) => sum + cur);                    
+                }
             }
         });
         this.on('current', 'end', () => {

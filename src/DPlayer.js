@@ -22,7 +22,12 @@ class DPlayer {
     constructor (option) {
         this.option = handleOption(option);
 
-        const tran = new i18n(this.option.lang).tran;
+        if (this.option.video.quality) {
+            this.qualityIndex = this.option.video.defaultQuality;
+            this.quality = this.option.video.quality[this.option.video.defaultQuality];
+        }
+
+        this.tran = new i18n(this.option.lang).tran;
 
         /**
          * Update progress bar, including loading progress bar and play progress bar
@@ -57,7 +62,7 @@ class DPlayer {
             this.element.classList.add('dplayer-mobile');
         }
 
-        this.element.innerHTML = html.main(option, index, tran);
+        this.element.innerHTML = html.main(option, index, this.tran);
 
         // arrow style
         this.arrow = this.element.offsetWidth <= 500;
@@ -68,7 +73,7 @@ class DPlayer {
         }
 
         // get this video manager
-        this.video = new Video(this.element.getElementsByClassName('dplayer-video'));
+        this.video = new Video(this.element.getElementsByClassName('dplayer-video-current'));
 
         // Support HTTP Live Streaming
         let enablehls;
@@ -88,7 +93,7 @@ class DPlayer {
             hls.on(Hls.Events.MEDIA_ATTACHED, () => {
                 hls.loadSource(this.option.video.url);
                 hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    console.log("manifest loaded, found " + data.levels.length + " quality level");
+                    this.notice("manifest loaded, found " + data.levels.length + " quality level");
                 });
             });
         }
@@ -154,18 +159,6 @@ class DPlayer {
         const pbar = this.element.getElementsByClassName('dplayer-bar-wrap')[0];
         const pbarTimeTips = this.element.getElementsByClassName('dplayer-bar-time')[0];
         let barWidth;
-
-        if (this.option.danmaku) {
-            this.video.on('all', 'seeking', () => {
-                for (let i = 0; i < this.dan.length; i++) {
-                    if (this.dan[i].time >= this.video.currentTime()) {
-                        this.danIndex = i;
-                        return;
-                    }
-                    this.danIndex = this.dan.length;
-                }
-            });
-        }
 
         let lastPlayPos = 0;
         let currentPlayPos = 0;
@@ -337,7 +330,7 @@ class DPlayer {
          * setting
          */
         this.danOpacity = localStorage.getItem('DPlayer-opacity') || 0.7;
-        const settingHTML = html.setting(tran);
+        const settingHTML = html.setting(this.tran);
 
         // toggle setting box
         const settingIcon = this.element.getElementsByClassName('dplayer-setting-icon')[0];
@@ -368,7 +361,7 @@ class DPlayer {
             openSetting();
         });
 
-        let loop = this.option.loop;
+        this.loop = this.option.loop;
         const danContainer = this.element.getElementsByClassName('dplayer-danmaku')[0];
         let showdan = true;
         const settingEvent = () => {
@@ -376,15 +369,15 @@ class DPlayer {
             const loopEle = this.element.getElementsByClassName('dplayer-setting-loop')[0];
             const loopToggle = loopEle.getElementsByClassName('dplayer-toggle-setting-input')[0];
 
-            loopToggle.checked = loop;
+            loopToggle.checked = this.loop;
 
             loopEle.addEventListener('click', () => {
                 loopToggle.checked = !loopToggle.checked;
                 if (loopToggle.checked) {
-                    loop = true;
+                    this.loop = true;
                 }
                 else {
-                    loop = false;
+                    this.loop = false;
                 }
                 closeSetting();
             });
@@ -497,66 +490,7 @@ class DPlayer {
         };
         settingEvent();
 
-
-        /**
-         * video events
-         */
-        // show video time: the metadata has loaded or changed
-        this.video.on('all', 'durationchange', (i, video) => {
-            if (video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
-                this.element.getElementsByClassName('dplayer-dtime')[0].innerHTML = utils.secondToTime(this.video.duration);
-            }
-        });
-
-        // show video loaded bar: to inform interested parties of progress downloading the media
-        this.video.on('current', 'progress', (i, video) => {
-            const percentage = video.buffered.length ? video.buffered.end(video.buffered.length - 1) / video.duration : 0;
-            this.updateBar('loaded', percentage, 'width');
-        });
-
-        // video download error: an error occurs
-        this.video.on('all', 'error', () => {
-            this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = `Error happens ╥﹏╥`;
-            this.trigger('pause');
-        });
-
-        // video can play: enough data is available that the media can be played
-        this.video.on('current', 'canplay', () => {
-            this.trigger('canplay');
-        });
-
-        // music end
-        this.ended = false;
-        this.video.on('all', 'ended', (i) => {
-            if (i === this.video.videos.length - 1) {
-                this.updateBar('played', 1, 'width');
-                console.log(loop);
-                if (!loop) {
-                    this.ended = true;
-                    this.pause();
-                    this.trigger('ended');
-                }
-                else {
-                    this.video.switch(0);
-                    this.video.play();
-                }
-            }
-        });
-
-        this.video.on('current', 'play', () => {
-            if (this.paused) {
-                this.play();
-            }
-        });
-
-        this.video.on('current', 'pause', () => {
-            if (!this.paused) {
-                this.pause();
-            }
-        });
-
-        // control volume
-        this.video.attr('volume', parseInt(this.element.getElementsByClassName('dplayer-volume-bar-inner')[0].style.width) / 100);
+        this.initVideo();
 
         // set duration time
         if (this.video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
@@ -609,7 +543,7 @@ class DPlayer {
 
             // text can't be empty
             if (!commentInput.value.replace(/^\s+|\s+$/g, '')) {
-                alert(tran('Please input danmaku!'));
+                this.notice(this.tran('Please input danmaku content!'));
                 return;
             }
 
@@ -857,6 +791,18 @@ class DPlayer {
         });
 
         /**
+         * Switch quality
+         */
+        if (this.option.video.quality) {
+            this.element.getElementsByClassName('dplayer-quality-list')[0].addEventListener('click', (e) => {
+                if (e.target.classList.contains('dplayer-quality-item')) {
+                    this.switchQuality(e.target.dataset.index);
+                    this.element.getElementsByClassName('dplayer-quality-icon')[0].innerHTML = this.option.video.quality[this.qualityIndex].name;
+                }
+            });
+        }
+
+        /**
          * Screenshot
          */
         if (this.option.screenshot) {
@@ -964,10 +910,10 @@ class DPlayer {
             ++readCount;
             if (err) {
                 if (err.response) {
-                    console.log(err.response.msg);                    
+                    this.notice(err.response.msg);                    
                 }
                 else {
-                    console.log('Request was unsuccessful: ' + err.status);                    
+                    this.notice('Request was unsuccessful: ' + err.status);                    
                 }
                 results[i] = [];
             }
@@ -1128,7 +1074,7 @@ class DPlayer {
             this.updateBar('loaded', 0, 'width');
             this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = '00:00';
             this.element.getElementsByClassName('dplayer-danmaku')[0].innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
-            this.danTunnel = {
+            this.danTuel = {
                 right: {},
                 top: {},
                 bottom: {}
@@ -1137,6 +1083,111 @@ class DPlayer {
             this.option.danmaku = danmaku;
             this.readDanmaku();
         }
+    }
+
+    initVideo () {
+        if (this.option.danmaku) {
+            this.video.on('all', 'seeking', () => {
+                for (let i = 0; i < this.dan.length; i++) {
+                    if (this.dan[i].time >= this.video.currentTime()) {
+                        this.danIndex = i;
+                        return;
+                    }
+                    this.danIndex = this.dan.length;
+                }
+            });
+        }
+
+
+        /**
+         * video events
+         */
+        // show video time: the metadata has loaded or changed
+        this.video.on('all', 'durationchange', (i, video) => {
+            if (video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+                this.element.getElementsByClassName('dplayer-dtime')[0].innerHTML = utils.secondToTime(this.video.duration);
+            }
+        });
+
+        // show video loaded bar: to inform interested parties of progress downloading the media
+        this.video.on('current', 'progress', (i, video) => {
+            const percentage = video.buffered.length ? video.buffered.end(video.buffered.length - 1) / video.duration : 0;
+            this.updateBar('loaded', percentage, 'width');
+        });
+
+        // video download error: an error occurs
+        this.video.on('all', 'error', () => {
+            this.notice(this.tran('This video fails to load'), -1);
+            this.trigger('pause');
+        });
+
+        // video can play: enough data is available that the media can be played
+        this.video.on('current', 'canplay', () => {
+            this.trigger('canplay');
+        });
+
+        // music end
+        this.ended = false;
+        this.video.on('all', 'ended', (i) => {
+            if (i === this.video.videos.length - 1) {
+                this.updateBar('played', 1, 'width');
+                if (!this.loop) {
+                    this.ended = true;
+                    this.pause();
+                    this.trigger('ended');
+                }
+                else {
+                    this.video.switch(0);
+                    this.video.play();
+                }
+            }
+        });
+
+        this.video.on('current', 'play', () => {
+            if (this.paused) {
+                this.play();
+            }
+        });
+
+        this.video.on('current', 'pause', () => {
+            if (!this.paused) {
+                this.pause();
+            }
+        });
+
+        // control volume
+        this.video.attr('volume', parseInt(this.element.getElementsByClassName('dplayer-volume-bar-inner')[0].style.width) / 100);
+    }
+
+    switchQuality (index) {
+        if (this.qualityIndex === index || this.switchingQuality) {
+            return;
+        }
+        else {
+            this.qualityIndex = index;
+        }
+        this.switchingQuality = true;
+        this.video.pause();
+        this.quality = this.option.video.quality[index];
+        const videoHTML = html.video(false, null, this.option.screenshot, 'auto', this.quality.url);
+        const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
+        const parent = this.element.getElementsByClassName('dplayer-video-wrap')[0];
+        parent.prepend(videoEle);
+        this.prevVideo = this.video;
+        this.video = new Video([videoEle], this.prevVideo.duration);
+        this.initVideo();
+        this.video.seek(this.prevVideo.currentTime());
+        this.notice(`${this.tran('Switching to')} ${this.quality.name} ${this.tran('quality')}`, -1);
+        this.video.on('current', 'canplay', () => {
+            if (this.prevVideo) {
+                parent.removeChild(this.prevVideo.current);
+                this.prevVideo = null;
+                this.video.current.classList.add('dplayer-video-current');
+                this.video.play();
+                this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
+                this.switchingQuality = false;
+            }
+        });
     }
 
     timeTipsHandler (pbar, timeTips) {
@@ -1184,6 +1235,21 @@ class DPlayer {
                 break;
             }
         };
+    }
+
+    notice (text, time) {
+        const noticeEle = this.element.getElementsByClassName('dplayer-notice')[0];
+        noticeEle.innerHTML = text;
+        noticeEle.style.opacity = 1;
+        if (this.noticeTime) {
+            clearTimeout(this.noticeTime);
+        }
+        if (time && time < 0) {
+            return;
+        }
+        this.noticeTime = setTimeout(() => {
+            noticeEle.style.opacity = 0;
+        }, time || 2000);
     }
 }
 

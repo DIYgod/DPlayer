@@ -54,14 +54,16 @@
     <h3>Normal</h3>
     <div class="dplayer" id="dplayer1"></div>
     <button onclick="switchDPlayer()">Switch Video</button>
-    <h3>Bilibili video and danmaku support</h3>
-    <div class="dplayer" id="dplayer2"></div>
+    <h3>Quality switching</h3>
+    <div class="dplayer" id="dplayer6"></div>
     <h3>Live Video (HTTP Live Streaming, M3U8 format) support</h3>
     <div class="dplayer" id="dplayer3"></div>
     <h3>FLV format support</h3>
     <div class="dplayer" id="dplayer4"></div>
-    <h3>Segmented videos</h3>
-    <div class="dplayer" id="dplayer5"></div>
+    <h3>Bilibili video and danmaku support</h3>
+    <div class="dplayer" id="dplayer2"></div>
+    <!--<h3>Segmented videos</h3>
+    <div class="dplayer" id="dplayer5"></div>-->
 </div>
 <script src="https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
 <script src="../plugin/flv.min.js"></script>
@@ -76,6 +78,7 @@
         loop: true,
         screenshot: true,
         hotkey: true,
+        logo: 'http://devtest.qiniudn.com/DPlayer.png',
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
@@ -87,7 +90,25 @@
             token: 'tokendemo',
             maximum: 3000,
             user: 'DIYgod的女粉'
-        }
+        },
+        contextmenu: [
+            {
+                text: '关于作者',
+                link: 'http://diygod.me'
+            },
+            {
+                text: '播放器意见反馈',
+                link: 'https://github.com/DIYgod/DPlayer/issues'
+            },
+            {
+                text: '关于 DPlayer 播放器',
+                link: 'https://github.com/DIYgod/DPlayer'
+            },
+            {
+                text: '自定义右键菜单demo',
+                link: 'https://github.com/DIYgod/DPlayer'
+            },
+        ]
     });
     function switchDPlayer() {
         if (dp1.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
@@ -125,6 +146,7 @@
         theme: '#FADFA3',
         loop: true,
         screenshot: false,
+        logo: 'http://devtest.qiniudn.com/DPlayer.png',
         video: {
             url: 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652',
             pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg',
@@ -147,6 +169,7 @@
         loop: true,
         screenshot: true,
         hotkey: true,
+        logo: 'http://devtest.qiniudn.com/DPlayer.png',
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒5.m3u8',
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
@@ -168,6 +191,7 @@
         loop: true,
         screenshot: true,
         hotkey: true,
+        logo: 'http://devtest.qiniudn.com/DPlayer.png',
         video: {
             url: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.flv',
             pic: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.jpg',
@@ -182,24 +206,54 @@
     });
 
     // Segmented videos
-    var dp5 = new DPlayer({
-        element: document.getElementById('dplayer5'),
+    // var dp5 = new DPlayer({
+    //     element: document.getElementById('dplayer5'),
+    //     autoplay: false,
+    //     theme: '#FADFA3',
+    //     loop: true,
+    //     screenshot: true,
+    //     hotkey: true,
+    //     preload: 'metadata',
+    //     video: {
+    //         url: ['http://devtest.qiniudn.com/若能绽放光芒0.mp4', 'http://devtest.qiniudn.com/若能绽放光芒1.mp4', 'http://devtest.qiniudn.com/若能绽放光芒2.mp4', 'http://devtest.qiniudn.com/若能绽放光芒3.mp4', 'http://devtest.qiniudn.com/若能绽放光芒4.mp4', 'http://devtest.qiniudn.com/若能绽放光芒5.mp4', 'http://devtest.qiniudn.com/若能绽放光芒6.mp4', 'http://devtest.qiniudn.com/若能绽放光芒7.mp4', 'http://devtest.qiniudn.com/若能绽放光芒8.mp4'],
+    //         pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+    //         type: 'normal',
+    //     },
+    //     danmaku: {
+    //         id: '9E2E3368B56CDBB40',
+    //         api: 'https://api.prprpr.me/dplayer/',
+    //         token: 'tokendemo',
+    //         maximum: 3000
+    //     }
+    // });
+
+    // Quality switching
+    var dp6 = new DPlayer({
+        element: document.getElementById('dplayer6'),
         autoplay: false,
         theme: '#FADFA3',
         loop: true,
         screenshot: true,
         hotkey: true,
-        preload: 'metadata',
+        logo: 'http://devtest.qiniudn.com/DPlayer.png',
         video: {
-            url: ['http://devtest.qiniudn.com/若能绽放光芒0.mp4', 'http://devtest.qiniudn.com/若能绽放光芒1.mp4', 'http://devtest.qiniudn.com/若能绽放光芒2.mp4', 'http://devtest.qiniudn.com/若能绽放光芒3.mp4', 'http://devtest.qiniudn.com/若能绽放光芒4.mp4', 'http://devtest.qiniudn.com/若能绽放光芒5.mp4', 'http://devtest.qiniudn.com/若能绽放光芒6.mp4', 'http://devtest.qiniudn.com/若能绽放光芒7.mp4', 'http://devtest.qiniudn.com/若能绽放光芒8.mp4'],
+            quality: [{
+                name: '高清',
+                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?1'
+            }, {
+                name: '超清',
+                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?2'
+            }],
+            defaultQuality: 0,
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
-            type: 'normal',
+            type: 'auto',
         },
         danmaku: {
-            id: '9E2E3368B56CDBB40',
+            id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
             token: 'tokendemo',
-            maximum: 3000
+            maximum: 3000,
+            user: 'DIYgod的女粉'
         }
     });
 

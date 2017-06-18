@@ -11,10 +11,14 @@ const tranZH = {
     'Speed': '速度',
     'Opacity for danmaku': '弹幕透明度',
     'Normal': '正常',
-    'Please input danmaku!': '要输入弹幕内容啊喂！',
+    'Please input danmaku content!': '要输入弹幕内容啊喂！',
     'Set danmaku color': '设置弹幕颜色',
     'Set danmaku type': '设置弹幕类型',
-    'Danmaku': '弹幕'
+    'Danmaku': '弹幕',
+    'This video fails to load': '视频加载失败',
+    'Switching to': '正在切换至',
+    'Switched to': '已经切换至',
+    'quality': '画质',
 };
 
 module.exports = function (lang) {

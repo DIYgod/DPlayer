@@ -1,15 +1,18 @@
 const svg = require('./svg.js');
 
-module.exports = {
+const html = {
     main: (option, index, tran) => {
         let videos = ``;
         for (let i = 0; i < option.video.url.length; i++) {
-            videos += `<video class="dplayer-video ${i === 0 ? `dplayer-video-current"` : ``}" ${option.video.pic ? `poster="${option.video.pic}"` : ``} webkit-playsinline playsinline ${option.screenshot ? `crossorigin="anonymous"` : ``} preload="${option.video.url.length ? 'metadata' : option.preload}" src="${option.video.url[i]}"></video>`;
+            videos += html.video(i === 0, option.video.pic, option.screenshot, option.video.url.length ? 'metadata' : option.preload, option.video.url[i]);
         }
         return `
         <div class="dplayer-mask"></div>
         <div class="dplayer-video-wrap">
             ${videos}
+            ${option.logo ? `
+            <div class="dplayer-logo"><img src="${option.logo}"></div>
+            ` : ``}
             <div class="dplayer-danmaku">
                 <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
             </div>
@@ -67,8 +70,16 @@ module.exports = {
                 <span class="dplayer-time"><span class="dplayer-ptime">0:00</span> / <span class="dplayer-dtime">0:00</span></span>
             </div>
             <div class="dplayer-icons dplayer-icons-right">
+                ${option.video.quality ? `
+                <div class="dplayer-quality">
+                    <button class="dplayer-icon dplayer-quality-icon">${option.video.quality[option.video.defaultQuality].name}</button>
+                    <div class="dplayer-quality-mask">
+                        ${html.qualityList(option.video.quality)}
+                    </div>
+                </div>
+                ` : ``}
                 ${option.screenshot ? `
-                <a href="#" class="dplayer-icon dplayer-camera-icon"}dplayer-volume>
+                <a href="#" class="dplayer-icon dplayer-camera-icon">
                     ${svg('camera')}
                 </a>
                 ` : ``}
@@ -155,12 +166,31 @@ module.exports = {
                 </div>
             </div>
         </div>
-        <div class="dplayer-menu">
-            <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="http://diygod.me/">${tran('About author')}</a></span></div>
-            <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer/issues">${tran('DPlayer feedback')}</a></span></div>
-            <div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="https://github.com/DIYgod/DPlayer">${tran('About DPlayer')}</a></span></div>
-        </div>`;
+        ${html.contextmenuList(option.contextmenu)}
+        <div class="dplayer-notice"></div>`;
     },
+
+    contextmenuList: (contextmenu) => {
+        let result = '<div class="dplayer-menu">';
+        for (let i = 0; i < contextmenu.length; i++) {
+            result += `<div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="${contextmenu[i].link}">${contextmenu[i].text}</a></span></div>`;
+        }
+        result += '</div>';
+
+        return result;
+    },
+
+    qualityList: (quality) => {
+        let result = '<div class="dplayer-quality-list">';
+        for (let i = 0; i < quality.length; i++) {
+            result += `<div class="dplayer-quality-item" data-index="${i}">${quality[i].name}</div>`;
+        }
+        result += '</div>';
+
+        return result;
+    },
+
+    video: (current, pic, screenshot, preload, url) => `<video class="dplayer-video ${current ? `dplayer-video-current"` : ``}" ${pic ? `poster="${pic}"` : ``} webkit-playsinline playsinline ${screenshot ? `crossorigin="anonymous"` : ``} ${preload ? `preload="${preload}"` : ``} src="${url}"></video>`,
 
     setting: (tran) => ({
         'original': `
@@ -215,3 +245,5 @@ module.exports = {
             </div>`
     }) 
 };
+
+module.exports = html;
