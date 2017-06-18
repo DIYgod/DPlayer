@@ -1,4 +1,4 @@
-console.log('\n %c DPlayer 1.3.0 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+console.log('\n %c DPlayer 1.3.1 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
 
 require('./DPlayer.scss');
 const utils = require('./utils.js');
@@ -756,7 +756,6 @@ class DPlayer {
             this.element.getElementsByClassName('dplayer-quality-list')[0].addEventListener('click', (e) => {
                 if (e.target.classList.contains('dplayer-quality-item')) {
                     this.switchQuality(e.target.dataset.index);
-                    this.element.getElementsByClassName('dplayer-quality-icon')[0].innerHTML = this.option.video.quality[this.qualityIndex].name;
                 }
             });
         }
@@ -1169,8 +1168,10 @@ class DPlayer {
             this.qualityIndex = index;
         }
         this.switchingQuality = true;
-        this.video.pause();
         this.quality = this.option.video.quality[index];
+        this.element.getElementsByClassName('dplayer-quality-icon')[0].innerHTML = this.quality.name;
+    
+        this.video.pause();
         const videoHTML = html.video(false, null, this.option.screenshot, 'auto', this.quality.url);
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
         const parent = this.element.getElementsByClassName('dplayer-video-wrap')[0];
