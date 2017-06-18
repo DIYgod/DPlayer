@@ -75,48 +75,7 @@ class DPlayer {
         // get this video manager
         this.video = new Video(this.element.getElementsByClassName('dplayer-video-current'));
 
-        // Support HTTP Live Streaming
-        let enablehls;
-        if (this.option.video.type === 'auto') {
-            enablehls = /m3u8(#|\?|$)/i.exec(this.option.video.url);
-        }
-        else if (this.option.video.type === 'hls') {
-            enablehls = true;
-        }
-        else {
-            enablehls = false;
-        }
-        if (enablehls && Hls.isSupported()) {
-            // this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
-            const hls = new Hls();
-            hls.attachMedia(this.video.current);
-            hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-                hls.loadSource(this.option.video.url);
-                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    this.notice("manifest loaded, found " + data.levels.length + " quality level");
-                });
-            });
-        }
-
-        // Support FLV
-        let enableflv;
-        if (this.option.video.type === 'auto') {
-            enableflv = /.flv(#|\?|$)/i.exec(this.option.video.url);
-        }
-        else if (this.option.video.type === 'flv') {
-            enableflv = true;
-        }
-        else {
-            enableflv = false;
-        }
-        if (enableflv && flvjs.isSupported()) {
-            const flvPlayer = flvjs.createPlayer({
-                type: 'flv',
-                url: this.option.video.url
-            });
-            flvPlayer.attachMediaElement(this.video.current);
-            flvPlayer.load();
-        }
+        this.initVideo();
 
         this.bezel = this.element.getElementsByClassName('dplayer-bezel-icon')[0];
         this.bezel.addEventListener('animationend', () => {
@@ -489,8 +448,6 @@ class DPlayer {
             }
         };
         settingEvent();
-
-        this.initVideo();
 
         // set duration time
         if (this.video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
@@ -1086,6 +1043,49 @@ class DPlayer {
     }
 
     initVideo () {
+        // Support HTTP Live Streaming
+        let enablehls;
+        if (this.option.video.type === 'auto') {
+            enablehls = /m3u8(#|\?|$)/i.exec(this.option.video.url);
+        }
+        else if (this.option.video.type === 'hls') {
+            enablehls = true;
+        }
+        else {
+            enablehls = false;
+        }
+        if (enablehls && Hls.isSupported()) {
+            // this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
+            const hls = new Hls();
+            hls.attachMedia(this.video.current);
+            hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+                hls.loadSource(this.option.video.url);
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    this.notice("manifest loaded, found " + data.levels.length + " quality level");
+                });
+            });
+        }
+
+        // Support FLV
+        let enableflv;
+        if (this.option.video.type === 'auto') {
+            enableflv = /.flv(#|\?|$)/i.exec(this.option.video.url);
+        }
+        else if (this.option.video.type === 'flv') {
+            enableflv = true;
+        }
+        else {
+            enableflv = false;
+        }
+        if (enableflv && flvjs.isSupported()) {
+            const flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: this.option.video.url
+            });
+            flvPlayer.attachMediaElement(this.video.current);
+            flvPlayer.load();
+        }
+
         if (this.option.danmaku) {
             this.video.on('all', 'seeking', () => {
                 for (let i = 0; i < this.dan.length; i++) {
@@ -1180,10 +1180,14 @@ class DPlayer {
         this.notice(`${this.tran('Switching to')} ${this.quality.name} ${this.tran('quality')}`, -1);
         this.video.on('current', 'canplay', () => {
             if (this.prevVideo) {
+                if (this.video.currentTime() !== this.prevVideo.currentTime()) {
+                    this.video.seek(this.prevVideo.currentTime());
+                    return;
+                }
                 parent.removeChild(this.prevVideo.current);
-                this.prevVideo = null;
                 this.video.current.classList.add('dplayer-video-current');
-                this.video.play();
+                this.video.play();                    
+                this.prevVideo = null;
                 this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
                 this.switchingQuality = false;
             }

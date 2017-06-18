@@ -89,6 +89,7 @@ class Video {
     seek (time) {
         time = Math.max(time, 0);
         time = Math.min(time, this.duration);
+        console.log(time);
 
         let i = 0;
         let tmptime = 0;
