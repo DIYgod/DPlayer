@@ -55,12 +55,14 @@
     <h3>Normal</h3>
     <div class="dplayer" id="dplayer1"></div>
     <button onclick="switchDPlayer()">Switch Video</button>
-    <h3>Bilibili video and danmaku support</h3>
-    <div class="dplayer" id="dplayer2"></div>
+    <h3>Quality switching</h3>
+    <div class="dplayer" id="dplayer6"></div>
     <h3>Live Video (HTTP Live Streaming, M3U8 format) support</h3>
     <div class="dplayer" id="dplayer3"></div>
     <h3>FLV format support</h3>
     <div class="dplayer" id="dplayer4"></div>
+    <h3>Bilibili video and danmaku support</h3>
+    <div class="dplayer" id="dplayer2"></div>
 </div>
 <script src="https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
 <script src="https://rawgit.com/DIYgod/DPlayer/master/plugin/flv.min.js"></script>
@@ -170,6 +172,36 @@
             api: 'https://api.prprpr.me/dplayer/',
             token: 'tokendemo',
             maximum: 3000
+        }
+    });
+
+    // Quality switching
+    var dp6 = new DPlayer({
+        element: document.getElementById('dplayer6'),
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: true,
+        screenshot: true,
+        hotkey: true,
+        logo: 'http://devtest.qiniudn.com/DPlayer.png',
+        video: {
+            quality: [{
+                name: '高清',
+                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?1'
+            }, {
+                name: '超清',
+                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?2'
+            }],
+            defaultQuality: 0,
+            pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+            type: 'auto',
+        },
+        danmaku: {
+            id: '9E2E3368B56CDBB4',
+            api: 'https://api.prprpr.me/dplayer/',
+            token: 'tokendemo',
+            maximum: 3000,
+            user: 'DIYgod的女粉'
         }
     });
 

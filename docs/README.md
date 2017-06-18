@@ -59,6 +59,7 @@ var dp = new DPlayer({
     screenshot: true,                                                  // Optional, enable screenshot function, default: false, NOTICE: if set it to true, video and video poster must enable Cross-Origin
     hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
     preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+    logo: 'logo.png',                                                  // Optional, player logo, showing in top left corner
     video: {                                                           // Required, video info
         url: '若能绽放光芒.mp4',                                         // Required, video link
         pic: '若能绽放光芒.png',                                         // Optional, video poster
@@ -71,7 +72,21 @@ var dp = new DPlayer({
         maximum: 1000,                                                 // Optional, maximum quantity of danmaku
         addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142'] // Optional, additional danmaku, see: `Bilibili 弹幕支持`,
         user: 'DIYgod'                                                 // Optional, current user's name, default: 'DIYgod'
-    }
+    },
+    contextmenu: [                                                     // Optional, custom contextmenu
+        {
+            text: '关于作者',
+            link: 'http://diygod.me'
+        },
+        {
+            text: '播放器意见反馈',
+            link: 'https://github.com/DIYgod/DPlayer/issues'
+        },
+        {
+            text: '关于 DPlayer 播放器',
+            link: 'https://github.com/DIYgod/DPlayer'
+        }
+    ]
 });
 ```
 
@@ -103,6 +118,27 @@ var dp = new DPlayer({
 + `playing`: Triggered periodically when DPlayer is playing
 + `ended`: Triggered when DPlayer ended
 + `error`: Triggered when an error occurs
+
+### Quality switching
+
+Set `option.video.quality` instead of `option.video.url`
+
+```js
+var dp = new DPlayer({
+    // ...
+    video: {
+        quality: [{
+            name: '高清',
+            url: '高清.mp4'
+        }, {
+            name: '超清',
+            url: '超清.mp4'
+        }],
+        defaultQuality: 0,
+        // ...
+    }
+});
+```
 
 ### HLS support (Live Video, M3U8 format)
 
@@ -152,7 +188,7 @@ var dp = new DPlayer({
 
 ### Segmented videos support (unstable)
 
-```
+```js
 var dp = new DPlayer({
     // ...
     video: {
