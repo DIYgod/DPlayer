@@ -36,6 +36,22 @@ $ npm install dplayer --save
 
 [RawGit](https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.js)
 
+## Quick Start
+
+```js
+var dp = new DPlayer({
+    element: document.getElementById('player1'),
+    video: {
+        url: 'dplayer.mp4',
+        pic: 'dplayer.png'
+    },
+    danmaku: {
+        id: 'testid',
+        api: 'https://api.prprpr.me/dplayer/'
+    }
+});
+```
+
 ## Usage
 
 See [docs](http://dplayer.js.org/docs)

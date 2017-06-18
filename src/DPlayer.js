@@ -1,4 +1,4 @@
-console.log('\n %c DPlayer 1.2.0 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+console.log('\n %c DPlayer 1.3.0 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
 
 require('./DPlayer.scss');
 const utils = require('./utils.js');
@@ -21,6 +21,8 @@ class DPlayer {
      */
     constructor (option) {
         this.option = handleOption(option);
+
+        this.option.element.classList.add('dplayer');
 
         if (this.option.video.quality) {
             this.qualityIndex = this.option.video.defaultQuality;
