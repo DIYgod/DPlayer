@@ -119,6 +119,7 @@ var dp = new DPlayer({
 + `dp.dan`                            // Return danmaku info
 + `dp.danIndex`                       // Return danmaku index
 + `dp.notice(text, time)`             // Show notice in lower left
++ `dp.switchQuality(index)`           // Switch quality
 + `dp.video.current`                  // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
  + `dp.video.currentTime`             // Returns the current playback position
  + `dp.video.loop`                    // Returns whether the video should start over again when finished
