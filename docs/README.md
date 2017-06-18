@@ -1,7 +1,6 @@
 # DPlayer
 
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![CDNJS](https://img.shields.io/cdnjs/v/dplayer.svg?style=flat-square)](https://cdnjs.com/libraries/dplayer)
 [![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/dplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/DPlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
@@ -35,6 +34,24 @@ $ npm install dplayer --save
 
 [BootCDN](http://www.bootcdn.cn/dplayer/)
 
+[RawGit](https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.js)
+
+## Quick Start
+
+```js
+var dp = new DPlayer({
+    element: document.getElementById('player1'),
+    video: {
+        url: 'dplayer.mp4',
+        pic: 'dplayer.png'
+    },
+    danmaku: {
+        id: 'testid',
+        api: 'https://api.prprpr.me/dplayer/'
+    }
+});
+```
+
 ## Usage
 
 ### HTML structure
@@ -42,7 +59,7 @@ $ npm install dplayer --save
 ```HTML
 <link rel="stylesheet" href="dist/DPlayer.min.css">
 <!-- ... -->
-<div id="player1" class="dplayer"></div>
+<div id="player1"></div>
 <!-- ... -->
 <script src="dist/DPlayer.min.js"></script>
 ```
@@ -61,8 +78,8 @@ var dp = new DPlayer({
     preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
     logo: 'logo.png',                                                  // Optional, player logo, showing in top left corner
     video: {                                                           // Required, video info
-        url: '若能绽放光芒.mp4',                                         // Required, video link
-        pic: '若能绽放光芒.png',                                         // Optional, video poster
+        url: 'dplayer.mp4',                                         // Required, video link
+        pic: 'dplayer.png',                                         // Optional, video poster
         type: 'auto'                                                   // Optional, video type, `flv` for flv format, `hls` for m3u8 format, `normal` for mp4 ogg and webm format, `auto` for automatic detection, default: `auto`
     },
     danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
@@ -98,10 +115,11 @@ var dp = new DPlayer({
 + `dp.toggle()`                       // Toggle between play and pause
 + `dp.on(event, handler)`             // Event binding
 + `dp.switchVideo(video, danmaku)`    // Switch to a new video, the format of `video` and `danmaku` is the same as option
-+ `dp.pushDanmaku(text, color, type)` // Push a custom danmaku into DPlayer in real time, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this custom danmaku will not be saved to back-end automatically.
++ `dp.pushDanmaku(text, color, type)` // Push a custom danmaku into DPlayer in real time, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this custom danmaku will not be saved to back-end automatically
 + `dp.dan`                            // Return danmaku info
 + `dp.danIndex`                       // Return danmaku index
-+ `dp.video`                          // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
++ `dp.notice(text, time)`             // Show notice in lower left
++ `dp.video.current`                  // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
  + `dp.video.currentTime`             // Returns the current playback position
  + `dp.video.loop`                    // Returns whether the video should start over again when finished
  + `dp.vidio.paused`                  // Returns whether the video paused
