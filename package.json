@@ -1,6 +1,6 @@
 {
   "name": "dplayer",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Wow, such a lovely HTML5 danmaku video player",
   "main": "dist/DPlayer.min.js",
   "style": "dist/DPlayer.min.css",
@@ -34,7 +34,7 @@
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^0.28.0",
-    "eslint": "^3.19.0",
+    "eslint": "^4.1.0",
     "eslint-loader": "^1.7.1",
     "exports-loader": "^0.6.4",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -45,7 +45,7 @@
     "strip-loader": "^0.1.2",
     "style-loader": "^0.18.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.6.1",
+    "webpack": "^3.0.0",
     "webpack-dev-server": "^2.4.5"
   }
 }
