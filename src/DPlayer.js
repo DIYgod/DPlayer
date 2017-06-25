@@ -1,4 +1,4 @@
-console.log('\n %c DPlayer 1.3.3 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+console.log('\n %c DPlayer 1.4.0 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
 
 require('./DPlayer.scss');
 const utils = require('./utils.js');
@@ -131,13 +131,13 @@ class DPlayer {
                 // whether the video is buffering
                 currentPlayPos = this.video.currentTime();
                 if (!bufferingDetected
-                    && currentPlayPos < lastPlayPos + 0.01
+                    && currentPlayPos < lastPlayPos + 0.001
                     && !this.video.attr('paused')) {
                     this.element.classList.add('dplayer-loading');
                     bufferingDetected = true;
                 }
                 if (bufferingDetected
-                    && currentPlayPos > lastPlayPos + 0.01
+                    && currentPlayPos > lastPlayPos + 0.001
                     && !this.video.attr('paused')) {
                     this.element.classList.remove('dplayer-loading');
                     bufferingDetected = false;
@@ -384,13 +384,12 @@ class DPlayer {
                     showdan = false;
                     if (this.option.danmaku) {
                         this.clearTime('danmaku');
-                        danContainer.innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
+                        danContainer.innerHTML = '';
                         this.danTunnel = {
                             right: {},
                             top: {},
                             bottom: {}
                         };
-                        this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
                     }
                 }
                 closeSetting();
@@ -472,7 +471,10 @@ class DPlayer {
             top: {},
             bottom: {}
         };
-        this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
+        const measureStyle = getComputedStyle(this.element.getElementsByClassName('dplayer-danmaku-item')[0], null);
+        const context = document.createElement('canvas').getContext('2d');
+        context.font = measureStyle.getPropertyValue('font-size') + ' ' + measureStyle.getPropertyValue('font-family');
+        this.danmakuMeasure = (text) => context.measureText(text).width;
 
         if (this.option.danmaku) {
             this.danIndex = 0;
@@ -1006,9 +1008,7 @@ class DPlayer {
                 danContainer.removeChild(item);
             });
 
-            // measure
-            this.itemDemo.innerHTML = danmaku[i].text;
-            const itemWidth = this.itemDemo.offsetWidth;
+            const itemWidth = this.danmakuMeasure(danmaku[i].text);
 
             // adjust
             switch (danmaku[i].type) {
@@ -1056,13 +1056,12 @@ class DPlayer {
             this.updateBar('played', 0, 'width');
             this.updateBar('loaded', 0, 'width');
             this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = '00:00';
-            this.element.getElementsByClassName('dplayer-danmaku')[0].innerHTML = `<div class="dplayer-danmaku-item  dplayer-danmaku-item--demo"></div>`;
+            this.element.getElementsByClassName('dplayer-danmaku')[0].innerHTML = '';
             this.danTuel = {
                 right: {},
                 top: {},
                 bottom: {}
             };
-            this.itemDemo = this.element.getElementsByClassName('dplayer-danmaku-item')[0];
             this.option.danmaku = danmaku;
             this.readDanmaku();
         }
