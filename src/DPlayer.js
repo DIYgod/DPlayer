@@ -1,4 +1,4 @@
-console.log('\n %c DPlayer 1.3.1 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+console.log('\n %c DPlayer 1.3.2 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
 
 require('./DPlayer.scss');
 const utils = require('./utils.js');
@@ -1018,12 +1018,9 @@ class DPlayer {
      * @param {Object} video - new video info
      * @param {Object} danmaku - new danmaku info
      */
-    // TODO
     switchVideo (video, danmaku) {
-        this.video.src = video.url;
-        this.video.poster = video.pic ? video.pic : '';
-        this.video.current.setAttribute('poster', this.video.poster);
-        this.video.current.setAttribute('src', this.video.src);
+        this.video.attr('poster', video.pic ? video.pic : '');
+        this.video.attr('src', video.url);
         this.pause();
         if (danmaku) {
             this.dan = [];
