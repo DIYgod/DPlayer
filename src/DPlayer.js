@@ -12,7 +12,7 @@ const isMobile = /mobile/i.test(window.navigator.userAgent);
 let index = 0;
 
 class DPlayer {
-    
+
     /**
      * DPlayer constructor function
      *
@@ -868,10 +868,10 @@ class DPlayer {
             ++readCount;
             if (err) {
                 if (err.response) {
-                    this.notice(err.response.msg);                    
+                    this.notice(err.response.msg);
                 }
                 else {
-                    this.notice('Request was unsuccessful: ' + err.status);                    
+                    this.notice('Request was unsuccessful: ' + err.status);
                 }
                 results[i] = [];
             }
@@ -1022,7 +1022,8 @@ class DPlayer {
     switchVideo (video, danmaku) {
         this.video.src = video.url;
         this.video.poster = video.pic ? video.pic : '';
-        this.video.currentTime = 0;
+        this.video.current.setAttribute('poster', this.video.poster);
+        this.video.current.setAttribute('src', this.video.src);
         this.pause();
         if (danmaku) {
             this.dan = [];
@@ -1170,7 +1171,7 @@ class DPlayer {
         this.switchingQuality = true;
         this.quality = this.option.video.quality[index];
         this.element.getElementsByClassName('dplayer-quality-icon')[0].innerHTML = this.quality.name;
-    
+
         this.video.pause();
         const videoHTML = html.video(false, null, this.option.screenshot, 'auto', this.quality.url);
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
@@ -1189,7 +1190,7 @@ class DPlayer {
                 }
                 parent.removeChild(this.prevVideo.current);
                 this.video.current.classList.add('dplayer-video-current');
-                this.video.play();                    
+                this.video.play();
                 this.prevVideo = null;
                 this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
                 this.switchingQuality = false;

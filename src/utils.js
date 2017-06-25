@@ -28,7 +28,7 @@ module.exports = {
             }
         }
         else {
-            while (current !== null && current !== this.element) {
+            while (current !== null && current !== element) {
                 actualLeft += current.offsetLeft;
                 current = current.offsetParent;
             }
