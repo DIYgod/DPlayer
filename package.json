@@ -44,6 +44,7 @@
     "sass-loader": "^6.0.2",
     "strip-loader": "^0.1.2",
     "style-loader": "^0.18.1",
+    "template-string-optimize-loader": "^2.2.3",
     "url-loader": "^0.5.7",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.4.5"

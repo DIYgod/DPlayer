@@ -62,6 +62,11 @@ module.exports = {
             },
             {
                 test: /\.js$/,
+                loader: 'template-string-optimize-loader',
+                include: APP_PATH,
+            },
+            {
+                test: /\.js$/,
                 loader: 'babel-loader',
                 include: APP_PATH,
                 options: {
