@@ -72,8 +72,10 @@ class Video {
     // trigger event
     trigger (type, event) {
         const events = type === 'all' ? this.eventAll : this.eventCurrent;
-        for (let i = 0; i < events[event].length; i++) {
-            events[event][i]();
+        if (events[event]) {
+            for (let i = 0; i < events[event].length; i++) {
+                events[event][i]();
+            }
         }
     }
 
