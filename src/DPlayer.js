@@ -1200,7 +1200,7 @@ class DPlayer {
         const videoHTML = html.video(false, null, this.option.screenshot, 'auto', this.quality.url);
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
         const parent = this.element.getElementsByClassName('dplayer-video-wrap')[0];
-        parent.prepend(videoEle);
+        parent.insertBefore(videoEle, parent.getElementsByTagName('div')[0]);
         this.prevVideo = this.video;
         this.video = new Video([videoEle], this.prevVideo.duration);
         this.initVideo();
