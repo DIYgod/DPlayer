@@ -376,7 +376,7 @@ class DPlayer {
                             this.danIndex = this.dan.length;
                         }
                         if (!this.paused) {
-                            this.setTime('danmaku');                            
+                            this.setTime('danmaku');
                         }
                     }
                 }
@@ -536,10 +536,10 @@ class DPlayer {
             const danmaku = {
                 text: htmlEncode(danmakuData.text),
                 color: danmakuData.color,
-                type: danmakuData.type
+                type: danmakuData.type,
+                border: `2px solid ${this.option.theme}`
             };
-            const item = this.pushDanmaku(danmaku);
-            item.style.border = `2px solid ${this.option.theme}`;
+            this.pushDanmaku(danmaku);
         };
 
         const closeCommentSetting = () => {
@@ -1004,6 +1004,7 @@ class DPlayer {
             item.innerHTML = danmaku[i].text;
             item.style.opacity = this.danOpacity;
             item.style.color = danmaku[i].color;
+            item.style.border = danmaku[i].border;
             item.addEventListener('animationend', () => {
                 danContainer.removeChild(item);
             });
