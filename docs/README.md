@@ -240,15 +240,7 @@ https://github.com/DIYgod/DPlayer-data
 
 **Build yourself:**
 
-[Node.js version](https://github.com/DIYgod/DPlayer/tree/master/nodejs)
-
-Required environment
-
-- Node.js
-- Mongodb
-- Redis
-
-[Other version](http://dplayer.js.org/docs/#/?id=related-projects)
+[DPlayer-backend](https://github.com/DIYgod/DPlayer-backend)
 
 ### Bilibili danmaku and video link
 
@@ -297,7 +289,9 @@ $ npm run build
 
 ## Related Projects
 
-- [Official danmaku data (https://api.prprpr.me/dplayer/)](https://github.com/DIYgod/DPlayer-data)
+- [DPlayer-backend](https://github.com/DIYgod/DPlayer-backend)
+
+- [DPlayer-data(weekly backup for api.prprpr.me/dplayer)](https://github.com/DIYgod/DPlayer-data)
 
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
 
