@@ -1,4 +1,4 @@
-console.log('\n %c DPlayer 1.4.2 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+console.log('\n %c DPlayer 1.4.3 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
 
 require('./DPlayer.scss');
 const utils = require('./utils.js');
@@ -126,24 +126,43 @@ class DPlayer {
         let bufferingDetected = false;
         this.danmakuTime = false;
         this.playedTime = false;
-        this.animationFrame = () => {
-            if (this.playedTime) {
+        window.requestAnimationFrame = (() =>
+            window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            }
+        )();
+
+        const setCheckLoadingTime = () => {
+            this.checkLoading = setInterval(() => {
                 // whether the video is buffering
                 currentPlayPos = this.video.currentTime();
                 if (!bufferingDetected
-                    && currentPlayPos < lastPlayPos + 0.001
+                    && currentPlayPos < lastPlayPos + 0.01
                     && !this.video.attr('paused')) {
                     this.element.classList.add('dplayer-loading');
                     bufferingDetected = true;
                 }
                 if (bufferingDetected
-                    && currentPlayPos > lastPlayPos + 0.001
+                    && currentPlayPos > lastPlayPos + 0.01
                     && !this.video.attr('paused')) {
                     this.element.classList.remove('dplayer-loading');
                     bufferingDetected = false;
                 }
                 lastPlayPos = currentPlayPos;
+            }, 100);
+        };
 
+        const clearCheckLoadingTime = () => {
+            clearInterval(this.checkLoading);
+        };
+        
+        this.animationFrame = () => {
+            if (this.playedTime) {
                 this.updateBar('played', this.video.currentTime() / this.video.duration, 'width');
                 this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = utils.secondToTime(this.video.currentTime());
                 this.trigger('playing');
@@ -157,26 +176,34 @@ class DPlayer {
                 }
                 this.pushDanmaku(danmakus);
             }
-            requestAnimationFrame(this.animationFrame);
+            window.requestAnimationFrame(this.animationFrame);
         };
-        requestAnimationFrame(this.animationFrame);
+        window.requestAnimationFrame(this.animationFrame);
 
         this.setTime = (type) => {
             if (!type) {
                 this.danmakuTime = true;
                 this.playedTime = true;
+                setCheckLoadingTime();
             }
             else {
                 this[`${type}Time`] = true;
+                if (type === 'played') {
+                    setCheckLoadingTime();
+                }
             }
         };
         this.clearTime = (type) => {
             if (!type) {
                 this.danmakuTime = false;
                 this.playedTime = false;
+                clearCheckLoadingTime();
             }
             else {
                 this[`${type}Time`] = false;
+                if (type === 'played') {
+                    clearCheckLoadingTime();
+                }
             }
         };
 
