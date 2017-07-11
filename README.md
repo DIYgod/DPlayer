@@ -1,4 +1,4 @@
-# DPlayer
+# ![logo](https://ws3.sinaimg.cn/large/006tKfTcgy1fhgiq84cd9j301m01e741.jpg)DPlayer
 
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
