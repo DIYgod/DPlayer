@@ -26,7 +26,7 @@ DPlayer is a lovely HTML5 danmaku video player to help people build video and da
 - Media formats
 	- MP4 H.264
 	- WebM
-	- Ogg
+	- Ogg Theora Vorbis
 - Features
 	- Danamku
 	- Screenshot
@@ -104,6 +104,7 @@ var dp = new DPlayer({
 - [妖气山弹幕网](http://www.m173.tv/)
 - [御宅同萌 – 聖域](https://wp.acg-moe.com/)
 - [動漫御宅堂](http://syu65406.tw/anime/)
+- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
 - Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/DPlayer/issues/31)
 
 ## CDN
