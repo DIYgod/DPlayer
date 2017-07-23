@@ -48,9 +48,9 @@ $ npm install dplayer --save
 ## Quick Start
 
 ```html
-<link rel="stylesheet" href="https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.css">
+<link rel="stylesheet" href="dist/DPlayer.min.css">
 <div id="player1"></div>
-<script src="https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.js"></script>
+<script src="dist/DPlayer.min.js"></script>
 ```
 
 ```js
@@ -69,7 +69,7 @@ var dp = new DPlayer({
 
 ## Usage
 
-See [docs](http://dplayer.js.org/docs)
+[Read the Docs](http://dplayer.js.org/docs)
 
 ## Join the Discussion
 
@@ -108,13 +108,10 @@ See [docs](http://dplayer.js.org/docs)
 
 ## CDN
 
-[unpkg](https://unpkg.com/dplayer)
-
-[cdnjs](https://cdnjs.com/libraries/dplayer)
-
-[BootCDN](http://www.bootcdn.cn/dplayer/)
-
-[RawGit](https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.js)
+- [unpkg](https://unpkg.com/dplayer)
+- [cdnjs](https://cdnjs.com/libraries/dplayer)
+- [BootCDN](http://www.bootcdn.cn/dplayer/)
+- [RawGit](https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.js)
 
 ## Donate
 
@@ -129,4 +126,4 @@ See [docs](http://dplayer.js.org/docs)
 **DPlayer** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/DPlayer/contributors)).
 
-> [Blog](https://www.anotherhome.net) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Weibo [@DIYgod酱](http://weibo.com/anotherhome) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
+> Blog [@Anotherhome](https://www.anotherhome.net) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Weibo [@DIYgod酱](http://weibo.com/anotherhome) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
