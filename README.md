@@ -88,7 +88,7 @@ var dp = new DPlayer({
 - [dplayer_lua_backend](https://github.com/dixyes/dplayer_lua_backend)
 - [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
 - [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
-- Feel free to submit yours in [`Let me know`](https://github.com/DIYgod/DPlayer/issues/31)
+- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/DPlayer/issues/31)
 
 ## Who use DPlayer?
 
@@ -104,7 +104,7 @@ var dp = new DPlayer({
 - [妖气山弹幕网](http://www.m173.tv/)
 - [御宅同萌 – 聖域](https://wp.acg-moe.com/)
 - [動漫御宅堂](http://syu65406.tw/anime/)
-- Feel free to submit yours in [`Let me know`](https://github.com/DIYgod/DPlayer/issues/31)
+- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/DPlayer/issues/31)
 
 ## CDN
 
