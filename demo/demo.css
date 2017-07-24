@@ -1,7 +1,7 @@
 body {
     max-width: 700px;
     margin: 0 auto;
-    padding: 45px;
+    padding: 45px 10px;
 }
 
 .example {
@@ -11,6 +11,12 @@ body {
     background-color: #fff;
     border-radius: 4px 4px 0 0;
     border: 1px solid #ddd;
+}
+
+@media (max-width:500px) {
+    .example {
+        padding: 39px 10px 14px;
+    }
 }
 
 .example:after {
