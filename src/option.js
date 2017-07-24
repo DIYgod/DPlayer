@@ -14,7 +14,7 @@ module.exports = (option) => {
         theme: '#b7daff',
         loop: false,
         lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
-        screenshot: false,
+        screenshot: true,
         hotkey: true,
         preload: 'auto',
         apiBackend: defaultApiBackend,
