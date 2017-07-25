@@ -105,6 +105,7 @@ var dp = new DPlayer({
 - [御宅同萌 – 聖域](https://wp.acg-moe.com/)
 - [動漫御宅堂](http://syu65406.tw/anime/)
 - [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
+- [otomads](https://otomads.com/)
 - Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/DPlayer/issues/31)
 
 ## CDN
