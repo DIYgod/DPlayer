@@ -58,7 +58,9 @@ module.exports = {
                     {
                         loader: require.resolve('postcss-loader'),
                         options: {
-                            ident: 'postcss'
+                            config: {
+                                path: path.join(__dirname, 'postcss.config.js')
+                            }
                         }
                     },
                     require.resolve('sass-loader')
