@@ -5,9 +5,10 @@
   "main": "dist/DPlayer.min.js",
   "style": "dist/DPlayer.min.css",
   "scripts": {
-    "test": "webpack",
-    "build": "webpack",
-    "dev": "cross-env WEBPACK_ENV=dev webpack-dev-server --hot --progress --inline --host 0.0.0.0"
+    "start": "npm run dev",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
+    "test": "eslint src webpack"
   },
   "files": [
     "dist"
@@ -32,7 +33,7 @@
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.1.1",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.0",
     "eslint": "^4.1.0",
