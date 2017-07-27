@@ -5,9 +5,10 @@
   "main": "dist/DPlayer.min.js",
   "style": "dist/DPlayer.min.css",
   "scripts": {
-    "test": "webpack",
-    "build": "webpack",
-    "dev": "cross-env WEBPACK_ENV=dev webpack-dev-server --hot --progress --inline --host 0.0.0.0"
+    "start": "npm run dev",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
+    "test": "eslint src"
   },
   "files": [
     "dist"
