@@ -6,11 +6,11 @@
 > Wow, such a lovely HTML5 danmaku video player
 
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/DIYgod/DPlayer/blob/master/LICENSE)
-[![devDependency Status](https://img.shields.io/david/dev/DIYgod/dplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/DPlayer#info=devDependencies)
+[![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
+[![devDependency Status](https://img.shields.io/david/dev/MoePlayer/dplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/DPlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![Travis](https://img.shields.io/travis/DIYgod/DPlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/DPlayer)
-[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/DIYgod/DPlayer#donate)
+[![Travis](https://img.shields.io/travis/MoePlayer/DPlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/DPlayer)
+[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer#donate)
 
 ## Introduction
 
@@ -78,8 +78,8 @@ var dp = new DPlayer({
 
 ## Related Projects
 
-- [DPlayer-backend](https://github.com/DIYgod/DPlayer-backend)
-- [DPlayer-data(weekly backup for api.prprpr.me/dplayer)](https://github.com/DIYgod/DPlayer-data)
+- [DPlayer-backend](https://github.com/MoePlayer/DPlayer-backend)
+- [DPlayer-data(weekly backup for api.prprpr.me/dplayer)](https://github.com/MoePlayer/DPlayer-data)
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
 - [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
 - [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
@@ -88,7 +88,7 @@ var dp = new DPlayer({
 - [dplayer_lua_backend](https://github.com/dixyes/dplayer_lua_backend)
 - [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
 - [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
-- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/DPlayer/issues/31)
+- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Who use DPlayer?
 
@@ -106,14 +106,14 @@ var dp = new DPlayer({
 - [動漫御宅堂](http://syu65406.tw/anime/)
 - [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
 - [otomads](https://otomads.com/)
-- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/DPlayer/issues/31)
+- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## CDN
 
 - [unpkg](https://unpkg.com/dplayer)
 - [cdnjs](https://cdnjs.com/libraries/dplayer)
 - [BootCDN](http://www.bootcdn.cn/dplayer/)
-- [RawGit](https://rawgit.com/DIYgod/DPlayer/master/dist/DPlayer.min.js)
+- [RawGit](https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js)
 
 ## Donate
 
