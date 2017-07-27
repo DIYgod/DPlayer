@@ -1,1 +1,1 @@
-window.DPlayer = require('./DPlayer');
+module.exports = require('./DPlayer');
