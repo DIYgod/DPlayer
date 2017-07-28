@@ -5,38 +5,12 @@
     <title>DPlayer Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://unpkg.com/github-markdown-css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css">
     <link rel="stylesheet" href="demo.css">
-    <script src="plugin/flv.min.js"></script>
-    <script src="plugin/hls.min.js"></script>
+    <script src="https://unpkg.com/flv.js/dist/flv.min.js"></script>
+    <script src="https://unpkg.com/hls.js/dist/hls.min.js"></script>
     <script src="DPlayer.js"></script>
 </head>
 <body class="markdown-body">
-    <p align="center">
-        <img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fhu01y9uy7j305k04s3yc.jpg" alt="ADPlayer" width="100">
-    </p>
-    <h1 align="center" style="margin-top: 16px;">DPlayer</h1>
-    <blockquote>
-        <p>Wow, such a lovely HTML5 danmaku video player</p>
-    </blockquote>
-    <p><a href="https://www.npmjs.com/package/dplayer"><img src="https://img.shields.io/npm/v/dplayer.svg?style=flat-square" alt="npm"></a>
-    <a href="https://github.com/DIYgod/DPlayer/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/dplayer.svg?style=flat-square"></a>
-    <a href="https://david-dm.org/DIYgod/DPlayer#info=devDependencies"><img src="https://img.shields.io/david/dev/DIYgod/dplayer.svg?style=flat-square"></a>
-    <a href="https://www.npmjs.com/package/dplayer"><img src="https://img.shields.io/npm/dt/dplayer.svg?style=flat-square"></a>
-    <a href="https://travis-ci.org/DIYgod/DPlayer"><img src="https://img.shields.io/travis/DIYgod/DPlayer.svg?style=flat-square"></a>
-    <a href="https://github.com/DIYgod/DPlayer#donate"><img src="https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square"></a></p>
-    
-    <details><summary>Summary</summary>
-    <ul>
-        <li><a href="#quick-start">Quick Start</a></li>
-        <li><a href="#options">Options</a></li>
-        <li><a href="#quality-switching">Quality switching</a></li>
-        <li><a href="#hls-support">HLS support</a></li>
-        <li><a href="#flv-support">FLV support</a></li>
-        <li><a href="#bilibili-video-and-danmaku">Bilibili video and danmaku</a></li>
-        <li><a href="#html5-check">HTML5 check</a></li>
-    </ul>
-    </details>
     <h2 id="quick-start">Quick Start</h2>
     <div class="example">
         <div id="dplayer1"></div>
@@ -54,22 +28,6 @@
             });
         </script>
     </div>
-    <div class="highlight highlight-middle highlight-html">
-        <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;DPlayer.min.css&quot;&gt;
-&lt;div id=&quot;dplayer&quot;&gt;&lt;/div&gt;
-&lt;script src=&quot;DPlayer.min.js&quot;&gt;&lt;/script&gt;</code></pre>
-    </div>
-    <div class="highlight highlight-js"><pre><code class="js">var dp = new DPlayer({
-    element: document.getElementById('dplayer'),
-    video: {
-        url: 'demo.mp4',
-        pic: 'demo.png'
-    },
-    danmaku: {
-        id: 'demo',
-        api: 'https://api.prprpr.me/dplayer/'
-    }
-});</code></pre></div>
 
     <h2 id="options">Options</h2>
     <div class="example">
@@ -134,35 +92,6 @@
             }
         </script>
     </div>
-    <div class="highlight highlight-js">
-        <pre><code class="js">var dp = new DPlayer({{
-    element: document.getElementById('dplayer'),
-    autoplay: false,
-    theme: '#FADFA3',
-    loop: true,
-    screenshot: true,
-    hotkey: true,
-    logo: 'logo.png',
-    video: {
-        url: 'demo.mp4',
-        pic: 'demo.png',
-        type: 'auto'
-    },
-    danmaku: {
-        id: 'demo',
-        api: 'https://api.prprpr.me/dplayer/',
-        token: 'demo',
-        maximum: 3000,
-        user: 'DIYgod'
-    },
-    contextmenu: [
-        {
-            text: 'custom contextmenu',
-            link: 'https://github.com/DIYgod/DPlayer'
-        }
-    ]
-});</code></pre>
-    </div>
 
     <h2 id="quality-switching">Quality switching</h2>
     <div class="example">
@@ -185,21 +114,6 @@
         });
         </script>
     </div>
-    <div class="highlight highlight-js">
-        <pre><code class="js">var dp = new DPlayer({
-    element: document.getElementById('dplayer'),
-    video: {
-        quality: [{
-            name: 'HD',
-            url: 'demo1.mp4'
-        }, {
-            name: 'SD',
-            url: 'demo2.mp4'
-        }],
-        defaultQuality: 0
-    }
-});</code></pre>
-    </div>
 
     <h2 id="hls-support">HLS support</h2>
     <div class="example">
@@ -214,21 +128,6 @@
             });
         </script>
     </div>
-    <div class="highlight highlight-middle highlight-html">
-        <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;DPlayer.min.css&quot;&gt;
-&lt;div id=&quot;dplayer&quot;&gt;&lt;/div&gt;
-&lt;script src=&quot;plugin/hls.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;DPlayer.min.js&quot;&gt;&lt;/script&gt;</code></pre>
-    </div>
-    <div class="highlight highlight-js">
-        <pre><code class="js">var dp = new DPlayer({
-    element: document.getElementById('dplayer'),
-    video: {
-        url: 'demo.m3u8',
-        type: 'hls'
-    }
-});</code></pre>
-    </div>
 
     <h2 id="flv-support">FLV support</h2>
     <div class="example">
@@ -242,21 +141,6 @@
                 }
             });
         </script>
-    </div>
-    <div class="highlight highlight-middle highlight-html">
-        <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;DPlayer.min.css&quot;&gt;
-&lt;div id=&quot;dplayer&quot;&gt;&lt;/div&gt;
-&lt;script src=&quot;plugin/flv.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;DPlayer.min.js&quot;&gt;&lt;/script&gt;</code></pre>
-    </div>
-    <div class="highlight highlight-js">
-        <pre><code class="js">var dp = new DPlayer({
-    element: document.getElementById('dplayer'),
-    video: {
-        url: 'demo.flv',
-        type: 'flv'
-    }
-});</code></pre>
     </div>
 
     <h2 id="bilibili-video-and-danmaku">Bilibili video and danmaku</h2>
@@ -277,20 +161,6 @@
             });
         </script>
     </div>
-    <div class="highlight highlight-js">
-        <pre><code class="js">var dp = new DPlayer({
-    element: document.getElementById('dplayer'),
-    screenshot: false,
-    video: {
-        url: 'https://api.prprpr.me/dplayer/video/bilibili?aid=[aid]'
-    },
-    danmaku: {
-        id: 'demo',
-        api: 'https://api.prprpr.me/dplayer/',
-        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=[aid]']
-    }
-});</code></pre>
-    </div>
 
     <h2 id="html5-check">HTML5 check</h2>
     <ul>
@@ -306,18 +176,7 @@
         <li class="websockets">WebSockets</li>
     </ul>
 
-    <a href="https://github.com/DIYgod/DPlayer" target="_blank" class="github-corner">
-        <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;">
-            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-                fill="currentColor" class="octo-body"></path>
-        </svg>
-    </a>
-
-    <script src="https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/stats.js"></script>
     <script src="demo.js"></script>
     <script src="modernizr.js"></script>
 </body>

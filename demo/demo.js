@@ -10,5 +10,3 @@ function animate () {
     requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-
-hljs.initHighlightingOnLoad();
