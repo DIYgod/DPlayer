@@ -85,6 +85,9 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.DefinePlugin({
+            DPLAYER_VERSION: `"${require('../package.json').version}"`
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false

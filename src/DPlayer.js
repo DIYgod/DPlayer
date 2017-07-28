@@ -1,13 +1,11 @@
-console.log('\n %c DPlayer 1.5.0 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+import './DPlayer.scss';
 
-require('./DPlayer.scss');
-const utils = require('./utils.js');
-const svg = require('./svg.js');
-const handleOption = require('./option.js');
-const i18n = require('./i18n.js');
-const html = require('./html.js');
-const Video = require('./video.js');
-const isMobile = /mobile/i.test(window.navigator.userAgent);
+import utils, {isMobile} from './utils';
+import svg from './svg';
+import handleOption from './option';
+import i18n from './i18n';
+import html from './html';
+import Video from './video';
 
 let index = 0;
 
@@ -160,7 +158,7 @@ class DPlayer {
         const clearCheckLoadingTime = () => {
             clearInterval(this.checkLoading);
         };
-        
+
         this.animationFrame = () => {
             if (this.playedTime) {
                 this.updateBar('played', this.video.currentTime() / this.video.duration, 'width');
@@ -933,7 +931,6 @@ class DPlayer {
      * Read danmaku from API
      */
     readDanmaku () {
-        const isMobile = /mobile/i.test(window.navigator.userAgent);
         let apiurl;
         if (this.option.danmaku.maximum) {
             apiurl = `${this.option.danmaku.api}?id=${this.option.danmaku.id}&max=${this.option.danmaku.maximum}`;
