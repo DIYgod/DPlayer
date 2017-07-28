@@ -35,4 +35,10 @@ module.exports = {
         }
         return actualLeft - elementScrollLeft;
     },
+
+    /**
+     * check if user is using mobile or not
+     */
+    isMobile: /mobile/i.test(window.navigator.userAgent)
+
 };
