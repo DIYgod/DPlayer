@@ -1,5 +1,3 @@
-console.log('\n %c DPlayer 1.5.0 %c http://dplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
-
 import './DPlayer.scss';
 
 import utils, {isMobile} from './utils';

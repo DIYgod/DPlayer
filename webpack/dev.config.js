@@ -91,7 +91,10 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new webpack.DefinePlugin({
+            DPLAYER_VERSION: `"${require('../package.json').version}"`
+        })
     ],
 
     node: {
