@@ -1107,13 +1107,8 @@ class DPlayer {
         if (enablehls && Hls.isSupported()) {
             // this.element.getElementsByClassName('dplayer-time')[0].style.display = 'none';
             const hls = new Hls();
+            hls.loadSource(this.option.video.url[0]);
             hls.attachMedia(this.video.current);
-            hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-                hls.loadSource(this.option.video.url);
-                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    this.notice("manifest loaded, found " + data.levels.length + " quality level");
-                });
-            });
         }
 
         // Support FLV
