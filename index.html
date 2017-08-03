@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/github-markdown-css">
     <link rel="stylesheet" href="https://unpkg.com/highlight.js/styles/github-gist.css">
     <link rel="stylesheet" href="demo.css">
-    <link rel="stylesheet" href="https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.css">
+    <link class="dplayer-css" rel="stylesheet" href="https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.css">
     <script src="https://unpkg.com/flv.js/dist/flv.min.js"></script>
     <script src="https://unpkg.com/hls.js/dist/hls.min.js"></script>
     <script src="https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js"></script>
@@ -27,8 +27,17 @@
         <a href="https://david-dm.org/MoePlayer/DPlayer#info=devDependencies"><img src="https://img.shields.io/david/dev/MoePlayer/dplayer.svg?style=flat-square"></a>
         <a href="https://www.npmjs.com/package/dplayer"><img src="https://img.shields.io/npm/dt/dplayer.svg?style=flat-square"></a>
         <a href="https://travis-ci.org/MoePlayer/DPlayer"><img src="https://img.shields.io/travis/MoePlayer/DPlayer.svg?style=flat-square"></a>
-        <a href="https://github.com/MoePlayer/DPlayer#donate"><img src="https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square"></a></p>
-
+        <a href="https://github.com/MoePlayer/DPlayer#donate"><img src="https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square"></a>
+    </p>
+    <p>
+        <span>DPlayer version: </span>
+        <select class="version-select">
+            <optgroup label="GitHub version (from rawgit)" class="version-github">
+                <option value="github" selected>latest on GitHub</option>
+            </optgroup>
+            <optgroup label="npm version (from cdnjs)" class="version-npm"></optgroup>
+        </select>
+    </p>
     <details>
         <summary>Summary</summary>
         <ul>
@@ -44,19 +53,6 @@
     <h2 id="quick-start">Quick Start</h2>
     <div class="example">
         <div id="dplayer1"></div>
-        <script>
-            var dp1 = new DPlayer({
-                element: document.getElementById('dplayer1'),
-                video: {
-                    url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
-                    pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
-                },
-                danmaku: {
-                    id: '9E2E3368B56CDBB4',
-                    api: 'https://api.prprpr.me/dplayer/'
-                }
-            });
-        </script>
     </div>
     <div class="highlight highlight-middle highlight-html">
         <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;DPlayer.min.css&quot;&gt;
@@ -82,63 +78,6 @@
         <button class="btn" onclick="switchDPlayer()">Switch Video</button>
         <button class="btn" onclick="dp2.notice('Notice演示')">Notice</button>
         <div id="dplayer2"></div>
-        <script>
-            var dp2 = new DPlayer({
-                element: document.getElementById('dplayer2'),
-                autoplay: false,
-                theme: '#FADFA3',
-                loop: true,
-                screenshot: true,
-                hotkey: true,
-                logo: 'http://devtest.qiniudn.com/DPlayer.png',
-                video: {
-                    url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
-                    pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
-                    type: 'auto'
-                },
-                danmaku: {
-                    id: '9E2E3368B56CDBB42',
-                    api: 'https://api.prprpr.me/dplayer/',
-                    token: 'tokendemo',
-                    maximum: 3000,
-                    user: 'DIYgod'
-                },
-                contextmenu: [
-                    {
-                        text: 'custom contextmenu',
-                        link: 'https://github.com/MoePlayer/DPlayer'
-                    }
-                ]
-            });
-            function switchDPlayer() {
-                if (dp2.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
-                    dp2.switchVideo({
-                        url: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.mp4',
-                        pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg',
-                        type: 'auto',
-                    },
-                        {
-                            id: '5rGf5Y2X55qu6Z2p',
-                            api: 'https://api.prprpr.me/dplayer/',
-                            maximum: 3000,
-                            user: 'DIYgod'
-                        });
-                }
-                else {
-                    dp2.switchVideo({
-                        url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
-                        pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
-                        type: 'auto',
-                    },
-                        {
-                            id: '9E2E3368B56CDBB42',
-                            api: 'https://api.prprpr.me/dplayer/',
-                            maximum: 3000,
-                            user: 'DIYgod'
-                        });
-                }
-            }
-        </script>
     </div>
     <div class="highlight highlight-js">
         <pre><code class="js">var dp = new DPlayer({{
@@ -174,22 +113,6 @@
     <div class="example">
         <button class="btn" onclick="dp3.switchQuality(1)">Switch quality</button>
         <div id="dplayer3"></div>
-        <script>
-            var dp3 = new DPlayer({
-                element: document.getElementById('dplayer3'),
-                video: {
-                    quality: [{
-                        name: 'HD',
-                        url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?1'
-                    }, {
-                        name: 'SD',
-                        url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?2'
-                    }],
-                    defaultQuality: 0,
-                    pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
-                }
-            });
-        </script>
     </div>
     <div class="highlight highlight-js">
         <pre><code class="js">var dp = new DPlayer({
@@ -211,15 +134,6 @@
     <p>It requires the library <a href="https://github.com/dailymotion/hls.js">hls.js</a> and it should be loaded before DPlayer.min.js.</p>
     <div class="example">
         <div id="dplayer4"></div>
-        <script>
-            var dp4 = new DPlayer({
-                element: document.getElementById('dplayer4'),
-                video: {
-                    url: 'http://devtest.qiniudn.com/若能绽放光芒5.m3u8',
-                    type: 'hls'
-                }
-            });
-        </script>
     </div>
     <div class="highlight highlight-middle highlight-html">
         <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;DPlayer.min.css&quot;&gt;
@@ -241,15 +155,6 @@
     <p>It requires the library <a href="https://github.com/Bilibili/flv.js">flv.js and it should be loaded before DPlayer.min.js.</a></p>
     <div class="example">
         <div id="dplayer5"></div>
-        <script>
-            var dp5 = new DPlayer({
-                element: document.getElementById('dplayer5'),
-                video: {
-                    url: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.flv',
-                    type: 'flv'
-                }
-            });
-        </script>
     </div>
     <div class="highlight highlight-middle highlight-html">
         <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;DPlayer.min.css&quot;&gt;
@@ -270,20 +175,6 @@
     <h2 id="bilibili-video-and-danmaku">Bilibili video and danmaku</h2>
     <div class="example">
         <div id="dplayer6"></div>
-        <script>
-            var dp5 = new DPlayer({
-                element: document.getElementById('dplayer6'),
-                screenshot: false,
-                video: {
-                    url: 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652',
-                },
-                danmaku: {
-                    id: '9E2E3368B56CDBB46',
-                    api: 'https://api.prprpr.me/dplayer/',
-                    addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4045652']
-                }
-            });
-        </script>
     </div>
     <div class="highlight highlight-js">
         <pre><code class="js">var dp = new DPlayer({
@@ -326,6 +217,7 @@
 
     <script src="https://unpkg.com/stats.js"></script>
     <script src="https://unpkg.com/highlight.js/lib/highlight.js"></script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
     <script src="demo.js"></script>
     <script src="modernizr.js"></script>
 </body>
