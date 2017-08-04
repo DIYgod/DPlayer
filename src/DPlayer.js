@@ -830,6 +830,14 @@ class DPlayer {
         }
 
         this.video.currentTime = time;
+
+        for (let i = 0; i < this.dan.length; i++) {
+            if (this.dan[i].time >= time) {
+                this.danIndex = i;
+                return;
+            }
+            this.danIndex = this.dan.length;
+        }
     }
 
     /**
@@ -1140,17 +1148,17 @@ class DPlayer {
             flvPlayer.load();
         }
 
-        if (this.option.danmaku) {
-            this.video.addEventListener('seeking', () => {
-                for (let i = 0; i < this.dan.length; i++) {
-                    if (this.dan[i].time >= this.video.currentTime) {
-                        this.danIndex = i;
-                        return;
-                    }
-                    this.danIndex = this.dan.length;
-                }
-            });
-        }
+        // if (this.option.danmaku) {
+        //     this.video.addEventListener('seeking', () => {
+        //         for (let i = 0; i < this.dan.length; i++) {
+        //             if (this.dan[i].time >= this.video.currentTime) {
+        //                 this.danIndex = i;
+        //                 return;
+        //             }
+        //             this.danIndex = this.dan.length;
+        //         }
+        //     });
+        // }
 
 
         /**
