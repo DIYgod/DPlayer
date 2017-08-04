@@ -173,9 +173,9 @@ class DPlayer {
                 }
                 this.pushDanmaku(danmakus);
             }
-            window.requestAnimationFrame(this.animationFrame);
+            this.requestID = window.requestAnimationFrame(this.animationFrame);
         };
-        window.requestAnimationFrame(this.animationFrame);
+        this.requestID = window.requestAnimationFrame(this.animationFrame);
 
         this.setTime = (type) => {
             if (!type) {
@@ -307,12 +307,12 @@ class DPlayer {
         /**
          * auto hide controller
          */
-        let hideTime = 0;
+        this.hideTime = 0;
         if (!isMobile) {
             const hideController = () => {
                 this.element.classList.remove('dplayer-hide-controller');
-                clearTimeout(hideTime);
-                hideTime = setTimeout(() => {
+                clearTimeout(this.hideTime);
+                this.hideTime = setTimeout(() => {
                     if (this.video.played.length) {
                         this.element.classList.add('dplayer-hide-controller');
                         closeSetting();
@@ -605,7 +605,7 @@ class DPlayer {
             this.element.classList.add('dplayer-show-controller');
 
             disableHide = setInterval(() => {
-                clearTimeout(hideTime);
+                clearTimeout(this.hideTime);
             }, 1000);
             commentFocusTimeout = setTimeout(() => {
                 commentInput.focus();
@@ -867,6 +867,7 @@ class DPlayer {
         this.video.pause();
         this.clearTime();
         this.element.classList.remove('dplayer-playing');
+        window.cancelAnimationFrame(this.requestID);
         this.trigger('pause');
     }
 
@@ -1170,8 +1171,8 @@ class DPlayer {
 
         // video download error: an error occurs
         this.video.addEventListener('error', () => {
-            this.notice(this.tran('This video fails to load'), -1);
-            this.trigger('pause');
+            this.tran && this.notice && this.notice(this.tran('This video fails to load'), -1);
+            this.trigger && this.trigger('pause');
         });
 
         // video can play: enough data is available that the media can be played
@@ -1311,6 +1312,18 @@ class DPlayer {
         this.noticeTime = setTimeout(() => {
             noticeEle.style.opacity = 0;
         }, time || 2000);
+    }
+
+    destroy () {
+        this.pause();
+        clearTimeout(this.hideTime);
+        this.video.src = '';
+        this.element.innerHTML = '';
+        for (const key in this) {
+            if (this.hasOwnProperty(key) && key !== 'paused') {
+                delete this[key];
+            }
+        }
     }
 }
 
