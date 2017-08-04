@@ -1,11 +1,11 @@
 class Video {
-    constructor (videos, duration) {
+    constructor (videos, duration = 0) {
         this.videos = videos;
         this.multi = this.videos.length > 1;
         this.index = 0;
         this.current = this.videos[this.index];
 
-        this.duration = duration || 0;
+        this.duration = duration;
         this.durationArr = [];
         this.eventAll = [];
         this.eventCurrent = [];
@@ -44,18 +44,11 @@ class Video {
     // bind event    
     on (type, event, callback) {
         if (typeof callback === 'function') {
-            if (type === 'all') {
-                if (!this.eventAll[event]) {
-                    this.eventAll[event] = [];
-                }
-                this.eventAll[event].push(callback);
+            const events = type === 'all' ? this.eventAll : this.eventCurrent;
+            if (!events[event]) {
+                events[event] = [];
             }
-            else {
-                if (!this.eventCurrent[event]) {
-                    this.eventCurrent[event] = [];
-                }
-                this.eventCurrent[event].push(callback);
-            }
+            events[event].push(callback);
 
             if (['seeking'].indexOf(event) === -1) {
                 for (let i = 0; i < this.videos.length; i++) {
