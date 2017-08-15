@@ -28,9 +28,12 @@ const SendXMLHttpRequest = (url, data, success, error, fail) => {
 };
 
 module.exports = {
-    send: (endpoint, danmakuData) => {
+    send: (endpoint, danmakuData, callback) => {
         SendXMLHttpRequest(endpoint, danmakuData, (xhr, response) => {
             console.log('Post danmaku: ', response);
+            if (callback) {
+                callback();
+            }
         }, (xhr, response) => {
             alert(response.msg);
         }, (xhr) => {
@@ -38,13 +41,13 @@ module.exports = {
         });
     },
 
-    read: (endpoint, cbk) => {
+    read: (endpoint, callback) => {
         SendXMLHttpRequest(endpoint, null, (xhr, response) => {
-            cbk(null, response.danmaku);
+            callback(null, response.danmaku);
         }, (xhr, response) => {
-            cbk({ status: xhr.status, response });
+            callback({ status: xhr.status, response });
         }, (xhr) => {
-            cbk({ status: xhr.status, response: null });
+            callback({ status: xhr.status, response: null });
         });
     }
 };
