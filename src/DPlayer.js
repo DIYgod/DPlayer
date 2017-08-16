@@ -412,7 +412,6 @@ class DPlayer {
                 showDanToggle.checked = !showDanToggle.checked;
                 if (showDanToggle.checked) {
                     showdan = true;
-                    this.danmaku.seek();
                     if (!this.paused) {
                         this.danmaku.show();
                     }
