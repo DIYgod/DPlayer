@@ -414,13 +414,12 @@ class DPlayer {
                     showdan = true;
                     this.danmaku.seek();
                     if (!this.paused) {
-                        this.danmaku.play();
+                        this.danmaku.show();
                     }
                 }
                 else {
                     showdan = false;
-                    this.danmaku.pause();
-                    this.danmaku.clear();
+                    this.danmaku.hide();
                 }
                 closeSetting();
             });
@@ -606,13 +605,19 @@ class DPlayer {
          * full screen
          */
         this.element.addEventListener('fullscreenchange', () => {
-            this.danmaku.resetAnimation();
+            if (this.danmaku) {
+                this.danmaku.resize();                
+            }
         });
         this.element.addEventListener('mozfullscreenchange', () => {
-            this.danmaku.resetAnimation();
+            if (this.danmaku) {
+                this.danmaku.resize();
+            }    
         });
         this.element.addEventListener('webkitfullscreenchange', () => {
-            this.danmaku.resetAnimation();
+            if (this.danmaku) {
+                this.danmaku.resize();
+            }    
         });
         // browser full screen
         this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
@@ -641,7 +646,9 @@ class DPlayer {
                     document.webkitCancelFullScreen();
                 }
             }
-            this.danmaku.resetAnimation();
+            if (this.danmaku) {
+                this.danmaku.resize();
+            }    
         });
         // web full screen
         this.element.getElementsByClassName('dplayer-full-in-icon')[0].addEventListener('click', () => {
@@ -650,7 +657,9 @@ class DPlayer {
             }
             else {
                 this.element.classList.add('dplayer-fulled');
-                this.danmaku.resetAnimation();
+                if (this.danmaku) {
+                    this.danmaku.resize();
+                }    
             }
         });
 
@@ -698,7 +707,9 @@ class DPlayer {
             case 27:
                 if (this.element.classList.contains('dplayer-fulled')) {
                     this.element.classList.remove('dplayer-fulled');
-                    this.danmaku.resetAnimation();
+                    if (this.danmaku) {
+                        this.danmaku.resize();
+                    }    
                 }
                 break;
             }
@@ -782,7 +793,11 @@ class DPlayer {
 
         this.video.currentTime = time;
 
-        this.danmaku.seek();
+        if (this.danmaku) {
+            this.danmaku.seek();
+        }    
+
+        this.updateBar('played', time / this.video.duration, 'width');
     }
 
     /**
@@ -800,6 +815,9 @@ class DPlayer {
         this.video.play();
         this.setTime();
         this.element.classList.add('dplayer-playing');
+        if (this.danmaku) {
+            this.danmaku.play();
+        }
         this.trigger('play');
     }
 
@@ -820,6 +838,9 @@ class DPlayer {
         this.video.pause();
         this.clearTime();
         this.element.classList.remove('dplayer-playing');
+        if (this.danmaku) {
+            this.danmaku.pause();
+        }
         this.trigger('pause');
     }
 
@@ -874,14 +895,16 @@ class DPlayer {
             this.updateBar('loaded', 0, 'width');
             this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = '00:00';
             this.element.getElementsByClassName('dplayer-danmaku')[0].innerHTML = '';
-            this.danmaku.reload({
-                id: danmakuAPI.id,
-                address: danmakuAPI.api,
-                token: danmakuAPI.token,
-                maximum: danmakuAPI.maximum,
-                addition: danmakuAPI.addition,
-                user: danmakuAPI.user,
-            });
+            if (this.danmaku) {
+                this.danmaku.reload({
+                    id: danmakuAPI.id,
+                    address: danmakuAPI.api,
+                    token: danmakuAPI.token,
+                    maximum: danmakuAPI.maximum,
+                    addition: danmakuAPI.addition,
+                    user: danmakuAPI.user,
+                });
+            }    
         }
     }
 
@@ -964,7 +987,9 @@ class DPlayer {
                 this.seek(0);
                 this.video.play();
             }
-            this.danmaku.danIndex = 0;
+            if (this.danmaku) {
+                this.danmaku.danIndex = 0;                
+            }
         });
 
         this.video.addEventListener('play', () => {

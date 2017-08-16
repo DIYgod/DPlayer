@@ -9,7 +9,7 @@ class Danmaku {
         };
         this.danIndex = 0;
         this.dan = [];
-        this.show = true;
+        this.showing = true;
         this._opacity = this.options.opacity;
 
         this.load();
@@ -97,7 +97,7 @@ class Danmaku {
     }
 
     frame () {
-        if (this.dan.length && !this.paused) {
+        if (this.dan.length && !this.paused && this.showing) {
             let item = this.dan[this.danIndex];
             const dan = [];
             while (item && this.options.time() > parseFloat(item.time)) {
@@ -284,12 +284,23 @@ class Danmaku {
             replace(/\//g, "&#x2f;");
     }
     
-    resetAnimation () {
+    resize () {
         const danWidth = this.container.offsetWidth;
         const items = this.container.getElementsByClassName('dplayer-danmaku-item');
         for (let i = 0; i < items.length; i++) {
             items[i].style.transform = `translateX(-${danWidth}px)`;
         }
+    }
+
+    hide () {
+        this.showing = false;
+        this.pause();
+        this.clear();
+    }
+
+    show () {
+        this.showing = true;
+        this.play();
     }
 }
 
