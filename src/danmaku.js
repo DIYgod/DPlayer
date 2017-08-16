@@ -300,6 +300,7 @@ class Danmaku {
 
     show () {
         this.showing = true;
+        this.seek();
         this.play();
     }
 }
