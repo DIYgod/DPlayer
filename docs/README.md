@@ -96,8 +96,6 @@ var dp = new DPlayer({
  + `dp.danmaku.send(text, color, type)` // Submit a new danmaku to back end, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this danmaku will not be submit to back end
  + `dp.danmaku.opacity(percentage)`   // Set danmaku opacity
  + `dp.danmaku.draw(text, color, type)`  // Draw a new danmaku in real time
- + `dp.danmaku.play()`                // Play danmaku
- + `dp.danmaku.pause()`               // Pause danmaku
  + `dp.danmaku.clear()`               // Clear danmaku
  + `dp.danmaku.resize()`              // After container resized
 
