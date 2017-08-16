@@ -98,6 +98,8 @@ var dp = new DPlayer({
  + `dp.danmaku.draw(text, color, type)`  // Draw a new danmaku in real time
  + `dp.danmaku.clear()`               // Clear danmaku
  + `dp.danmaku.resize()`              // After container resized
+ + `dp.danmaku.hide()`                // Hide danmaku
+ + `dp.danmaku.show()`                // Show danmaku
 
 
 ### Event binding
