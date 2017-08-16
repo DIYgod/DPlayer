@@ -75,8 +75,42 @@
 
     <h2 id="options">Options</h2>
     <div class="example">
-        <button class="btn" onclick="switchDPlayer()">Switch Video</button>
-        <button class="btn" onclick="dp2.notice('Notice演示')">Notice</button>
+        <script>
+            function switchDPlayer() {
+                if (dp2.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
+                    dp2.switchVideo({
+                        url: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.mp4',
+                        pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg',
+                        type: 'auto',
+                    },
+                        {
+                            id: '5rGf5Y2X55qu6Z2p',
+                            api: 'https://api.prprpr.me/dplayer/',
+                            maximum: 3000,
+                            user: 'DIYgod'
+                        });
+                }
+                else {
+                    dp2.switchVideo({
+                        url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
+                        pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+                        type: 'auto',
+                    },
+                        {
+                            id: '9E2E3368B56CDBB42',
+                            api: 'https://api.prprpr.me/dplayer/',
+                            maximum: 3000,
+                            user: 'DIYgod'
+                        });
+                }
+            }
+        </script>
+        <button class="btn" onclick="switchDPlayer()">switchVideo</button>
+        <button class="btn" onclick="dp2.notice('Notice演示')">notice</button>
+        <button class="btn" onclick="dp2.seek(120)">seek</button>
+        <button class="btn" onclick="dp2.volume(0.2)">volume</button>
+        <button class="btn" onclick="dp2.toggle()">toggle</button>
+        <button class="btn" onclick="dp2.destroy()">destroy</button>
         <div id="dplayer2"></div>
     </div>
     <div class="highlight highlight-js">

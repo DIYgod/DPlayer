@@ -101,34 +101,6 @@ function initPlayers () {
             }
         ]
     });
-    function switchDPlayer() {
-        if (dp2.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
-            dp2.switchVideo({
-                url: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.mp4',
-                pic: 'http://devtest.qiniudn.com/微小微-江南皮革厂倒闭了.jpg',
-                type: 'auto',
-            },
-                {
-                    id: '5rGf5Y2X55qu6Z2p',
-                    api: 'https://api.prprpr.me/dplayer/',
-                    maximum: 3000,
-                    user: 'DIYgod'
-                });
-        }
-        else {
-            dp2.switchVideo({
-                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
-                pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
-                type: 'auto',
-            },
-                {
-                    id: '9E2E3368B56CDBB42',
-                    api: 'https://api.prprpr.me/dplayer/',
-                    maximum: 3000,
-                    user: 'DIYgod'
-                });
-        }
-    }
 
     //dp3
     window.dp3 = new DPlayer({
