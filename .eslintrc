@@ -48,7 +48,8 @@
         "no-duplicate-imports": 1,
         "no-useless-computed-key": 1,
         "no-useless-rename": 1,
-        "rest-spread-spacing": 1
+        "rest-spread-spacing": 1,
+        "no-trailing-spaces": 1
     },
     "globals": {
         "require": false,

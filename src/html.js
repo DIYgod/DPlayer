@@ -243,7 +243,7 @@ const html = {
             <div class="dplayer-setting-speed-item" data-speed="2">
                 <span class="dplayer-label">2</span>
             </div>`
-    }) 
+    })
 };
 
 module.exports = html;

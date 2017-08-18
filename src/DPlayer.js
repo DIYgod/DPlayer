@@ -95,7 +95,7 @@ class DPlayer {
                     user: this.option.danmaku.user,
                 }
             });
-        }    
+        }
 
 
         // arrow style
@@ -605,18 +605,18 @@ class DPlayer {
          */
         this.element.addEventListener('fullscreenchange', () => {
             if (this.danmaku) {
-                this.danmaku.resize();                
+                this.danmaku.resize();
             }
         });
         this.element.addEventListener('mozfullscreenchange', () => {
             if (this.danmaku) {
                 this.danmaku.resize();
-            }    
+            }
         });
         this.element.addEventListener('webkitfullscreenchange', () => {
             if (this.danmaku) {
                 this.danmaku.resize();
-            }    
+            }
         });
         // browser full screen
         this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
@@ -647,7 +647,7 @@ class DPlayer {
             }
             if (this.danmaku) {
                 this.danmaku.resize();
-            }    
+            }
         });
         // web full screen
         this.element.getElementsByClassName('dplayer-full-in-icon')[0].addEventListener('click', () => {
@@ -658,7 +658,7 @@ class DPlayer {
                 this.element.classList.add('dplayer-fulled');
                 if (this.danmaku) {
                     this.danmaku.resize();
-                }    
+                }
             }
         });
 
@@ -708,7 +708,7 @@ class DPlayer {
                     this.element.classList.remove('dplayer-fulled');
                     if (this.danmaku) {
                         this.danmaku.resize();
-                    }    
+                    }
                 }
                 break;
             }
@@ -787,14 +787,14 @@ class DPlayer {
     seek (time) {
         time = Math.max(time, 0);
         if (this.video.duration) {
-            time = Math.min(time, this.video.duration);            
+            time = Math.min(time, this.video.duration);
         }
 
         this.video.currentTime = time;
 
         if (this.danmaku) {
             this.danmaku.seek();
-        }    
+        }
 
         this.updateBar('played', time / this.video.duration, 'width');
     }
@@ -903,7 +903,7 @@ class DPlayer {
                     addition: danmakuAPI.addition,
                     user: danmakuAPI.user,
                 });
-            }    
+            }
         }
     }
 
@@ -987,7 +987,7 @@ class DPlayer {
                 this.video.play();
             }
             if (this.danmaku) {
-                this.danmaku.danIndex = 0;                
+                this.danmaku.danIndex = 0;
             }
         });
 
@@ -1038,7 +1038,7 @@ class DPlayer {
                 parent.removeChild(this.prevVideo);
                 this.video.classList.add('dplayer-video-current');
                 if (!paused) {
-                    this.video.play();                    
+                    this.video.play();
                 }
                 this.prevVideo = null;
                 this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);

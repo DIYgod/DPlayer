@@ -283,7 +283,7 @@ class Danmaku {
             replace(/'/g, "&#x27;").
             replace(/\//g, "&#x2f;");
     }
-    
+
     resize () {
         const danWidth = this.container.offsetWidth;
         const items = this.container.getElementsByClassName('dplayer-danmaku-item');
