@@ -19,6 +19,9 @@ const tranZH = {
     'Switching to': '正在切换至',
     'Switched to': '已经切换至',
     'quality': '画质',
+    'FF to': '快进至',
+    'REW to': '快退至',
+    'Volume': '音量'
 };
 
 module.exports = function (lang) {

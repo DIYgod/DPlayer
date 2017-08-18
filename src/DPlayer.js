@@ -64,6 +64,14 @@ class DPlayer {
 
         this.element.innerHTML = html.main(option, index, this.tran);
 
+        document.addEventListener('click', () => {
+            this.focus = false;
+        }, true);
+
+        this.element.addEventListener('click', () => {
+            this.focus = true;
+        }, true);
+
         if (this.option.danmaku) {
             this.danmaku = new Danmaku({
                 container: this.element.getElementsByClassName('dplayer-danmaku')[0],
@@ -666,34 +674,36 @@ class DPlayer {
          * hot key
          */
         const handleKeyDown = (e) => {
-            const tag = document.activeElement.tagName.toUpperCase();
-            const editable = document.activeElement.getAttribute('contenteditable');
-            if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
-                const event = e || window.event;
-                let percentage;
-                switch (event.keyCode) {
-                case 32:
-                    event.preventDefault();
-                    this.toggle();
-                    break;
-                case 37:
-                    event.preventDefault();
-                    this.seek(this.video.currentTime - 5);
-                    break;
-                case 39:
-                    event.preventDefault();
-                    this.seek(this.video.currentTime + 5);
-                    break;
-                case 38:
-                    event.preventDefault();
-                    percentage = this.video.volume + 0.1;
-                    this.volume(percentage);
-                    break;
-                case 40:
-                    event.preventDefault();
-                    percentage = this.video.volume - 0.1;
-                    this.volume(percentage);
-                    break;
+            if (this.focus) {
+                const tag = document.activeElement.tagName.toUpperCase();
+                const editable = document.activeElement.getAttribute('contenteditable');
+                if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
+                    const event = e || window.event;
+                    let percentage;
+                    switch (event.keyCode) {
+                    case 32:
+                        event.preventDefault();
+                        this.toggle();
+                        break;
+                    case 37:
+                        event.preventDefault();
+                        this.seek(this.video.currentTime - 5);
+                        break;
+                    case 39:
+                        event.preventDefault();
+                        this.seek(this.video.currentTime + 5);
+                        break;
+                    case 38:
+                        event.preventDefault();
+                        percentage = this.video.volume + 0.1;
+                        this.volume(percentage);
+                        break;
+                    case 40:
+                        event.preventDefault();
+                        percentage = this.video.volume - 0.1;
+                        this.volume(percentage);
+                        break;
+                    }
                 }
             }
         };
@@ -790,6 +800,13 @@ class DPlayer {
             time = Math.min(time, this.video.duration);
         }
 
+        if (this.video.currentTime < time) {
+            this.notice(`${this.tran('FF to')} ${utils.secondToTime(time)}`);
+        }
+        else if (this.video.currentTime > time) {
+            this.notice(`${this.tran('REW to')} ${utils.secondToTime(time)}`);
+        }
+
         this.video.currentTime = time;
 
         if (this.danmaku) {
@@ -850,6 +867,7 @@ class DPlayer {
         percentage = percentage > 0 ? percentage : 0;
         percentage = percentage < 1 ? percentage : 1;
         this.updateBar('volume', percentage, 'width');
+        this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
         this.video.volume = percentage;
         if (this.video.muted) {
             this.video.muted = false;
