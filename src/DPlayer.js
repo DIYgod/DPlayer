@@ -339,18 +339,18 @@ class DPlayer {
          * auto hide controller
          */
         this.hideTime = 0;
+        const hideController = () => {
+            this.element.classList.remove('dplayer-hide-controller');
+            clearTimeout(this.hideTime);
+            this.hideTime = setTimeout(() => {
+                if (this.video.played.length) {
+                    this.element.classList.add('dplayer-hide-controller');
+                    closeSetting();
+                    closeComment();
+                }
+            }, 2000);
+        };
         if (!isMobile) {
-            const hideController = () => {
-                this.element.classList.remove('dplayer-hide-controller');
-                clearTimeout(this.hideTime);
-                this.hideTime = setTimeout(() => {
-                    if (this.video.played.length) {
-                        this.element.classList.add('dplayer-hide-controller');
-                        closeSetting();
-                        closeComment();
-                    }
-                }, 2000);
-            };
             this.element.addEventListener('mousemove', hideController);
             this.element.addEventListener('click', hideController);
         }
@@ -688,10 +688,12 @@ class DPlayer {
                     case 37:
                         event.preventDefault();
                         this.seek(this.video.currentTime - 5);
+                        hideController();
                         break;
                     case 39:
                         event.preventDefault();
                         this.seek(this.video.currentTime + 5);
+                        hideController();
                         break;
                     case 38:
                         event.preventDefault();
