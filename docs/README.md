@@ -45,6 +45,7 @@ var dp = new DPlayer({
     hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
     preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
     logo: 'logo.png',                                                  // Optional, player logo, showing in top left corner
+    volume: 0.7,                                                       // Optional, default volume, not work after user set volume themselves
     video: {                                                           // Required, video info
         url: 'dplayer.mp4',                                            // Required, video link
         pic: 'dplayer.png',                                            // Optional, video poster
