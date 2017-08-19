@@ -1112,19 +1112,16 @@ class DPlayer {
         };
     }
 
-    notice (text, time) {
+    notice (text, time = 2000, opacity = 0.8) {
         const noticeEle = this.element.getElementsByClassName('dplayer-notice')[0];
         noticeEle.innerHTML = text;
-        noticeEle.style.opacity = 1;
+        noticeEle.style.opacity = opacity;
         if (this.noticeTime) {
             clearTimeout(this.noticeTime);
         }
-        if (time && time < 0) {
-            return;
-        }
         this.noticeTime = setTimeout(() => {
             noticeEle.style.opacity = 0;
-        }, time || 2000);
+        }, time);
     }
 
     destroy () {
