@@ -61,7 +61,7 @@ const html = {
                     </button>
                     <div class="dplayer-volume-bar-wrap">
                         <div class="dplayer-volume-bar">
-                            <div class="dplayer-volume-bar-inner" style="width: 70%; background: ${option.theme};">
+                            <div class="dplayer-volume-bar-inner" style="background: ${option.theme};">
                                 <span class="dplayer-thumb" style="background: ${option.theme}"></span>
                             </div>
                         </div>

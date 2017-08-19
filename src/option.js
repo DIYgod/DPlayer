@@ -17,6 +17,7 @@ module.exports = (option) => {
         screenshot: false,
         hotkey: true,
         preload: 'auto',
+        volume: '0.7',
         apiBackend: defaultApiBackend,
         contextmenu: [
             {

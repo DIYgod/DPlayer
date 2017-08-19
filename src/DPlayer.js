@@ -29,19 +29,6 @@ class DPlayer {
 
         this.tran = new i18n(this.option.lang).tran;
 
-        /**
-         * Update progress bar, including loading progress bar and play progress bar
-         *
-         * @param {String} type - Point out which bar it is, should be played loaded or volume
-         * @param {Number} percentage
-         * @param {String} direction - Point out the direction of this bar, Should be height or width
-         */
-        this.updateBar = (type, percentage, direction) => {
-            percentage = percentage > 0 ? percentage : 0;
-            percentage = percentage < 1 ? percentage : 1;
-            bar[type + 'Bar'].style[direction] = percentage * 100 + '%';
-        };
-
         // define DPlayer events
         const eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
         this.event = {};
@@ -63,6 +50,27 @@ class DPlayer {
         }
 
         this.element.innerHTML = html.main(option, index, this.tran);
+
+        const bar = {};
+        bar.volumeBar = this.element.getElementsByClassName('dplayer-volume-bar-inner')[0];
+        bar.playedBar = this.element.getElementsByClassName('dplayer-played')[0];
+        bar.loadedBar = this.element.getElementsByClassName('dplayer-loaded')[0];
+        const pbar = this.element.getElementsByClassName('dplayer-bar-wrap')[0];
+        const pbarTimeTips = this.element.getElementsByClassName('dplayer-bar-time')[0];
+        let barWidth;
+
+        /**
+         * Update progress bar, including loading progress bar and play progress bar
+         *
+         * @param {String} type - Point out which bar it is, should be played loaded or volume
+         * @param {Number} percentage
+         * @param {String} direction - Point out the direction of this bar, Should be height or width
+         */
+        this.updateBar = (type, percentage, direction) => {
+            percentage = percentage > 0 ? percentage : 0;
+            percentage = percentage < 1 ? percentage : 1;
+            bar[type + 'Bar'].style[direction] = percentage * 100 + '%';
+        };
 
         document.addEventListener('click', () => {
             this.focus = false;
@@ -117,8 +125,6 @@ class DPlayer {
         // get this video manager
         this.video = this.element.getElementsByClassName('dplayer-video-current')[0];
 
-        this.initVideo();
-
         this.bezel = this.element.getElementsByClassName('dplayer-bezel-icon')[0];
         this.bezel.addEventListener('animationend', () => {
             this.bezel.classList.remove('dplayer-bezel-transition');
@@ -153,13 +159,6 @@ class DPlayer {
             videoWrap.addEventListener('click', toggleController);
             conMask.addEventListener('click', toggleController);
         }
-
-        const bar = {};
-        bar.playedBar = this.element.getElementsByClassName('dplayer-played')[0];
-        bar.loadedBar = this.element.getElementsByClassName('dplayer-loaded')[0];
-        const pbar = this.element.getElementsByClassName('dplayer-bar-wrap')[0];
-        const pbarTimeTips = this.element.getElementsByClassName('dplayer-bar-time')[0];
-        let barWidth;
 
         let lastPlayPos = 0;
         let currentPlayPos = 0;
@@ -281,7 +280,6 @@ class DPlayer {
         /**
          * control volume
          */
-        bar.volumeBar = this.element.getElementsByClassName('dplayer-volume-bar-inner')[0];
         const volumeEle = this.element.getElementsByClassName('dplayer-volume')[0];
         const volumeBarWrapWrap = this.element.getElementsByClassName('dplayer-volume-bar-wrap')[0];
         const volumeBarWrap = this.element.getElementsByClassName('dplayer-volume-bar')[0];
@@ -290,10 +288,10 @@ class DPlayer {
 
         this.switchVolumeIcon = () => {
             const volumeicon = this.element.getElementsByClassName('dplayer-volume-icon')[0];
-            if (this.video.volume >= 0.8) {
+            if (this.volume() >= 0.95) {
                 volumeicon.innerHTML = svg('volume-up');
             }
-            else if (this.video.volume > 0) {
+            else if (this.volume() > 0) {
                 volumeicon.innerHTML = svg('volume-down');
             }
             else {
@@ -325,7 +323,7 @@ class DPlayer {
             if (this.video.muted) {
                 this.video.muted = false;
                 this.switchVolumeIcon();
-                this.updateBar('volume', this.video.volume, 'width');
+                this.updateBar('volume', this.volume(), 'width');
             }
             else {
                 this.video.muted = true;
@@ -697,12 +695,12 @@ class DPlayer {
                         break;
                     case 38:
                         event.preventDefault();
-                        percentage = this.video.volume + 0.1;
+                        percentage = this.volume() + 0.1;
                         this.volume(percentage);
                         break;
                     case 40:
                         event.preventDefault();
-                        percentage = this.video.volume - 0.1;
+                        percentage = this.volume() - 0.1;
                         this.volume(percentage);
                         break;
                     }
@@ -790,6 +788,8 @@ class DPlayer {
             });
         }
 
+        this.initVideo();
+
         index++;
     }
 
@@ -865,16 +865,26 @@ class DPlayer {
     /**
      * Set volume
      */
-    volume (percentage) {
-        percentage = percentage > 0 ? percentage : 0;
-        percentage = percentage < 1 ? percentage : 1;
-        this.updateBar('volume', percentage, 'width');
-        this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
-        this.video.volume = percentage;
-        if (this.video.muted) {
-            this.video.muted = false;
+    volume (percentage, nonotice, nostorage) {
+        percentage = parseFloat(percentage);
+        if (!isNaN(percentage)) {
+            percentage = percentage > 0 ? percentage : 0;
+            percentage = percentage < 1 ? percentage : 1;
+            this.updateBar('volume', percentage, 'width');
+            if (!nostorage) {
+                localStorage.setItem('dplayer-volume', percentage);
+            }
+            if (!nonotice) {
+                this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
+            }
+            this.video.volume = percentage;
+            if (this.video.muted) {
+                this.video.muted = false;
+            }
+            this.switchVolumeIcon();
         }
-        this.switchVolumeIcon();
+
+        return this.video.volume;
     }
 
     /**
@@ -1023,8 +1033,7 @@ class DPlayer {
             }
         });
 
-        // control volume
-        this.video.volume = parseInt(this.element.getElementsByClassName('dplayer-volume-bar-inner')[0].style.width) / 100;
+        this.volume(localStorage.getItem('dplayer-volume') || this.option.volume, true, true);
     }
 
     switchQuality (index) {
