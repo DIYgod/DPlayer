@@ -89,6 +89,7 @@ var dp = new DPlayer({
 - [dplayer_lua_backend](https://github.com/dixyes/dplayer_lua_backend)
 - [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
 - [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
+- [react-dplayer](https://github.com/hnsylitao/react-dplayer)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Who use DPlayer?
