@@ -1114,7 +1114,7 @@ class DPlayer {
             case 'mousemove':
                 this.isMouseHoverPbar = true;
                 this.setPreviewSourceAndFrame({
-                    url: this.video.current.src,
+                    url: this.video.src,
                     time
                 });
                 this.timeTipsDisplay(true, timeTips);
@@ -1151,16 +1151,22 @@ class DPlayer {
         this.previewCanvas = this.element.getElementsByClassName('dplayer-bar-preview-canvas')[0];
 
         this.previewVideo.preload = 'auto';
-        const w = this.element.offsetWidth / 3;
-        const h = this.element.offsetHeight / 3;
-        this.previewWrapper.style.width = `${w}px`;
-        this.previewWrapper.style.height = `${h}px`;
-        this.previewWrapper.style.top = `${-h}px`;
-        this.previewCanvas.width = w;
-        this.previewCanvas.height = h;
+        const resize = () => {
+            const w = this.element.offsetWidth / 4;
+            const h = this.element.offsetHeight / 4;
+            this.previewWrapper.style.width = `${w}px`;
+            this.previewWrapper.style.height = `${h}px`;
+            this.previewWrapper.style.top = `${-h + 2}px`;
+            this.previewCanvas.width = w;
+            this.previewCanvas.height = h;
+        };
+        resize();
+        this.video.addEventListener('loadedmetadata', () => {
+            resize();
+        });
 
         this.setPreviewSourceAndFrame({
-            url: this.video.current.src, time: 0
+            url: this.video.src, time: 0
         });
         this.bindPreviewEvent();
     }
