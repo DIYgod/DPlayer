@@ -160,7 +160,7 @@ class DPlayer {
         const clearCheckLoadingTime = () => {
             clearInterval(this.checkLoading);
         };
-        
+
         this.animationFrame = () => {
             if (this.playedTime) {
                 this.updateBar('played', this.video.currentTime() / this.video.duration, 'width');
@@ -217,14 +217,18 @@ class DPlayer {
             this.video.seek(parseFloat(bar.playedBar.style.width) / 100 * this.video.duration);
         });
 
-        this.isTipsShow = false;
-        this.timeTipsHandler = this.timeTipsHandler(
+        this.initVideoPreview();
+        this.isPreViewShow = false;
+        this.isTimeTipsShow = true;
+        this.isMouseHoverPbar = false;
+        this.mouseHandler = this.mouseHandler(
             pbar, pbarTimeTips).bind(this);
-        pbar.addEventListener('mousemove', this.timeTipsHandler);
-        pbar.addEventListener('mouseover', this.timeTipsHandler);
-        pbar.addEventListener('mouseenter', this.timeTipsHandler);
-        pbar.addEventListener('mouseout', this.timeTipsHandler);
-        pbar.addEventListener('mouseleave', this.timeTipsHandler);
+        pbar.addEventListener('mousemove', this.mouseHandler);
+        pbar.addEventListener('mouseover', this.mouseHandler);
+        pbar.addEventListener('mouseenter', this.mouseHandler);
+        pbar.addEventListener('mouseout', this.mouseHandler);
+        pbar.addEventListener('mouseleave', this.mouseHandler);
+
 
         const thumbMove = (event) => {
             const e = event || window.event;
@@ -1250,7 +1254,7 @@ class DPlayer {
         });
     }
 
-    timeTipsHandler (pbar, timeTips) {
+    mouseHandler (pbar, timeTips) {
         // http://stackoverflow.com/questions/1480133/how-can-i-get-an-objects-absolute-position-on-the-page-in-javascript
         const cumulativeOffset = (element) => {
             let top = 0, left = 0;
@@ -1273,31 +1277,99 @@ class DPlayer {
             const { clientX } = e;
             const px = cumulativeOffset(pbar).left;
             const tx = clientX - px;
-            timeTips.innerText = utils.secondToTime(this.video.duration * (tx / pbar.offsetWidth));
+            const time = this.video.duration * (tx / pbar.offsetWidth);
+            timeTips.innerText = utils.secondToTime(time);
             timeTips.style.left = `${(tx - 20)}px`;
+            this.previewWrapper.style.left = `${(tx - 80)}px`;
+
             switch (e.type) {
             case 'mouseenter':
             case 'mouseover':
             case 'mousemove':
-                if (this.isTipsShow) {
-                    return;
-                }
-                timeTips.classList.remove('hidden');
-                this.isTipsShow = true;
+                this.isMouseHoverPbar = true;
+                this.setPreviewSourceAndFrame({ time });
+                this.timeTipsDisplay(true, timeTips);
                 break;
             case 'mouseleave':
             case 'mouseout':
-                if (!this.isTipsShow) {
-                    return;
-                }
-                timeTips.classList.add('hidden');
-                this.isTipsShow = false;
+                this.isMouseHoverPbar = false;
+                this.previewDispaly(false);
+                this.timeTipsDisplay(false, timeTips);
                 break;
             }
         };
     }
 
-    notice (text, time) {
+    timeTipsDisplay (show, timeTips) {
+        if (show) {
+            if (this.isTimeTipsShow) {
+                return;
+            }
+            timeTips.classList.remove('hidden');
+            this.isTimeTipsShow = true;
+        } else {
+            if (!this.isTimeTipsShow) {
+                return;
+            }
+            timeTips.classList.add('hidden');
+            this.isTimeTipsShow = false;
+        }
+    }
+
+    initVideoPreview () {
+        this.previewVideo = document.createElement("video");
+        this.previewWrapper = this.element.getElementsByClassName('dplayer-bar-preview')[0];
+        this.previewCanvas = this.element.getElementsByClassName('dplayer-bar-preview-canvas')[0];
+        this.previewCanvas.width = this.previewWrapper.offsetWidth;
+        this.previewCanvas.height = this.previewWrapper.offsetHeight;
+        this.previewVideo.preload = 'auto';
+        this.setPreviewSourceAndFrame({
+            url: this.video.src, time: 0
+        });
+        this.bindPreviewEvent();
+    }
+
+    setPreviewSourceAndFrame ({ url, time }) {
+        if (url) {
+            this.previewVideo.src = url;
+        }
+        if (time) {
+            this.previewVideo.currentTime = time;
+        }
+    }
+
+    bindPreviewEvent () {
+        if (!this.previewVideo) {return;}
+        this.previewVideo.addEventListener('seeked', () => {
+            this.generPreviewImage(this.video.currentTime);
+        });
+    }
+
+    generPreviewImage (time) {
+        if (time !== this.video.currentTime) {return;}
+        if (!this.isMouseHoverPbar) {return;}
+        const ctx = this.previewCanvas.getContext('2d');
+        ctx.drawImage(this.previewVideo, 0, 0,
+            this.previewWrapper.offsetWidth,
+            this.previewWrapper.offsetHeight);
+        this.previewDispaly(true);
+    }
+
+
+    previewDispaly (show) {
+        if (show) {
+            if (this.isPreViewShow) {return;}
+            if (!this.isMouseHoverPbar) {return;}
+            this.previewWrapper.classList.remove('hidden');
+            this.isPreViewShow = true;
+        } else {
+            if (!this.isPreViewShow) {return;}
+            this.previewWrapper.classList.add('hidden');
+            this.isPreViewShow = false;
+        }
+    }
+
+    notice (text, time = 2000, opacity = 0.8) {
         const noticeEle = this.element.getElementsByClassName('dplayer-notice')[0];
         noticeEle.innerHTML = text;
         noticeEle.style.opacity = 1;

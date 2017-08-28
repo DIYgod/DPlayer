@@ -158,6 +158,10 @@ const html = {
             </div>
             <div class="dplayer-bar-wrap">
                 <div class="dplayer-bar-time hidden">00:00</div>
+                <div class="dplayer-bar-preview hidden">
+                    <canvas class="dplayer-bar-preview-canvas">
+                    </canvas>
+                </div>
                 <div class="dplayer-bar">
                     <div class="dplayer-loaded" style="width: 0;"></div>
                     <div class="dplayer-played" style="width: 0; background: ${option.theme}">
