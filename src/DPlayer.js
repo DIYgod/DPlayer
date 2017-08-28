@@ -1280,14 +1280,17 @@ class DPlayer {
             const time = this.video.duration * (tx / pbar.offsetWidth);
             timeTips.innerText = utils.secondToTime(time);
             timeTips.style.left = `${(tx - 20)}px`;
-            this.previewWrapper.style.left = `${(tx - 80)}px`;
+            this.previewWrapper.style.left = `${(tx - this.previewWrapper.offsetWidth / 2)}px`;
 
             switch (e.type) {
             case 'mouseenter':
             case 'mouseover':
             case 'mousemove':
                 this.isMouseHoverPbar = true;
-                this.setPreviewSourceAndFrame({ time });
+                this.setPreviewSourceAndFrame({
+                    url: this.video.current.src,
+                    time
+                });
                 this.timeTipsDisplay(true, timeTips);
                 break;
             case 'mouseleave':
@@ -1320,11 +1323,18 @@ class DPlayer {
         this.previewVideo = document.createElement("video");
         this.previewWrapper = this.element.getElementsByClassName('dplayer-bar-preview')[0];
         this.previewCanvas = this.element.getElementsByClassName('dplayer-bar-preview-canvas')[0];
-        this.previewCanvas.width = this.previewWrapper.offsetWidth;
-        this.previewCanvas.height = this.previewWrapper.offsetHeight;
+
         this.previewVideo.preload = 'auto';
+        const w = this.element.offsetWidth / 3;
+        const h = this.element.offsetHeight / 3;
+        this.previewWrapper.style.width = `${w}px`;
+        this.previewWrapper.style.height = `${h}px`;
+        this.previewWrapper.style.top = `${-h}px`;
+        this.previewCanvas.width = w;
+        this.previewCanvas.height = h;
+
         this.setPreviewSourceAndFrame({
-            url: this.video.src, time: 0
+            url: this.video.current.src, time: 0
         });
         this.bindPreviewEvent();
     }
@@ -1339,20 +1349,22 @@ class DPlayer {
     }
 
     bindPreviewEvent () {
-        if (!this.previewVideo) {return;}
+        this.previewNumber = 0;
         this.previewVideo.addEventListener('seeked', () => {
-            this.generPreviewImage(this.video.currentTime);
+            this.previewNumber += 1;
+            this.generPreviewImage(this.previewNumber);
         });
     }
 
-    generPreviewImage (time) {
-        if (time !== this.video.currentTime) {return;}
+    generPreviewImage (number) {
+        if (number !== this.previewNumber) {return;}
         if (!this.isMouseHoverPbar) {return;}
+        this.previewDispaly(true);
+        if (!this.isPreViewShow) {return;}
         const ctx = this.previewCanvas.getContext('2d');
         ctx.drawImage(this.previewVideo, 0, 0,
             this.previewWrapper.offsetWidth,
             this.previewWrapper.offsetHeight);
-        this.previewDispaly(true);
     }
 
 
@@ -1372,7 +1384,7 @@ class DPlayer {
     notice (text, time = 2000, opacity = 0.8) {
         const noticeEle = this.element.getElementsByClassName('dplayer-notice')[0];
         noticeEle.innerHTML = text;
-        noticeEle.style.opacity = 1;
+        noticeEle.style.opacity = opacity;
         if (this.noticeTime) {
             clearTimeout(this.noticeTime);
         }
