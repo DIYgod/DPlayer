@@ -3,9 +3,7 @@ const svg = require('./svg.js');
 const html = {
     main: (option, index, tran) => {
         let videos = ``;
-        for (let i = 0; i < option.video.url.length; i++) {
-            videos += html.video(i === 0, option.video.pic, option.screenshot, option.video.url.length ? 'metadata' : option.preload, option.video.url[i]);
-        }
+        videos += html.video(true, option.video.pic, option.screenshot, option.preload, option.video.url);
         return `
         <div class="dplayer-mask"></div>
         <div class="dplayer-video-wrap">

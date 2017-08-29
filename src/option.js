@@ -19,6 +19,7 @@ module.exports = (option) => {
         preload: 'auto',
         volume: '0.7',
         apiBackend: defaultApiBackend,
+        video: {},
         contextmenu: [
             {
                 text: '关于作者',
@@ -38,9 +39,6 @@ module.exports = (option) => {
         if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
             option[defaultKey] = defaultOption[defaultKey];
         }
-    }
-    if (Object.prototype.toString.call(option.video.url) !== '[object Array]') {
-        option.video.url = [option.video.url];
     }
     if (option.video && !option.video.hasOwnProperty('type')) {
         option.video.type = 'auto';

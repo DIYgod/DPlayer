@@ -113,10 +113,12 @@
             video: {
                 quality: [{
                     name: 'HD',
-                    url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?1'
+                    url: 'http://devtest.qiniudn.com/若能绽放光芒5.m3u8',
+                    type: 'hls'
                 }, {
                     name: 'SD',
-                    url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?2'
+                    url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
+                    type: 'normal'
                 }],
                 defaultQuality: 0,
                 pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
@@ -137,6 +139,15 @@
                 }
             });
         </script>
+        <div id="dplayer8"></div>
+        <script>
+            var dp8 = new DPlayer({
+                element: document.getElementById('dplayer8')
+            });
+            var hls = new Hls();
+            hls.loadSource('http://devtest.qiniudn.com/若能绽放光芒5.m3u8');
+            hls.attachMedia(dp8.video);
+        </script>
     </div>
 
     <h2 id="flv-support">FLV support</h2>
@@ -150,6 +161,18 @@
                     type: 'flv'
                 }
             });
+        </script>
+        <div id="dplayer7"></div>
+        <script>
+            var dp7 = new DPlayer({
+                element: document.getElementById('dplayer7')
+            });
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.flv'
+            });
+            flvPlayer.attachMediaElement(dp7.video);
+            flvPlayer.load();
         </script>
     </div>
 
