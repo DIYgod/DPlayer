@@ -1,37 +1,68 @@
-const tranZH = {
-    'Danmaku is loading': '弹幕加载中',
-    'Top': '顶部',
-    'Bottom': '底部',
-    'Rolling': '滚动',
-    'Input danmaku, hit Enter': '输入弹幕，回车发送',
-    'About author': '关于作者',
-    'DPlayer feedback': '播放器意见反馈',
-    'About DPlayer': '关于 DPlayer 播放器',
-    'Loop': '洗脑循环',
-    'Speed': '速度',
-    'Opacity for danmaku': '弹幕透明度',
-    'Normal': '正常',
-    'Please input danmaku content!': '要输入弹幕内容啊喂！',
-    'Set danmaku color': '设置弹幕颜色',
-    'Set danmaku type': '设置弹幕类型',
-    'Danmaku': '弹幕',
-    'This video fails to load': '视频加载失败',
-    'Switching to': '正在切换至',
-    'Switched to': '已经切换至',
-    'quality': '画质',
-    'FF to': '快进至',
-    'REW to': '快退至',
-    'Volume': '音量'
-};
+/*
+W3C def language codes is :
+    language-code = primary-code ( "-" subcode )
+        primary-code    ISO 639-1   ( the names of language with 2 code )
+        subcode         ISO 3166    ( the names of countries )
+
+NOTE: use lowercase to prevent case typo from user! 
+Use this as shown below..... */
 
 module.exports = function (lang) {
     this.lang = lang;
     this.tran = (text) => {
-        if (this.lang === 'en') {
+        if (tranTxt[this.lang]) {
+            return tranTxt[this.lang][text];
+        }
+        else {
             return text;
         }
-        else if (this.lang === 'zh') {
-            return tranZH[text];
-        }
     };
+};
+
+// add translation text here
+const tranTxt = {
+    "zh-cn" : {
+        'Danmaku is loading': '弹幕加载中',
+        'Top': '顶部',
+        'Bottom': '底部',
+        'Rolling': '滚动',
+        'Input danmaku, hit Enter': '输入弹幕，回车发送',
+        'About author': '关于作者',
+        'DPlayer feedback': '播放器意见反馈',
+        'About DPlayer': '关于 DPlayer 播放器',
+        'Loop': '洗脑循环',
+        'Speed': '速度',
+        'Opacity for danmaku': '弹幕透明度',
+        'Normal': '正常',
+        'Please input danmaku content!': '要输入弹幕内容啊喂！',
+        'Set danmaku color': '设置弹幕颜色',
+        'Set danmaku type': '设置弹幕类型',
+        'Danmaku': '弹幕',
+        'This video fails to load': '视频加载失败',
+        'Switching to': '正在切换至',
+        'Switched to': '已经切换至',
+        'quality': '画质',
+    },
+    "zh-tw" : {
+        'Danmaku is loading': '彈幕加載中',
+        'Top': '頂部',
+        'Bottom': '底部',
+        'Rolling': '滾動',
+        'Input danmaku, hit Enter': '輸入彈幕，Enter 發送',
+        'About author': '關於作者',
+        'DPlayer feedback': '播放器意見反饋',
+        'About DPlayer': '關於 DPlayer 播放器',
+        'Loop': '循環播放',
+        'Speed': '速度',
+        'Opacity for danmaku': '彈幕透明度',
+        'Normal': '正常',
+        'Please input danmaku content!': '請輸入彈幕内容啊！',
+        'Set danmaku color': '設置彈幕顏色',
+        'Set danmaku type': '設置彈幕類型',
+        'Danmaku': '彈幕',
+        'This video fails to load': '視頻加載失敗',
+        'Switching to': '正在切換至',
+        'Switched to': '已經切換至',
+        'quality': '畫質',
+    }
 };

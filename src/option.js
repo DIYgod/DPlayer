@@ -13,7 +13,7 @@ module.exports = (option) => {
         autoplay: false,
         theme: '#b7daff',
         loop: false,
-        lang: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
+        lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
         hotkey: true,
         preload: 'auto',
@@ -51,6 +51,10 @@ module.exports = (option) => {
 
     if (option.video.quality) {
         option.video.url = [option.video.quality[option.video.defaultQuality].url];
+    }
+
+    if (option.lang) {
+        option.lang.toLowerCase();
     }
 
     return option;

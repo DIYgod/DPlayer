@@ -13,7 +13,7 @@ const html = {
             ${option.logo ? `
             <div class="dplayer-logo"><img src="${option.logo}"></div>
             ` : ``}
-            <div class="dplayer-danmaku">
+            <div class="dplayer-danmaku" style="${option.danmaku ? html.danmakumargin(option.danmaku.margin) : ``}">
                 <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
             </div>
             <div class="dplayer-bezel">
@@ -172,6 +172,16 @@ const html = {
         </div>
         ${html.contextmenuList(option.contextmenu)}
         <div class="dplayer-notice"></div>`;
+    },
+
+    danmakumargin: (margin) => {
+        let result = '';
+        if (margin) {
+            for (const key in margin) {
+                result += `${key}:${margin[key]};`;
+            }
+        }
+        return result;
     },
 
     contextmenuList: (contextmenu) => {
