@@ -13,7 +13,7 @@ module.exports = (option) => {
         autoplay: false,
         theme: '#b7daff',
         loop: false,
-        lang: (navigator.language || navigator.browserLanguage).toLowerCase().indexOf('zh-cn') !== -1 ? 'zh-cn' : 'en-us',
+        lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
         hotkey: true,
         preload: 'auto',

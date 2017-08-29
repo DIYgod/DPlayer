@@ -10,14 +10,12 @@ Use this as shown below..... */
 module.exports = function (lang) {
     this.lang = lang;
     this.tran = (text) => {
-        if (this.lang === 'en-us') {
+        if (tranTxt[this.lang]) {
+            return tranTxt[this.lang][text];
+        }
+        else {
             return text;
         }
-        else if (
-            // add language-code list here
-            this.lang === 'zh-cn' ||
-            this.lang === 'zh-tw'
-        ) { return tranTxt[this.lang][text]; }
     };
 };
 
