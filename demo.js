@@ -109,10 +109,12 @@ function initPlayers () {
         video: {
             quality: [{
                 name: 'HD',
-                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?1'
+                url: 'http://devtest.qiniudn.com/若能绽放光芒5.m3u8',
+                type: 'hls'
             }, {
                 name: 'SD',
-                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4?2'
+                url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
+                type: 'normal'
             }],
             defaultQuality: 0,
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png'
