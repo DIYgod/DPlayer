@@ -1104,7 +1104,6 @@ class DPlayer {
             const px = cumulativeOffset(pbar).left;
             const tx = clientX - px;
             const time = this.video.duration * (tx / pbar.offsetWidth);
-            timeTips.innerText = utils.secondToTime(time);
             timeTips.style.left = `${(tx - 20)}px`;
             this.previewWrapper.style.left = `${(tx - this.previewWrapper.offsetWidth / 2)}px`;
 
@@ -1113,10 +1112,16 @@ class DPlayer {
             case 'mouseover':
             case 'mousemove':
                 this.isMouseHoverPbar = true;
-                this.setPreviewSourceAndFrame({
-                    url: this.video.src,
-                    time
-                });
+                if (this.previewTime !== parseInt(time)) {
+                    timeTips.innerText = utils.secondToTime(time);
+                    this.previewTime = parseInt(time);
+                    this.setPreview && clearTimeout(this.setPreview);
+                    this.setPreview = setTimeout(() => {
+                        this.setPreviewSourceAndFrame({
+                            time: parseInt(time)
+                        });
+                    }, 500);
+                }
                 this.timeTipsDisplay(true, timeTips);
                 break;
             case 'mouseleave':
@@ -1146,11 +1151,11 @@ class DPlayer {
     }
 
     initVideoPreview () {
-        this.previewVideo = document.createElement("video");
+        this.previewVideo = document.createElement('video');
         this.previewWrapper = this.element.getElementsByClassName('dplayer-bar-preview')[0];
         this.previewCanvas = this.element.getElementsByClassName('dplayer-bar-preview-canvas')[0];
 
-        this.previewVideo.preload = 'auto';
+        this.previewVideo.preload = 'metadata';
         const resize = () => {
             const w = this.element.offsetWidth / 4;
             const h = this.element.offsetHeight / 4;
