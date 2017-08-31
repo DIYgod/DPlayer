@@ -6,6 +6,7 @@ import handleOption from './option';
 import i18n from './i18n';
 import html from './html';
 import Danmaku from './danmaku';
+import Thumbnails from './thumbnails';
 
 let index = 0;
 
@@ -244,12 +245,11 @@ class DPlayer {
             this.seek(parseFloat(bar.playedBar.style.width) / 100 * this.video.duration);
         });
 
-        this.initVideoPreview();
-        this.isPreViewShow = false;
+        if (this.option.video.thumbnails) {
+            this.initThumbnails();
+        }
         this.isTimeTipsShow = true;
-        this.isMouseHoverPbar = false;
-        this.mouseHandler = this.mouseHandler(
-            pbar, pbarTimeTips).bind(this);
+        this.mouseHandler = this.mouseHandler(pbar, pbarTimeTips).bind(this);
         pbar.addEventListener('mousemove', this.mouseHandler);
         pbar.addEventListener('mouseover', this.mouseHandler);
         pbar.addEventListener('mouseenter', this.mouseHandler);
@@ -1096,31 +1096,23 @@ class DPlayer {
             const { clientX } = e;
             const px = cumulativeOffset(pbar).left;
             const tx = clientX - px;
+            if (tx < 0 || tx > pbar.offsetWidth) {
+                return;
+            }
             const time = this.video.duration * (tx / pbar.offsetWidth);
             timeTips.style.left = `${(tx - 20)}px`;
-            this.previewWrapper.style.left = `${(tx - this.previewWrapper.offsetWidth / 2)}px`;
 
             switch (e.type) {
             case 'mouseenter':
             case 'mouseover':
             case 'mousemove':
-                this.isMouseHoverPbar = true;
-                if (this.previewTime !== parseInt(time)) {
-                    timeTips.innerText = utils.secondToTime(time);
-                    this.previewTime = parseInt(time);
-                    this.setPreview && clearTimeout(this.setPreview);
-                    this.setPreview = setTimeout(() => {
-                        this.setPreviewSourceAndFrame({
-                            time: parseInt(time)
-                        });
-                    }, 500);
-                }
+                this.thumbnails && this.thumbnails.show(tx);
+                timeTips.innerText = utils.secondToTime(time);
                 this.timeTipsDisplay(true, timeTips);
                 break;
             case 'mouseleave':
             case 'mouseout':
-                this.isMouseHoverPbar = false;
-                this.previewDispaly(false);
+                this.thumbnails && this.thumbnails.hide();
                 this.timeTipsDisplay(false, timeTips);
                 break;
             }
@@ -1143,72 +1135,13 @@ class DPlayer {
         }
     }
 
-    initVideoPreview () {
-        this.previewVideo = document.createElement('video');
-        this.previewWrapper = this.element.getElementsByClassName('dplayer-bar-preview')[0];
-        this.previewCanvas = this.element.getElementsByClassName('dplayer-bar-preview-canvas')[0];
+    initThumbnails () {
+        this.thumbnails = new Thumbnails(this.element.getElementsByClassName('dplayer-bar-preview')[0], this.element.getElementsByClassName('dplayer-bar-wrap')[0].offsetWidth, this.option.video.thumbnails);
 
-        this.previewVideo.preload = 'metadata';
-        const resize = () => {
-            const w = this.element.offsetWidth / 4;
-            const h = this.element.offsetHeight / 4;
-            this.previewWrapper.style.width = `${w}px`;
-            this.previewWrapper.style.height = `${h}px`;
-            this.previewWrapper.style.top = `${-h + 2}px`;
-            this.previewCanvas.width = w;
-            this.previewCanvas.height = h;
-        };
-        resize();
         this.video.addEventListener('loadedmetadata', () => {
-            resize();
+            this.thumbnails.resize(160, 90);
+            // this.thumbnails.resize(this.element.offsetWidth / 4, this.element.offsetHeight / 4);
         });
-
-        this.setPreviewSourceAndFrame({
-            url: this.video.src, time: 0
-        });
-        this.bindPreviewEvent();
-    }
-
-    setPreviewSourceAndFrame ({ url, time }) {
-        if (url) {
-            this.previewVideo.src = url;
-        }
-        if (time) {
-            this.previewVideo.currentTime = time;
-        }
-    }
-
-    bindPreviewEvent () {
-        this.previewNumber = 0;
-        this.previewVideo.addEventListener('seeked', () => {
-            this.previewNumber += 1;
-            this.generPreviewImage(this.previewNumber);
-        });
-    }
-
-    generPreviewImage (number) {
-        if (number !== this.previewNumber) {return;}
-        if (!this.isMouseHoverPbar) {return;}
-        this.previewDispaly(true);
-        if (!this.isPreViewShow) {return;}
-        const ctx = this.previewCanvas.getContext('2d');
-        ctx.drawImage(this.previewVideo, 0, 0,
-            this.previewWrapper.offsetWidth,
-            this.previewWrapper.offsetHeight);
-    }
-
-
-    previewDispaly (show) {
-        if (show) {
-            if (this.isPreViewShow) {return;}
-            if (!this.isMouseHoverPbar) {return;}
-            this.previewWrapper.classList.remove('hidden');
-            this.isPreViewShow = true;
-        } else {
-            if (!this.isPreViewShow) {return;}
-            this.previewWrapper.classList.add('hidden');
-            this.isPreViewShow = false;
-        }
     }
 
     notice (text, time = 2000, opacity = 0.8) {

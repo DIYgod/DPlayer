@@ -10,7 +10,7 @@ Use this as shown below..... */
 module.exports = function (lang) {
     this.lang = lang;
     this.tran = (text) => {
-        if (tranTxt[this.lang]) {
+        if (tranTxt[this.lang] && tranTxt[this.lang][text]) {
             return tranTxt[this.lang][text];
         }
         else {
@@ -42,6 +42,8 @@ const tranTxt = {
         'Switching to': '正在切换至',
         'Switched to': '已经切换至',
         'quality': '画质',
+        'FF to': '快进至',
+        'REW to': '快退至'
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',
@@ -64,5 +66,7 @@ const tranTxt = {
         'Switching to': '正在切換至',
         'Switched to': '已經切換至',
         'quality': '畫質',
+        'FF to': '快進至',
+        'REW to': '快退至'
     }
 };

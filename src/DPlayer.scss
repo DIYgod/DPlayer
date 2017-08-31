@@ -378,10 +378,8 @@
                 position: absolute;
                 background: #fff;
                 pointer-events: none;
-
-                &.hidden {
-                    visibility: hidden;
-                }
+                display: none;
+                background-size: auto 100%;
             }
 
             .dplayer-bar-preview-canvas {
