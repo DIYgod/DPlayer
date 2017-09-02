@@ -84,32 +84,94 @@ var dp = new DPlayer({
 ### API
 
 + `dp.play()`
+
     Resume play
+
 + `dp.seek(time)`
+
     Set currentTime
+
 + `dp.pause()`
+
     Pause
+
 + `dp.toggle()`
+
     Toggle between play and pause
-+ `dp.on(event, handler)`             // Event binding
-+ `dp.switchVideo(video, danmaku)`    // Switch to a new video, the format of `video` and `danmaku` is the same as option
-+ `dp.danmaku.push(text, color, type)` // Push a custom danmaku into DPlayer in real time, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this custom danmaku will not be saved to back-end automatically
-+ `dp.notice(text, time)`             // Show notice in lower left
-+ `dp.switchQuality(index)`           // Switch quality
-+ `dp.destroy()`                      // Destroy player
-+ `dp.video`                          // Native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
- + `dp.video.currentTime`             // Returns the current playback position
- + `dp.video.loop`                    // Returns whether the video should start over again when finished
- + `dp.vidio.paused`                  // Returns whether the video paused
+
++ `dp.on(event, handler)`
+
+    Event binding
+
++ `dp.switchVideo(video, danmaku)`
+
+    Switch to a new video, the format of `video` and `danmaku` is the same as option
+
++ `dp.danmaku.push(text, color, type)`
+
+    Push a custom danmaku into DPlayer in real time, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this custom danmaku will not be saved to back-end automatically
+
++ `dp.notice(text, time)`
+
+    Show notice in lower left
+
++ `dp.switchQuality(index)`
+
+    Switch quality
+
++ `dp.destroy()`
+
+    Destroy player
+
++ `dp.video`
+
+    Native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
+
+ + `dp.video.currentTime`
+
+    Returns the current playback position
+
+ + `dp.video.loop`
+
+    Returns whether the video should start over again when finished
+
+ + `dp.vidio.paused`
+
+    Returns whether the video paused
+
  + Most [native api](http://www.w3schools.com/tags/ref_av_dom.asp)
-+ `dp.danmaku`                        // Danmaku
- + `dp.danmaku.send(text, color, type)` // Submit a new danmaku to back end, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this danmaku will not be submit to back end
- + `dp.danmaku.opacity(percentage)`   // Set danmaku opacity
- + `dp.danmaku.draw(text, color, type)`  // Draw a new danmaku in real time
- + `dp.danmaku.clear()`               // Clear danmaku
- + `dp.danmaku.resize()`              // After container resized
- + `dp.danmaku.hide()`                // Hide danmaku
- + `dp.danmaku.show()`                // Show danmaku
+
++ `dp.danmaku`
+
+    Danmaku
+
+ + `dp.danmaku.send(text, color, type)`
+
+    Submit a new danmaku to back end, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this danmaku will not be submit to back end
+
+ + `dp.danmaku.opacity(percentage)`
+
+    Set danmaku opacity
+
+ + `dp.danmaku.draw(text, color, type)`
+
+    Draw a new danmaku in real time
+
+ + `dp.danmaku.clear()`
+
+    Clear danmaku
+
+ + `dp.danmaku.resize()`
+
+    After container resized
+
+ + `dp.danmaku.hide()`
+
+    Hide danmaku
+
+ + `dp.danmaku.show()`
+ 
+    Show danmaku
 
 
 ### Event binding
