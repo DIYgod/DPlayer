@@ -34,7 +34,7 @@ var dp = new DPlayer({
 
 ### Options
 
-```JS
+```js
 var dp = new DPlayer({
     element: document.getElementById('player1'),                       // Optional, player element
     autoplay: false,                                                   // Optional, autoplay video, not supported by mobile browsers
@@ -83,10 +83,14 @@ var dp = new DPlayer({
 
 ### API
 
-+ `dp.play()`                         // Resume play
-+ `dp.seek(time)`                     // Set currentTime
-+ `dp.pause()`                        // Pause
-+ `dp.toggle()`                       // Toggle between play and pause
++ `dp.play()`
+    Resume play
++ `dp.seek(time)`
+    Set currentTime
++ `dp.pause()`
+    Pause
++ `dp.toggle()`
+    Toggle between play and pause
 + `dp.on(event, handler)`             // Event binding
 + `dp.switchVideo(video, danmaku)`    // Switch to a new video, the format of `video` and `danmaku` is the same as option
 + `dp.danmaku.push(text, color, type)` // Push a custom danmaku into DPlayer in real time, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this custom danmaku will not be saved to back-end automatically
