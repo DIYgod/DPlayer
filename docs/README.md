@@ -1,5 +1,7 @@
 # DPlayer
 
+> [GitHub](https://github.com/MoePlayer/DPlayer) | [Demo](http://dplayer.js.org)
+
 ## Install
 
 ```
@@ -170,7 +172,7 @@ var dp = new DPlayer({
     Hide danmaku
 
  + `dp.danmaku.show()`
- 
+
     Show danmaku
 
 
