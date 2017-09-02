@@ -165,7 +165,7 @@ const html = {
                 </div>
             </div>
         </div>
-        ${html.contextmenuList(option.contextmenu)}
+        ${html.contextmenuList(option.contextmenu, tran)}
         <div class="dplayer-notice"></div>`;
     },
 
@@ -179,10 +179,10 @@ const html = {
         return result;
     },
 
-    contextmenuList: (contextmenu) => {
+    contextmenuList: (contextmenu, tran) => {
         let result = '<div class="dplayer-menu">';
         for (let i = 0; i < contextmenu.length; i++) {
-            result += `<div class="dplayer-menu-item"><span class="dplayer-menu-label"><a target="_blank" href="${contextmenu[i].link}">${contextmenu[i].text}</a></span></div>`;
+            result += `<div class="dplayer-menu-item"><a target="_blank" href="${contextmenu[i].link}">${tran(contextmenu[i].text)}</a></div>`;
         }
         result += '</div>';
 

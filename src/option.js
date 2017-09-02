@@ -22,16 +22,12 @@ module.exports = (option) => {
         video: {},
         contextmenu: [
             {
-                text: '关于作者',
+                text: 'About author',
                 link: 'http://diygod.me'
             },
             {
-                text: '播放器意见反馈',
+                text: 'DPlayer feedback',
                 link: 'https://github.com/DIYgod/DPlayer/issues'
-            },
-            {
-                text: '关于 DPlayer 播放器',
-                link: 'https://github.com/DIYgod/DPlayer'
             }
         ]
     };
@@ -54,6 +50,11 @@ module.exports = (option) => {
     if (option.lang) {
         option.lang.toLowerCase();
     }
+
+    option.contextmenu.push({
+        text: 'About DPlayer',
+        link: 'https://github.com/DIYgod/DPlayer'
+    });
 
     return option;
 };

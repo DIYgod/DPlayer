@@ -967,7 +967,6 @@
                 width: 32px;
                 height: 100%;
                 text-align: center;
-                display: inline-block;
                 font-size: 0;
                 vertical-align: middle;
                 float: right;
@@ -1048,7 +1047,6 @@
 
         .dplayer-menu-item {
             height: 30px;
-            padding: 5px 10px;
             box-sizing: border-box;
             cursor: pointer;
 
@@ -1056,11 +1054,18 @@
                 background-color: rgba(255,255,255,.1);
             }
 
-            .dplayer-menu-label a {
+            a {
+                display: inline-block;
+                padding: 0 10px;
+                line-height: 30px;
                 color: #eee;
                 font-size: 13px;
                 display: inline-block;
                 vertical-align: middle;
+
+                &:hover {
+                    text-decoration: none;
+                }
             }
         }
     }
