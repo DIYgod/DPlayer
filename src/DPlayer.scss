@@ -88,6 +88,8 @@
     }
 
     &.dplayer-hide-controller {
+        cursor: none;
+
         .dplayer-controller-mask {
             opacity: 0;
             transform: translateY(100%);
