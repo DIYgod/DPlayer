@@ -148,7 +148,7 @@ class Danmaku {
         const getTunnel = (ele, type, width) => {
             const tmp = danWidth / danSpeed(width);
 
-            for (let i = 0; ; i++) {
+            for (let i = 0; this.options.unlimited || i < itemY; i++) {
                 const item = this.danTunnel[type][i + ''];
                 if (item && item.length) {
                     if (type !== 'right') {
@@ -176,6 +176,7 @@ class Danmaku {
                     return i % itemY;
                 }
             }
+            return -1;
         };
 
         if (Object.prototype.toString.call(dan) !== '[object Array]') {
@@ -207,29 +208,41 @@ class Danmaku {
             });
 
             const itemWidth = this._measure(dan[i].text);
+            let tunnel;
 
             // adjust
             switch (dan[i].type) {
             case 'right':
-                item.style.width = itemWidth + 1 + 'px';
-                item.style.top = itemHeight * getTunnel(item, dan[i].type, itemWidth) + 'px';
-                item.style.transform = `translateX(-${danWidth}px)`;
+                tunnel = getTunnel(item, dan[i].type, itemWidth);
+                if (tunnel >= 0) {
+                    item.style.width = itemWidth + 1 + 'px';
+                    item.style.top = itemHeight * tunnel + 'px';
+                    item.style.transform = `translateX(-${danWidth}px)`;
+                }
                 break;
             case 'top':
-                item.style.top = itemHeight * getTunnel(item, dan[i].type) + 'px';
+                tunnel = getTunnel(item, dan[i].type);
+                if (tunnel >= 0) {
+                    item.style.top = itemHeight * tunnel + 'px';
+                }
                 break;
             case 'bottom':
-                item.style.bottom = itemHeight * getTunnel(item, dan[i].type) + 'px';
+                tunnel = getTunnel(item, dan[i].type);
+                if (tunnel >= 0) {
+                    item.style.bottom = itemHeight * tunnel + 'px';
+                }
                 break;
             default:
                 console.error(`Can't handled danmaku type: ${dan[i].type}`);
             }
 
-            // move
-            item.classList.add(`dplayer-danmaku-move`);
+            if (tunnel >= 0) {
+                // move
+                item.classList.add(`dplayer-danmaku-move`);
 
-            // insert
-            docFragment.appendChild(item);
+                // insert
+                docFragment.appendChild(item);
+            }
         }
 
         this.container.appendChild(docFragment);

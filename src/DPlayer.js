@@ -103,6 +103,7 @@ class DPlayer {
                 borderColor: this.option.theme,
                 height: this.arrow ? 24 : 30,
                 time: () => this.video.currentTime,
+                unlimited: this.option.danmaku.unlimited,
                 api: {
                     id: this.option.danmaku.id,
                     address: this.option.danmaku.api,
