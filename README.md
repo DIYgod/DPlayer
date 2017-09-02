@@ -82,6 +82,7 @@ var dp = new DPlayer({
 
 - [DPlayer-backend](https://github.com/MoePlayer/DPlayer-backend)
 - [DPlayer-data(weekly backup for api.prprpr.me/dplayer)](https://github.com/MoePlayer/DPlayer-data)
+- [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
 - [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
 - [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
