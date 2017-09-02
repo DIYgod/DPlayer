@@ -920,9 +920,10 @@ class DPlayer {
      * @param {Object} danmaku - new danmaku info
      */
     switchVideo (video, danmakuAPI) {
+        this.pause();
         this.video.poster = video.pic ? video.pic : '';
         this.video.src = video.url;
-        this.pause();
+        this.initMSE(this.video, video.type || 'auto');
         if (danmakuAPI) {
             this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'block';
             this.updateBar('played', 0, 'width');
@@ -942,7 +943,7 @@ class DPlayer {
         }
     }
 
-    initVideo (video, type) {
+    initMSE (video, type) {
         this.type = type;
         if (this.type === 'auto') {
             if (/m3u8(#|\?|$)/i.exec(video.src)) {
@@ -973,6 +974,10 @@ class DPlayer {
             flvPlayer.attachMediaElement(video);
             flvPlayer.load();
         }
+    }
+
+    initVideo (video, type) {
+        this.initMSE(video, type);
 
         /**
          * video events
