@@ -64,7 +64,8 @@
     element: document.getElementById('dplayer'),
     video: {
         url: 'demo.mp4',
-        pic: 'demo.png'
+        pic: 'demo.jpg',
+        thumbnails: 'thumbnails.jpg'
     },
     danmaku: {
         id: 'demo',
@@ -94,7 +95,8 @@
                     dp2.switchVideo({
                         url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
                         pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
-                        type: 'auto',
+                        thumbnails: 'http://devtest.qiniudn.com/thumbnails.jpg',
+                        type: 'auto'
                     },
                         {
                             id: '9E2E3368B56CDBB42',
@@ -128,6 +130,7 @@
     video: {
         url: 'demo.mp4',
         pic: 'demo.png',
+        thumbnails: 'thumbnails.jpg'
         type: 'auto'
     },
     danmaku: {
@@ -135,7 +138,11 @@
         api: 'https://api.prprpr.me/dplayer/',
         token: 'demo',
         maximum: 3000,
-        user: 'DIYgod'
+        user: 'DIYgod',
+        margin: {
+            bottom: '15%'
+        },
+        unlimited: true
     },
     contextmenu: [
         {

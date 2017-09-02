@@ -66,6 +66,7 @@ function initPlayers () {
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+            thumbnails: 'http://devtest.qiniudn.com/thumbnails.jpg'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
@@ -86,14 +87,19 @@ function initPlayers () {
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
+            thumbnails: 'http://devtest.qiniudn.com/thumbnails.jpg',
             type: 'auto'
         },
         danmaku: {
-            id: '9E2E3368B56CDBB42',
+            id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
             token: 'tokendemo',
             maximum: 3000,
-            user: 'DIYgod'
+            user: 'DIYgod',
+            margin: {
+                bottom: '15%'
+            },
+            unlimited: true
         },
         contextmenu: [
             {

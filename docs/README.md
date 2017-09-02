@@ -46,9 +46,10 @@ var dp = new DPlayer({
     preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
     logo: 'logo.png',                                                  // Optional, player logo, showing in top left corner
     volume: 0.7,                                                       // Optional, default volume, not work after user set volume themselves
-    video: {                                                           // Required, video info
+    video: {                                                           // Optional, video info
         url: 'dplayer.mp4',                                            // Required, video link
         pic: 'dplayer.png',                                            // Optional, video poster
+        thumbnails: 'thumbnails.jpg',                                  // Optional, video thumbnails, generate with https://github.com/MoePlayer/DPlayer-thumbnails
         type: 'auto'                                                   // Optional, video type, `flv` for flv format, `hls` for m3u8 format, `normal` for mp4 ogg and webm format, `auto` for automatic detection, default: `auto`
     },
     danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
@@ -57,7 +58,11 @@ var dp = new DPlayer({
         token: 'tokendemo',                                            // Optional, danmaku token for api
         maximum: 1000,                                                 // Optional, maximum quantity of danmaku
         addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142'] // Optional, additional danmaku, see: `Bilibili 弹幕支持`,
-        user: 'DIYgod'                                                 // Optional, current user's name, default: 'DIYgod'
+        user: 'DIYgod'                                                 // Optional, current user's name, default: 'DIYgod',
+        margin: {                                                      // Optional, have a white space
+            bottom: '15%'
+        },
+        unlimited: true                                                // Optional, unlimited amount and allow overlap
     },
     contextmenu: [                                                     // Optional, custom contextmenu
         {
