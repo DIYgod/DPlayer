@@ -98,18 +98,18 @@ var dp = new DPlayer({
 
 - [Anotherhome](https://www.anotherhome.net/2648)
 - [嘀哩嘀哩](http://www.dilidili.wang/)
-- [息萌](http://ximeng.co/)
-- [TALD](https://github.com/maysrp/TALD)
-- [webdir](https://github.com/maysrp/webdir)
 - [0xBBC](https://blog.0xbbc.com/2016/09/dplayer-for-wordpress/)
 - [树洞](https://aoaoao.me/1031.html)
 - [FGHRSH的博客](https://www.fghrsh.net/post/57.html)
 - [银色子弹](https://www.sbsub.com/)
 - [妖气山弹幕网](http://www.m173.tv/)
 - [御宅同萌 – 聖域](https://wp.acg-moe.com/)
-- [動漫御宅堂](http://syu65406.tw/anime/)
 - [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
 - [otomads](https://otomads.com/)
+- [JA 日本動漫交流平台Ω](http://jac-animation-net.blogspot.tw/)
+- [九妖萌弹幕动漫网](http://www.91moe.com/)
+- [爱弹幕](https://www.idanmu.pw/)
+- [萌心次元](https://moxacg.moe/)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## CDN
