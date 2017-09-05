@@ -1,3 +1,4 @@
+/* global DPLAYER_VERSION GIT_HASH */
 const defaultApiBackend = require('./api.js');
 
 module.exports = (option) => {
@@ -20,16 +21,7 @@ module.exports = (option) => {
         volume: '0.7',
         apiBackend: defaultApiBackend,
         video: {},
-        contextmenu: [
-            {
-                text: 'About author',
-                link: 'http://diygod.me'
-            },
-            {
-                text: 'DPlayer feedback',
-                link: 'https://github.com/DIYgod/DPlayer/issues'
-            }
-        ]
+        contextmenu: []
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -51,10 +43,19 @@ module.exports = (option) => {
         option.lang.toLowerCase();
     }
 
-    option.contextmenu.push({
+    option.contextmenu = option.contextmenu.concat([{
+        text: 'About author',
+        link: 'https://www.anotherhome.net/'
+    }, {
         text: 'About DPlayer',
-        link: 'https://github.com/DIYgod/DPlayer'
-    });
+        link: 'https://github.com/MoePlayer/DPlayer'
+    }, {
+        text: 'DPlayer feedback',
+        link: 'https://github.com/DIYgod/DPlayer/issues'
+    }, {
+        text: `DPlayer ${DPLAYER_VERSION} ${GIT_HASH}`,
+        link: 'https://github.com/MoePlayer/DPlayer/commits/master'
+    }]);
 
     return option;
 };

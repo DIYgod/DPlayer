@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 const path = require('path');
 const webpack = require('webpack');
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
+const gitRevisionPlugin = new GitRevisionPlugin();
 
 module.exports = {
 
@@ -93,7 +95,8 @@ module.exports = {
     plugins: [
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
-            DPLAYER_VERSION: `"${require('../package.json').version}"`
+            DPLAYER_VERSION: `"${require('../package.json').version}"`,
+            GIT_HASH: JSON.stringify(gitRevisionPlugin.version())
         })
     ],
 

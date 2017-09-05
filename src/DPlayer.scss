@@ -1033,9 +1033,9 @@
 
     .dplayer-menu {
         position: absolute;
-        width: 150px;
+        width: 170px;
         border-radius: 2px;
-        background: rgba(28, 28, 28, 0.9);
+        background: rgba(28, 28, 28, 0.85);
         padding: 5px 0;
         overflow: hidden;
         z-index: 3;
@@ -1062,6 +1062,11 @@
                 font-size: 13px;
                 display: inline-block;
                 vertical-align: middle;
+                width: 100%;
+                box-sizing: border-box;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
 
                 &:hover {
                     text-decoration: none;
