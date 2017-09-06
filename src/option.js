@@ -40,7 +40,7 @@ module.exports = (option) => {
     }
 
     if (option.lang) {
-        option.lang.toLowerCase();
+        option.lang = option.lang.toLowerCase();
     }
 
     option.contextmenu = option.contextmenu.concat([{
