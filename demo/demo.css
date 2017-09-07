@@ -88,6 +88,18 @@ summary {
     margin-bottom: 10px;
 }
 
+#events {
+    font-size: 12px;
+    margin-top: 5px;
+    height: 120px;
+    overflow: scroll;
+}
+
+#events p {
+    margin: 0;
+    line-height: 17px;
+}
+
 /* github-corner */
 .github-corner:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out

@@ -11,6 +11,7 @@ class Danmaku {
         this.dan = [];
         this.showing = true;
         this._opacity = this.options.opacity;
+        this.events = this.options.events;
 
         this.load();
     }
@@ -25,6 +26,7 @@ class Danmaku {
         }
         const endpoints = (this.options.api.addition || []).slice(0);
         endpoints.push(apiurl);
+        this.events && this.events.trigger('danmaku_load_start', endpoints);
 
         this._readAllEndpoints(endpoints, (results) => {
             this.dan = [].concat.apply([], results).sort((a, b) => a.time - b.time);
@@ -33,6 +35,8 @@ class Danmaku {
             });
 
             this.options.callback();
+
+            this.events && this.events.trigger('danmaku_load_end');
         });
     }
 
@@ -94,6 +98,8 @@ class Danmaku {
             border: `2px solid ${this.options.borderColor}`
         };
         this.draw(danmaku);
+
+        this.events && this.events.trigger('danmaku_send', danmakuData);
     }
 
     frame () {
@@ -119,6 +125,8 @@ class Danmaku {
             }
             this._opacity = percentage;
             localStorage.setItem('danmaku-opacity', this._opacity);
+
+            this.events && this.events.trigger('danmaku_opacity', this._opacity);
         }
         return this._opacity;
     }
@@ -285,6 +293,8 @@ class Danmaku {
         };
         this.danIndex = 0;
         this.options.container.innerHTML = '';
+
+        this.events && this.events.trigger('danmaku_clear');
     }
 
     htmlEncode (str) {
@@ -309,12 +319,16 @@ class Danmaku {
         this.showing = false;
         this.pause();
         this.clear();
+
+        this.events && this.events.trigger('danmaku_hide');
     }
 
     show () {
         this.seek();
         this.showing = true;
         this.play();
+
+        this.events && this.events.trigger('danmaku_show');
     }
 }
 

@@ -7,6 +7,7 @@ import i18n from './i18n';
 import html from './html';
 import Danmaku from './danmaku';
 import Thumbnails from './thumbnails';
+import Events from './events';
 
 let index = 0;
 
@@ -30,17 +31,7 @@ class DPlayer {
 
         this.tran = new i18n(this.option.lang).tran;
 
-        // define DPlayer events
-        const eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
-        this.event = {};
-        for (let i = 0; i < eventTypes.length; i++) {
-            this.event[eventTypes[i]] = [];
-        }
-        this.trigger = (type) => {
-            for (let i = 0; i < this.event[type].length; i++) {
-                this.event[type][i]();
-            }
-        };
+        this.events = new Events();
 
         this.element = this.option.element;
         if (!this.option.danmaku) {
@@ -111,7 +102,8 @@ class DPlayer {
                     maximum: this.option.danmaku.maximum,
                     addition: this.option.danmaku.addition,
                     user: this.option.danmaku.user,
-                }
+                },
+                events: this.events
             });
         }
 
@@ -205,7 +197,6 @@ class DPlayer {
             if (this.playedTime) {
                 this.updateBar('played', this.video.currentTime / this.video.duration, 'width');
                 this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = utils.secondToTime(this.video.currentTime);
-                this.trigger('playing');
             }
             window.requestAnimationFrame(this.animationFrame);
         };
@@ -252,9 +243,7 @@ class DPlayer {
         this.isTimeTipsShow = true;
         this.mouseHandler = this.mouseHandler(pbar, pbarTimeTips).bind(this);
         pbar.addEventListener('mousemove', this.mouseHandler);
-        pbar.addEventListener('mouseover', this.mouseHandler);
         pbar.addEventListener('mouseenter', this.mouseHandler);
-        pbar.addEventListener('mouseout', this.mouseHandler);
         pbar.addEventListener('mouseleave', this.mouseHandler);
 
 
@@ -615,19 +604,13 @@ class DPlayer {
          * full screen
          */
         this.element.addEventListener('fullscreenchange', () => {
-            if (this.danmaku) {
-                this.danmaku.resize();
-            }
+            this.resize();
         });
         this.element.addEventListener('mozfullscreenchange', () => {
-            if (this.danmaku) {
-                this.danmaku.resize();
-            }
+            this.resize();
         });
         this.element.addEventListener('webkitfullscreenchange', () => {
-            if (this.danmaku) {
-                this.danmaku.resize();
-            }
+            this.resize();
         });
         // browser full screen
         this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
@@ -644,6 +627,8 @@ class DPlayer {
                 else if (this.video.webkitEnterFullscreen) {   // Safari for iOS
                     this.video.webkitEnterFullscreen();
                 }
+
+                this.events.trigger('fullscreen');
             }
             else {
                 if (document.cancelFullScreen) {
@@ -655,10 +640,10 @@ class DPlayer {
                 else if (document.webkitCancelFullScreen) {
                     document.webkitCancelFullScreen();
                 }
+
+                this.events.trigger('fullscreen_cancel');
             }
-            if (this.danmaku) {
-                this.danmaku.resize();
-            }
+            this.resize();
         });
         // web full screen
         this.element.getElementsByClassName('dplayer-full-in-icon')[0].addEventListener('click', () => {
@@ -667,9 +652,7 @@ class DPlayer {
             }
             else {
                 this.element.classList.add('dplayer-fulled');
-                if (this.danmaku) {
-                    this.danmaku.resize();
-                }
+                this.resize();
             }
         });
 
@@ -721,9 +704,7 @@ class DPlayer {
             case 27:
                 if (this.element.classList.contains('dplayer-fulled')) {
                     this.element.classList.remove('dplayer-fulled');
-                    if (this.danmaku) {
-                        this.danmaku.resize();
-                    }
+                    this.resize();
                 }
                 break;
             }
@@ -760,9 +741,14 @@ class DPlayer {
             }
 
             mask.classList.add('dplayer-mask-show');
+
+            this.events.trigger('contextmenu_show');
+
             mask.addEventListener('click', () => {
                 mask.classList.remove('dplayer-mask-show');
                 menu.classList.remove('dplayer-menu-show');
+
+                this.events.trigger('contextmenu_hide');
             });
         });
 
@@ -788,8 +774,11 @@ class DPlayer {
                 canvas.height = this.video.videoHeight;
                 canvas.getContext('2d').drawImage(this.video, 0, 0, canvas.width, canvas.height);
 
-                camareIcon.href = canvas.toDataURL();
+                const dataURL = canvas.toDataURL();
+                camareIcon.href = dataURL;
                 camareIcon.download = "DPlayer.png";
+
+                this.events.trigger('screenshot', dataURL);
             });
         }
 
@@ -841,7 +830,6 @@ class DPlayer {
         if (this.danmaku) {
             this.danmaku.play();
         }
-        this.trigger('play');
     }
 
     /**
@@ -864,7 +852,6 @@ class DPlayer {
         if (this.danmaku) {
             this.danmaku.pause();
         }
-        this.trigger('pause');
     }
 
     /**
@@ -907,10 +894,8 @@ class DPlayer {
     /**
      * attach event
      */
-    on (event, callback) {
-        if (typeof callback === 'function') {
-            this.event[event].push(callback);
-        }
+    on (name, callback) {
+        this.events.on(name, callback);
     }
 
     /**
@@ -983,37 +968,30 @@ class DPlayer {
          * video events
          */
         // show video time: the metadata has loaded or changed
-        video.addEventListener('durationchange', () => {
+        this.on('durationchange', () => {
             if (video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
                 this.element.getElementsByClassName('dplayer-dtime')[0].innerHTML = utils.secondToTime(video.duration);
             }
         });
 
         // show video loaded bar: to inform interested parties of progress downloading the media
-        video.addEventListener('progress', () => {
+        this.on('progress', () => {
             const percentage = video.buffered.length ? video.buffered.end(video.buffered.length - 1) / video.duration : 0;
             this.updateBar('loaded', percentage, 'width');
         });
 
         // video download error: an error occurs
-        video.addEventListener('error', () => {
+        this.on('error', () => {
             this.tran && this.notice && this.notice(this.tran('This video fails to load'), -1);
-            this.trigger && this.trigger('pause');
-        });
-
-        // video can play: enough data is available that the media can be played
-        video.addEventListener('canplay', () => {
-            this.trigger('canplay');
         });
 
         // video end
         this.ended = false;
-        video.addEventListener('ended', () => {
+        this.on('ended', () => {
             this.updateBar('played', 1, 'width');
             if (!this.loop) {
                 this.ended = true;
                 this.pause();
-                this.trigger('ended');
             }
             else {
                 this.seek(0);
@@ -1024,17 +1002,23 @@ class DPlayer {
             }
         });
 
-        video.addEventListener('play', () => {
+        this.on('play', () => {
             if (this.paused) {
                 this.play();
             }
         });
 
-        video.addEventListener('pause', () => {
+        this.on('pause', () => {
             if (!this.paused) {
                 this.pause();
             }
         });
+
+        for (let i = 0; i < this.events.videoEvents.length; i++) {
+            video.addEventListener(this.events.videoEvents[i], () => {
+                this.events.trigger(this.events.videoEvents[i]);
+            });
+        }
 
         this.volume(localStorage.getItem('dplayer-volume') || this.option.volume, true, true);
     }
@@ -1061,7 +1045,9 @@ class DPlayer {
         this.initVideo(this.video, this.quality.type || this.option.video.type);
         this.seek(this.prevVideo.currentTime);
         this.notice(`${this.tran('Switching to')} ${this.quality.name} ${this.tran('quality')}`, -1);
-        this.video.addEventListener('canplay', () => {
+        this.events.trigger('quality_start', this.quality);
+
+        this.on('canplay', () => {
             if (this.prevVideo) {
                 if (this.video.currentTime !== this.prevVideo.currentTime) {
                     this.seek(this.prevVideo.currentTime);
@@ -1075,6 +1061,8 @@ class DPlayer {
                 this.prevVideo = null;
                 this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
                 this.switchingQuality = false;
+
+                this.events.trigger('quality_end');
             }
         });
     }
@@ -1110,14 +1098,14 @@ class DPlayer {
 
             switch (e.type) {
             case 'mouseenter':
-            case 'mouseover':
+                this.thumbnails && this.thumbnails.show();
+                break;
             case 'mousemove':
-                this.thumbnails && this.thumbnails.show(tx);
+                this.thumbnails && this.thumbnails.move(tx);
                 timeTips.innerText = utils.secondToTime(time);
                 this.timeTipsDisplay(true, timeTips);
                 break;
             case 'mouseleave':
-            case 'mouseout':
                 this.thumbnails && this.thumbnails.hide();
                 this.timeTipsDisplay(false, timeTips);
                 break;
@@ -1142,11 +1130,10 @@ class DPlayer {
     }
 
     initThumbnails () {
-        this.thumbnails = new Thumbnails(this.element.getElementsByClassName('dplayer-bar-preview')[0], this.element.getElementsByClassName('dplayer-bar-wrap')[0].offsetWidth, this.option.video.thumbnails);
+        this.thumbnails = new Thumbnails(this.element.getElementsByClassName('dplayer-bar-preview')[0], this.element.getElementsByClassName('dplayer-bar-wrap')[0].offsetWidth, this.option.video.thumbnails, this.events);
 
-        this.video.addEventListener('loadedmetadata', () => {
+        this.on('loadedmetadata', () => {
             this.thumbnails.resize(160, 90);
-            // this.thumbnails.resize(this.element.offsetWidth / 4, this.element.offsetHeight / 4);
         });
     }
 
@@ -1157,9 +1144,18 @@ class DPlayer {
         if (this.noticeTime) {
             clearTimeout(this.noticeTime);
         }
+        this.events.trigger('notice_show', text);
         this.noticeTime = setTimeout(() => {
             noticeEle.style.opacity = 0;
+            this.events.trigger('notice_hide');
         }, time);
+    }
+
+    resize () {
+        if (this.danmaku) {
+            this.danmaku.resize();
+        }
+        this.events.trigger('resize');
     }
 
     destroy () {
@@ -1167,6 +1163,8 @@ class DPlayer {
         clearTimeout(this.hideTime);
         this.video.src = '';
         this.element.innerHTML = '';
+        this.events.trigger('destroy');
+
         for (const key in this) {
             if (this.hasOwnProperty(key) && key !== 'paused') {
                 delete this[key];
