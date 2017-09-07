@@ -180,13 +180,53 @@ var dp = new DPlayer({
 
 `dp.on(event, handler)`
 
-`event`:
-+ `play`: Triggered when DPlayer start play
-+ `pause`: Triggered when DPlayer paused
-+ `canplay`: Triggered when enough data is available that DPlayer can be played
-+ `playing`: Triggered periodically when DPlayer is playing
-+ `ended`: Triggered when DPlayer ended
-+ `error`: Triggered when an error occurs
+Video events
+
+- abort
+- canplay
+- canplaythrough
+- durationchange
+- emptied
+- ended
+- error
+- loadeddata
+- loadedmetadata
+- loadstart
+- mozaudioavailable
+- pause
+- play
+- playing
+- progress
+- ratechange
+- seeked
+- seeking
+- stalled
+- suspend
+- timeupdate
+- volumechange
+- waiting
+
+Player events
+
+- screenshot
+- thumbnails_show
+- thumbnails_hide
+- danmaku_show
+- danmaku_hide
+- danmaku_clear
+- danmaku_loaded
+- danmaku_send
+- danmaku_opacity
+- contextmenu_show
+- contextmenu_hide
+- notice_show
+- notice_hide
+- quality_start
+- quality_end
+- destroy
+- resize
+- fullscreen
+- fullscreen_cancel
 
 ### Quality switching
 
