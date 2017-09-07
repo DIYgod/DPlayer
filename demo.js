@@ -109,6 +109,30 @@ function initPlayers () {
         ]
     });
 
+    var events = [
+        'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error',
+        'loadeddata', 'loadedmetadata', 'loadstart', 'mozaudioavailable', 'pause', 'play',
+        'playing', 'ratechange', 'seeked', 'seeking', 'stalled',
+        'volumechange', 'waiting',
+        'screenshot',
+        'thumbnails_show', 'thumbnails_hide',
+        'danmaku_show', 'danmaku_hide', 'danmaku_clear',
+        'danmaku_loaded', 'danmaku_send', 'danmaku_opacity',
+        'contextmenu_show', 'contextmenu_hide',
+        'notice_show', 'notice_hide',
+        'quality_start', 'quality_end',
+        'destroy',
+        'resize',
+        'fullscreen', 'fullscreen_cancel'
+    ];
+    var eventsEle = document.getElementById('events');
+    for (let i = 0; i < events.length; i++) {
+        dp2.on(events[i], (info) => {
+            eventsEle.innerHTML += '<p>Event: ' + events[i] +  '</p>';
+            eventsEle.scrollTop = eventsEle.scrollHeight;
+        })
+    }
+
     //dp3
     window.dp3 = new DPlayer({
         element: document.getElementById('dplayer3'),
