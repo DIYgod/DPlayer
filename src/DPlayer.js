@@ -8,6 +8,7 @@ import html from './html';
 import Danmaku from './danmaku';
 import Thumbnails from './thumbnails';
 import Events from './events';
+import FullScreen from './fullscreen';
 
 let index = 0;
 
@@ -599,61 +600,16 @@ class DPlayer {
 
         commentSendIcon.addEventListener('click', sendComment);
 
+        this.fullScreen = new FullScreen(this);
 
-        /**
-         * full screen
-         */
-        this.element.addEventListener('fullscreenchange', () => {
-            this.resize();
-        });
-        this.element.addEventListener('mozfullscreenchange', () => {
-            this.resize();
-        });
-        this.element.addEventListener('webkitfullscreenchange', () => {
-            this.resize();
-        });
         // browser full screen
         this.element.getElementsByClassName('dplayer-full-icon')[0].addEventListener('click', () => {
-            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
-                if (this.element.requestFullscreen) {
-                    this.element.requestFullscreen();
-                }
-                else if (this.element.mozRequestFullScreen) {
-                    this.element.mozRequestFullScreen();
-                }
-                else if (this.element.webkitRequestFullscreen) {
-                    this.element.webkitRequestFullscreen();
-                }
-                else if (this.video.webkitEnterFullscreen) {   // Safari for iOS
-                    this.video.webkitEnterFullscreen();
-                }
-
-                this.events.trigger('fullscreen');
-            }
-            else {
-                if (document.cancelFullScreen) {
-                    document.cancelFullScreen();
-                }
-                else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                }
-                else if (document.webkitCancelFullScreen) {
-                    document.webkitCancelFullScreen();
-                }
-
-                this.events.trigger('fullscreen_cancel');
-            }
-            this.resize();
+            this.fullScreen.toggle('browser');
         });
+
         // web full screen
         this.element.getElementsByClassName('dplayer-full-in-icon')[0].addEventListener('click', () => {
-            if (this.element.classList.contains('dplayer-fulled')) {
-                this.element.classList.remove('dplayer-fulled');
-            }
-            else {
-                this.element.classList.add('dplayer-fulled');
-                this.resize();
-            }
+            this.fullScreen.toggle('web');
         });
 
         /**
@@ -702,9 +658,8 @@ class DPlayer {
             const event = e || window.event;
             switch (event.keyCode) {
             case 27:
-                if (this.element.classList.contains('dplayer-fulled')) {
-                    this.element.classList.remove('dplayer-fulled');
-                    this.resize();
+                if (this.fullScreen.isFullScreen('web')) {
+                    this.fullScreen.cancel('web');
                 }
                 break;
             }

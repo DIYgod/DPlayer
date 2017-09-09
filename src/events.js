@@ -18,7 +18,7 @@ class Events {
             'quality_start', 'quality_end',
             'destroy',
             'resize',
-            'fullscreen', 'fullscreen_cancel'
+            'fullscreen', 'fullscreen_cancel', 'webfullscreen', 'webfullscreen_cancel'
         ];
     }
 
