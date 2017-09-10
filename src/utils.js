@@ -39,6 +39,14 @@ module.exports = {
     /**
      * check if user is using mobile or not
      */
-    isMobile: /mobile/i.test(window.navigator.userAgent)
+    isMobile: /mobile/i.test(window.navigator.userAgent),
+
+    storage: {
+        set: (key, value) => {
+            localStorage.setItem(key, value);
+        },
+
+        get: (key) => localStorage.getItem(key)
+    }
 
 };

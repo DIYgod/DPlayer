@@ -37,13 +37,14 @@ const tranTxt = {
         'Please input danmaku content!': '要输入弹幕内容啊喂！',
         'Set danmaku color': '设置弹幕颜色',
         'Set danmaku type': '设置弹幕类型',
-        'Danmaku': '弹幕',
+        'Show danmaku': '显示弹幕',
         'This video fails to load': '视频加载失败',
         'Switching to': '正在切换至',
         'Switched to': '已经切换至',
         'quality': '画质',
         'FF to': '快进至',
-        'REW to': '快退至'
+        'REW to': '快退至',
+        'Unlimited danmaku': '海量弹幕'
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',
@@ -61,12 +62,13 @@ const tranTxt = {
         'Please input danmaku content!': '請輸入彈幕内容啊！',
         'Set danmaku color': '設置彈幕顏色',
         'Set danmaku type': '設置彈幕類型',
-        'Danmaku': '彈幕',
+        'Show danmaku': '顯示彈幕',
         'This video fails to load': '視頻加載失敗',
         'Switching to': '正在切換至',
         'Switched to': '已經切換至',
         'quality': '畫質',
         'FF to': '快進至',
-        'REW to': '快退至'
+        'REW to': '快退至',
+        'Unlimited danmaku': '海量彈幕'
     }
 };

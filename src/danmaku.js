@@ -12,6 +12,8 @@ class Danmaku {
         this.showing = true;
         this._opacity = this.options.opacity;
         this.events = this.options.events;
+        this.unlimited = this.options.unlimited;
+        this._measure('');
 
         this.load();
     }
@@ -124,7 +126,6 @@ class Danmaku {
                 items[i].style.opacity = percentage;
             }
             this._opacity = percentage;
-            localStorage.setItem('danmaku-opacity', this._opacity);
 
             this.events && this.events.trigger('danmaku_opacity', this._opacity);
         }
@@ -156,7 +157,7 @@ class Danmaku {
         const getTunnel = (ele, type, width) => {
             const tmp = danWidth / danSpeed(width);
 
-            for (let i = 0; this.options.unlimited || i < itemY; i++) {
+            for (let i = 0; this.unlimited || i < itemY; i++) {
                 const item = this.danTunnel[type][i + ''];
                 if (item && item.length) {
                     if (type !== 'right') {
@@ -329,6 +330,10 @@ class Danmaku {
         this.play();
 
         this.events && this.events.trigger('danmaku_show');
+    }
+
+    unlimit (boolean) {
+        this.unlimited = boolean;
     }
 }
 

@@ -38,7 +38,8 @@
     &.dplayer-no-danmaku {
         .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box {
             .dplayer-setting-showdan,
-            .dplayer-setting-danmaku {
+            .dplayer-setting-danmaku,
+            .dplayer-setting-danunlimit {
                 display: none;
             }
         }

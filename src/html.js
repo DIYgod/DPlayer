@@ -217,17 +217,24 @@ const html = {
                 </div>
             </div>
             <div class="dplayer-setting-item dplayer-setting-showdan">
-                <span class="dplayer-label">${tran('Danmaku')}</span>
+                <span class="dplayer-label">${tran('Show danmaku')}</span>
                 <div class="dplayer-toggle">
                     <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan">
                     <label for="dplayer-toggle-dan"></label>
+                </div>
+            </div>
+            <div class="dplayer-setting-item dplayer-setting-danunlimit">
+                <span class="dplayer-label">${tran('Unlimited danmaku')}</span>
+                <div class="dplayer-toggle">
+                    <input class="dplayer-danunlimit-setting-input" type="checkbox" name="dplayer-toggle-danunlimit">
+                    <label for="dplayer-toggle-danunlimit"></label>
                 </div>
             </div>
             <div class="dplayer-setting-item dplayer-setting-danmaku">
                 <span class="dplayer-label">${tran('Opacity for danmaku')}</span>
                 <div class="dplayer-danmaku-bar-wrap">
                     <div class="dplayer-danmaku-bar">
-                        <div class="dplayer-danmaku-bar-inner" style="width: ${(localStorage.getItem('DPlayer-opacity') || 0.7) * 100}%">
+                        <div class="dplayer-danmaku-bar-inner">
                             <span class="dplayer-thumb"></span>
                         </div>
                     </div>

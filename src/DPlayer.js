@@ -9,6 +9,7 @@ import Danmaku from './danmaku';
 import Thumbnails from './thumbnails';
 import Events from './events';
 import FullScreen from './fullscreen';
+import User from './user';
 
 let index = 0;
 
@@ -33,6 +34,8 @@ class DPlayer {
         this.tran = new i18n(this.option.lang).tran;
 
         this.events = new Events();
+
+        this.user = new User(this);
 
         this.element = this.option.element;
         if (!this.option.danmaku) {
@@ -76,7 +79,7 @@ class DPlayer {
         if (this.option.danmaku) {
             this.danmaku = new Danmaku({
                 container: this.element.getElementsByClassName('dplayer-danmaku')[0],
-                opacity: localStorage.getItem('danmaku-opacity') || 0.7,
+                opacity: this.user.get('opacity'),
                 callback: () => {
                     this.element.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
 
@@ -95,7 +98,7 @@ class DPlayer {
                 borderColor: this.option.theme,
                 height: this.arrow ? 24 : 30,
                 time: () => this.video.currentTime,
-                unlimited: this.option.danmaku.unlimited,
+                unlimited: this.user.get('unlimited'),
                 api: {
                     id: this.option.danmaku.id,
                     address: this.option.danmaku.api,
@@ -384,7 +387,11 @@ class DPlayer {
         });
 
         this.loop = this.option.loop;
-        let showdan = true;
+        let showdan = this.user.get('danmaku');
+        if (!showdan) {
+            this.danmaku && this.danmaku.hide();
+        }
+        let unlimitDan = this.user.get('unlimited');
         const settingEvent = () => {
             // loop control
             const loopEle = this.element.getElementsByClassName('dplayer-setting-loop')[0];
@@ -421,6 +428,27 @@ class DPlayer {
                     showdan = false;
                     this.danmaku.hide();
                 }
+                this.user.set('danmaku', showdan ? 1 : 0);
+                closeSetting();
+            });
+
+            // unlimited danmaku control
+            const unlimitDanEle = this.element.getElementsByClassName('dplayer-setting-danunlimit')[0];
+            const unlimitDanToggle = unlimitDanEle.getElementsByClassName('dplayer-danunlimit-setting-input')[0];
+
+            unlimitDanToggle.checked = unlimitDan;
+
+            unlimitDanEle.addEventListener('click', () => {
+                unlimitDanToggle.checked = !unlimitDanToggle.checked;
+                if (unlimitDanToggle.checked) {
+                    unlimitDan = true;
+                    this.danmaku.unlimit(true);
+                }
+                else {
+                    unlimitDan = false;
+                    this.danmaku.unlimit(false);
+                }
+                this.user.set('unlimited', unlimitDan ? 1 : 0);
                 closeSetting();
             });
 
@@ -446,14 +474,17 @@ class DPlayer {
                 const danmakuBarWrap = this.element.getElementsByClassName('dplayer-danmaku-bar')[0];
                 const danmakuSettingBox = this.element.getElementsByClassName('dplayer-setting-danmaku')[0];
                 const dWidth = 130;
-                this.updateBar('danmaku', this.danmaku.opacity(), 'width');
+                this.on('danmaku_opacity', (percentage) => {
+                    this.updateBar('danmaku', percentage, 'width');
+                    this.user.set('opacity', percentage);
+                });
+                this.danmaku.opacity(this.user.get('opacity'));
 
                 const danmakuMove = (event) => {
                     const e = event || window.event;
                     let percentage = (e.clientX - utils.getElementViewLeft(danmakuBarWrap)) / dWidth;
                     percentage = percentage > 0 ? percentage : 0;
                     percentage = percentage < 1 ? percentage : 1;
-                    this.updateBar('danmaku', percentage, 'width');
                     this.danmaku.opacity(percentage);
                 };
                 const danmakuUp = () => {
@@ -467,7 +498,6 @@ class DPlayer {
                     let percentage = (e.clientX - utils.getElementViewLeft(danmakuBarWrap)) / dWidth;
                     percentage = percentage > 0 ? percentage : 0;
                     percentage = percentage < 1 ? percentage : 1;
-                    this.updateBar('danmaku', percentage, 'width');
                     this.danmaku.opacity(percentage);
                 });
                 danmakuBarWrapWrap.addEventListener('mousedown', () => {
@@ -819,7 +849,7 @@ class DPlayer {
             percentage = percentage < 1 ? percentage : 1;
             this.updateBar('volume', percentage, 'width');
             if (!nostorage) {
-                localStorage.setItem('dplayer-volume', percentage);
+                this.user.set('volume', percentage);
             }
             if (!nonotice) {
                 this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
@@ -975,7 +1005,7 @@ class DPlayer {
             });
         }
 
-        this.volume(localStorage.getItem('dplayer-volume') || this.option.volume, true, true);
+        this.volume(this.user.get('volume'), true, true);
     }
 
     switchQuality (index) {
