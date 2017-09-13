@@ -114,9 +114,9 @@ var dp = new DPlayer({
 
 ## CDN
 
-- [unpkg](https://unpkg.com/dplayer)
+- [jsDelivr](https://www.jsdelivr.com/package/npm/dplayer)
 - [cdnjs](https://cdnjs.com/libraries/dplayer)
-- [BootCDN](http://www.bootcdn.cn/dplayer/)
+- [unpkg](https://unpkg.com/dplayer/dist/)
 - [RawGit](https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js)
 
 ## Donate
