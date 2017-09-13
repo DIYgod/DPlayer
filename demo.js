@@ -15,16 +15,16 @@ requestAnimationFrame(animate);
 hljs.initHighlightingOnLoad();
 
 $.ajax({
-    url: 'https://api.cdnjs.com/libraries/dplayer?fields=assets',
+    url: 'https://data.jsdelivr.com/v1/package/npm/dplayer',
     type: 'get',
     dataType: 'json',
     success(data) {
         if (data) {
             var html = '';
-            for (var i = 0; i < data.assets.length; i++) {
-                html += '<option value="' + data.assets[i].version + '">Version ' + data.assets[i].version + (i === 0 ? ' (latest on npm)' : '') + '</option>';
+            for (var i = 0; i < data.versions.length; i++) {
+                html += '<option value="' + data.versions[i] + '">v' + data.versions[i] + '</option>';
             }
-            $('.version-npm').html(html);
+            $('.version-select').html(html);
         }
     },
     error(e) {
@@ -34,16 +34,8 @@ $.ajax({
 
 $('.version-select').change(function () {
     var version = $('.version-select').val();
-    var jslink;
-    var csslink;
-    if (version === 'github') {
-        jslink = 'https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js';
-        csslink = 'https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.css';
-    }
-    else {
-        jslink = 'https://cdnjs.cloudflare.com/ajax/libs/dplayer/' + version + '/DPlayer.min.js';
-        csslink = 'https://cdnjs.cloudflare.com/ajax/libs/dplayer/' + version + '/DPlayer.min.css'
-    }
+    var jslink = 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist/DPlayer.min.js';
+    var csslink = 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist//DPlayer.min.css'
     
     $('.dplayer-css').attr('href', csslink);
 

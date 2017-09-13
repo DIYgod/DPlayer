@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://unpkg.com/github-markdown-css">
     <link rel="stylesheet" href="https://unpkg.com/highlight.js/styles/github-gist.css">
     <link rel="stylesheet" href="demo.css">
-    <link class="dplayer-css" rel="stylesheet" href="https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.css">
+    <link class="dplayer-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
     <script src="https://unpkg.com/flv.js/dist/flv.min.js"></script>
     <script src="https://unpkg.com/hls.js/dist/hls.min.js"></script>
-    <script src="https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dplayer"></script>
 </head>
 
 <body class="markdown-body">
@@ -31,12 +31,7 @@
     </p>
     <p>
         <span>DPlayer version: </span>
-        <select class="version-select">
-            <optgroup label="GitHub version (from rawgit)" class="version-github">
-                <option value="github" selected>latest on GitHub</option>
-            </optgroup>
-            <optgroup label="npm version (from cdnjs)" class="version-npm"></optgroup>
-        </select>
+        <select class="version-select"></select>
     </p>
     <details>
         <summary>Summary</summary>
