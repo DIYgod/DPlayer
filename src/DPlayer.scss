@@ -605,8 +605,8 @@
                     position: absolute;
                     right: 0;
                     bottom: 50px;
-                    transform: translateX(170px);
-                    width: 150px;
+                    transform: translateX(220px);
+                    width: 200px;
                     border-radius: 2px;
                     background: rgba(28, 28, 28, 0.9);
                     padding: 7px 0;
@@ -631,6 +631,7 @@
                     padding: 5px 10px;
                     box-sizing: border-box;
                     cursor: pointer;
+                    white-space: nowrap;
 
                     &:hover {
                         background-color: rgba(255,255,255,.1);
