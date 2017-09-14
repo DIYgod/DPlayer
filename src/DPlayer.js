@@ -772,7 +772,6 @@ class DPlayer {
         if (this.video.duration) {
             time = Math.min(time, this.video.duration);
         }
-        console.log(time, this.video.currentTime, time - this.video.currentTime);
         if (this.video.currentTime < time) {
             this.notice(`${this.tran('FF')} ${(time - this.video.currentTime).toFixed(0)} ${this.tran('s')}`);
         }
