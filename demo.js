@@ -25,6 +25,19 @@ $.ajax({
                 html += '<option value="' + data.versions[i] + '">v' + data.versions[i] + '</option>';
             }
             $('.version-select').html(html);
+
+            var version = data.versions[0];
+            $('.dplayer-css').attr('href', 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist//DPlayer.min.css');
+
+            $.ajax({
+                url: 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist/DPlayer.min.js',
+                cache: true,
+                type: 'get',
+                dataType: 'script',
+                success() {
+                    initPlayers();
+                },
+            });
         }
     },
     error(e) {
@@ -34,13 +47,11 @@ $.ajax({
 
 $('.version-select').change(function () {
     var version = $('.version-select').val();
-    var jslink = 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist/DPlayer.min.js';
-    var csslink = 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist//DPlayer.min.css'
     
-    $('.dplayer-css').attr('href', csslink);
+    $('.dplayer-css').attr('href', 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist//DPlayer.min.css');
 
     $.ajax({
-        url: jslink,
+        url: 'https://cdn.jsdelivr.net/npm/dplayer@' + version + '/dist/DPlayer.min.js',
         cache: true,
         type: 'get',
         dataType: 'script',
@@ -175,7 +186,6 @@ function initPlayers () {
         }
     });
 }
-initPlayers();
 
 function clearPlayers () {
     for (var i = 0; i < 6; i++) {
