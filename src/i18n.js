@@ -42,15 +42,16 @@ const tranTxt = {
         'Switching to': '正在切换至',
         'Switched to': '已经切换至',
         'quality': '画质',
-        'FF to': '快进至',
-        'REW to': '快退至',
+        'FF': '快进',
+        'REW': '快退',
         'Unlimited danmaku': '海量弹幕',
         'Send danmaku': '发送弹幕',
         'Setting': '设置',
         'Full screen': '全屏',
         'Web full screen': '页面全屏',
         'Send': '发送',
-        'Screenshot': '截图'
+        'Screenshot': '截图',
+        's': '秒'
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',
@@ -73,8 +74,8 @@ const tranTxt = {
         'Switching to': '正在切換至',
         'Switched to': '已經切換至',
         'quality': '畫質',
-        'FF to': '快進至',
-        'REW to': '快退至',
+        'FF': '快進',
+        'REW': '快退',
         'Unlimited danmaku': '海量彈幕'
     }
 };

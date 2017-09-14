@@ -177,13 +177,13 @@ class DPlayer {
                 // whether the video is buffering
                 currentPlayPos = this.video.currentTime;
                 if (!bufferingDetected
-                    && currentPlayPos < lastPlayPos + 0.01
+                    && currentPlayPos === lastPlayPos
                     && !this.video.paused) {
                     this.element.classList.add('dplayer-loading');
                     bufferingDetected = true;
                 }
                 if (bufferingDetected
-                    && currentPlayPos > lastPlayPos + 0.01
+                    && currentPlayPos > lastPlayPos
                     && !this.video.paused) {
                     this.element.classList.remove('dplayer-loading');
                     bufferingDetected = false;
@@ -231,16 +231,6 @@ class DPlayer {
             }
         };
 
-        pbar.addEventListener('click', (event) => {
-            const e = event || window.event;
-            barWidth = pbar.clientWidth;
-            let percentage = (e.clientX - utils.getElementViewLeft(pbar)) / barWidth;
-            percentage = percentage > 0 ? percentage : 0;
-            percentage = percentage < 1 ? percentage : 1;
-            this.updateBar('played', percentage, 'width');
-            this.seek(parseFloat(bar.playedBar.style.width) / 100 * this.video.duration);
-        });
-
         if (this.option.video.thumbnails) {
             this.initThumbnails();
         }
@@ -251,8 +241,7 @@ class DPlayer {
         pbar.addEventListener('mouseleave', this.mouseHandler);
 
 
-        const thumbMove = (event) => {
-            const e = event || window.event;
+        const thumbMove = (e) => {
             let percentage = (e.clientX - utils.getElementViewLeft(pbar)) / barWidth;
             percentage = percentage > 0 ? percentage : 0;
             percentage = percentage < 1 ? percentage : 1;
@@ -260,9 +249,13 @@ class DPlayer {
             this.element.getElementsByClassName('dplayer-ptime')[0].innerHTML = utils.secondToTime(percentage * this.video.duration);
         };
 
-        const thumbUp = () => {
+        const thumbUp = (e) => {
             document.removeEventListener('mouseup', thumbUp);
             document.removeEventListener('mousemove', thumbMove);
+            let percentage = (e.clientX - utils.getElementViewLeft(pbar)) / barWidth;
+            percentage = percentage > 0 ? percentage : 0;
+            percentage = percentage < 1 ? percentage : 1;
+            this.updateBar('played', percentage, 'width');
             this.seek(parseFloat(bar.playedBar.style.width) / 100 * this.video.duration);
             this.setTime();
         };
@@ -779,12 +772,12 @@ class DPlayer {
         if (this.video.duration) {
             time = Math.min(time, this.video.duration);
         }
-
+        console.log(time, this.video.currentTime, time - this.video.currentTime);
         if (this.video.currentTime < time) {
-            this.notice(`${this.tran('FF to')} ${utils.secondToTime(time)}`);
+            this.notice(`${this.tran('FF')} ${(time - this.video.currentTime).toFixed(0)} ${this.tran('s')}`);
         }
         else if (this.video.currentTime > time) {
-            this.notice(`${this.tran('REW to')} ${utils.secondToTime(time)}`);
+            this.notice(`${this.tran('REW')} ${(this.video.currentTime - time).toFixed(0)} ${this.tran('s')}`);
         }
 
         this.video.currentTime = time;

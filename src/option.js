@@ -54,7 +54,7 @@ module.exports = (option) => {
         link: 'https://github.com/DIYgod/DPlayer/issues'
     }, {
         text: `DPlayer ${DPLAYER_VERSION} ${GIT_HASH}`,
-        link: 'https://github.com/MoePlayer/DPlayer/commits/master'
+        link: 'https://github.com/MoePlayer/DPlayer/releases'
     }]);
 
     return option;
