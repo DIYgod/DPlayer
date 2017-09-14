@@ -1,3 +1,5 @@
+@import '../node_modules/balloon-css/balloon.css';
+
 .dplayer {
     position: relative;
     overflow: hidden;
@@ -497,14 +499,19 @@
                 background-color: transparent;
                 outline: none;
                 cursor: pointer;
-                opacity: .8;
-                transition: all .2s ease-in-out;
                 vertical-align: middle;
                 box-sizing: border-box;
                 display: inline-block;
 
+                .dplayer-icon-content {
+                    transition: all .2s ease-in-out;
+                    opacity: .8;
+                }
+
                 &:hover {
-                    opacity: 1;
+                    .dplayer-icon-content {
+                        opacity: 1;
+                    }
                 }
 
                 &.dplayer-quality-icon {
@@ -1262,4 +1269,17 @@
     0%, 100% {
         transform: translate(0, 0) rotate(0deg);
     }
+}
+
+[data-balloon]:before {
+    display: none;
+}
+
+[data-balloon]:after {
+    padding: 0.3em 0.7em;
+    background: rgba(17, 17, 17, 0.7);
+}
+
+[data-balloon][data-balloon-pos="up"]:after {
+    margin-bottom: 0;
 }

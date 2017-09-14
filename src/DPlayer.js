@@ -281,11 +281,10 @@ class DPlayer {
         const volumeEle = this.element.getElementsByClassName('dplayer-volume')[0];
         const volumeBarWrapWrap = this.element.getElementsByClassName('dplayer-volume-bar-wrap')[0];
         const volumeBarWrap = this.element.getElementsByClassName('dplayer-volume-bar')[0];
-        const volumeicon = this.element.getElementsByClassName('dplayer-volume-icon')[0];
+        const volumeicon = this.element.getElementsByClassName('dplayer-volume-icon')[0].getElementsByClassName('dplayer-icon-content')[0];
         const vWidth = 35;
 
         this.switchVolumeIcon = () => {
-            const volumeicon = this.element.getElementsByClassName('dplayer-volume-icon')[0];
             if (this.volume() >= 0.95) {
                 volumeicon.innerHTML = svg('volume-up');
             }
@@ -842,17 +841,16 @@ class DPlayer {
     /**
      * Set volume
      */
-    volume (percentage, nonotice, nostorage) {
+    volume (percentage, nostorage) {
         percentage = parseFloat(percentage);
         if (!isNaN(percentage)) {
             percentage = percentage > 0 ? percentage : 0;
             percentage = percentage < 1 ? percentage : 1;
             this.updateBar('volume', percentage, 'width');
+            const formatPercentage = `${(percentage * 100).toFixed(0)}%`;
+            this.element.getElementsByClassName('dplayer-volume-bar-wrap')[0].dataset.balloon = formatPercentage;
             if (!nostorage) {
                 this.user.set('volume', percentage);
-            }
-            if (!nonotice) {
-                this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
             }
             this.video.volume = percentage;
             if (this.video.muted) {
@@ -1005,7 +1003,7 @@ class DPlayer {
             });
         }
 
-        this.volume(this.user.get('volume'), true, true);
+        this.volume(this.user.get('volume'), true);
     }
 
     switchQuality (index) {

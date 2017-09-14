@@ -51,13 +51,13 @@ const html = {
         <div class="dplayer-controller">
             <div class="dplayer-icons dplayer-icons-left">
                 <button class="dplayer-icon dplayer-play-icon">
-                    ${svg('play')}
+                    <span class="dplayer-icon-content">${svg('play')}</span>
                 </button>
                 <div class="dplayer-volume">
                     <button class="dplayer-icon dplayer-volume-icon">
-                        ${svg('volume-down')}
+                        <span class="dplayer-icon-content">${svg('volume-down')}</span>
                     </button>
-                    <div class="dplayer-volume-bar-wrap">
+                    <div class="dplayer-volume-bar-wrap" data-balloon-pos="up">
                         <div class="dplayer-volume-bar">
                             <div class="dplayer-volume-bar-inner" style="background: ${option.theme};">
                                 <span class="dplayer-thumb" style="background: ${option.theme}"></span>
@@ -77,17 +77,17 @@ const html = {
                 </div>
                 ` : ``}
                 ${option.screenshot ? `
-                <a href="#" class="dplayer-icon dplayer-camera-icon">
-                    ${svg('camera')}
+                <a href="#" class="dplayer-icon dplayer-camera-icon" data-balloon="${tran('Screenshot')}" data-balloon-pos="up">
+                    <span class="dplayer-icon-content">${svg('camera')}</span>
                 </a>
                 ` : ``}
                 <div class="dplayer-comment">
-                    <button class="dplayer-icon dplayer-comment-icon">
-                        ${svg('comment')}
+                    <button class="dplayer-icon dplayer-comment-icon" data-balloon="${tran('Send danmaku')}" data-balloon-pos="up">
+                        <span class="dplayer-icon-content">${svg('comment')}</span>
                     </button>
                     <div class="dplayer-comment-box">
-                        <button class="dplayer-icon dplayer-comment-setting-icon">
-                            ${svg('menu')}
+                        <button class="dplayer-icon dplayer-comment-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
+                            <span class="dplayer-icon-content">${svg('menu')}</span>
                         </button>
                         <div class="dplayer-comment-setting-box">
                             <div class="dplayer-comment-setting-color">
@@ -134,23 +134,23 @@ const html = {
                             </div>
                         </div>
                         <input class="dplayer-comment-input" type="text" placeholder="${tran('Input danmaku, hit Enter')}" maxlength="30">
-                        <button class="dplayer-icon dplayer-send-icon">
-                            ${svg('send')}
+                        <button class="dplayer-icon dplayer-send-icon" data-balloon="${tran('Send')}" data-balloon-pos="up">
+                            <span class="dplayer-icon-content">${svg('send')}</span>
                         </button>
                     </div>
                 </div>
                 <div class="dplayer-setting">
-                    <button class="dplayer-icon dplayer-setting-icon">
-                        ${svg('setting')}
+                    <button class="dplayer-icon dplayer-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
+                        <span class="dplayer-icon-content">${svg('setting')}</span>
                     </button>
                     <div class="dplayer-setting-box"></div>
                 </div>
                 <div class="dplayer-full">
-                    <button class="dplayer-icon dplayer-full-in-icon">
-                        ${svg('full-in')}
+                    <button class="dplayer-icon dplayer-full-in-icon" data-balloon="${tran('Web full screen')}" data-balloon-pos="up">
+                        <span class="dplayer-icon-content">${svg('full-in')}</span>
                     </button>
-                    <button class="dplayer-icon dplayer-full-icon">
-                        ${svg('full')}
+                    <button class="dplayer-icon dplayer-full-icon" data-balloon="${tran('Full screen')}" data-balloon-pos="up">
+                        <span class="dplayer-icon-content">${svg('full')}</span>
                     </button>
                 </div>
             </div>

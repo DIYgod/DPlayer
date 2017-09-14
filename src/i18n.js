@@ -44,7 +44,13 @@ const tranTxt = {
         'quality': '画质',
         'FF to': '快进至',
         'REW to': '快退至',
-        'Unlimited danmaku': '海量弹幕'
+        'Unlimited danmaku': '海量弹幕',
+        'Send danmaku': '发送弹幕',
+        'Setting': '设置',
+        'Full screen': '全屏',
+        'Web full screen': '页面全屏',
+        'Send': '发送',
+        'Screenshot': '截图'
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',

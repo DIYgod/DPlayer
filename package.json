@@ -51,5 +51,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "balloon-css": "^0.5.0"
   }
 }
