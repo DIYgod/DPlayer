@@ -65,7 +65,7 @@ $('.version-select').change(function () {
 function initPlayers () {
     // dp1
     window.dp1 = new DPlayer({
-        element: document.getElementById('dplayer1'),
+        container: document.getElementById('dplayer1'),
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
@@ -79,7 +79,7 @@ function initPlayers () {
 
     // dp2
     window.dp2 = new DPlayer({
-        element: document.getElementById('dplayer2'),
+        container: document.getElementById('dplayer2'),
         autoplay: false,
         theme: '#FADFA3',
         loop: true,
@@ -138,7 +138,7 @@ function initPlayers () {
 
     //dp3
     window.dp3 = new DPlayer({
-        element: document.getElementById('dplayer3'),
+        container: document.getElementById('dplayer3'),
         video: {
             quality: [{
                 name: 'HD',
@@ -156,7 +156,7 @@ function initPlayers () {
 
     // dp4
     window.dp4 = new DPlayer({
-        element: document.getElementById('dplayer4'),
+        container: document.getElementById('dplayer4'),
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒5.m3u8',
             type: 'hls'
@@ -165,7 +165,7 @@ function initPlayers () {
 
     // dp5
     window.dp5 = new DPlayer({
-        element: document.getElementById('dplayer5'),
+        container: document.getElementById('dplayer5'),
         video: {
             url: 'http://devtest.qiniudn.com/【微小微】玖月奇迹－踩踩踩.flv',
             type: 'flv'
@@ -174,7 +174,7 @@ function initPlayers () {
 
     // dp6
     window.dp6 = new DPlayer({
-        element: document.getElementById('dplayer6'),
+        container: document.getElementById('dplayer6'),
         screenshot: false,
         video: {
             url: 'https://api.prprpr.me/dplayer/video/bilibili?aid=4045652',

@@ -12,13 +12,15 @@ $ npm install dplayer --save
 
 ```js
 var dp = new DPlayer({
-    element: document.getElementById('player1'),
+    container: document.getElementById('dplayer'),
+    screenshot: true,
     video: {
-        url: 'dplayer.mp4',
-        pic: 'dplayer.png'
+        url: 'demo.mp4',
+        pic: 'demo.jpg',
+        thumbnails: 'thumbnails.jpg'
     },
     danmaku: {
-        id: 'testid',
+        id: 'demo',
         api: 'https://api.prprpr.me/dplayer/'
     }
 });
@@ -36,47 +38,75 @@ var dp = new DPlayer({
 
 ### Options
 
+Name|Default|Note
+----|-------|----
+container | document.getElementById('player1') | player container
+autoplay | false | not supported in mobile browsers
+theme | '#b7daff' | main color
+loop | true | upon reaching the end of the video, automatically seek back to the start
+lang | (navigator.language \|\| navigator.browserLanguage).toLowerCase() | values: 'en', 'zh-cn', 'zh-tw'
+screenshot | false | enable screenshot, if true, video and video poster must enable Cross-Origin
+hotkey | true | enable hotkey
+preload | 'auto' | values: 'none', 'metadata', 'auto'
+volume | 0.7 | default volume, not work after user set volume themselves
+logo | undefined | logo in top left corner
+video | `required` | video info
+video.quality | undefined | more: [Quality switching](http://dplayer.js.org/docs/#/?id=quality-switching)
+video.url | undefined | video link
+video.pic | undefined | video poster
+video.thumbnails | undefined | video thumbnails, generate with [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
+video.type | 'auto' | 'flv' for flv format, 'hls' for m3u8 format, 'normal' for mp4 ogg and webm format, 'auto' for automatic detection according to video suffix, more: [#HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [#FLV support](http://dplayer.js.org/docs/#/?id=flv-support)
+danmaku | undefined | showing danmaku
+danmaku.id | `required` | it must be unique, check if some id used in other player: `https://api.prprpr.me/dplayer/list`
+danmaku.api | `required` | more: [#Back-end](http://dplayer.js.org/docs/#/?id=back-end)
+danmaku.token | undefined | back end verification
+danmaku.maximum | undefined | maximum quantity of danmaku
+danmaku.addition | undefined | additional danmaku, more: [Bilibili danmaku](http://dplayer.js.org/docs/#/?id=bilibili-danmaku-and-video-link)
+danmaku.user | 'DIYgod' | user name
+danmaku.margin | undefined | keep some white space, prevent warding off subtitle
+danmaku.unlimited | false | unlimited amount and allow overlap
+contextmenu | undefined | custom contextmenu, like: `[{ text: 'custom', link: 'https://github.com/MoePlayer/DPlayer' }]`
+
+
+Example:
+
 ```js
 var dp = new DPlayer({
-    element: document.getElementById('player1'),                       // Optional, player element
-    autoplay: false,                                                   // Optional, autoplay video, not supported by mobile browsers
-    theme: '#FADFA3',                                                  // Optional, theme color, default: #b7daff
-    loop: true,                                                        // Optional, loop play music, default: true
-    lang: 'zh',                                                        // Optional, language, `zh` for Chinese, `en` for English, default: Navigator language
-    screenshot: true,                                                  // Optional, enable screenshot function, default: false, NOTICE: if set it to true, video and video poster must enable Cross-Origin
-    hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
-    preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
-    logo: 'logo.png',                                                  // Optional, player logo, showing in top left corner
-    volume: 0.7,                                                       // Optional, default volume, not work after user set volume themselves
-    video: {                                                           // Optional, video info
-        url: 'dplayer.mp4',                                            // Required, video link
-        pic: 'dplayer.png',                                            // Optional, video poster
-        thumbnails: 'thumbnails.jpg',                                  // Optional, video thumbnails, generate with https://github.com/MoePlayer/DPlayer-thumbnails
-        type: 'auto'                                                   // Optional, video type, `flv` for flv format, `hls` for m3u8 format, `normal` for mp4 ogg and webm format, `auto` for automatic detection, default: `auto`
+    container: document.getElementById('player1'),
+    autoplay: false,
+    theme: '#FADFA3',
+    loop: true,
+    lang: 'zh-cn',
+    screenshot: true,
+    hotkey: true,
+    preload: 'auto',
+    logo: 'logo.png',
+    volume: 0.7,
+    video: {
+        url: 'dplayer.mp4',
+        pic: 'dplayer.png',
+        thumbnails: 'thumbnails.jpg',
+        type: 'auto'
     },
-    danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
-        id: '9E2E3368B56CDBB4',                                        // Required, danmaku id, NOTICE: it must be unique, can not use these in your new player: `https://api.prprpr.me/dplayer/list`
-        api: 'https://api.prprpr.me/dplayer/',                         // Required, danmaku api
-        token: 'tokendemo',                                            // Optional, danmaku token for api
-        maximum: 1000,                                                 // Optional, maximum quantity of danmaku
-        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142'] // Optional, additional danmaku, see: `Bilibili 弹幕支持`,
-        user: 'DIYgod'                                                 // Optional, current user's name, default: 'DIYgod',
-        margin: {                                                      // Optional, have a white space
+    danmaku: {
+        id: '9E2E3368B56CDBB4',
+        api: 'https://api.prprpr.me/dplayer/',
+        token: 'tokendemo',
+        maximum: 1000,
+        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142']
+        user: 'DIYgod'
+        margin: {
             bottom: '15%'
         },
-        unlimited: true                                                // Optional, unlimited amount and allow overlap
+        unlimited: true
     },
-    contextmenu: [                                                     // Optional, custom contextmenu
+    contextmenu: [
         {
-            text: '关于作者',
-            link: 'http://diygod.me'
+            text: 'custom1',
+            link: 'https://github.com/DIYgod/DPlayer'
         },
         {
-            text: '播放器意见反馈',
-            link: 'https://github.com/DIYgod/DPlayer/issues'
-        },
-        {
-            text: '关于 DPlayer 播放器',
+            text: 'custom2',
             link: 'https://github.com/DIYgod/DPlayer'
         }
     ]
