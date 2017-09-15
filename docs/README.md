@@ -44,7 +44,7 @@ container | document.getElementById('player1') | player container
 autoplay | false | not supported in mobile browsers
 theme | '#b7daff' | main color
 loop | true | upon reaching the end of the video, automatically seek back to the start
-lang | (navigator.language \|\| navigator.browserLanguage).toLowerCase() | values: 'en', 'zh-cn', 'zh-tw'
+lang | `(navigator.language || navigator.browserLanguage).toLowerCase()` | values: 'en', 'zh-cn', 'zh-tw'
 screenshot | false | enable screenshot, if true, video and video poster must enable Cross-Origin
 hotkey | true | enable hotkey
 preload | 'auto' | values: 'none', 'metadata', 'auto'
