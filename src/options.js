@@ -1,16 +1,16 @@
 /* global DPLAYER_VERSION GIT_HASH */
 const defaultApiBackend = require('./api.js');
 
-module.exports = (option) => {
+module.exports = (options) => {
     const isMobile = /mobile/i.test(window.navigator.userAgent);
     // compatibility: some mobile browsers don't suppose autoplay
     if (isMobile) {
-        option.autoplay = false;
+        options.autoplay = false;
     }
 
     // default options
     const defaultOption = {
-        element: document.getElementsByClassName('dplayer')[0],
+        container: options.element || document.getElementsByClassName('dplayer')[0],
         autoplay: false,
         theme: '#b7daff',
         loop: false,
@@ -24,26 +24,26 @@ module.exports = (option) => {
         contextmenu: []
     };
     for (const defaultKey in defaultOption) {
-        if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
-            option[defaultKey] = defaultOption[defaultKey];
+        if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
+            options[defaultKey] = defaultOption[defaultKey];
         }
     }
-    if (option.video && !option.video.hasOwnProperty('type')) {
-        option.video.type = 'auto';
+    if (options.video && !options.video.hasOwnProperty('type')) {
+        options.video.type = 'auto';
     }
-    if (option.danmaku && !option.danmaku.hasOwnProperty('user')) {
-        option.danmaku.user = 'DIYgod';
-    }
-
-    if (option.video.quality) {
-        option.video.url = [option.video.quality[option.video.defaultQuality].url];
+    if (options.danmaku && !options.danmaku.hasOwnProperty('user')) {
+        options.danmaku.user = 'DIYgod';
     }
 
-    if (option.lang) {
-        option.lang = option.lang.toLowerCase();
+    if (options.video.quality) {
+        options.video.url = [options.video.quality[options.video.defaultQuality].url];
     }
 
-    option.contextmenu = option.contextmenu.concat([{
+    if (options.lang) {
+        options.lang = options.lang.toLowerCase();
+    }
+
+    options.contextmenu = options.contextmenu.concat([{
         text: 'About author',
         link: 'https://www.anotherhome.net/'
     }, {
@@ -57,5 +57,5 @@ module.exports = (option) => {
         link: 'https://github.com/MoePlayer/DPlayer/releases'
     }]);
 
-    return option;
+    return options;
 };

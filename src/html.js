@@ -1,22 +1,22 @@
 const svg = require('./svg.js');
 
 const html = {
-    main: (option, index, tran) => {
+    main: (options, index, tran) => {
         let videos = ``;
-        videos += html.video(true, option.video.pic, option.screenshot, option.preload, option.video.url);
+        videos += html.video(true, options.video.pic, options.screenshot, options.preload, options.video.url);
         return `
         <div class="dplayer-mask"></div>
         <div class="dplayer-video-wrap">
             ${videos}
-            ${option.logo ? `
-            <div class="dplayer-logo"><img src="${option.logo}"></div>
+            ${options.logo ? `
+            <div class="dplayer-logo"><img src="${options.logo}"></div>
             ` : ``}
-            <div class="dplayer-danmaku" style="${option.danmaku ? html.danmakumargin(option.danmaku.margin) : ``}">
+            <div class="dplayer-danmaku" style="${options.danmaku ? html.danmakumargin(options.danmaku.margin) : ``}">
                 <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
             </div>
             <div class="dplayer-bezel">
                 <span class="dplayer-bezel-icon"></span>
-                ${option.danmaku ? `<span class="dplayer-danloading">${tran('Danmaku is loading')}</span>` : ``}
+                ${options.danmaku ? `<span class="dplayer-danloading">${tran('Danmaku is loading')}</span>` : ``}
                 <span class="diplayer-loading-icon">
                     <svg height="100%" version="1.1" viewBox="0 0 22 22" width="100%">
                         <svg x="7" y="1">
@@ -59,8 +59,8 @@ const html = {
                     </button>
                     <div class="dplayer-volume-bar-wrap" data-balloon-pos="up">
                         <div class="dplayer-volume-bar">
-                            <div class="dplayer-volume-bar-inner" style="background: ${option.theme};">
-                                <span class="dplayer-thumb" style="background: ${option.theme}"></span>
+                            <div class="dplayer-volume-bar-inner" style="background: ${options.theme};">
+                                <span class="dplayer-thumb" style="background: ${options.theme}"></span>
                             </div>
                         </div>
                     </div>
@@ -68,15 +68,15 @@ const html = {
                 <span class="dplayer-time"><span class="dplayer-ptime">0:00</span> / <span class="dplayer-dtime">0:00</span></span>
             </div>
             <div class="dplayer-icons dplayer-icons-right">
-                ${option.video.quality ? `
+                ${options.video.quality ? `
                 <div class="dplayer-quality">
-                    <button class="dplayer-icon dplayer-quality-icon">${option.video.quality[option.video.defaultQuality].name}</button>
+                    <button class="dplayer-icon dplayer-quality-icon">${options.video.quality[options.video.defaultQuality].name}</button>
                     <div class="dplayer-quality-mask">
-                        ${html.qualityList(option.video.quality)}
+                        ${html.qualityList(options.video.quality)}
                     </div>
                 </div>
                 ` : ``}
-                ${option.screenshot ? `
+                ${options.screenshot ? `
                 <a href="#" class="dplayer-icon dplayer-camera-icon" data-balloon="${tran('Screenshot')}" data-balloon-pos="up">
                     <span class="dplayer-icon-content">${svg('camera')}</span>
                 </a>
@@ -159,13 +159,13 @@ const html = {
                 <div class="dplayer-bar-preview"></div>
                 <div class="dplayer-bar">
                     <div class="dplayer-loaded" style="width: 0;"></div>
-                    <div class="dplayer-played" style="width: 0; background: ${option.theme}">
-                        <span class="dplayer-thumb" style="background: ${option.theme}"></span>
+                    <div class="dplayer-played" style="width: 0; background: ${options.theme}">
+                        <span class="dplayer-thumb" style="background: ${options.theme}"></span>
                     </div>
                 </div>
             </div>
         </div>
-        ${html.contextmenuList(option.contextmenu, tran)}
+        ${html.contextmenuList(options.contextmenu, tran)}
         <div class="dplayer-notice"></div>`;
     },
 

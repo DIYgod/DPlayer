@@ -10,8 +10,8 @@ class User {
         };
         this.default = {
             opacity: 0.7,
-            volume: player.option.volume || 0.7,
-            unlimited: (player.option.danmaku && player.option.danmaku.unlimited ? 1 : 0) || 0,
+            volume: player.options.volume || 0.7,
+            unlimited: (player.options.danmaku && player.options.danmaku.unlimited ? 1 : 0) || 0,
             danmaku: 1
         };
         this.data = {};

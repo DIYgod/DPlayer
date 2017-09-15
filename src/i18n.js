@@ -76,6 +76,13 @@ const tranTxt = {
         'quality': '畫質',
         'FF': '快進',
         'REW': '快退',
-        'Unlimited danmaku': '海量彈幕'
+        'Unlimited danmaku': '海量彈幕',
+        'Send danmaku': '發送彈幕',
+        'Setting': '設置',
+        'Full screen': '全屏',
+        'Web full screen': '頁面全屏',
+        'Send': '發送',
+        'Screenshot': '截圖',
+        's': '秒'
     }
 };

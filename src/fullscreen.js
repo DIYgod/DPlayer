@@ -18,9 +18,9 @@ class FullScreen {
                 this.player.events.trigger('fullscreen_cancel');
             }
         };
-        this.player.element.addEventListener('fullscreenchange', fullscreenchange);
-        this.player.element.addEventListener('mozfullscreenchange', fullscreenchange);
-        this.player.element.addEventListener('webkitfullscreenchange', fullscreenchange);
+        this.player.container.addEventListener('fullscreenchange', fullscreenchange);
+        this.player.container.addEventListener('mozfullscreenchange', fullscreenchange);
+        this.player.container.addEventListener('webkitfullscreenchange', fullscreenchange);
     }
 
     isFullScreen (type = 'browser') {
@@ -28,28 +28,28 @@ class FullScreen {
         case 'browser':
             return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
         case 'web':
-            return this.player.element.classList.contains('dplayer-fulled');
+            return this.player.container.classList.contains('dplayer-fulled');
         }
     }
 
     request (type = 'browser') {
         switch (type) {
         case 'browser':
-            if (this.player.element.requestFullscreen) {
-                this.player.element.requestFullscreen();
+            if (this.player.container.requestFullscreen) {
+                this.player.container.requestFullscreen();
             }
-            else if (this.player.element.mozRequestFullScreen) {
-                this.player.element.mozRequestFullScreen();
+            else if (this.player.container.mozRequestFullScreen) {
+                this.player.container.mozRequestFullScreen();
             }
-            else if (this.player.element.webkitRequestFullscreen) {
-                this.player.element.webkitRequestFullscreen();
+            else if (this.player.container.webkitRequestFullscreen) {
+                this.player.container.webkitRequestFullscreen();
             }
             else if (this.player.video.webkitEnterFullscreen) {   // Safari for iOS
                 this.player.video.webkitEnterFullscreen();
             }
             break;
         case 'web':
-            this.player.element.classList.add('dplayer-fulled');
+            this.player.container.classList.add('dplayer-fulled');
             this.player.events.trigger('webfullscreen');
             break;
         }
@@ -69,7 +69,7 @@ class FullScreen {
             }
             break;
         case 'web':
-            this.player.element.classList.remove('dplayer-fulled');
+            this.player.container.classList.remove('dplayer-fulled');
             this.player.events.trigger('webfullscreen_cancel');
             break;
         }
