@@ -1,6 +1,6 @@
 import './DPlayer.scss';
 
-import utils, {isMobile} from './utils';
+import utils, { isMobile } from './utils';
 import handleOption from './options';
 import i18n from './i18n';
 import html from './html';
@@ -33,7 +33,7 @@ class DPlayer {
 
         this.tran = new i18n(this.options.lang).tran;
 
-        this.icons = new Svg(this.options.icons);
+        this.icons = new Svg(this.options);
 
         this.events = new Events();
 
@@ -928,7 +928,7 @@ class DPlayer {
         }
 
         // Support FLV
-        if (this.type === 'flv'  && flvjs.isSupported()) {
+        if (this.type === 'flv' && flvjs.isSupported()) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
                 url: video.src
