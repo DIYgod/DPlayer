@@ -40,17 +40,17 @@ var dp = new DPlayer({
 
 Name|Default|Note
 ----|-------|----
-container | document.getElementById('player1') | player container
+container | document.getElementsByClassName('dplayer')[0] | player container
 autoplay | false | not supported in mobile browsers
 theme | '#b7daff' | main color
-loop | true | upon reaching the end of the video, automatically seek back to the start
+loop | false | upon reaching the end of the video, automatically seek back to the start
 lang | navigator.language.toLowerCase() | values: 'en', 'zh-cn', 'zh-tw'
 screenshot | false | enable screenshot, if true, video and video poster must enable Cross-Origin
 hotkey | true | enable hotkey
 preload | 'auto' | values: 'none', 'metadata', 'auto'
 volume | 0.7 | default volume, not work after user set volume themselves
 logo | undefined | logo in top left corner
-video | `required` | video info
+video | undefined | video info
 video.quality | undefined | more: [Quality switching](http://dplayer.js.org/docs/#/?id=quality-switching)
 video.url | undefined | video link
 video.pic | undefined | video poster
@@ -167,7 +167,7 @@ var dp = new DPlayer({
 
     Returns whether the video should start over again when finished
 
- + `dp.vidio.paused`
+ + `dp.video.paused`
 
     Returns whether the video paused
 
