@@ -1,7 +1,5 @@
-const svg = require('./svg.js');
-
 const html = {
-    main: (options, index, tran) => {
+    main: (options, index, tran, icons) => {
         let videos = ``;
         videos += html.video(true, options.video.pic, options.screenshot, options.preload, options.video.url);
         return `
@@ -51,11 +49,11 @@ const html = {
         <div class="dplayer-controller">
             <div class="dplayer-icons dplayer-icons-left">
                 <button class="dplayer-icon dplayer-play-icon">
-                    <span class="dplayer-icon-content">${svg('play')}</span>
+                    <span class="dplayer-icon-content">${icons.get('play')}</span>
                 </button>
                 <div class="dplayer-volume">
                     <button class="dplayer-icon dplayer-volume-icon">
-                        <span class="dplayer-icon-content">${svg('volume-down')}</span>
+                        <span class="dplayer-icon-content">${icons.get('volume-down')}</span>
                     </button>
                     <div class="dplayer-volume-bar-wrap" data-balloon-pos="up">
                         <div class="dplayer-volume-bar">
@@ -78,16 +76,16 @@ const html = {
                 ` : ``}
                 ${options.screenshot ? `
                 <a href="#" class="dplayer-icon dplayer-camera-icon" data-balloon="${tran('Screenshot')}" data-balloon-pos="up">
-                    <span class="dplayer-icon-content">${svg('camera')}</span>
+                    <span class="dplayer-icon-content">${icons.get('camera')}</span>
                 </a>
                 ` : ``}
                 <div class="dplayer-comment">
                     <button class="dplayer-icon dplayer-comment-icon" data-balloon="${tran('Send danmaku')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${svg('comment')}</span>
+                        <span class="dplayer-icon-content">${icons.get('comment')}</span>
                     </button>
                     <div class="dplayer-comment-box">
                         <button class="dplayer-icon dplayer-comment-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
-                            <span class="dplayer-icon-content">${svg('menu')}</span>
+                            <span class="dplayer-icon-content">${icons.get('menu')}</span>
                         </button>
                         <div class="dplayer-comment-setting-box">
                             <div class="dplayer-comment-setting-color">
@@ -135,22 +133,22 @@ const html = {
                         </div>
                         <input class="dplayer-comment-input" type="text" placeholder="${tran('Input danmaku, hit Enter')}" maxlength="30">
                         <button class="dplayer-icon dplayer-send-icon" data-balloon="${tran('Send')}" data-balloon-pos="up">
-                            <span class="dplayer-icon-content">${svg('send')}</span>
+                            <span class="dplayer-icon-content">${icons.get('send')}</span>
                         </button>
                     </div>
                 </div>
                 <div class="dplayer-setting">
                     <button class="dplayer-icon dplayer-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${svg('setting')}</span>
+                        <span class="dplayer-icon-content">${icons.get('setting')}</span>
                     </button>
                     <div class="dplayer-setting-box"></div>
                 </div>
                 <div class="dplayer-full">
                     <button class="dplayer-icon dplayer-full-in-icon" data-balloon="${tran('Web full screen')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${svg('full-in')}</span>
+                        <span class="dplayer-icon-content">${icons.get('full-in')}</span>
                     </button>
                     <button class="dplayer-icon dplayer-full-icon" data-balloon="${tran('Full screen')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${svg('full')}</span>
+                        <span class="dplayer-icon-content">${icons.get('full')}</span>
                     </button>
                 </div>
             </div>
@@ -201,12 +199,12 @@ const html = {
 
     video: (current, pic, screenshot, preload, url) => `<video class="dplayer-video ${current ? `dplayer-video-current"` : ``}" ${pic ? `poster="${pic}"` : ``} webkit-playsinline playsinline ${screenshot ? `crossorigin="anonymous"` : ``} ${preload ? `preload="${preload}"` : ``} src="${url}"></video>`,
 
-    setting: (tran) => ({
+    setting: (tran, icons) => ({
         'original': `
             <div class="dplayer-setting-item dplayer-setting-speed">
                 <span class="dplayer-label">${tran('Speed')}</span>
                 <div class="dplayer-toggle">
-                    ${svg('right')}
+                    ${icons.get('right')}
                 </div>
             </div>
             <div class="dplayer-setting-item dplayer-setting-loop">
