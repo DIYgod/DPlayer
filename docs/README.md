@@ -56,6 +56,8 @@ video.url | undefined | video link
 video.pic | undefined | video poster
 video.thumbnails | undefined | video thumbnails, generate with [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
 video.type | 'auto' | 'flv' for flv format, 'hls' for m3u8 format, 'normal' for mp4 ogg and webm format, 'auto' for automatic detection according to video suffix, more: [#HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [#FLV support](http://dplayer.js.org/docs/#/?id=flv-support)
+icons | [options.js#L24](https://github.com/MoePlayer/DPlayer/blob/master/src/options.js#L24) | UI icons
+iconsColor | #ffffff | player icons color
 danmaku | undefined | showing danmaku
 danmaku.id | `required` | it must be unique, check if some id used in other player: `https://api.prprpr.me/dplayer/list`
 danmaku.api | `required` | more: [#Back-end](http://dplayer.js.org/docs/#/?id=back-end)
@@ -99,6 +101,18 @@ var dp = new DPlayer({
             bottom: '15%'
         },
         unlimited: true
+    },
+    icons: {
+        play: [
+            '0 0 24 24',
+            'M8 5v14l11-7z',
+            '24' // Icon size
+        ],
+        pause: [
+            '0 0 24 24',
+            'M6 19h4V5H6v14zm8-14v14h4V5h-4z',
+            '24' // Icon size
+        ]
     },
     contextmenu: [
         {
