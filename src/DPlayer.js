@@ -1,10 +1,10 @@
 import './DPlayer.scss';
 
-import utils, {isMobile} from './utils';
-import svg from './svg';
+import utils, { isMobile } from './utils';
 import handleOption from './options';
 import i18n from './i18n';
 import html from './html';
+import SvgCollection from './svg';
 import Danmaku from './danmaku';
 import Thumbnails from './thumbnails';
 import Events from './events';
@@ -33,6 +33,8 @@ class DPlayer {
 
         this.tran = new i18n(this.options.lang).tran;
 
+        this.icons = new SvgCollection(this.options);
+
         this.events = new Events();
 
         this.user = new User(this);
@@ -45,7 +47,7 @@ class DPlayer {
             this.container.classList.add('dplayer-mobile');
         }
 
-        this.container.innerHTML = html.main(this.options, index, this.tran);
+        this.container.innerHTML = html.main(this.options, index, this.tran, this.icons);
 
         const bar = {};
         bar.volumeBar = this.container.getElementsByClassName('dplayer-volume-bar-inner')[0];
@@ -279,13 +281,13 @@ class DPlayer {
 
         this.switchVolumeIcon = () => {
             if (this.volume() >= 0.95) {
-                volumeicon.innerHTML = svg('volume-up');
+                volumeicon.innerHTML = this.icons.get('volume-up');
             }
             else if (this.volume() > 0) {
-                volumeicon.innerHTML = svg('volume-down');
+                volumeicon.innerHTML = this.icons.get('volume-down');
             }
             else {
-                volumeicon.innerHTML = svg('volume-off');
+                volumeicon.innerHTML = this.icons.get('volume-off');
             }
         };
         const volumeMove = (event) => {
@@ -317,7 +319,7 @@ class DPlayer {
             }
             else {
                 this.video.muted = true;
-                volumeicon.innerHTML = svg('volume-off');
+                volumeicon.innerHTML = this.icons.get('volume-off');
                 this.updateBar('volume', 0, 'width');
             }
         });
@@ -347,7 +349,7 @@ class DPlayer {
         /**
          * setting
          */
-        const settingHTML = html.setting(this.tran);
+        const settingHTML = html.setting(this.tran, this.icons);
 
         // toggle setting box
         const settingIcon = this.container.getElementsByClassName('dplayer-setting-icon')[0];
@@ -502,7 +504,7 @@ class DPlayer {
         settingEvent();
 
         // set duration time
-        if (this.video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+        if (this.video.duration !== 1) { // compatibility: Android browsers will output 1 at first
             this.container.getElementsByClassName('dplayer-dtime')[0].innerHTML = this.video.duration ? utils.secondToTime(this.video.duration) : '00:00';
         }
 
@@ -794,11 +796,11 @@ class DPlayer {
     play () {
         this.paused = false;
         if (this.video.paused) {
-            this.bezel.innerHTML = svg('play');
+            this.bezel.innerHTML = this.icons.get('play');
             this.bezel.classList.add('dplayer-bezel-transition');
         }
 
-        this.playButton.innerHTML = svg('pause');
+        this.playButton.innerHTML = this.icons.get('pause');
 
         this.video.play();
         this.setTime();
@@ -816,12 +818,12 @@ class DPlayer {
         this.container.classList.remove('dplayer-loading');
 
         if (!this.video.paused) {
-            this.bezel.innerHTML = svg('pause');
+            this.bezel.innerHTML = this.icons.get('pause');
             this.bezel.classList.add('dplayer-bezel-transition');
         }
 
         this.ended = false;
-        this.playButton.innerHTML = svg('play');
+        this.playButton.innerHTML = this.icons.get('play');
         this.video.pause();
         this.clearTime();
         this.container.classList.remove('dplayer-playing');
@@ -926,7 +928,7 @@ class DPlayer {
         }
 
         // Support FLV
-        if (this.type === 'flv'  && flvjs.isSupported()) {
+        if (this.type === 'flv' && flvjs.isSupported()) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
                 url: video.src
