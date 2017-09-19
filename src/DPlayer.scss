@@ -530,10 +530,6 @@
                 }
             }
 
-            .dplayer-fill {
-                fill: #fff;
-            }
-
             .dplayer-volume {
                 position: relative;
                 display: inline-block;
@@ -803,18 +799,6 @@
                         top: 5px;
                         left: 7px;
                         padding: 0;
-                        opacity: 1;
-
-                        &:hover {
-                            .dplayer-fill {
-                                fill: #aaa;
-                            }
-                        }
-
-                        .dplayer-fill {
-                            transition: all .2s ease-in-out;
-                            fill: #ddd;
-                        }
                     }
 
                     .dplayer-comment-setting-box {
@@ -945,18 +929,6 @@
                         top: 6px;
                         right: 7px;
                         padding: 0;
-                        opacity: 1;
-
-                        &:hover {
-                            .dplayer-fill {
-                                fill: #aaa;
-                            }
-                        }
-
-                        .dplayer-fill {
-                            transition: all .2s ease-in-out;
-                            fill: #ddd;
-                        }
                     }
                 }
             }
