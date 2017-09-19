@@ -2,10 +2,10 @@
 * SVG used by DPlayer
 */
 
-class Svg {
+class SvgSource {
     constructor (options) {
         this.icons = options.icons;
-        this.iconColor = options.iconColor;
+        this.iconColor = options.iconsColor;
     }
 
     get (type) {
@@ -21,4 +21,4 @@ class Svg {
     }
 }
 
-module.exports = Svg;
+module.exports = SvgSource;

@@ -4,7 +4,7 @@ import utils, { isMobile } from './utils';
 import handleOption from './options';
 import i18n from './i18n';
 import html from './html';
-import Svg from './svg';
+import SvgCollection from './svg';
 import Danmaku from './danmaku';
 import Thumbnails from './thumbnails';
 import Events from './events';
@@ -33,7 +33,7 @@ class DPlayer {
 
         this.tran = new i18n(this.options.lang).tran;
 
-        this.icons = new Svg(this.options);
+        this.icons = new SvgCollection(this.options);
 
         this.events = new Events();
 
@@ -504,7 +504,7 @@ class DPlayer {
         settingEvent();
 
         // set duration time
-        if (this.video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+        if (this.video.duration !== 1) { // compatibility: Android browsers will output 1 at first
             this.container.getElementsByClassName('dplayer-dtime')[0].innerHTML = this.video.duration ? utils.secondToTime(this.video.duration) : '00:00';
         }
 
