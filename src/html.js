@@ -1,17 +1,15 @@
 const html = {
-    main: (options, index, tran, icons) => {
-        let videos = ``;
-        videos += html.video(true, options.video.pic, options.screenshot, options.preload, options.video.url);
-        return `
+    main: (options, index, tran, icons) => `
         <div class="dplayer-mask"></div>
         <div class="dplayer-video-wrap">
-            ${videos}
+            ${html.video(true, options.video.pic, options.screenshot, options.preload, options.video.url, options.subtitle)}
             ${options.logo ? `
             <div class="dplayer-logo"><img src="${options.logo}"></div>
             ` : ``}
             <div class="dplayer-danmaku" style="${options.danmaku ? html.danmakumargin(options.danmaku.margin) : ``}">
                 <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
             </div>
+            <div class="dplayer-subtitle"></div>
             <div class="dplayer-bezel">
                 <span class="dplayer-bezel-icon"></span>
                 ${options.danmaku ? `<span class="dplayer-danloading">${tran('Danmaku is loading')}</span>` : ``}
@@ -164,8 +162,7 @@ const html = {
             </div>
         </div>
         ${html.contextmenuList(options.contextmenu, tran)}
-        <div class="dplayer-notice"></div>`;
-    },
+        <div class="dplayer-notice"></div>`,
 
     danmakumargin: (margin) => {
         let result = '';
@@ -197,7 +194,13 @@ const html = {
         return result;
     },
 
-    video: (current, pic, screenshot, preload, url) => `<video class="dplayer-video ${current ? `dplayer-video-current"` : ``}" ${pic ? `poster="${pic}"` : ``} webkit-playsinline playsinline ${screenshot ? `crossorigin="anonymous"` : ``} ${preload ? `preload="${preload}"` : ``} src="${url}"></video>`,
+    video: (current, pic, screenshot, preload, url, subtitle) => {
+        const enableSubtitle = subtitle && subtitle.type === 'webvtt';
+        return `
+        <video class="dplayer-video ${current ? `dplayer-video-current"` : ``}" ${pic ? `poster="${pic}"` : ``} webkit-playsinline playsinline ${screenshot || enableSubtitle ? `crossorigin="anonymous"` : ``} ${preload ? `preload="${preload}"` : ``} src="${url}">
+            ${enableSubtitle ? `<track kind="metadata" default src="${subtitle.url}"></track>` : ``}
+        </video>`;
+    },
 
     setting: (tran, icons) => ({
         'original': `

@@ -247,6 +247,17 @@
         }
     }
 
+    .dplayer-subtitle {
+        position: absolute;
+        bottom: 40px;
+        width: 90%;
+        left: 5%;
+        text-align: center;
+        color: #fff;
+        text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
+        font-size: 20px;
+    }
+
     .dplayer-bezel {
         position: absolute;
         left: 0;

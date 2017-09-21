@@ -10,6 +10,7 @@ import Thumbnails from './thumbnails';
 import Events from './events';
 import FullScreen from './fullscreen';
 import User from './user';
+import Subtitle from './subtitle';
 
 let index = 0;
 
@@ -998,6 +999,10 @@ class DPlayer {
         }
 
         this.volume(this.user.get('volume'), true);
+
+        if (this.options.subtitle) {
+            this.subtitle = new Subtitle(this.container.getElementsByClassName('dplayer-subtitle')[0], this.video, this.options.subtitle);
+        }
     }
 
     switchQuality (index) {
@@ -1013,7 +1018,7 @@ class DPlayer {
 
         const paused = this.video.paused;
         this.video.pause();
-        const videoHTML = html.video(false, null, this.options.screenshot, 'auto', this.quality.url);
+        const videoHTML = html.video(false, null, this.options.screenshot, 'auto', this.quality.url, this.options.subtitle);
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
         const parent = this.container.getElementsByClassName('dplayer-video-wrap')[0];
         parent.insertBefore(videoEle, parent.getElementsByTagName('div')[0]);

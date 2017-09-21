@@ -18,7 +18,7 @@ module.exports = (options) => {
         screenshot: false,
         hotkey: true,
         preload: 'auto',
-        volume: '0.7',
+        volume: 0.7,
         apiBackend: defaultApiBackend,
         video: {},
         icons: {
@@ -91,11 +91,17 @@ module.exports = (options) => {
             options[defaultKey] = defaultOption[defaultKey];
         }
     }
-    if (options.video && !options.video.hasOwnProperty('type')) {
-        options.video.type = 'auto';
+    if (options.video) {
+        !options.video.type && (options.video.type = 'auto');
     }
-    if (options.danmaku && !options.danmaku.hasOwnProperty('user')) {
-        options.danmaku.user = 'DIYgod';
+    if (options.danmaku) {
+        !options.danmaku.user && (options.danmaku.user = 'DIYgod');
+    }
+    if (options.subtitle) {
+        !options.subtitle.type && (options.subtitle.type = 'webvtt');
+        !options.subtitle.fontSize && (options.subtitle.fontSize = '20px');
+        !options.subtitle.bottom && (options.subtitle.bottom = '40px');
+        !options.subtitle.color && (options.subtitle.color = '#fff');
     }
 
     if (options.video.quality) {
