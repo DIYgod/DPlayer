@@ -71,6 +71,9 @@ function initPlayers() {
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
             thumbnails: 'http://devtest.qiniudn.com/thumbnails.jpg'
         },
+        subtitle: {
+            url: 'http://devtest.qiniudn.com/若能绽放光芒2.vtt'
+        },
         danmaku: {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/'
@@ -92,6 +95,13 @@ function initPlayers() {
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
             thumbnails: 'http://devtest.qiniudn.com/thumbnails.jpg',
             type: 'auto'
+        },
+        subtitle: {
+            url: 'http://devtest.qiniudn.com/若能绽放光芒2.vtt',
+            type: 'webvtt',
+            fontSize: '25px',
+            bottom: '10%',
+            color: '#b7daff'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',

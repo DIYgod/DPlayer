@@ -58,6 +58,12 @@ video.thumbnails | undefined | video thumbnails, generate with [DPlayer-thumbnai
 video.type | 'auto' | 'flv' for flv format, 'hls' for m3u8 format, 'normal' for mp4 ogg and webm format, 'auto' for automatic detection according to video suffix, more: [#HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [#FLV support](http://dplayer.js.org/docs/#/?id=flv-support)
 icons | [options.js#L24](https://github.com/MoePlayer/DPlayer/blob/master/src/options.js#L24) | UI icons
 iconsColor | #ffffff | player icons color
+subtitle | undefined | external subtitle
+subtitle.url | `required` | subtitle url
+subtitle.type | 'webvtt' | values: 'webvtt', 'ass', but only webvtt is supported for now
+subtitle.fontSize | '20px' | subtitle font size
+subtitle.bottom | '40px' | subtitle bottom space
+subtitle.color | '#fff' | subtitle color
 danmaku | undefined | showing danmaku
 danmaku.id | `required` | it must be unique, check if some id used in other player: `https://api.prprpr.me/dplayer/list`
 danmaku.api | `required` | more: [#Back-end](http://dplayer.js.org/docs/#/?id=back-end)
@@ -89,6 +95,13 @@ var dp = new DPlayer({
         pic: 'dplayer.png',
         thumbnails: 'thumbnails.jpg',
         type: 'auto'
+    },
+    subtitle: {
+        url: 'dplayer.vtt',
+        type: 'webvtt',
+        fontSize: '25px',
+        bottom: '10%',
+        color: '#b7daff'
     },
     danmaku: {
         id: '9E2E3368B56CDBB4',
