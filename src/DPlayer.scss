@@ -1262,3 +1262,12 @@
 [data-balloon][data-balloon-pos="up"]:after {
     margin-bottom: 0;
 }
+
+// To hide scroll bar, apply this class to <body>
+.dplayer-web-fullscreen-fix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}

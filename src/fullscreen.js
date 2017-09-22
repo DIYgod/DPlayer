@@ -1,3 +1,5 @@
+import utils from './utils';
+
 class FullScreen {
     constructor (player) {
         this.player = player;
@@ -50,6 +52,11 @@ class FullScreen {
             break;
         case 'web':
             this.player.container.classList.add('dplayer-fulled');
+
+            // record last position then hide scrollbars
+            this.lastScrollPosition = utils.getScrollPosition();
+            document.body.classList.add('dplayer-web-fullscreen-fix');
+
             this.player.events.trigger('webfullscreen');
             break;
         }
@@ -70,6 +77,11 @@ class FullScreen {
             break;
         case 'web':
             this.player.container.classList.remove('dplayer-fulled');
+
+            // restore scrollbars and last position
+            document.body.classList.remove('dplayer-web-fullscreen-fix');
+            utils.setScrollPosition(this.lastScrollPosition);
+
             this.player.events.trigger('webfullscreen_cancel');
             break;
         }
