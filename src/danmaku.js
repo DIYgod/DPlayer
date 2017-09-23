@@ -277,6 +277,7 @@ class Danmaku {
     }
 
     seek () {
+        this.clear();
         for (let i = 0; i < this.dan.length; i++) {
             if (this.dan[i].time >= this.options.time()) {
                 this.danIndex = i;
