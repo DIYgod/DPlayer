@@ -284,6 +284,9 @@ Player events
 - resize
 - fullscreen
 - fullscreen_cancel
+- subtitle_show
+- subtitle_hide
+- subtitle_change
 
 ### Quality switching
 
