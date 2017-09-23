@@ -74,7 +74,7 @@ danmaku.user | 'DIYgod' | user name
 danmaku.margin | undefined | keep some white space, prevent warding off subtitle
 danmaku.unlimited | false | unlimited amount and allow overlap
 contextmenu | undefined | custom contextmenu, like: `[{ text: 'custom', link: 'https://github.com/MoePlayer/DPlayer' }]`
-
+mutex | true | pause other players when this player start play
 
 Example:
 
@@ -90,6 +90,7 @@ var dp = new DPlayer({
     preload: 'auto',
     logo: 'logo.png',
     volume: 0.7,
+    mutex: true,
     video: {
         url: 'dplayer.mp4',
         pic: 'dplayer.png',

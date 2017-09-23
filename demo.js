@@ -90,6 +90,7 @@ function initPlayers() {
         hotkey: true,
         logo: 'http://devtest.qiniudn.com/DPlayer.png',
         volume: 0.2,
+        mutex: true,
         video: {
             url: 'http://devtest.qiniudn.com/若能绽放光芒.mp4',
             pic: 'http://devtest.qiniudn.com/若能绽放光芒.png',
