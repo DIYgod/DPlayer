@@ -256,6 +256,10 @@
         color: #fff;
         text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
         font-size: 20px;
+
+        &.dplayer-subtitle-hide {
+            display: none;
+        }
     }
 
     .dplayer-bezel {
@@ -605,6 +609,11 @@
                         }
                     }
                 }
+            }
+
+            .dplayer-subtitle-btn {
+                display: inline-block;
+                height: 100%;
             }
 
             .dplayer-setting {

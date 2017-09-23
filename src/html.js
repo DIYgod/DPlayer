@@ -135,6 +135,13 @@ const html = {
                         </button>
                     </div>
                 </div>
+                ${options.subtitle ? `
+                <div class="dplayer-subtitle-btn">
+                    <button class="dplayer-icon dplayer-subtitle-icon" data-balloon="${tran('Hide subtitle')}" data-balloon-pos="up">
+                        <span class="dplayer-icon-content">${icons.get('subtitle')}</span>
+                    </button>
+                </div>
+                ` : ``}
                 <div class="dplayer-setting">
                     <button class="dplayer-icon dplayer-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
                         <span class="dplayer-icon-content">${icons.get('setting')}</span>

@@ -51,7 +51,9 @@ const tranTxt = {
         'Web full screen': '页面全屏',
         'Send': '发送',
         'Screenshot': '截图',
-        's': '秒'
+        's': '秒',
+        'Show subtitle': '显示字幕',
+        'Hide subtitle': '隐藏字幕'
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',
@@ -83,6 +85,8 @@ const tranTxt = {
         'Web full screen': '頁面全屏',
         'Send': '發送',
         'Screenshot': '截圖',
-        's': '秒'
+        's': '秒',
+        'Show subtitle': '顯示字幕',
+        'Hide subtitle': '隱藏字幕'
     }
 };

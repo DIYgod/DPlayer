@@ -762,6 +762,29 @@ class DPlayer {
             });
         }
 
+        /**
+         * Toggle subtitle
+         */
+        if (this.options.subtitle) {
+            const subtitleIcon = this.container.getElementsByClassName('dplayer-subtitle-icon')[0];
+            const subtitleIn = subtitleIcon.getElementsByClassName('dplayer-icon-content')[0];
+
+            this.events.on('subtitle_show', () => {
+                subtitleIcon.dataset.balloon = this.tran('Hide subtitle');
+                subtitleIn.style.opacity = '';
+                this.user.set('subtitle', 1);
+            });
+            this.events.on('subtitle_hide', () => {
+                subtitleIcon.dataset.balloon = this.tran('Show subtitle');
+                subtitleIn.style.opacity = '0.4';
+                this.user.set('subtitle', 0);
+            });
+
+            subtitleIcon.addEventListener('click', () => {
+                this.subtitle.toggle();
+            });
+        }
+
         this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
 
         index++;
@@ -1001,7 +1024,10 @@ class DPlayer {
         this.volume(this.user.get('volume'), true);
 
         if (this.options.subtitle) {
-            this.subtitle = new Subtitle(this.container.getElementsByClassName('dplayer-subtitle')[0], this.video, this.options.subtitle);
+            this.subtitle = new Subtitle(this.container.getElementsByClassName('dplayer-subtitle')[0], this.video, this.options.subtitle, this.events);
+            if (!this.user.get('subtitle')) {
+                this.subtitle.hide();
+            }
         }
     }
 

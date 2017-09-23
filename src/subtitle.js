@@ -1,8 +1,9 @@
 class Subtitle {
-    constructor (container, video, options) {
+    constructor (container, video, options, events) {
         this.container = container;
         this.video = video;
         this.options = options;
+        this.events = events;
 
         this.init();
     }
@@ -26,7 +27,27 @@ class Subtitle {
                 else {
                     this.container.innerHTML = '';
                 }
+                this.events.trigger('subtitle_change');
             };
+        }
+    }
+
+    show () {
+        this.container.classList.remove('dplayer-subtitle-hide');
+        this.events.trigger('subtitle_show');
+    }
+
+    hide () {
+        this.container.classList.add('dplayer-subtitle-hide');
+        this.events.trigger('subtitle_hide');
+    }
+
+    toggle () {
+        if (this.container.classList.contains('dplayer-subtitle-hide')) {
+            this.show();
+        }
+        else {
+            this.hide();
         }
     }
 }
