@@ -53,7 +53,8 @@ const tranTxt = {
         'Screenshot': '截图',
         's': '秒',
         'Show subtitle': '显示字幕',
-        'Hide subtitle': '隐藏字幕'
+        'Hide subtitle': '隐藏字幕',
+        'Volume': '音量'
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',
@@ -87,6 +88,7 @@ const tranTxt = {
         'Screenshot': '截圖',
         's': '秒',
         'Show subtitle': '顯示字幕',
-        'Hide subtitle': '隱藏字幕'
+        'Hide subtitle': '隱藏字幕',
+        'Volume': '音量'
     }
 };

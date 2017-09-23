@@ -868,7 +868,7 @@ class DPlayer {
     /**
      * Set volume
      */
-    volume (percentage, nostorage) {
+    volume (percentage, nostorage, nonotice) {
         percentage = parseFloat(percentage);
         if (!isNaN(percentage)) {
             percentage = percentage > 0 ? percentage : 0;
@@ -879,6 +879,10 @@ class DPlayer {
             if (!nostorage) {
                 this.user.set('volume', percentage);
             }
+            if (!nonotice) {
+                this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
+            }
+
             this.video.volume = percentage;
             if (this.video.muted) {
                 this.video.muted = false;
@@ -1030,7 +1034,7 @@ class DPlayer {
             });
         }
 
-        this.volume(this.user.get('volume'), true);
+        this.volume(this.user.get('volume'), true, true);
 
         if (this.options.subtitle) {
             this.subtitle = new Subtitle(this.container.getElementsByClassName('dplayer-subtitle')[0], this.video, this.options.subtitle, this.events);
