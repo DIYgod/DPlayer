@@ -13,6 +13,7 @@ import User from './user';
 import Subtitle from './subtitle';
 
 let index = 0;
+const instances = [];
 
 class DPlayer {
 
@@ -788,6 +789,7 @@ class DPlayer {
         this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
 
         index++;
+        instances.push(this);
     }
 
     /**
@@ -831,6 +833,13 @@ class DPlayer {
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
             this.danmaku.play();
+        }
+        if (this.options.mutex) {
+            for (let i = 0; i < instances.length; i++) {
+                if (this !== instances[i]) {
+                    instances[i].pause();
+                }
+            }
         }
     }
 
@@ -1167,6 +1176,7 @@ class DPlayer {
     }
 
     destroy () {
+        instances.splice(instances.indexOf(this), 1);
         this.pause();
         clearTimeout(this.hideTime);
         this.video.src = '';

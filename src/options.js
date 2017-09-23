@@ -88,7 +88,8 @@ module.exports = (options) => {
             ]
         },
         iconsColor: '#ffffff',
-        contextmenu: []
+        contextmenu: [],
+        mutex: true
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
