@@ -376,6 +376,16 @@
         user-select: none;
         transition: all 0.3s ease;
 
+        &.dplayer-controller-comment {
+            .dplayer-icons {
+                display: none;
+            }
+
+            .dplayer-icons.dplayer-comment-box {
+                display: block;
+            }
+        }
+
         .dplayer-bar-wrap {
             padding: 5px 0;
             cursor: pointer;
@@ -476,6 +486,156 @@
             position: absolute;
             bottom: 0;
 
+            &.dplayer-comment-box {
+                display: none;
+                position: absolute;
+                transition: all .3s ease-in-out;
+                z-index: 2;
+                height: 38px;
+                bottom: 0;
+                left: 20px;
+                right: 20px;
+                color: #fff;
+
+                .dplayer-icon {
+                    padding: 7px;
+                }
+
+                .dplayer-comment-setting-icon {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+
+                .dplayer-send-icon {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+
+                .dplayer-comment-setting-box {
+                    position: absolute;
+                    background: rgba(28, 28, 28, 0.9);
+                    bottom: 41px;
+                    left: 0;
+                    box-shadow: 0 0 25px rgba(0,0,0,.3);
+                    border-radius: 4px;
+                    padding: 10px 10px 16px;
+                    font-size: 14px;
+                    width: 204px;
+                    transition: all .3s ease-in-out;
+                    transform: scale(0);
+
+                    &.dplayer-comment-setting-open {
+                        transform: scale(1);
+                    }
+
+                    input[type=radio] {
+                        display: none;
+                    }
+
+                    label {
+                        cursor: pointer;
+                    }
+
+                    .dplayer-comment-setting-title {
+                        font-size: 13px;
+                        color: #fff;
+                        line-height: 30px;
+                    }
+
+                    .dplayer-comment-setting-type {
+                        font-size: 0;
+
+                        .dplayer-comment-setting-title {
+                            margin-bottom: 6px;
+                        }
+
+                        label {
+                            &:nth-child(2) {
+                                span {
+                                    border-radius: 4px 0 0 4px;
+                                }
+                            }
+                            &:nth-child(4) {
+                                span {
+                                    border-radius: 0 4px 4px 0;
+                                }
+                            }
+                        }
+
+                        span {
+                            width: 33%;
+                            padding: 4px 6px;
+                            line-height: 16px;
+                            display: inline-block;
+                            font-size: 12px;
+                            color: #fff;
+                            border: 1px solid #fff;
+                            margin-right: -1px;
+                            box-sizing: border-box;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+
+                        input:checked+span {
+                            background: #E4E4E6;
+                            color: #1c1c1c;
+                        }
+                    }
+
+                    .dplayer-comment-setting-color {
+                        font-size: 0;
+
+                        label {
+                            font-size: 0;
+                            padding: 6px;
+                            display: inline-block;
+                        }
+
+                        span {
+                            width: 22px;
+                            height: 22px;
+                            display: inline-block;
+                            border-radius: 50%;
+                            box-sizing: border-box;
+                            cursor: pointer;
+
+                            &:hover {
+                                animation: my-face 5s infinite ease-in-out;
+                                box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+                            }
+                        }
+
+                        input:checked+span {
+                            box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+                            border: none !important;
+                        }
+                    }
+                }
+
+                .dplayer-comment-input {
+                    outline: none;
+                    border: none;
+                    padding: 8px 31px;
+                    font-size: 14px;
+                    line-height: 18px;
+                    text-align: center;
+                    border-radius: 4px;
+                    background: none;
+                    margin: 0;
+                    height: 100%;
+                    box-sizing: border-box;
+                    width: 100%;
+                    color: #fff;
+
+                    &::placeholder {
+                        color: #fff;
+                        opacity: 0.8;
+                    }
+                }
+            }
+
             &.dplayer-icons-left {
                 .dplayer-icon {
                     padding: 7px;
@@ -487,11 +647,6 @@
                 .dplayer-icon {
                     padding: 8px;
                 }
-            }
-
-            #dplayer-menu {
-                stroke: #ddd;
-                stroke-width: 1px;
             }
 
             .dplayer-time {
@@ -624,7 +779,7 @@
                     position: absolute;
                     right: 0;
                     bottom: 50px;
-                    transform: translateX(170px);
+                    transform: scale(0);
                     width: 150px;
                     border-radius: 2px;
                     background: rgba(28, 28, 28, 0.9);
@@ -634,7 +789,7 @@
                     z-index: 2;
 
                     &.dplayer-setting-box-open {
-                        transform: translateX(0);
+                        transform: scale(1);
                     }
 
                     &.dplayer-setting-box-narrow {
@@ -799,158 +954,7 @@
                 display: inline-block;
                 height: 100%;
 
-                .dplayer-comment-box {
-                    position: absolute;
-                    right: 0;
-                    bottom: 50px;
-                    transform: translateX(382px);
-                    border-radius: 2px;
-                    transition: all .3s ease-in-out;
-                    z-index: 2;
-
-                    &.dplayer-comment-box-open {
-                        transform: translateX(0);
-                    }
-
-                    .dplayer-comment-setting-icon {
-                        height: 24px;
-                        width: 24px;
-                        position: absolute;
-                        top: 5px;
-                        left: 7px;
-                        padding: 0;
-                    }
-
-                    .dplayer-comment-setting-box {
-                        position: absolute;
-                        background: #fff;
-                        bottom: 40px;
-                        left: -93px;
-                        box-shadow: 0 0 25px rgba(0,0,0,.3);
-                        border-radius: 4px;
-                        padding: 10px 10px 16px;
-                        font-size: 14px;
-                        width: 204px;
-                        transition: all .3s ease-in-out;
-                        transform: scale(0);
-
-                        &.dplayer-comment-setting-open {
-                            transform: scale(1);
-                        }
-
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            top: 100%;
-                            left: 50%;
-                            margin-left: -12px;
-                            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12"><path fill="#FFF" d="M23.7,0c-1.2,0-2.4,0.5-3.2,1.3l-7.7,7.8c-0.4,0.4-1.1,0.4-1.5,0L3.5,1.3C2.7,0.5,1.5,0,0.3,0"/></svg>');
-                            width: 24px;
-                            height: 12px;
-                        }
-
-                        input[type=radio] {
-                            display: none;
-                        }
-
-                        label {
-                            cursor: pointer;
-                        }
-
-                        .dplayer-comment-setting-title {
-                            font-size: 14px;
-                            color: #555;
-                            padding: 6px;
-                        }
-
-                        .dplayer-comment-setting-type {
-                            font-size: 0;
-
-                            label {
-                                &:nth-child(2) {
-                                    span {
-                                        border-radius: 4px 0 0 4px;
-                                    }
-                                }
-                                &:nth-child(4) {
-                                    span {
-                                        border-radius: 0 4px 4px 0;
-                                    }
-                                }
-                            }
-
-                            span {
-                                width: 33%;
-                                padding: 4px 6px;
-                                line-height: 16px;
-                                display: inline-block;
-                                font-size: 12px;
-                                color: #555;
-                                border: 1px solid #E4E4E6;
-                                margin-right: -1px;
-                                box-sizing: border-box;
-                                text-align: center;
-                                cursor: pointer;
-                            }
-
-                            input:checked+span {
-                                background: #E4E4E6;
-                            }
-                        }
-
-                        .dplayer-comment-setting-color {
-                            font-size: 0;
-
-                            label {
-                                font-size: 0;
-                                padding: 6px;
-                                display: inline-block;
-                            }
-
-                            span {
-                                width: 22px;
-                                height: 22px;
-                                display: inline-block;
-                                border-radius: 50%;
-                                box-sizing: border-box;
-                                cursor: pointer;
-
-                                &:hover {
-                                    animation: my-face 5s infinite ease-in-out;
-                                    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
-                                }
-                            }
-
-                            input:checked+span {
-                                box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
-                                border: none !important;
-                            }
-                        }
-                    }
-
-                    .dplayer-comment-input {
-                        outline: none;
-                        border: none;
-                        padding: 8px 31px;
-                        font-size: 14px;
-                        line-height: 18px;
-                        text-align: center;
-                        border-radius: 4px;
-                        width: 300px;
-                        background: #fff;
-                        margin: 0;
-                        height: auto;
-                    }
-
-                    .dplayer-send-icon {
-                        height: 22px;
-                        width: 22px;
-                        position: absolute;
-                        top: 6px;
-                        right: 7px;
-                        padding: 0;
-                    }
-                }
+                
             }
 
             .dplayer-label {

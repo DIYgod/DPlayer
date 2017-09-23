@@ -334,7 +334,7 @@ class DPlayer {
             this.container.classList.remove('dplayer-hide-controller');
             clearTimeout(this.hideTime);
             this.hideTime = setTimeout(() => {
-                if (this.video.played.length) {
+                if (this.video.played.length && !this.disableHideController) {
                     this.container.classList.add('dplayer-hide-controller');
                     closeSetting();
                     closeComment();
@@ -368,8 +368,12 @@ class DPlayer {
                     settingEvent();
                 }, 300);
             }
+
+            this.disableHideController = false;
         };
         const openSetting = () => {
+            this.disableHideController = true;
+
             settingBox.classList.add('dplayer-setting-box-open');
             mask.classList.add('dplayer-mask-show');
         };
@@ -523,9 +527,9 @@ class DPlayer {
         /**
          * comment
          */
+        const controller = this.container.getElementsByClassName('dplayer-controller')[0];
         const commentInput = this.container.getElementsByClassName('dplayer-comment-input')[0];
         const commentIcon = this.container.getElementsByClassName('dplayer-comment-icon')[0];
-        const commentBox = this.container.getElementsByClassName('dplayer-comment-box')[0];
         const commentSettingIcon = this.container.getElementsByClassName('dplayer-comment-setting-icon')[0];
         const commentSettingBox = this.container.getElementsByClassName('dplayer-comment-setting-box')[0];
         const commentSendIcon = this.container.getElementsByClassName('dplayer-send-icon')[0];
@@ -544,36 +548,28 @@ class DPlayer {
             }
         };
 
-        let disableHide = 0;
-        let commentFocusTimeout = 0;
         const closeComment = () => {
-            if (!commentBox.classList.contains('dplayer-comment-box-open')) {
+            if (!controller.classList.contains('dplayer-controller-comment')) {
                 return;
             }
 
-            commentBox.classList.remove('dplayer-comment-box-open');
+            controller.classList.remove('dplayer-controller-comment');
             mask.classList.remove('dplayer-mask-show');
             this.container.classList.remove('dplayer-show-controller');
 
-            clearInterval(disableHide);
-            clearTimeout(commentFocusTimeout);
             closeCommentSetting();
+
+            this.disableHideController = false;
         };
         const openComment = () => {
-            if (commentBox.classList.contains('dplayer-comment-box-open')) {
-                return;
-            }
+            this.disableHideController = true;
 
-            commentBox.classList.add('dplayer-comment-box-open');
-            mask.classList.add('dplayer-mask-show');
-            this.container.classList.add('dplayer-show-controller');
-
-            disableHide = setInterval(() => {
-                clearTimeout(this.hideTime);
-            }, 1000);
-            commentFocusTimeout = setTimeout(() => {
+            if (!controller.classList.contains('dplayer-controller-comment')) {
+                controller.classList.add('dplayer-controller-comment');
+                mask.classList.add('dplayer-mask-show');
+                this.container.classList.add('dplayer-show-controller');
                 commentInput.focus();
-            }, 300);
+            }
         };
 
         mask.addEventListener('click', () => {
@@ -587,10 +583,14 @@ class DPlayer {
         });
 
         // comment setting box
-        this.container.getElementsByClassName('dplayer-comment-setting-color')[0].addEventListener('click', () => {
-            const sele = this.container.querySelector('input[name="dplayer-danmaku-color-${index}"]:checked+span');
+        const colorSetting = this.container.getElementsByClassName('dplayer-comment-setting-color')[0];
+        colorSetting.addEventListener('click', () => {
+            const sele = colorSetting.querySelector(`input:checked+span`);
             if (sele) {
-                commentSettingIcon.getElementsByClassName('dplayer-fill')[0].style.fill = this.container.querySelector('input[name="dplayer-danmaku-color-${index}"]:checked').value;
+                const color = colorSetting.querySelector(`input:checked`).value;
+                commentSettingIcon.getElementsByClassName('dplayer-fill')[0].style.fill = color;
+                commentInput.style.color = color;
+                commentSendIcon.getElementsByClassName('dplayer-fill')[0].style.fill = color;
             }
         });
 

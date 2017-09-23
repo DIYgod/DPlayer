@@ -45,6 +45,59 @@ const html = {
         </div>
         <div class="dplayer-controller-mask"></div>
         <div class="dplayer-controller">
+            <div class="dplayer-icons dplayer-comment-box">
+                <button class="dplayer-icon dplayer-comment-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
+                    <span class="dplayer-icon-content">${icons.get('pallette')}</span>
+                </button>
+                <div class="dplayer-comment-setting-box">
+                    <div class="dplayer-comment-setting-color">
+                        <div class="dplayer-comment-setting-title">${tran('Set danmaku color')}</div>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-color-${index}" value="#fff" checked>
+                            <span style="background: #fff;"></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-color-${index}" value="#e54256">
+                            <span style="background: #e54256"></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-color-${index}" value="#ffe133">
+                            <span style="background: #ffe133"></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-color-${index}" value="#64DD17">
+                            <span style="background: #64DD17"></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-color-${index}" value="#39ccff">
+                            <span style="background: #39ccff"></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-color-${index}" value="#D500F9">
+                            <span style="background: #D500F9"></span>
+                        </label>
+                    </div>
+                    <div class="dplayer-comment-setting-type">
+                        <div class="dplayer-comment-setting-title">${tran('Set danmaku type')}</div>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-type-${index}" value="top">
+                            <span>${tran('Top')}</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-type-${index}" value="right" checked>
+                            <span>${tran('Rolling')}</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dplayer-danmaku-type-${index}" value="bottom">
+                            <span>${tran('Bottom')}</span>
+                        </label>
+                    </div>
+                </div>
+                <input class="dplayer-comment-input" type="text" placeholder="${tran('Input danmaku, hit Enter')}" maxlength="30">
+                <button class="dplayer-icon dplayer-send-icon" data-balloon="${tran('Send')}" data-balloon-pos="up">
+                    <span class="dplayer-icon-content">${icons.get('send')}</span>
+                </button>
+            </div>
             <div class="dplayer-icons dplayer-icons-left">
                 <button class="dplayer-icon dplayer-play-icon">
                     <span class="dplayer-icon-content">${icons.get('play')}</span>
@@ -81,59 +134,6 @@ const html = {
                     <button class="dplayer-icon dplayer-comment-icon" data-balloon="${tran('Send danmaku')}" data-balloon-pos="up">
                         <span class="dplayer-icon-content">${icons.get('comment')}</span>
                     </button>
-                    <div class="dplayer-comment-box">
-                        <button class="dplayer-icon dplayer-comment-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
-                            <span class="dplayer-icon-content">${icons.get('menu')}</span>
-                        </button>
-                        <div class="dplayer-comment-setting-box">
-                            <div class="dplayer-comment-setting-color">
-                                <div class="dplayer-comment-setting-title">${tran('Set danmaku color')}</div>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-color-${index}" value="#fff" checked>
-                                    <span style="background: #fff; border: 1px solid rgba(0,0,0,.1);"></span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-color-${index}" value="#e54256">
-                                    <span style="background: #e54256"></span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-color-${index}" value="#ffe133">
-                                    <span style="background: #ffe133"></span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-color-${index}" value="#64DD17">
-                                    <span style="background: #64DD17"></span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-color-${index}" value="#39ccff">
-                                    <span style="background: #39ccff"></span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-color-${index}" value="#D500F9">
-                                    <span style="background: #D500F9"></span>
-                                </label>
-                            </div>
-                            <div class="dplayer-comment-setting-type">
-                                <div class="dplayer-comment-setting-title">${tran('Set danmaku type')}</div>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-type-${index}" value="top">
-                                    <span>${tran('Top')}</span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-type-${index}" value="right" checked>
-                                    <span>${tran('Rolling')}</span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="dplayer-danmaku-type-${index}" value="bottom">
-                                    <span>${tran('Bottom')}</span>
-                                </label>
-                            </div>
-                        </div>
-                        <input class="dplayer-comment-input" type="text" placeholder="${tran('Input danmaku, hit Enter')}" maxlength="30">
-                        <button class="dplayer-icon dplayer-send-icon" data-balloon="${tran('Send')}" data-balloon-pos="up">
-                            <span class="dplayer-icon-content">${icons.get('send')}</span>
-                        </button>
-                    </div>
                 </div>
                 ${options.subtitle ? `
                 <div class="dplayer-subtitle-btn">
