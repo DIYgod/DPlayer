@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="demo.css">
     <script src="https://unpkg.com/flv.js/dist/flv.min.js"></script>
     <script src="https://unpkg.com/hls.js/dist/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js"></script>
     <script src="DPlayer.js"></script>
 </head>
 
@@ -213,6 +214,26 @@
             });
             flvPlayer.attachMediaElement(dp7.video);
             flvPlayer.load();
+        </script>
+    </div>
+    <h2 id="dash-support">MPEG DASH support</h2>
+    <div class="example">
+        <div id="dplayer10"></div>
+        <script>
+            var dp10 = new DPlayer({
+                container: document.getElementById('dplayer10'),
+                video: {
+                    url: 'http://devtest.qiniudn.com/若能绽放光芒.mpd',
+                    type: 'dash'
+                }
+            });
+        </script>
+        <div id="dplayer11"></div>
+        <script>
+            var dp11 = new DPlayer({
+                container: document.getElementById('dplayer11')
+            });
+            dashjs.MediaPlayer().create().initialize(dp11.video, "http://devtest.qiniudn.com/若能绽放光芒.mpd", false);
         </script>
     </div>
 

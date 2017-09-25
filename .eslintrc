@@ -55,6 +55,7 @@
         "require": false,
         "module": false,
         "Hls": false,
-        "flvjs": false
+        "flvjs": false,
+        "dashjs": false
     }
 }

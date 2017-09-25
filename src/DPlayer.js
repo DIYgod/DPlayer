@@ -951,27 +951,35 @@ class DPlayer {
             else if (/.flv(#|\?|$)/i.exec(video.src)) {
                 this.type = 'flv';
             }
+            else if (/.mpd(#|\?|$)/i.exec(video.src)) {
+                this.type = 'dash';
+            }
             else {
                 this.type = 'normal';
             }
         }
 
-        // Support HTTP Live Streaming
-        if (this.type === 'hls' && Hls.isSupported()) {
+        // HTTP Live Streaming
+        if (this.type === 'hls' && Hls && Hls.isSupported()) {
             // this.container.getElementsByClassName('dplayer-time')[0].style.display = 'none';
             const hls = new Hls();
             hls.loadSource(video.src);
             hls.attachMedia(video);
         }
 
-        // Support FLV
-        if (this.type === 'flv' && flvjs.isSupported()) {
+        // FLV
+        if (this.type === 'flv' && flvjs && flvjs.isSupported()) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
                 url: video.src
             });
             flvPlayer.attachMediaElement(video);
             flvPlayer.load();
+        }
+
+        // MPEG DASH
+        if (this.type === 'dash' && dashjs) {
+            dashjs.MediaPlayer().create().initialize(video, video.src, false);
         }
     }
 
