@@ -11,6 +11,7 @@
     <link class="dplayer-css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js"></script>
 </head>
 
 <body class="markdown-body">
@@ -212,6 +213,35 @@ var hls = new Hls();
 hls.loadSource('demo.m3u8');
 hls.attachMedia(dp.video);
 </code></pre>
+    </div>
+
+    <h2 id="flv-support">MPEG DASH support</h2>
+    <p>It requires the library <a href="https://github.com/Dash-Industry-Forum/dash.js">dash.js</a> and it should be loaded before DPlayer.min.js.</p>
+    <div class="example">
+        <div id="dplayer8"></div>
+    </div>
+    <div class="highlight highlight-middle highlight-html">
+        <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;DPlayer.min.css&quot;&gt;
+&lt;div id=&quot;dplayer&quot;&gt;&lt;/div&gt;
+&lt;script src=&quot;dash.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;DPlayer.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+    </div>
+    <div class="highlight highlight-middle highlight-js">
+        <pre><code class="js">var dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'demo.mpd',
+        type: 'dash'
+    }
+});</code></pre>
+    </div>
+    <div class="highlight highlight-js">
+        <pre><code class="js">// Another way, init MPEG DASH outside
+var dp = new DPlayer({
+    container: document.getElementById('dplayer')
+});
+dashjs.MediaPlayer().create().initialize(dp11.video, "demo.mpd", false);</code>
+</pre>
     </div>
 
     <h2 id="flv-support">FLV support</h2>

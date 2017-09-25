@@ -275,7 +275,15 @@ function initPlayers() {
             ]
         },
         iconsColor: 'orange'
-    })
+    });
+
+    window.dp8 = new DPlayer({
+        container: document.getElementById('dplayer8'),
+        video: {
+            url: 'http://devtest.qiniudn.com/若能绽放光芒.mpd',
+            type: 'dash'
+        }
+    });
 }
 
 function clearPlayers() {

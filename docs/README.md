@@ -10,6 +10,12 @@ $ npm install dplayer --save
 
 ## Quick Start
 
+```html
+<link rel="stylesheet" href="DPlayer.min.css">
+<div id="dplayer"></div>
+<script src="DPlayer.min.js"></script>
+```
+
 ```js
 var dp = new DPlayer({
     container: document.getElementById('dplayer'),
@@ -19,6 +25,9 @@ var dp = new DPlayer({
         pic: 'demo.jpg',
         thumbnails: 'thumbnails.jpg'
     },
+    subtitle: {
+        url: 'webvtt.vtt'
+    },
     danmaku: {
         id: 'demo',
         api: 'https://api.prprpr.me/dplayer/'
@@ -27,14 +36,6 @@ var dp = new DPlayer({
 ```
 
 ## Usage
-
-### HTML structure
-
-```HTML
-<link rel="stylesheet" href="DPlayer.min.css">
-<div id="player1"></div>
-<script src="DPlayer.min.js"></script>
-```
 
 ### Options
 
@@ -314,24 +315,60 @@ var dp = new DPlayer({
 
 It requires the library [hls.js](https://github.com/dailymotion/hls.js) and it should be loaded before DPlayer.min.js.
 
-Live danamku is not supported  yet.
-
 ```HTML
-<div id="player1" class="dplayer"></div>
-<!-- ... -->
+<link rel="stylesheet" href="DPlayer.min.css">
+<div id="dplayer"></div>
 <script src="hls.min.js"></script>
 <script src="DPlayer.min.js"></script>
+```
 
-<script>
+```js
 var dp = new DPlayer({
-    // ...
+    container: document.getElementById('dplayer'),
     video: {
-        url: 'xxx.m3u8',
+        url: 'demo.m3u8',
         type: 'hls'
-        // ...
     }
 });
-</script>
+```
+
+```js
+// Another way, init HLS outside
+var dp = new DPlayer({
+    container: document.getElementById('dplayer')
+});
+var hls = new Hls();
+hls.loadSource('demo.m3u8');
+hls.attachMedia(dp.video);
+```
+
+### MPEG DASH support
+
+It requires the library [dash.js](https://github.com/Dash-Industry-Forum/dash.js) and it should be loaded before DPlayer.min.js.
+
+```HTML
+<link rel="stylesheet" href="DPlayer.min.css">
+<div id="dplayer"></div>
+<script src="dash.min.js"></script>
+<script src="DPlayer.min.js"></script>
+```
+
+```js
+var dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'demo.mpd',
+        type: 'dash'
+    }
+});
+```
+
+```js
+// Another way, init MPEG DASH outside
+var dp = new DPlayer({
+    container: document.getElementById('dplayer')
+});
+dashjs.MediaPlayer().create().initialize(dp11.video, "demo.mpd", false);
 ```
 
 ### FLV support
@@ -339,29 +376,39 @@ var dp = new DPlayer({
 It requires the library [flv.js](https://github.com/Bilibili/flv.js) and it should be loaded before DPlayer.min.js.
 
 ```HTML
-<div id="player1" class="dplayer"></div>
-<!-- ... -->
+<link rel="stylesheet" href="DPlayer.min.css">
+<div id="dplayer"></div>
 <script src="flv.min.js"></script>
 <script src="DPlayer.min.js"></script>
+```
 
-<script>
+```js
 var dp = new DPlayer({
-    // ...
+    container: document.getElementById('dplayer'),
     video: {
-        url: 'xxx.flv',
+        url: 'demo.flv',
         type: 'flv'
-        // ...
     }
 });
-</script>
+```
+
+```js
+// Another way, init FLV outside
+var dp = new DPlayer({
+    container: document.getElementById('dplayer')
+});
+var flvPlayer = flvjs.createPlayer({
+    type: 'flv',
+    url: 'demo.flv'
+});
+flvPlayer.attachMediaElement(dp.video);
+flvPlayer.load();
 ```
 
 ### Work with module bundler
 
 ```js
 require('DPlayer/dist/DPlayer.min.css');
-var Hls = require('hls.js');
-var flvjs = require('flv.js');
 var DPlayer = require('DPlayer');
 
 var dp = new DPlayer(option);
