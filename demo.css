@@ -100,6 +100,19 @@ summary {
     line-height: 17px;
 }
 
+.middle {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+a.middle {
+    margin-left: 5px;
+}
+
+p.sponsor {
+    margin-top: 80px;
+}
+
 /* github-corner */
 .github-corner:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out
