@@ -131,6 +131,10 @@ var dp = new DPlayer({
 - [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
 - Donate via Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
 
+## Sponsor
+
+- The CDN service is sponsored by [又拍云](https://console.upyun.com/register/?invite=BkLZ2Xqob)
+
 ## Author
 
 **DPlayer** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
