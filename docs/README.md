@@ -42,6 +42,7 @@ var dp = new DPlayer({
 Name|Default|Note
 ----|-------|----
 container | document.getElementsByClassName('dplayer')[0] | player container
+live | false | enable live mode, see (Live mode)(http://dplayer.js.org/docs/#/?id=live-mode) for more details
 autoplay | false | not supported in mobile browsers
 theme | '#b7daff' | main color
 loop | false | upon reaching the end of the video, automatically seek back to the start
@@ -67,14 +68,14 @@ subtitle.bottom | '40px' | subtitle bottom space
 subtitle.color | '#fff' | subtitle color
 danmaku | undefined | showing danmaku
 danmaku.id | `required` | it must be unique, check if some id used in other player: `https://api.prprpr.me/dplayer/list`
-danmaku.api | `required` | more: [#Back-end](http://dplayer.js.org/docs/#/?id=back-end)
+danmaku.api | `required` | see [#Back-end](http://dplayer.js.org/docs/#/?id=back-end) for more details
 danmaku.token | undefined | back end verification
 danmaku.maximum | undefined | maximum quantity of danmaku
-danmaku.addition | undefined | additional danmaku, more: [Bilibili danmaku](http://dplayer.js.org/docs/#/?id=bilibili-danmaku-and-video-link)
+danmaku.addition | undefined | additional danmaku, see [Bilibili danmaku](http://dplayer.js.org/docs/#/?id=bilibili-danmaku-and-video-link) for more details
 danmaku.user | 'DIYgod' | user name
 danmaku.margin | undefined | keep some white space, prevent warding off subtitle
 danmaku.unlimited | false | unlimited amount and allow overlap
-contextmenu | undefined | custom contextmenu, like: `[{ text: 'custom', link: 'https://github.com/MoePlayer/DPlayer' }]`
+contextmenu | [] | custom contextmenu
 mutex | true | pause other players when this player start play
 
 Example:
@@ -168,10 +169,6 @@ var dp = new DPlayer({
 
     Switch to a new video, the format of `video` and `danmaku` is the same as option
 
-+ `dp.danmaku.push(text, color, type)`
-
-    Push a custom danmaku into DPlayer in real time, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this custom danmaku will not be saved to back-end automatically
-
 + `dp.notice(text, time)`
 
     Show notice in lower left
@@ -206,7 +203,7 @@ var dp = new DPlayer({
 
     Danmaku
 
- + `dp.danmaku.send(text, color, type)`
+ + `dp.danmaku.send({text, color, type})`
 
     Submit a new danmaku to back end, the value of `color` should be like `#fff`, the value of `type` should be `top` `bottom` or `right`, notice: this danmaku will not be submit to back end
 
@@ -214,9 +211,9 @@ var dp = new DPlayer({
 
     Set danmaku opacity
 
- + `dp.danmaku.draw(text, color, type)`
+ + `dp.danmaku.draw({text, color, type})`
 
-    Draw a new danmaku in real time
+    Draw a new danmaku in real time, this custom danmaku will not be saved to back-end
 
  + `dp.danmaku.clear()`
 
@@ -405,6 +402,46 @@ flvPlayer.attachMediaElement(dp.video);
 flvPlayer.load();
 ```
 
+## Live mode
+
+At first, you should prepare a WebSocket backend.
+
+Init DPlayer:
+
+```js
+var dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    live: true,
+    danmaku: true,
+    apiBackend: {
+        read: function (endpoint, callback) {
+            console.log('假装 WebSocket 连接成功');
+            callback();
+        },
+        send: function (endpoint, danmakuData, callback) {
+            console.log('假装通过 WebSocket 发送数据', danmakuData);
+            callback();
+        }
+    },
+    video: {
+        url: 'demo.m3u8',
+        type: 'hls'
+    }
+});
+```
+
+After getting a danmaku via WebSocket:
+
+```js
+var danmaku = {
+    text: 'websocket',
+    color: '#fff',
+    type: 'right'
+};
+dp.danmaku.draw(danmaku);
+```
+
+
 ### Work with module bundler
 
 ```js
@@ -430,7 +467,7 @@ https://github.com/DIYgod/DPlayer-data
 
 [DPlayer-backend](https://github.com/DIYgod/DPlayer-backend)
 
-### Bilibili danmaku and video link
+### Bilibili danmaku
 
 **Bilibili  Danmaku**
 
@@ -448,12 +485,6 @@ var option = {
     }
 }
 ```
-
-**Bilibili Video link**
-
-`https://api.prprpr.me/dplayer/video/bilibili?aid=【bilibili视频AV号】`
-
-or `https://api.prprpr.me/dplayer/video/bilibili?cid=【bilibili视频cid】`
 
 ## Run in development
 
