@@ -4,7 +4,7 @@ W3C def language codes is :
         primary-code    ISO 639-1   ( the names of language with 2 code )
         subcode         ISO 3166    ( the names of countries )
 
-NOTE: use lowercase to prevent case typo from user! 
+NOTE: use lowercase to prevent case typo from user!
 Use this as shown below..... */
 
 module.exports = function (lang) {
@@ -54,7 +54,8 @@ const tranTxt = {
         's': '秒',
         'Show subtitle': '显示字幕',
         'Hide subtitle': '隐藏字幕',
-        'Volume': '音量'
+        'Volume': '音量',
+        'Live': '直播',
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',
@@ -89,6 +90,7 @@ const tranTxt = {
         's': '秒',
         'Show subtitle': '顯示字幕',
         'Hide subtitle': '隱藏字幕',
-        'Volume': '音量'
+        'Volume': '音量',
+        'Live': '直播',
     }
 };

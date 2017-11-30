@@ -11,6 +11,7 @@ module.exports = (options) => {
     // default options
     const defaultOption = {
         container: options.element || document.getElementsByClassName('dplayer')[0],
+        live: false,
         autoplay: false,
         theme: '#b7daff',
         loop: false,
@@ -99,7 +100,7 @@ module.exports = (options) => {
     if (options.video) {
         !options.video.type && (options.video.type = 'auto');
     }
-    if (options.danmaku) {
+    if (typeof options.danmaku === 'object' && options.danmaku) {
         !options.danmaku.user && (options.danmaku.user = 'DIYgod');
     }
     if (options.subtitle) {
@@ -126,7 +127,7 @@ module.exports = (options) => {
     options.contextmenu = options.contextmenu.concat([
         {
             text: 'About author',
-            link: 'https://www.anotherhome.net/'
+            link: 'https://digod.me'
         },
         {
             text: 'About DPlayer',

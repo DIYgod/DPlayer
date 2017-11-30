@@ -115,6 +115,7 @@ const html = {
                     </div>
                 </div>
                 <span class="dplayer-time"><span class="dplayer-ptime">0:00</span> / <span class="dplayer-dtime">0:00</span></span>
+                ${options.live ? `<span class="dplayer-live-badge"><span class="dplayer-live-dot" style="background: ${options.theme};"></span>${tran('Live')}</span>` : ''}
             </div>
             <div class="dplayer-icons dplayer-icons-right">
                 ${options.video.quality ? `

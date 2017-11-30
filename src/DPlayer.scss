@@ -55,6 +55,21 @@
         }
     }
 
+    &.dplayer-live {
+        .dplayer-time {
+            display: none;
+        }
+        .dplayer-bar-wrap {
+            display: none;
+        }
+        .dplayer-setting-speed {
+            display: none;
+        }
+        .dplayer-setting-loop {
+            display: none;
+        }
+    }
+
     &.dplayer-playing {
 
         .dplayer-danmaku .dplayer-danmaku-move {
@@ -649,13 +664,24 @@
                 }
             }
 
-            .dplayer-time {
+            .dplayer-time,
+            .dplayer-live-badge {
                 line-height: 38px;
                 color: #eee;
                 text-shadow: 0 0 2px rgba(0,0,0,.5);
                 vertical-align: middle;
                 font-size: 13px;
                 cursor: default;
+            }
+
+            .dplayer-live-dot {
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                vertical-align: 4%;
+                margin-right: 5px;
+                content: '';
+                border-radius: 6px;
             }
 
             .dplayer-icon {

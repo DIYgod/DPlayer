@@ -45,6 +45,9 @@ class DPlayer {
         if (!this.options.danmaku) {
             this.container.classList.add('dplayer-no-danmaku');
         }
+        if (this.options.live) {
+            this.container.classList.add('dplayer-live');
+        }
         if (isMobile) {
             this.container.classList.add('dplayer-mobile');
         }
