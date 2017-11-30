@@ -42,7 +42,7 @@ var dp = new DPlayer({
 Name|Default|Note
 ----|-------|----
 container | document.getElementsByClassName('dplayer')[0] | player container
-live | false | enable live mode, see (Live mode)(http://dplayer.js.org/docs/#/?id=live-mode) for more details
+live | false | enable live mode, see [Live mode](http://dplayer.js.org/docs/#/?id=live-mode) for more details
 autoplay | false | not supported in mobile browsers
 theme | '#b7daff' | main color
 loop | false | upon reaching the end of the video, automatically seek back to the start
@@ -52,12 +52,13 @@ hotkey | true | enable hotkey
 preload | 'auto' | values: 'none', 'metadata', 'auto'
 volume | 0.7 | default volume, not work after user set volume themselves
 logo | undefined | logo in top left corner
+apiBackend | - | custom get and send danmaku behavior, see [Live mode](http://dplayer.js.org/docs/#/?id=live-mode) for more details
 video | undefined | video info
 video.quality | undefined | more: [Quality switching](http://dplayer.js.org/docs/#/?id=quality-switching)
 video.url | undefined | video link
 video.pic | undefined | video poster
 video.thumbnails | undefined | video thumbnails, generate with [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
-video.type | 'auto' | 'flv' for flv format, 'hls' for m3u8 format, 'normal' for mp4 ogg and webm format, 'auto' for automatic detection according to video suffix, more: [#HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [#FLV support](http://dplayer.js.org/docs/#/?id=flv-support)
+video.type | 'auto' | 'flv' for flv format, 'hls' for m3u8 format, 'normal' for mp4 ogg and webm format, 'auto' for automatic detection according to video suffix, more: [HLS support](http://dplayer.js.org/docs/#/?id=hls-support) [FLV support](http://dplayer.js.org/docs/#/?id=flv-support)
 icons | [options.js#L24](https://github.com/MoePlayer/DPlayer/blob/master/src/options.js#L24) | UI icons
 iconsColor | #ffffff | player icons color
 subtitle | undefined | external subtitle
@@ -68,7 +69,7 @@ subtitle.bottom | '40px' | subtitle bottom space
 subtitle.color | '#fff' | subtitle color
 danmaku | undefined | showing danmaku
 danmaku.id | `required` | it must be unique, check if some id used in other player: `https://api.prprpr.me/dplayer/list`
-danmaku.api | `required` | see [#Back-end](http://dplayer.js.org/docs/#/?id=back-end) for more details
+danmaku.api | `required` | see [Back-end](http://dplayer.js.org/docs/#/?id=back-end) for more details
 danmaku.token | undefined | back end verification
 danmaku.maximum | undefined | maximum quantity of danmaku
 danmaku.addition | undefined | additional danmaku, see [Bilibili danmaku](http://dplayer.js.org/docs/#/?id=bilibili-danmaku-and-video-link) for more details
@@ -402,7 +403,7 @@ flvPlayer.attachMediaElement(dp.video);
 flvPlayer.load();
 ```
 
-## Live mode
+### Live mode
 
 At first, you should prepare a WebSocket backend.
 
