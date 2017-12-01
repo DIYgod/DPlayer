@@ -88,15 +88,17 @@ class DPlayer {
                 container: this.container.getElementsByClassName('dplayer-danmaku')[0],
                 opacity: this.user.get('opacity'),
                 callback: () => {
-                    this.container.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
+                    setTimeout(() => {
+                        this.container.getElementsByClassName('dplayer-danloading')[0].style.display = 'none';
 
-                    // autoplay
-                    if (this.options.autoplay && !isMobile) {
-                        this.play();
-                    }
-                    else if (isMobile) {
-                        this.pause();
-                    }
+                        // autoplay
+                        if (this.options.autoplay && !isMobile) {
+                            this.play();
+                        }
+                        else if (isMobile) {
+                            this.pause();
+                        }
+                    }, 0);
                 },
                 error: (msg) => {
                     this.notice(msg);
