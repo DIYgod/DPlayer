@@ -127,7 +127,7 @@ module.exports = (options) => {
     options.contextmenu = options.contextmenu.concat([
         {
             text: 'About author',
-            link: 'https://digod.me'
+            link: 'https://diygod.me'
         },
         {
             text: 'About DPlayer',
