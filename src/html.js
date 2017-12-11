@@ -205,7 +205,7 @@ const html = {
     video: (current, pic, screenshot, preload, url, subtitle) => {
         const enableSubtitle = subtitle && subtitle.type === 'webvtt';
         return `
-        <video class="dplayer-video ${current ? `dplayer-video-current"` : ``}" ${pic ? `poster="${pic}"` : ``} webkit-playsinline playsinline ${screenshot || enableSubtitle ? `crossorigin="anonymous"` : ``} ${preload ? `preload="${preload}"` : ``} src="${url}">
+        <video class="dplayer-video ${current ? `dplayer-video-current` : ``}" ${pic ? `poster="${pic}"` : ``} webkit-playsinline playsinline ${screenshot || enableSubtitle ? `crossorigin="anonymous"` : ``} ${preload ? `preload="${preload}"` : ``} src="${url}">
             ${enableSubtitle ? `<track kind="metadata" default src="${subtitle.url}"></track>` : ``}
         </video>`;
     },
