@@ -94,11 +94,13 @@ var dp = new DPlayer({
 - [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
 - [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
 - [react-dplayer](https://github.com/hnsylitao/react-dplayer)
+- [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite)
+- [DPlayerHandle](https://github.com/kn007/DPlayerHandle)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Who use DPlayer?
 
-- [Anotherhome](https://www.anotherhome.net/2648)
+- [Hi, DIYgod](https://diygod.me)
 - [嘀哩嘀哩](http://www.dilidili.wang/)
 - [0xBBC](https://blog.0xbbc.com/2016/09/dplayer-for-wordpress/)
 - [树洞](https://aoaoao.me/1031.html)
@@ -112,6 +114,7 @@ var dp = new DPlayer({
 - [九妖萌弹幕动漫网](http://www.91moe.com/)
 - [爱弹幕](https://www.idanmu.pw/)
 - [萌心次元](https://moxacg.moe/)
+- [kn007的个人博客](https://kn007.net/)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## CDN
