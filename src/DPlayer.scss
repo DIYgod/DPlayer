@@ -754,7 +754,7 @@
 
                 .dplayer-volume-bar-wrap {
                     display: inline-block;
-                    margin: 0 5px 0 -5px;
+                    margin: 0 10px 0 -5px;
                     vertical-align: middle;
                     height: 100%;
 
@@ -814,6 +814,14 @@
                     overflow: hidden;
                     z-index: 2;
 
+                    & > div {
+                        display: none;
+
+                        &.dplayer-setting-origin-panel {
+                            display: block;
+                        }
+                    }
+
                     &.dplayer-setting-box-open {
                         transform: scale(1);
                     }
@@ -822,6 +830,15 @@
                         width: 70px;
                         height: 180px;
                         text-align: center;
+                    }
+
+                    &.dplayer-setting-box-speed {
+                        .dplayer-setting-origin-panel {
+                            display: none;
+                        }
+                        .dplayer-setting-speed-panel {
+                            display: block;
+                        }
                     }
                 }
 
