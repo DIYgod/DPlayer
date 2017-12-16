@@ -88,24 +88,30 @@ class FullScreen {
     }
 
     toggle (type = 'browser') {
-        if (this.isFullScreen(type)) {
-            this.cancel(type);
-        }
-        else {
-            switch (type) {
-            case 'browser':
+        switch (type) {
+        case 'browser':
+            if (this.isFullScreen('browser')) {
+                this.cancel('browser');
+            }
+            else {
                 this.request('browser');
                 if (this.isFullScreen('web')) {
                     this.cancel('web');
                 }
-                break;
-            case 'web':
+            }
+            break;
+        case 'web':
+            if (this.isFullScreen('web')) {
+                this.cancel('web');
+            }
+            else {
                 this.request('web');
                 if (this.isFullScreen('browser')) {
                     this.cancel('browser');
                 }
-                break;
             }
+            break;
+        }
         }
     }
 }
