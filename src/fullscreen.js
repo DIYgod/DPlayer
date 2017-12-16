@@ -92,7 +92,20 @@ class FullScreen {
             this.cancel(type);
         }
         else {
-            this.request(type);
+            switch (type) {
+            case 'browser':
+                this.request('browser');
+                if (this.isFullScreen('web')) {
+                    this.cancel('web');
+                }
+                break;
+            case 'web':
+                this.request('web');
+                if (this.isFullScreen('browser')) {
+                    this.cancel('browser');
+                }
+                break;
+            }
         }
     }
 }
