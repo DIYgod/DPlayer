@@ -112,7 +112,6 @@ class FullScreen {
             }
             break;
         }
-        }
     }
 }
 
