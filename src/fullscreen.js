@@ -93,6 +93,10 @@ class FullScreen {
         }
         else {
             this.request(type);
+            const anotherType = type === 'browser' ? 'web' : 'browser';
+            if (this.isFullScreen(anotherType)) {
+                this.cancel(anotherType);
+            }
         }
     }
 }
