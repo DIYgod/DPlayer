@@ -88,29 +88,15 @@ class FullScreen {
     }
 
     toggle (type = 'browser') {
-        switch (type) {
-        case 'browser':
-            if (this.isFullScreen('browser')) {
-                this.cancel('browser');
+        if (this.isFullScreen(type)) {
+            this.cancel(type);
+        }
+        else {
+            this.request(type);
+            const anotherType = type === 'browser' ? 'web' : 'browser';
+            if (this.isFullScreen(anotherType)) {
+                this.cancel(anotherType);
             }
-            else {
-                this.request('browser');
-                if (this.isFullScreen('web')) {
-                    this.cancel('web');
-                }
-            }
-            break;
-        case 'web':
-            if (this.isFullScreen('web')) {
-                this.cancel('web');
-            }
-            else {
-                this.request('web');
-                if (this.isFullScreen('browser')) {
-                    this.cancel('browser');
-                }
-            }
-            break;
         }
     }
 }
