@@ -53,7 +53,6 @@ class Template {
         this.commentSendButton = this.container.querySelector('.dplayer-send-icon');
         this.commentSendFill = this.container.querySelector('.dplayer-send-icon .dplayer-fill');
         this.commentColorSettingBox = this.container.querySelector('.dplayer-comment-setting-color');
-        this.svgFill = this.container.querySelector('.dplayer-fill');
         this.browserFullButton = this.container.querySelector('.dplayer-full-icon');
         this.webFullButton = this.container.querySelector('.dplayer-full-in-icon');
         this.menu = this.container.querySelector('.dplayer-menu');
@@ -63,7 +62,6 @@ class Template {
         this.subtitleButtonInner = this.container.querySelector('.dplayer-subtitle-icon .dplayer-icon-content');
         this.subtitle = this.container.querySelector('.dplayer-subtitle');
         this.qualityButton = this.container.querySelector('.dplayer-quality-icon');
-        this.videoWrap = this.parent = this.container.querySelector('.dplayer-video-wrap');
         this.barPreview = this.container.querySelector('.dplayer-bar-preview');
         this.barWrap = this.container.querySelector('.dplayer-bar-wrap');
         this.notice = this.container.querySelector('.dplayer-notice');
