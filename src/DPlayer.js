@@ -12,6 +12,7 @@ import FullScreen from './fullscreen';
 import User from './user';
 import Subtitle from './subtitle';
 import Bar from './bar';
+import Time from './time';
 
 let index = 0;
 const instances = [];
@@ -61,10 +62,15 @@ class DPlayer {
         document.addEventListener('click', () => {
             this.focus = false;
         }, true);
-
         this.container.addEventListener('click', () => {
             this.focus = true;
         }, true);
+
+        // arrow style
+        this.arrow = this.container.offsetWidth <= 500;
+        if (this.arrow) {
+            this.container.classList.add('dplayer-arrow');
+        }
 
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
@@ -103,15 +109,6 @@ class DPlayer {
             });
         }
 
-
-        // arrow style
-        this.arrow = this.container.offsetWidth <= 500;
-        if (this.arrow) {
-            const arrowStyle = document.createElement('style');
-            arrowStyle.innerHTML = `.dplayer .dplayer-danmaku{font-size:18px}`;
-            document.head.appendChild(arrowStyle);
-        }
-
         // get this video manager
         this.video = this.template.video;
 
@@ -146,78 +143,7 @@ class DPlayer {
             this.template.controllerMask.addEventListener('click', toggleController);
         }
 
-        let lastPlayPos = 0;
-        let currentPlayPos = 0;
-        let bufferingDetected = false;
-        window.requestAnimationFrame = (() =>
-            window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function (callback) {
-                window.setTimeout(callback, 1000 / 60);
-            }
-        )();
-
-        const setCheckLoadingTime = () => {
-            this.checkLoading = setInterval(() => {
-                // whether the video is buffering
-                currentPlayPos = this.video.currentTime;
-                if (!bufferingDetected
-                    && currentPlayPos === lastPlayPos
-                    && !this.video.paused) {
-                    this.container.classList.add('dplayer-loading');
-                    bufferingDetected = true;
-                }
-                if (bufferingDetected
-                    && currentPlayPos > lastPlayPos
-                    && !this.video.paused) {
-                    this.container.classList.remove('dplayer-loading');
-                    bufferingDetected = false;
-                }
-                lastPlayPos = currentPlayPos;
-            }, 100);
-        };
-
-        const clearCheckLoadingTime = () => {
-            clearInterval(this.checkLoading);
-        };
-
-        this.playedTime = false;
-        this.animationFrame = () => {
-            if (this.playedTime) {
-                this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
-                this.template.ptime.innerHTML = utils.secondToTime(this.video.currentTime);
-            }
-            window.requestAnimationFrame(this.animationFrame);
-        };
-        window.requestAnimationFrame(this.animationFrame);
-
-        this.setTime = (type) => {
-            if (!type) {
-                this.playedTime = true;
-                setCheckLoadingTime();
-            }
-            else {
-                this[`${type}Time`] = true;
-                if (type === 'played') {
-                    setCheckLoadingTime();
-                }
-            }
-        };
-        this.clearTime = (type) => {
-            if (!type) {
-                this.playedTime = false;
-                clearCheckLoadingTime();
-            }
-            else {
-                this[`${type}Time`] = false;
-                if (type === 'played') {
-                    clearCheckLoadingTime();
-                }
-            }
-        };
+        this.time = new Time(this);
 
         if (this.options.video.thumbnails) {
             this.initThumbnails();
@@ -245,12 +171,12 @@ class DPlayer {
             percentage = Math.min(percentage, 1);
             this.bar.set('played', percentage, 'width');
             this.seek(this.bar.get('played') * this.video.duration);
-            this.setTime();
+            this.time.enable('progress');
         };
 
         this.template.playedBarWrap.addEventListener('mousedown', () => {
             barWidth = this.template.playedBarWrap.clientWidth;
-            this.clearTime();
+            this.time.disable('progress');
             document.addEventListener('mousemove', thumbMove);
             document.addEventListener('mouseup', thumbUp);
         });
@@ -772,7 +698,7 @@ class DPlayer {
         this.template.playButton.innerHTML = this.icons.get('pause');
 
         this.video.play();
-        this.setTime();
+        this.time.enable();
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
             this.danmaku.play();
@@ -801,7 +727,7 @@ class DPlayer {
         this.ended = false;
         this.template.playButton.innerHTML = this.icons.get('play');
         this.video.pause();
-        this.clearTime();
+        this.time.disable();
         this.container.classList.remove('dplayer-playing');
         if (this.danmaku) {
             this.danmaku.pause();
@@ -1131,6 +1057,7 @@ class DPlayer {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
         clearTimeout(this.hideTime);
+        this.time.destroy();
         this.video.src = '';
         this.container.innerHTML = '';
         this.events.trigger('destroy');
