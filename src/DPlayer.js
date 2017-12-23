@@ -13,6 +13,7 @@ import User from './user';
 import Subtitle from './subtitle';
 import Bar from './bar';
 import Time from './time';
+import Bezel from './bezel';
 
 let index = 0;
 const instances = [];
@@ -48,6 +49,10 @@ class DPlayer {
         if (isMobile) {
             this.container.classList.add('dplayer-mobile');
         }
+        this.arrow = this.container.offsetWidth <= 500;
+        if (this.arrow) {
+            this.container.classList.add('dplayer-arrow');
+        }
 
         this.template = new Template({
             container: this.container,
@@ -57,20 +62,11 @@ class DPlayer {
             icons: this.icons
         });
 
+        this.video = this.template.video;
+
         this.bar = new Bar(this.template);
 
-        document.addEventListener('click', () => {
-            this.focus = false;
-        }, true);
-        this.container.addEventListener('click', () => {
-            this.focus = true;
-        }, true);
-
-        // arrow style
-        this.arrow = this.container.offsetWidth <= 500;
-        if (this.arrow) {
-            this.container.classList.add('dplayer-arrow');
-        }
+        this.bezel = new Bezel(this.template.bezel);
 
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
@@ -109,12 +105,12 @@ class DPlayer {
             });
         }
 
-        // get this video manager
-        this.video = this.template.video;
-
-        this.template.bezel.addEventListener('animationend', () => {
-            this.template.bezel.classList.remove('dplayer-bezel-transition');
-        });
+        document.addEventListener('click', () => {
+            this.focus = false;
+        }, true);
+        this.container.addEventListener('click', () => {
+            this.focus = true;
+        }, true);
 
         // play and pause button
         this.paused = true;
@@ -691,8 +687,7 @@ class DPlayer {
     play () {
         this.paused = false;
         if (this.video.paused) {
-            this.template.bezel.innerHTML = this.icons.get('play');
-            this.template.bezel.classList.add('dplayer-bezel-transition');
+            this.bezel.switch(this.icons.get('play'));
         }
 
         this.template.playButton.innerHTML = this.icons.get('pause');
@@ -720,8 +715,7 @@ class DPlayer {
         this.container.classList.remove('dplayer-loading');
 
         if (!this.video.paused) {
-            this.template.bezel.innerHTML = this.icons.get('pause');
-            this.template.bezel.classList.add('dplayer-bezel-transition');
+            this.bezel.switch(this.icons.get('pause'));
         }
 
         this.ended = false;
