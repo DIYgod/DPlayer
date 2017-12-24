@@ -8,6 +8,7 @@ class FullScreen {
             this.player.resize();
         });
         this.player.events.on('webfullscreen_cancel', () => {
+            utils.setScrollPosition(this.lastScrollPosition);
             this.player.resize();
         });
 
@@ -17,6 +18,7 @@ class FullScreen {
                 this.player.events.trigger('fullscreen');
             }
             else {
+                utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
             }
         };
@@ -34,7 +36,11 @@ class FullScreen {
         }
     }
 
-    request (type = 'browser') {
+    request (type = 'browser', switchmode) {
+        if (!switchmode) {
+            this.lastScrollPosition = utils.getScrollPosition();
+        }
+
         switch (type) {
         case 'browser':
             if (this.player.container.requestFullscreen) {
@@ -52,11 +58,7 @@ class FullScreen {
             break;
         case 'web':
             this.player.container.classList.add('dplayer-fulled');
-
-            // record last position then hide scrollbars
-            this.lastScrollPosition = utils.getScrollPosition();
             document.body.classList.add('dplayer-web-fullscreen-fix');
-
             this.player.events.trigger('webfullscreen');
             break;
         }
@@ -77,11 +79,7 @@ class FullScreen {
             break;
         case 'web':
             this.player.container.classList.remove('dplayer-fulled');
-
-            // restore scrollbars and last position
             document.body.classList.remove('dplayer-web-fullscreen-fix');
-            utils.setScrollPosition(this.lastScrollPosition);
-
             this.player.events.trigger('webfullscreen_cancel');
             break;
         }
@@ -92,10 +90,13 @@ class FullScreen {
             this.cancel(type);
         }
         else {
-            this.request(type);
             const anotherType = type === 'browser' ? 'web' : 'browser';
             if (this.isFullScreen(anotherType)) {
+                this.request(type, true);
                 this.cancel(anotherType);
+            }
+            else {
+                this.request(type);
             }
         }
     }
