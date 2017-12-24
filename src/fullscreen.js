@@ -9,6 +9,7 @@ class FullScreen {
         });
         this.player.events.on('webfullscreen_cancel', () => {
             this.player.resize();
+            utils.setScrollPosition(this.lastScrollPosition);
         });
 
         const fullscreenchange = () => {
@@ -17,6 +18,7 @@ class FullScreen {
                 this.player.events.trigger('fullscreen');
             }
             else {
+                utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
             }
         };
@@ -35,6 +37,12 @@ class FullScreen {
     }
 
     request (type = 'browser') {
+        const anotherType = type === 'browser' ? 'web' : 'browser';
+        const anotherTypeOn = this.isFullScreen(anotherType);
+        if (!anotherTypeOn) {
+            this.lastScrollPosition = utils.getScrollPosition();
+        }
+
         switch (type) {
         case 'browser':
             if (this.player.container.requestFullscreen) {
@@ -52,13 +60,13 @@ class FullScreen {
             break;
         case 'web':
             this.player.container.classList.add('dplayer-fulled');
-
-            // record last position then hide scrollbars
-            this.lastScrollPosition = utils.getScrollPosition();
             document.body.classList.add('dplayer-web-fullscreen-fix');
-
             this.player.events.trigger('webfullscreen');
             break;
+        }
+
+        if (anotherTypeOn) {
+            this.cancel(anotherType);
         }
     }
 
@@ -77,11 +85,7 @@ class FullScreen {
             break;
         case 'web':
             this.player.container.classList.remove('dplayer-fulled');
-
-            // restore scrollbars and last position
             document.body.classList.remove('dplayer-web-fullscreen-fix');
-            utils.setScrollPosition(this.lastScrollPosition);
-
             this.player.events.trigger('webfullscreen_cancel');
             break;
         }
@@ -93,10 +97,6 @@ class FullScreen {
         }
         else {
             this.request(type);
-            const anotherType = type === 'browser' ? 'web' : 'browser';
-            if (this.isFullScreen(anotherType)) {
-                this.cancel(anotherType);
-            }
         }
     }
 }
