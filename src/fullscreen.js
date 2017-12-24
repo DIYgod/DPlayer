@@ -38,8 +38,8 @@ class FullScreen {
 
     request (type = 'browser') {
         const anotherType = type === 'browser' ? 'web' : 'browser';
-        this.anotherTypeOn = this.isFullScreen(anotherType);
-        if (!this.anotherTypeOn) {
+        const anotherTypeOn = this.isFullScreen(anotherType);
+        if (!anotherTypeOn) {
             this.lastScrollPosition = utils.getScrollPosition();
         }
 
@@ -65,7 +65,7 @@ class FullScreen {
             break;
         }
 
-        if (this.anotherTypeOn) {
+        if (anotherTypeOn) {
             this.cancel(anotherType);
         }
     }
