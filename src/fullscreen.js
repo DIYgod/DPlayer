@@ -36,8 +36,10 @@ class FullScreen {
         }
     }
 
-    request (type = 'browser', switchmode) {
-        if (!switchmode) {
+    request (type = 'browser') {
+        const anotherType = type === 'browser' ? 'web' : 'browser';
+        this.anotherTypeOn = this.isFullScreen(anotherType);
+        if (!this.anotherTypeOn) {
             this.lastScrollPosition = utils.getScrollPosition();
         }
 
@@ -61,6 +63,10 @@ class FullScreen {
             document.body.classList.add('dplayer-web-fullscreen-fix');
             this.player.events.trigger('webfullscreen');
             break;
+        }
+
+        if (this.anotherTypeOn) {
+            this.cancel(anotherType);
         }
     }
 
@@ -90,14 +96,7 @@ class FullScreen {
             this.cancel(type);
         }
         else {
-            const anotherType = type === 'browser' ? 'web' : 'browser';
-            if (this.isFullScreen(anotherType)) {
-                this.request(type, true);
-                this.cancel(anotherType);
-            }
-            else {
-                this.request(type);
-            }
+            this.request(type);
         }
     }
 }
