@@ -8,8 +8,8 @@ class FullScreen {
             this.player.resize();
         });
         this.player.events.on('webfullscreen_cancel', () => {
-            utils.setScrollPosition(this.lastScrollPosition);
             this.player.resize();
+            utils.setScrollPosition(this.lastScrollPosition);
         });
 
         const fullscreenchange = () => {
