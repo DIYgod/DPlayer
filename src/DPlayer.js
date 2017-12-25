@@ -14,6 +14,9 @@ import Subtitle from './subtitle';
 import Bar from './bar';
 import Time from './time';
 import Bezel from './bezel';
+import Controller from './controller';
+import Setting from './setting';
+import Comment from './comment';
 
 let index = 0;
 const instances = [];
@@ -68,6 +71,8 @@ class DPlayer {
 
         this.bezel = new Bezel(this.template.bezel);
 
+        this.controller = new Controller(this);
+
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
                 container: this.template.danmaku,
@@ -103,7 +108,11 @@ class DPlayer {
                 },
                 events: this.events
             });
+
+            this.comment = new Comment(this);
         }
+
+        this.setting = new Setting(this);
 
         document.addEventListener('click', () => {
             this.focus = false;
@@ -127,16 +136,12 @@ class DPlayer {
             });
         }
         else {
-            const toggleController = () => {
-                if (this.container.classList.contains('dplayer-hide-controller')) {
-                    this.container.classList.remove('dplayer-hide-controller');
-                }
-                else {
-                    this.container.classList.add('dplayer-hide-controller');
-                }
-            };
-            this.template.videoWrap.addEventListener('click', toggleController);
-            this.template.controllerMask.addEventListener('click', toggleController);
+            this.template.videoWrap.addEventListener('click', () => {
+                this.controller.toggle();
+            });
+            this.template.controllerMask.addEventListener('click', () => {
+                this.controller.toggle();
+            });
         }
 
         this.time = new Time(this);
@@ -228,164 +233,6 @@ class DPlayer {
             }
         });
 
-
-        /**
-         * auto hide controller
-         */
-        this.hideTime = 0;
-        const hideController = () => {
-            this.container.classList.remove('dplayer-hide-controller');
-            clearTimeout(this.hideTime);
-            this.hideTime = setTimeout(() => {
-                if (this.video.played.length && !this.disableHideController) {
-                    this.container.classList.add('dplayer-hide-controller');
-                    closeSetting();
-                    closeComment();
-                }
-            }, 2000);
-        };
-        if (!isMobile) {
-            this.container.addEventListener('mousemove', hideController);
-            this.container.addEventListener('click', hideController);
-        }
-
-
-        /**
-         * setting
-         */
-        // toggle setting box
-        const closeSetting = () => {
-            if (this.template.settingBox.classList.contains('dplayer-setting-box-open')) {
-                this.template.settingBox.classList.remove('dplayer-setting-box-open');
-                this.template.mask.classList.remove('dplayer-mask-show');
-                setTimeout(() => {
-                    this.template.settingBox.classList.remove('dplayer-setting-box-narrow');
-                    this.template.settingBox.classList.remove('dplayer-setting-box-speed');
-                }, 300);
-            }
-
-            this.disableHideController = false;
-        };
-        const openSetting = () => {
-            this.disableHideController = true;
-
-            this.template.settingBox.classList.add('dplayer-setting-box-open');
-            this.template.mask.classList.add('dplayer-mask-show');
-        };
-
-        this.template.mask.addEventListener('click', () => {
-            closeSetting();
-        });
-        this.template.settingButton.addEventListener('click', () => {
-            openSetting();
-        });
-
-        this.loop = this.options.loop;
-        let showdan = this.user.get('danmaku');
-        if (!showdan) {
-            this.danmaku && this.danmaku.hide();
-        }
-        let unlimitDan = this.user.get('unlimited');
-
-        // loop control
-        this.template.loopToggle.checked = this.loop;
-
-        this.template.loop.addEventListener('click', () => {
-            this.template.loopToggle.checked = !this.template.loopToggle.checked;
-            if (this.template.loopToggle.checked) {
-                this.loop = true;
-            }
-            else {
-                this.loop = false;
-            }
-            closeSetting();
-        });
-
-        // show danmaku control
-        this.template.showDanmakuToggle.checked = showdan;
-
-        this.template.showDanmaku.addEventListener('click', () => {
-            this.template.showDanmakuToggle.checked = !this.template.showDanmakuToggle.checked;
-            if (this.template.showDanmakuToggle.checked) {
-                showdan = true;
-                if (!this.paused) {
-                    this.danmaku.show();
-                }
-            }
-            else {
-                showdan = false;
-                this.danmaku.hide();
-            }
-            this.user.set('danmaku', showdan ? 1 : 0);
-            closeSetting();
-        });
-
-        // unlimited danmaku control
-        this.template.unlimitDanmakuToggle.checked = unlimitDan;
-
-        this.template.unlimitDanmaku.addEventListener('click', () => {
-            this.template.unlimitDanmakuToggle.checked = !this.template.unlimitDanmakuToggle.checked;
-            if (this.template.unlimitDanmakuToggle.checked) {
-                unlimitDan = true;
-                this.danmaku.unlimit(true);
-            }
-            else {
-                unlimitDan = false;
-                this.danmaku.unlimit(false);
-            }
-            this.user.set('unlimited', unlimitDan ? 1 : 0);
-            closeSetting();
-        });
-
-        // speed control
-        this.template.speed.addEventListener('click', () => {
-            this.template.settingBox.classList.add('dplayer-setting-box-narrow');
-            this.template.settingBox.classList.add('dplayer-setting-box-speed');
-
-            for (let i = 0; i < this.template.speedItem.length; i++) {
-                this.template.speedItem[i].addEventListener('click', () => {
-                    this.video.playbackRate = this.template.speedItem[i].dataset.speed;
-                    closeSetting();
-                });
-            }
-        });
-
-        if (this.danmaku) {
-            // danmaku opacity
-            const dWidth = 130;
-            this.on('danmaku_opacity', (percentage) => {
-                this.bar.set('danmaku', percentage, 'width');
-                this.user.set('opacity', percentage);
-            });
-            this.danmaku.opacity(this.user.get('opacity'));
-
-            const danmakuMove = (event) => {
-                const e = event || window.event;
-                let percentage = (e.clientX - utils.getElementViewLeft(this.template.danmakuOpacityBarWrap)) / dWidth;
-                percentage = Math.max(percentage, 0);
-                percentage = Math.min(percentage, 1);
-                this.danmaku.opacity(percentage);
-            };
-            const danmakuUp = () => {
-                document.removeEventListener('mouseup', danmakuUp);
-                document.removeEventListener('mousemove', danmakuMove);
-                this.template.danmakuOpacityBox.classList.remove('dplayer-setting-danmaku-active');
-            };
-
-            this.template.danmakuOpacityBarWrapWrap.addEventListener('click', (event) => {
-                const e = event || window.event;
-                let percentage = (e.clientX - utils.getElementViewLeft(this.template.danmakuOpacityBarWrap)) / dWidth;
-                percentage = Math.max(percentage, 0);
-                percentage = Math.min(percentage, 1);
-                this.danmaku.opacity(percentage);
-            });
-            this.template.danmakuOpacityBarWrapWrap.addEventListener('mousedown', () => {
-                document.addEventListener('mousemove', danmakuMove);
-                document.addEventListener('mouseup', danmakuUp);
-                this.template.danmakuOpacityBox.classList.add('dplayer-setting-danmaku-active');
-            });
-        }
-
         // set duration time
         if (this.video.duration !== 1) { // compatibility: Android browsers will output 1 at first
             this.template.dtime.innerHTML = this.video.duration ? utils.secondToTime(this.video.duration) : '00:00';
@@ -400,101 +247,6 @@ class DPlayer {
                 this.pause();
             }
         }
-
-
-        /**
-         * comment
-         */
-
-        const closeCommentSetting = () => {
-            if (this.template.commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
-                this.template.commentSettingBox.classList.remove('dplayer-comment-setting-open');
-            }
-        };
-        const toggleCommentSetting = () => {
-            if (this.template.commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
-                this.template.commentSettingBox.classList.remove('dplayer-comment-setting-open');
-            }
-            else {
-                this.template.commentSettingBox.classList.add('dplayer-comment-setting-open');
-            }
-        };
-
-        const closeComment = () => {
-            if (!this.template.controller.classList.contains('dplayer-controller-comment')) {
-                return;
-            }
-
-            this.template.controller.classList.remove('dplayer-controller-comment');
-            this.template.mask.classList.remove('dplayer-mask-show');
-            this.container.classList.remove('dplayer-show-controller');
-
-            closeCommentSetting();
-
-            this.disableHideController = false;
-        };
-        const openComment = () => {
-            this.disableHideController = true;
-
-            if (!this.template.controller.classList.contains('dplayer-controller-comment')) {
-                this.template.controller.classList.add('dplayer-controller-comment');
-                this.template.mask.classList.add('dplayer-mask-show');
-                this.container.classList.add('dplayer-show-controller');
-                this.template.commentInput.focus();
-            }
-        };
-
-        this.template.mask.addEventListener('click', () => {
-            closeComment();
-        });
-        this.template.commentButton.addEventListener('click', () => {
-            openComment();
-        });
-        this.template.commentSettingButton.addEventListener('click', () => {
-            toggleCommentSetting();
-        });
-
-        // comment setting box
-        this.template.commentColorSettingBox.addEventListener('click', () => {
-            const sele = this.template.commentColorSettingBox.querySelector(`input:checked+span`);
-            if (sele) {
-                const color = this.template.commentColorSettingBox.querySelector(`input:checked`).value;
-                this.template.commentSettingFill.style.fill = color;
-                this.template.commentInput.style.color = color;
-                this.template.commentSendFill.style.fill = color;
-            }
-        });
-
-        const sendComment = () => {
-            this.template.commentInput.blur();
-
-            // text can't be empty
-            if (!this.template.commentInput.value.replace(/^\s+|\s+$/g, '')) {
-                this.notice(this.tran('Please input danmaku content!'));
-                return;
-            }
-
-            this.danmaku.send({
-                text: this.template.commentInput.value,
-                color: this.container.querySelector('.dplayer-comment-setting-color input:checked').value,
-                type: this.container.querySelector('.dplayer-comment-setting-type input:checked').value
-            }, () => {
-                this.template.commentInput.value = '';
-                closeComment();
-            });
-        };
-
-        this.template.commentInput.addEventListener('click', () => {
-            closeCommentSetting();
-        });
-        this.template.commentInput.addEventListener('keydown', (e) => {
-            const event = e || window.event;
-            if (event.keyCode === 13) {
-                sendComment();
-            }
-        });
-
-        this.template.commentSendButton.addEventListener('click', sendComment);
 
         this.fullScreen = new FullScreen(this);
 
@@ -526,12 +278,12 @@ class DPlayer {
                     case 37:
                         event.preventDefault();
                         this.seek(this.video.currentTime - 5);
-                        hideController();
+                        this.controller.setAutoHide();
                         break;
                     case 39:
                         event.preventDefault();
                         this.seek(this.video.currentTime + 5);
-                        hideController();
+                        this.controller.setAutoHide();
                         break;
                     case 38:
                         event.preventDefault();
@@ -873,7 +625,7 @@ class DPlayer {
         this.ended = false;
         this.on('ended', () => {
             this.bar.set('played', 1, 'width');
-            if (!this.loop) {
+            if (!this.setting.loop) {
                 this.ended = true;
                 this.pause();
             }
@@ -1050,7 +802,7 @@ class DPlayer {
     destroy () {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
-        clearTimeout(this.hideTime);
+        this.controller.destroy();
         this.time.destroy();
         this.video.src = '';
         this.container.innerHTML = '';
