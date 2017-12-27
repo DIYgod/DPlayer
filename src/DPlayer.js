@@ -181,7 +181,14 @@ class DPlayer {
             document.addEventListener('mousemove', thumbMove);
             document.addEventListener('mouseup', thumbUp);
         });
-
+        // speed change
+        this.template.speedItem.forEach((item) => {
+            item.addEventListener('click', () => {
+                if (item.dataset.speed) {
+                    this.video.playbackRate = item.dataset.speed;
+                }
+            });
+        });
 
         /**
          * control volume
