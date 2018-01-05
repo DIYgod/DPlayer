@@ -88,7 +88,7 @@ class Time {
         }
     }
 
-    distroy (type) {
+    destroy (type) {
         if (type) {
             clearInterval(this[`${type}Checker`]);
         }
