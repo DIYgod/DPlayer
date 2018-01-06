@@ -1,6 +1,6 @@
 import utils from './utils';
 
-class SettingBox {
+class Setting {
     constructor (player) {
         this.player = player;
 
@@ -130,4 +130,4 @@ class SettingBox {
     }
 }
 
-module.exports = SettingBox;
+module.exports = Setting;
