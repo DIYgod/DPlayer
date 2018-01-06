@@ -6,7 +6,6 @@ import i18n from './i18n';
 import Template from './template';
 import SvgCollection from './svg';
 import Danmaku from './danmaku';
-import Thumbnails from './thumbnails';
 import Events from './events';
 import FullScreen from './fullscreen';
 import User from './user';
@@ -71,6 +70,8 @@ class DPlayer {
 
         this.bezel = new Bezel(this.template.bezel);
 
+        this.fullScreen = new FullScreen(this);
+
         this.controller = new Controller(this);
 
         if (this.options.danmaku) {
@@ -121,122 +122,9 @@ class DPlayer {
             this.focus = true;
         }, true);
 
-        // play and pause button
         this.paused = true;
-        this.template.playButton.addEventListener('click', () => {
-            this.toggle();
-        });
-
-        if (!isMobile) {
-            this.template.videoWrap.addEventListener('click', () => {
-                this.toggle();
-            });
-            this.template.controllerMask.addEventListener('click', () => {
-                this.toggle();
-            });
-        }
-        else {
-            this.template.videoWrap.addEventListener('click', () => {
-                this.controller.toggle();
-            });
-            this.template.controllerMask.addEventListener('click', () => {
-                this.controller.toggle();
-            });
-        }
 
         this.time = new Time(this);
-
-        if (this.options.video.thumbnails) {
-            this.initThumbnails();
-        }
-        this.isTimeTipsShow = true;
-        this.mouseHandler = this.mouseHandler(this.template.playedBarWrap, this.template.playedBarTime).bind(this);
-        this.template.playedBarWrap.addEventListener('mousemove', this.mouseHandler);
-        this.template.playedBarWrap.addEventListener('mouseenter', this.mouseHandler);
-        this.template.playedBarWrap.addEventListener('mouseleave', this.mouseHandler);
-
-        let barWidth;
-        const thumbMove = (e) => {
-            let percentage = (e.clientX - utils.getElementViewLeft(this.template.playedBarWrap)) / barWidth;
-            percentage = Math.max(percentage, 0);
-            percentage = Math.min(percentage, 1);
-            this.bar.set('played', percentage, 'width');
-            this.template.ptime.innerHTML = utils.secondToTime(percentage * this.video.duration);
-        };
-
-        const thumbUp = (e) => {
-            document.removeEventListener('mouseup', thumbUp);
-            document.removeEventListener('mousemove', thumbMove);
-            let percentage = (e.clientX - utils.getElementViewLeft(this.template.playedBarWrap)) / barWidth;
-            percentage = Math.max(percentage, 0);
-            percentage = Math.min(percentage, 1);
-            this.bar.set('played', percentage, 'width');
-            this.seek(this.bar.get('played') * this.video.duration);
-            this.time.enable('progress');
-        };
-
-        this.template.playedBarWrap.addEventListener('mousedown', () => {
-            barWidth = this.template.playedBarWrap.clientWidth;
-            this.time.disable('progress');
-            document.addEventListener('mousemove', thumbMove);
-            document.addEventListener('mouseup', thumbUp);
-        });
-
-
-        /**
-         * control volume
-         */
-        const vWidth = 35;
-
-        this.switchVolumeIcon = () => {
-            if (this.volume() >= 0.95) {
-                this.template.volumeIcon.innerHTML = this.icons.get('volume-up');
-            }
-            else if (this.volume() > 0) {
-                this.template.volumeIcon.innerHTML = this.icons.get('volume-down');
-            }
-            else {
-                this.template.volumeIcon.innerHTML = this.icons.get('volume-off');
-            }
-        };
-        const volumeMove = (event) => {
-            const e = event || window.event;
-            const percentage = (e.clientX - utils.getElementViewLeft(this.template.volumeBarWrap) - 5.5) / vWidth;
-            this.volume(percentage);
-        };
-        const volumeUp = () => {
-            document.removeEventListener('mouseup', volumeUp);
-            document.removeEventListener('mousemove', volumeMove);
-            this.template.volumeButton.classList.remove('dplayer-volume-active');
-        };
-
-        this.template.volumeBarWrapWrap.addEventListener('click', (event) => {
-            const e = event || window.event;
-            const percentage = (e.clientX - utils.getElementViewLeft(this.template.volumeBarWrap) - 5.5) / vWidth;
-            this.volume(percentage);
-        });
-        this.template.volumeBarWrapWrap.addEventListener('mousedown', () => {
-            document.addEventListener('mousemove', volumeMove);
-            document.addEventListener('mouseup', volumeUp);
-            this.template.volumeButton.classList.add('dplayer-volume-active');
-        });
-        this.template.volumeIcon.addEventListener('click', () => {
-            if (this.video.muted) {
-                this.video.muted = false;
-                this.switchVolumeIcon();
-                this.bar.set('volume', this.volume(), 'width');
-            }
-            else {
-                this.video.muted = true;
-                this.template.volumeIcon.innerHTML = this.icons.get('volume-off');
-                this.bar.set('volume', 0, 'width');
-            }
-        });
-
-        // set duration time
-        if (this.video.duration !== 1) { // compatibility: Android browsers will output 1 at first
-            this.template.dtime.innerHTML = this.video.duration ? utils.secondToTime(this.video.duration) : '00:00';
-        }
 
         if (!this.danmaku) {
             // autoplay
@@ -247,18 +135,6 @@ class DPlayer {
                 this.pause();
             }
         }
-
-        this.fullScreen = new FullScreen(this);
-
-        // browser full screen
-        this.template.browserFullButton.addEventListener('click', () => {
-            this.fullScreen.toggle('browser');
-        });
-
-        // web full screen
-        this.template.webFullButton.addEventListener('click', () => {
-            this.fullScreen.toggle('web');
-        });
 
         /**
          * hot key
@@ -354,55 +230,6 @@ class DPlayer {
             });
         });
 
-        /**
-         * Switch quality
-         */
-        if (this.options.video.quality) {
-            this.template.qualityList.addEventListener('click', (e) => {
-                if (e.target.classList.contains('dplayer-quality-item')) {
-                    this.switchQuality(e.target.dataset.index);
-                }
-            });
-        }
-
-        /**
-         * Screenshot
-         */
-        if (this.options.screenshot) {
-            this.template.camareButton.addEventListener('click', () => {
-                const canvas = document.createElement("canvas");
-                canvas.width = this.video.videoWidth;
-                canvas.height = this.video.videoHeight;
-                canvas.getContext('2d').drawImage(this.video, 0, 0, canvas.width, canvas.height);
-
-                const dataURL = canvas.toDataURL();
-                this.template.camareButton.href = dataURL;
-                this.template.camareButton.download = "DPlayer.png";
-
-                this.events.trigger('screenshot', dataURL);
-            });
-        }
-
-        /**
-         * Toggle subtitle
-         */
-        if (this.options.subtitle) {
-            this.events.on('subtitle_show', () => {
-                this.template.subtitleButton.dataset.balloon = this.tran('Hide subtitle');
-                this.template.subtitleButtonInner.style.opacity = '';
-                this.user.set('subtitle', 1);
-            });
-            this.events.on('subtitle_hide', () => {
-                this.template.subtitleButton.dataset.balloon = this.tran('Show subtitle');
-                this.template.subtitleButtonInner.style.opacity = '0.4';
-                this.user.set('subtitle', 0);
-            });
-
-            this.template.subtitleButton.addEventListener('click', () => {
-                this.subtitle.toggle();
-            });
-        }
-
         this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
 
         index++;
@@ -477,6 +304,18 @@ class DPlayer {
         this.container.classList.remove('dplayer-playing');
         if (this.danmaku) {
             this.danmaku.pause();
+        }
+    }
+
+    switchVolumeIcon () {
+        if (this.volume() >= 0.95) {
+            this.template.volumeIcon.innerHTML = this.icons.get('volume-up');
+        }
+        else if (this.volume() > 0) {
+            this.template.volumeIcon.innerHTML = this.icons.get('volume-down');
+        }
+        else {
+            this.template.volumeIcon.innerHTML = this.icons.get('volume-off');
         }
     }
 
@@ -706,76 +545,6 @@ class DPlayer {
 
                 this.events.trigger('quality_end');
             }
-        });
-    }
-
-    mouseHandler (pbar, timeTips) {
-        // http://stackoverflow.com/questions/1480133/how-can-i-get-an-objects-absolute-position-on-the-page-in-javascript
-        const cumulativeOffset = (element) => {
-            let top = 0, left = 0;
-            do {
-                top += element.offsetTop || 0;
-                left += element.offsetLeft || 0;
-                element = element.offsetParent;
-            } while (element);
-
-            return {
-                top: top,
-                left: left
-            };
-        };
-
-        return (e) => {
-            if (!this.video.duration) {
-                return;
-            }
-            const { clientX } = e;
-            const px = cumulativeOffset(pbar).left;
-            const tx = clientX - px;
-            if (tx < 0 || tx > pbar.offsetWidth) {
-                return;
-            }
-            const time = this.video.duration * (tx / pbar.offsetWidth);
-            timeTips.style.left = `${(tx - 20)}px`;
-
-            switch (e.type) {
-            case 'mouseenter':
-                this.thumbnails && this.thumbnails.show();
-                break;
-            case 'mousemove':
-                this.thumbnails && this.thumbnails.move(tx);
-                timeTips.innerText = utils.secondToTime(time);
-                this.timeTipsDisplay(true, timeTips);
-                break;
-            case 'mouseleave':
-                this.thumbnails && this.thumbnails.hide();
-                this.timeTipsDisplay(false, timeTips);
-                break;
-            }
-        };
-    }
-
-    timeTipsDisplay (show, timeTips) {
-        if (show) {
-            if (this.isTimeTipsShow) {
-                return;
-            }
-            timeTips.classList.remove('hidden');
-            this.isTimeTipsShow = true;
-        } else {
-            if (!this.isTimeTipsShow) {
-                return;
-            }
-            timeTips.classList.add('hidden');
-            this.isTimeTipsShow = false;
-        }
-    }
-
-    initThumbnails () {
-        this.thumbnails = new Thumbnails(this.template.barPreview, this.template.barWrap.offsetWidth, this.options.video.thumbnails, this.events);
-
-        this.on('loadedmetadata', () => {
-            this.thumbnails.resize(160, 90);
         });
     }
 

@@ -1,9 +1,9 @@
 class Thumbnails {
-    constructor (container, width, url, events) {
-        this.container = container;
-        this.width = width;
-        this.container.style.backgroundImage = `url('${url}')`;
-        this.events = events;
+    constructor (options) {
+        this.container = options.container;
+        this.barWidth = options.barWidth;
+        this.container.style.backgroundImage = `url('${options.url}')`;
+        this.events = options.events;
     }
 
     resize (width, height) {
@@ -18,7 +18,7 @@ class Thumbnails {
     }
 
     move (position) {
-        this.container.style.backgroundPosition = `-${(Math.ceil(position / this.width * 100) - 1) * 160}px 0`;
+        this.container.style.backgroundPosition = `-${(Math.ceil(position / this.barWidth * 100) - 1) * 160}px 0`;
         this.container.style.left = `${(position - this.container.offsetWidth / 2)}px`;
     }
 
