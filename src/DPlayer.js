@@ -16,6 +16,8 @@ import Bezel from './bezel';
 import Controller from './controller';
 import Setting from './setting';
 import Comment from './comment';
+import HotKey from './hotkey';
+import ContextMenu from './contextmenu';
 
 let index = 0;
 const instances = [];
@@ -136,99 +138,9 @@ class DPlayer {
             }
         }
 
-        /**
-         * hot key
-         */
-        const handleKeyDown = (e) => {
-            if (this.focus) {
-                const tag = document.activeElement.tagName.toUpperCase();
-                const editable = document.activeElement.getAttribute('contenteditable');
-                if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
-                    const event = e || window.event;
-                    let percentage;
-                    switch (event.keyCode) {
-                    case 32:
-                        event.preventDefault();
-                        this.toggle();
-                        break;
-                    case 37:
-                        event.preventDefault();
-                        this.seek(this.video.currentTime - 5);
-                        this.controller.setAutoHide();
-                        break;
-                    case 39:
-                        event.preventDefault();
-                        this.seek(this.video.currentTime + 5);
-                        this.controller.setAutoHide();
-                        break;
-                    case 38:
-                        event.preventDefault();
-                        percentage = this.volume() + 0.1;
-                        this.volume(percentage);
-                        break;
-                    case 40:
-                        event.preventDefault();
-                        percentage = this.volume() - 0.1;
-                        this.volume(percentage);
-                        break;
-                    }
-                }
-            }
-        };
-        if (this.options.hotkey) {
-            document.addEventListener('keydown', handleKeyDown);
-        }
-        document.addEventListener('keydown', (e) => {              // Press ESC to quit web full screen
-            const event = e || window.event;
-            switch (event.keyCode) {
-            case 27:
-                if (this.fullScreen.isFullScreen('web')) {
-                    this.fullScreen.cancel('web');
-                }
-                break;
-            }
-        });
+        this.hotkey = new HotKey(this);
 
-        /**
-         * right key
-         */
-        this.container.addEventListener('contextmenu', (e) => {
-            const event = e || window.event;
-            event.preventDefault();
-
-            this.template.menu.classList.add('dplayer-menu-show');
-
-            const clientRect = this.container.getBoundingClientRect();
-            const menuLeft = event.clientX - clientRect.left;
-            const menuTop = event.clientY - clientRect.top;
-            if (menuLeft + this.template.menu.offsetWidth >= clientRect.width) {
-                this.template.menu.style.right = clientRect.width - menuLeft + 'px';
-                this.template.menu.style.left = 'initial';
-            }
-            else {
-                this.template.menu.style.left = event.clientX - this.container.getBoundingClientRect().left + 'px';
-                this.template.menu.style.right = 'initial';
-            }
-            if (menuTop + this.template.menu.offsetHeight >= clientRect.height) {
-                this.template.menu.style.bottom = clientRect.height - menuTop + 'px';
-                this.template.menu.style.top = 'initial';
-            }
-            else {
-                this.template.menu.style.top = event.clientY - this.container.getBoundingClientRect().top + 'px';
-                this.template.menu.style.bottom = 'initial';
-            }
-
-            this.template.mask.classList.add('dplayer-mask-show');
-
-            this.events.trigger('contextmenu_show');
-
-            this.template.mask.addEventListener('click', () => {
-                this.template.mask.classList.remove('dplayer-mask-show');
-                this.template.menu.classList.remove('dplayer-menu-show');
-
-                this.events.trigger('contextmenu_hide');
-            });
-        });
+        this.contextmenu = new ContextMenu(this);
 
         this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
 
