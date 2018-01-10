@@ -75,6 +75,29 @@ var dp = new DPlayer({
 
 [Read the Docs](http://dplayer.js.org/docs)
 
+## FAQ
+
+<details><summary>Why can't some videos be full screen?</summary><br>
+
+If player is contained in a iframe, try adding the allowfullscreen attribute to the iframe.
+
+For full browser support it should look like this:
+
+```html
+<iframe src="example.com"
+        allowfullscreen="allowfullscreen"
+        mozallowfullscreen="mozallowfullscreen"
+        msallowfullscreen="msallowfullscreen"
+        oallowfullscreen="oallowfullscreen"
+        webkitallowfullscreen="webkitallowfullscreen"></iframe> 
+```
+</details>
+
+<details><summary>Why can't player autoplay in some mobile browsers?</summary><br>
+
+Most mobile browsers forbid video autoplay, you wont be able to achieve it without hacks.
+</details>
+
 ## Join the Discussion
 
 - [Telegram Group](https://t.me/adplayer)
