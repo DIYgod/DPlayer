@@ -340,4 +340,4 @@ class Danmaku {
     }
 }
 
-module.exports = Danmaku;
+export default Danmaku;

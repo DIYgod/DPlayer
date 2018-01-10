@@ -52,4 +52,4 @@ class Subtitle {
     }
 }
 
-module.exports = Subtitle;
+export default Subtitle;

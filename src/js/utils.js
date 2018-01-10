@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 
     /**
     * Parse second to 00:00 format

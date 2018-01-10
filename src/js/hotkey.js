@@ -52,4 +52,4 @@ class HotKey {
     }
 }
 
-module.exports = HotKey;
+export default HotKey;

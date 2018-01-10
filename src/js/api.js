@@ -27,7 +27,7 @@ const SendXMLHttpRequest = (url, data, success, error, fail) => {
     xhr.send(data !== null ? JSON.stringify(data) : null);
 };
 
-module.exports = {
+export default {
     send: (endpoint, danmakuData, callback) => {
         SendXMLHttpRequest(endpoint, danmakuData, (xhr, response) => {
             console.log('Post danmaku: ', response);

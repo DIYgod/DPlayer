@@ -7,7 +7,7 @@ W3C def language codes is :
 NOTE: use lowercase to prevent case typo from user!
 Use this as shown below..... */
 
-module.exports = function (lang) {
+function i18n (lang) {
     this.lang = lang;
     this.tran = (text) => {
         if (tranTxt[this.lang] && tranTxt[this.lang][text]) {
@@ -17,7 +17,7 @@ module.exports = function (lang) {
             return text;
         }
     };
-};
+}
 
 // add translation text here
 const tranTxt = {
@@ -94,3 +94,5 @@ const tranTxt = {
         'Live': '直播',
     }
 };
+
+export default i18n;

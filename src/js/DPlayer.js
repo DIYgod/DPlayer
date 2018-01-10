@@ -1,5 +1,3 @@
-import './DPlayer.scss';
-
 import utils, { isMobile } from './utils';
 import handleOption from './options';
 import i18n from './i18n';
@@ -497,4 +495,4 @@ class DPlayer {
     }
 }
 
-module.exports = DPlayer;
+export default DPlayer;

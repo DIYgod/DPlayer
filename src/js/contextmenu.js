@@ -49,4 +49,4 @@ class ContextMenu {
     }
 }
 
-module.exports = ContextMenu;
+export default ContextMenu;

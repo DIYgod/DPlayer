@@ -130,4 +130,4 @@ class Setting {
     }
 }
 
-module.exports = Setting;
+export default Setting;

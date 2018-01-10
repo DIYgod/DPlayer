@@ -13,4 +13,4 @@ class Bezel {
     }
 }
 
-module.exports = Bezel;
+export default Bezel;

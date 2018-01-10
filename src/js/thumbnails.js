@@ -29,4 +29,4 @@ class Thumbnails {
     }
 }
 
-module.exports = Thumbnails;
+export default Thumbnails;

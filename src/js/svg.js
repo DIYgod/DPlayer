@@ -21,4 +21,4 @@ class SvgSource {
     }
 }
 
-module.exports = SvgSource;
+export default SvgSource;

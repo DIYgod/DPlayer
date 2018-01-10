@@ -25,4 +25,4 @@ class Bar {
     }
 }
 
-module.exports = Bar;
+export default Bar;
