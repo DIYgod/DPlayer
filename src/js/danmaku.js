@@ -21,10 +21,10 @@ class Danmaku {
     load () {
         let apiurl;
         if (this.options.api.maximum) {
-            apiurl = `${this.options.api.address}?id=${this.options.api.id}&max=${this.options.api.maximum}`;
+            apiurl = `${this.options.api.address}v2/?id=${this.options.api.id}&max=${this.options.api.maximum}`;
         }
         else {
-            apiurl = `${this.options.api.address}?id=${this.options.api.id}`;
+            apiurl = `${this.options.api.address}v2/?id=${this.options.api.id}`;
         }
         const endpoints = (this.options.api.addition || []).slice(0);
         endpoints.push(apiurl);
@@ -67,7 +67,14 @@ class Danmaku {
                 results[i] = [];
             }
             else {
-                results[i] = data;
+                const typeMap = ['right', 'top', 'bottom'];
+                results[i] = data.map((item) => ({
+                    time: item[0],
+                    type: typeMap[item[1]],
+                    color: item[2],
+                    author: item[3],
+                    text: item[4]
+                }));
             }
             if (readCount === endpoints.length) {
                 return callback(results);
@@ -89,7 +96,7 @@ class Danmaku {
             color: dan.color,
             type: dan.type
         };
-        this.options.apiBackend.send(this.options.api.address, danmakuData, callback);
+        this.options.apiBackend.send(this.options.api.address + 'v2/', danmakuData, callback);
 
         this.dan.splice(this.danIndex, 0, danmakuData);
         this.danIndex++;

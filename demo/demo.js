@@ -121,15 +121,14 @@ function initPlayers () {
     // });
 
     // // dp4
-    window.dp4 = new DPlayer({
-        container: document.getElementById('dplayer4'),
-        preload: 'none',
-        autoplay: true,
-        video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
-            type: 'hls'
-        }
-    });
+    // window.dp4 = new DPlayer({
+    //     container: document.getElementById('dplayer4'),
+    //     preload: 'none',
+    //     video: {
+    //         url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+    //         type: 'hls'
+    //     }
+    // });
 
     // // dp5
     // window.dp5 = new DPlayer({

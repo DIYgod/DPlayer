@@ -1,7 +1,7 @@
 /*
  * xhr.status ---> fail
- * response.code === 1 ---> success
- * response.code !== 1 ---> error
+ * response.code === 0 ---> success
+ * response.code !== 0 ---> error
  * */
 
 const SendXMLHttpRequest = (url, data, success, error, fail) => {
@@ -12,7 +12,7 @@ const SendXMLHttpRequest = (url, data, success, error, fail) => {
             if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
                 const response = JSON.parse(xhr.responseText);
 
-                if (response.code !== 1) {
+                if (response.code !== 0) {
                     return error(xhr, response);
                 }
 
