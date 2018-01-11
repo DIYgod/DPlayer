@@ -126,6 +126,12 @@ class DPlayer {
 
         this.time = new Time(this);
 
+        this.hotkey = new HotKey(this);
+
+        this.contextmenu = new ContextMenu(this);
+
+        this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
+
         if (!this.danmaku) {
             // autoplay
             if (this.options.autoplay && !utils.isMobile) {
@@ -135,12 +141,6 @@ class DPlayer {
                 this.pause();
             }
         }
-
-        this.hotkey = new HotKey(this);
-
-        this.contextmenu = new ContextMenu(this);
-
-        this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
 
         index++;
         instances.push(this);

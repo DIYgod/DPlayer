@@ -230,7 +230,7 @@ class Controller {
     hide () {
         this.player.container.classList.add('dplayer-hide-controller');
         this.player.setting.hide();
-        this.player.comment.hide();
+        this.player.comment && this.player.comment.hide();
     }
 
     isShow () {
