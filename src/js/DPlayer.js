@@ -1,4 +1,4 @@
-import utils, { isMobile } from './utils';
+import utils from './utils';
 import handleOption from './options';
 import i18n from './i18n';
 import Template from './template';
@@ -48,7 +48,7 @@ class DPlayer {
         if (this.options.live) {
             this.container.classList.add('dplayer-live');
         }
-        if (isMobile) {
+        if (utils.isMobile) {
             this.container.classList.add('dplayer-mobile');
         }
         this.arrow = this.container.offsetWidth <= 500;
@@ -83,10 +83,10 @@ class DPlayer {
                         this.template.danmakuLoading.style.display = 'none';
 
                         // autoplay
-                        if (this.options.autoplay && !isMobile) {
+                        if (this.options.autoplay && !utils.isMobile) {
                             this.play();
                         }
-                        else if (isMobile) {
+                        else if (utils.isMobile) {
                             this.pause();
                         }
                     }, 0);
@@ -128,10 +128,10 @@ class DPlayer {
 
         if (!this.danmaku) {
             // autoplay
-            if (this.options.autoplay && !isMobile) {
+            if (this.options.autoplay && !utils.isMobile) {
                 this.play();
             }
-            else if (isMobile) {
+            else if (utils.isMobile) {
                 this.pause();
             }
         }

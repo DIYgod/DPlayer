@@ -1,4 +1,4 @@
-import utils, { isMobile } from './utils';
+import utils from './utils';
 import Thumbnails from './thumbnails';
 
 class Controller {
@@ -6,7 +6,7 @@ class Controller {
         this.player = player;
 
         this.autoHideTimer = 0;
-        if (!isMobile) {
+        if (!utils.isMobile) {
             this.player.container.addEventListener('mousemove', () => {
                 this.setAutoHide();
             });
@@ -30,7 +30,7 @@ class Controller {
             this.player.toggle();
         });
 
-        if (!isMobile) {
+        if (!utils.isMobile) {
             this.player.template.videoWrap.addEventListener('click', () => {
                 this.player.toggle();
             });

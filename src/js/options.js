@@ -1,10 +1,10 @@
 /* global DPLAYER_VERSION GIT_HASH */
 import defaultApiBackend from './api.js';
+import utils from './utils';
 
 export default (options) => {
-    const isMobile = /mobile/i.test(window.navigator.userAgent);
     // compatibility: some mobile browsers don't suppose autoplay
-    if (isMobile) {
+    if (utils.isMobile) {
         options.autoplay = false;
     }
 
