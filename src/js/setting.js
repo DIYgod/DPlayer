@@ -69,7 +69,7 @@ class Setting {
         });
         for (let i = 0; i < this.player.template.speedItem.length; i++) {
             this.player.template.speedItem[i].addEventListener('click', () => {
-                this.player.video.playbackRate = this.player.template.speedItem[i].dataset.speed;
+                this.player.speed(this.player.template.speedItem[i].dataset.speed);
                 this.hide();
             });
         }

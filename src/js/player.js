@@ -478,6 +478,10 @@ class DPlayer {
         this.events.trigger('resize');
     }
 
+    speed (rate) {
+        this.video.playbackRate = rate;
+    }
+
     destroy () {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
