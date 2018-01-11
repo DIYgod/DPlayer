@@ -1,0 +1,14 @@
+.dplayer-notice {
+    opacity: 0;
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+    font-size: 14px;
+    border-radius: 2px;
+    background: rgba(28, 28, 28, 0.9);
+    padding: 7px 20px;
+    transition: all .3s ease-in-out;
+    overflow: hidden;
+    color: #fff;
+    pointer-events: none;
+}

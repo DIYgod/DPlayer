@@ -1,0 +1,38 @@
+.dplayer-menu {
+    position: absolute;
+    width: 170px;
+    border-radius: 2px;
+    background: rgba(28, 28, 28, 0.85);
+    padding: 5px 0;
+    overflow: hidden;
+    z-index: 3;
+    display: none;
+    &.dplayer-menu-show {
+        display: block;
+    }
+    .dplayer-menu-item {
+        height: 30px;
+        box-sizing: border-box;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(255, 255, 255, .1);
+        }
+        a {
+            display: inline-block;
+            padding: 0 10px;
+            line-height: 30px;
+            color: #eee;
+            font-size: 13px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
