@@ -68,13 +68,18 @@ class Danmaku {
             }
             else {
                 const typeMap = ['right', 'top', 'bottom'];
-                results[i] = data.map((item) => ({
-                    time: item[0],
-                    type: typeMap[item[1]],
-                    color: item[2],
-                    author: item[3],
-                    text: item[4]
-                }));
+                if (data) {
+                    results[i] = data.map((item) => ({
+                        time: item[0],
+                        type: typeMap[item[1]],
+                        color: item[2],
+                        author: item[3],
+                        text: item[4]
+                    }));
+                }
+                else {
+                    results[i] = [];
+                }
             }
             if (readCount === endpoints.length) {
                 return callback(results);

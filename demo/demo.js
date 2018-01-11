@@ -149,26 +149,26 @@ function initPlayers () {
     //     }
     // });
 
-    // window.dp6 = new DPlayer({
-    //     container: document.getElementById('dplayer6'),
-    //     preload: 'none',
-    //     live: true,
-    //     danmaku: true,
-    //     apiBackend: {
-    //         read: function (endpoint, callback) {
-    //             console.log('假装 WebSocket 连接成功');
-    //             callback();
-    //         },
-    //         send: function (endpoint, danmakuData, callback) {
-    //             console.log('假装通过 WebSocket 发送数据', danmakuData);
-    //             callback();
-    //         }
-    //     },
-    //     video: {
-    //         url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
-    //         type: 'hls'
-    //     }
-    // });
+    window.dp6 = new DPlayer({
+        container: document.getElementById('dplayer6'),
+        preload: 'none',
+        live: true,
+        danmaku: true,
+        apiBackend: {
+            read: function (endpoint, callback) {
+                console.log('假装 WebSocket 连接成功');
+                callback();
+            },
+            send: function (endpoint, danmakuData, callback) {
+                console.log('假装通过 WebSocket 发送数据', danmakuData);
+                callback();
+            }
+        },
+        video: {
+            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+            type: 'hls'
+        }
+    });
 }
 
 function clearPlayers () {
