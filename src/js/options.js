@@ -1,12 +1,7 @@
 /* global DPLAYER_VERSION GIT_HASH */
 import defaultApiBackend from './api.js';
-import utils from './utils';
 
 export default (options) => {
-    // compatibility: some mobile browsers don't suppose autoplay
-    if (utils.isMobile) {
-        options.autoplay = false;
-    }
 
     // default options
     const defaultOption = {

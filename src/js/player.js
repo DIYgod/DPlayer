@@ -83,7 +83,7 @@ class DPlayer {
                         this.template.danmakuLoading.style.display = 'none';
 
                         // autoplay
-                        if (this.options.autoplay && !utils.isMobile) {
+                        if (this.options.autoplay) {
                             this.play();
                         }
                         else if (utils.isMobile) {
@@ -132,14 +132,8 @@ class DPlayer {
 
         this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
 
-        if (!this.danmaku) {
-            // autoplay
-            if (this.options.autoplay && !utils.isMobile) {
-                this.play();
-            }
-            else if (utils.isMobile) {
-                this.pause();
-            }
+        if (!this.danmaku && this.options.autoplay) {
+            this.play();
         }
 
         index++;
@@ -181,7 +175,15 @@ class DPlayer {
 
         this.template.playButton.innerHTML = this.icons.get('pause');
 
-        this.video.play();
+        const playedPromise = this.video.play();
+        if (playedPromise) {
+            playedPromise.
+                catch(() => {
+                    this.pause();
+                }).
+                then(() => {
+                });
+        }
         this.time.enable();
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
