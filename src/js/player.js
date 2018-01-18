@@ -1,3 +1,5 @@
+import Promise from 'promise-polyfill';
+
 import utils from './utils';
 import handleOption from './options';
 import i18n from './i18n';
@@ -175,15 +177,11 @@ class DPlayer {
 
         this.template.playButton.innerHTML = this.icons.get('pause');
 
-        const playedPromise = this.video.play();
-        if (playedPromise) {
-            playedPromise.
-                catch(() => {
-                    this.pause();
-                }).
-                then(() => {
-                });
-        }
+        const playedPromise = Promise.resolve(this.video.play());
+        playedPromise.catch(() => {
+            this.pause();
+        }).then(() => {
+        });
         this.time.enable();
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {

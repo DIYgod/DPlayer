@@ -1,4 +1,5 @@
 /* global DPLAYER_VERSION GIT_HASH */
+import objectAssign from 'object-assign';
 import defaultApiBackend from './api.js';
 
 export default (options) => {
@@ -116,7 +117,7 @@ export default (options) => {
     }
 
     if (options.icons) {
-        options.icons = Object.assign({}, defaultOption.icons, options.icons);
+        options.icons = objectAssign({}, defaultOption.icons, options.icons);
     }
 
     options.contextmenu = options.contextmenu.concat([

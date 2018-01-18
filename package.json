@@ -1,6 +1,6 @@
 {
   "name": "dplayer",
-  "version": "1.20.0",
+  "version": "1.20.1",
   "description": "Wow, such a lovely HTML5 danmaku video player",
   "main": "dist/DPlayer.min.js",
   "style": "dist/DPlayer.min.css",
@@ -53,6 +53,8 @@
     "webpack-dev-server": "^2.9.5"
   },
   "dependencies": {
-    "balloon-css": "^0.5.0"
+    "balloon-css": "^0.5.0",
+    "object-assign": "4.1.1",
+    "promise-polyfill": "7.0.0"
   }
 }
