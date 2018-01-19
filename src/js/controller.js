@@ -25,10 +25,12 @@ class Controller {
         this.initThumbnails();
         this.initPlayedBar();
         this.initFullButton();
-        this.initVolumeButton();
         this.initQualityButton();
         this.initScreenshotButton();
         this.initSubtitleButton();
+        if (!utils.isMobile) {
+            this.initVolumeButton();
+        }
     }
 
     initPlayButton () {
@@ -71,7 +73,7 @@ class Controller {
 
     initPlayedBar () {
         const thumbMove = (e) => {
-            let percentage = (e.clientX - utils.getElementViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
+            let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
@@ -79,9 +81,9 @@ class Controller {
         };
 
         const thumbUp = (e) => {
-            document.removeEventListener('mouseup', thumbUp);
-            document.removeEventListener('mousemove', thumbMove);
-            let percentage = (e.clientX - utils.getElementViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
+            document.removeEventListener(utils.nameMap.dragEnd, thumbUp);
+            document.removeEventListener(utils.nameMap.dragMove, thumbMove);
+            let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
@@ -89,16 +91,16 @@ class Controller {
             this.player.time.enable('progress');
         };
 
-        this.player.template.playedBarWrap.addEventListener('mousedown', () => {
+        this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragStart, () => {
             this.player.time.disable('progress');
-            document.addEventListener('mousemove', thumbMove);
-            document.addEventListener('mouseup', thumbUp);
+            document.addEventListener(utils.nameMap.dragMove, thumbMove);
+            document.addEventListener(utils.nameMap.dragEnd, thumbUp);
         });
 
-        this.player.template.playedBarWrap.addEventListener('mousemove', (e) => {
+        this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragMove, (e) => {
             if (this.player.video.duration) {
                 const px = utils.cumulativeOffset(this.player.template.playedBarWrap).left;
-                const tx = e.clientX - px;
+                const tx = (e.clientX || e.changedTouches[0].clientX) - px;
                 if (tx < 0 || tx > this.player.template.playedBarWrap.offsetWidth) {
                     return;
                 }
@@ -140,23 +142,23 @@ class Controller {
 
         const volumeMove = (event) => {
             const e = event || window.event;
-            const percentage = (e.clientX - utils.getElementViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
             this.player.volume(percentage);
         };
         const volumeUp = () => {
-            document.removeEventListener('mouseup', volumeUp);
-            document.removeEventListener('mousemove', volumeMove);
+            document.removeEventListener(utils.nameMap.dragEnd, volumeUp);
+            document.removeEventListener(utils.nameMap.dragMove, volumeMove);
             this.player.template.volumeButton.classList.remove('dplayer-volume-active');
         };
 
         this.player.template.volumeBarWrapWrap.addEventListener('click', (event) => {
             const e = event || window.event;
-            const percentage = (e.clientX - utils.getElementViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
             this.player.volume(percentage);
         });
-        this.player.template.volumeBarWrapWrap.addEventListener('mousedown', () => {
-            document.addEventListener('mousemove', volumeMove);
-            document.addEventListener('mouseup', volumeUp);
+        this.player.template.volumeBarWrapWrap.addEventListener(utils.nameMap.dragStart, () => {
+            document.addEventListener(utils.nameMap.dragMove, volumeMove);
+            document.addEventListener(utils.nameMap.dragEnd, volumeUp);
             this.player.template.volumeButton.classList.add('dplayer-volume-active');
         });
         this.player.template.volumeIcon.addEventListener('click', () => {

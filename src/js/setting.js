@@ -85,27 +85,27 @@ class Setting {
 
             const danmakuMove = (event) => {
                 const e = event || window.event;
-                let percentage = (e.clientX - utils.getElementViewLeft(this.player.template.danmakuOpacityBarWrap)) / dWidth;
+                let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.danmakuOpacityBarWrap)) / dWidth;
                 percentage = Math.max(percentage, 0);
                 percentage = Math.min(percentage, 1);
                 this.player.danmaku.opacity(percentage);
             };
             const danmakuUp = () => {
-                document.removeEventListener('mouseup', danmakuUp);
-                document.removeEventListener('mousemove', danmakuMove);
+                document.removeEventListener(utils.nameMap.dragEnd, danmakuUp);
+                document.removeEventListener(utils.nameMap.dragMove, danmakuMove);
                 this.player.template.danmakuOpacityBox.classList.remove('dplayer-setting-danmaku-active');
             };
 
             this.player.template.danmakuOpacityBarWrapWrap.addEventListener('click', (event) => {
                 const e = event || window.event;
-                let percentage = (e.clientX - utils.getElementViewLeft(this.player.template.danmakuOpacityBarWrap)) / dWidth;
+                let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.danmakuOpacityBarWrap)) / dWidth;
                 percentage = Math.max(percentage, 0);
                 percentage = Math.min(percentage, 1);
                 this.player.danmaku.opacity(percentage);
             });
-            this.player.template.danmakuOpacityBarWrapWrap.addEventListener('mousedown', () => {
-                document.addEventListener('mousemove', danmakuMove);
-                document.addEventListener('mouseup', danmakuUp);
+            this.player.template.danmakuOpacityBarWrapWrap.addEventListener(utils.nameMap.dragStart, () => {
+                document.addEventListener(utils.nameMap.dragMove, danmakuMove);
+                document.addEventListener(utils.nameMap.dragEnd, danmakuUp);
                 this.player.template.danmakuOpacityBox.classList.add('dplayer-setting-danmaku-active');
             });
         }

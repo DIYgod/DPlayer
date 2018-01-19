@@ -1,4 +1,6 @@
-export default {
+const isMobile = /mobile/i.test(window.navigator.userAgent);
+
+const utils = {
 
     /**
     * Parse second to 00:00 format
@@ -53,10 +55,7 @@ export default {
         }
     },
 
-    /**
-     * check if user is using mobile or not
-     */
-    isMobile: /mobile/i.test(window.navigator.userAgent),
+    isMobile: isMobile,
 
     isFirefox: /firefox/i.test(window.navigator.userAgent),
 
@@ -82,6 +81,13 @@ export default {
             top: top,
             left: left
         };
-    }
+    },
 
+    nameMap: {
+        dragStart: isMobile ? 'touchstart' : 'mousedown',
+        dragMove: isMobile ? 'touchmove' : 'mousemove',
+        dragEnd: isMobile ? 'touchend' : 'mouseup'
+    }
 };
+
+export default utils;
