@@ -13,6 +13,12 @@ class Controller {
             this.player.container.addEventListener('click', () => {
                 this.setAutoHide();
             });
+            this.player.on('play', () => {
+                this.setAutoHide();
+            });
+            this.player.on('pause', () => {
+                this.setAutoHide();
+            });
         }
 
         this.initPlayButton();
@@ -217,7 +223,7 @@ class Controller {
         this.show();
         clearTimeout(this.autoHideTimer);
         this.autoHideTimer = setTimeout(() => {
-            if (this.player.video.played.length && !this.disableAutoHide) {
+            if (this.player.video.played.length && !this.player.paused && !this.disableAutoHide) {
                 this.hide();
             }
         }, 3000);
