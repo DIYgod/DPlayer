@@ -22,19 +22,20 @@ DPlayer is a lovely HTML5 danmaku video player to help people build video and da
 **DPlayer supports:**
 
 - Streaming formats
-	- [HLS](https://github.com/video-dev/hls.js)
-	- [FLV](https://github.com/Bilibili/flv.js)
-	- [MPEG DASH](https://github.com/Dash-Industry-Forum/dash.js)
+    - [HLS](https://github.com/video-dev/hls.js)
+    - [FLV](https://github.com/Bilibili/flv.js)
+    - [MPEG DASH](https://github.com/Dash-Industry-Forum/dash.js)
     - [WebTorrent](https://github.com/webtorrent/webtorrent)
+    - Any other custom streaming formats
 - Media formats
-	- MP4 H.264
-	- WebM
-	- Ogg Theora Vorbis
+    - MP4 H.264
+    - WebM
+    - Ogg Theora Vorbis
 - Features
-	- Danamku
-	- Screenshot
-	- Hotkeys
-	- Quality switching
+    - Danamku
+    - Screenshot
+    - Hotkeys
+    - Quality switching
     - Thumbnails
     - Subtitle
 

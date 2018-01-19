@@ -177,6 +177,22 @@ function initPlayers () {
     //         type: 'hls'
     //     }
     // });
+
+    // window.dp10 = new DPlayer({
+    //     container: document.getElementById('dplayer10'),
+    //     video: {
+    //         url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
+    //         type: 'pearplayer',
+    //         customType: {
+    //             'pearplayer': function (video, player) {
+    //                 new PearPlayer(video, {
+    //                     src: video.src,
+    //                     autoplay: player.options.autoplay
+    //                 });
+    //             }
+    //         }
+    //     }
+    // });
 }
 
 function clearPlayers () {
