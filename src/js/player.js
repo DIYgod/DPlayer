@@ -374,17 +374,22 @@ class DPlayer {
         // https://github.com/webtorrent/webtorrent
         case 'webtorrent':
             if (WebTorrent) {
-                this.container.classList.add('dplayer-loading');
-                const client = new WebTorrent();
-                const torrentId = video.src;
-                client.add(torrentId, (torrent) => {
-                    const file = torrent.files.find((file) => file.name.endsWith('.mp4'));
-                    file.renderTo(this.video, {
-                        autoplay: this.options.autoplay
-                    }, () => {
-                        this.container.classList.remove('dplayer-loading');
+                if (WebTorrent.WEBRTC_SUPPORT) {
+                    this.container.classList.add('dplayer-loading');
+                    const client = new WebTorrent();
+                    const torrentId = video.src;
+                    client.add(torrentId, (torrent) => {
+                        const file = torrent.files.find((file) => file.name.endsWith('.mp4'));
+                        file.renderTo(this.video, {
+                            autoplay: this.options.autoplay
+                        }, () => {
+                            this.container.classList.remove('dplayer-loading');
+                        });
                     });
-                });
+                }
+                else {
+                    this.notice('Error: Webtorrent is not supported.');
+                }
             }
             else {
                 this.notice('Error: Can\'t find Webtorrent.');
