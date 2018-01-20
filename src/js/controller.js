@@ -105,6 +105,9 @@ class Controller {
                     return;
                 }
                 const time = this.player.video.duration * (tx / this.player.template.playedBarWrap.offsetWidth);
+                if (utils.isMobile) {
+                    this.thumbnails && this.thumbnails.show();
+                }
                 this.thumbnails && this.thumbnails.move(tx);
                 this.player.template.playedBarTime.style.left = `${(tx - 20)}px`;
                 this.player.template.playedBarTime.innerText = utils.secondToTime(time);
@@ -112,19 +115,27 @@ class Controller {
             }
         });
 
-        this.player.template.playedBarWrap.addEventListener('mouseenter', () => {
-            if (this.player.video.duration) {
-                this.thumbnails && this.thumbnails.show();
-                this.player.template.playedBarTime.classList.remove('hidden');
+        this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragEnd, () => {
+            if (utils.isMobile) {
+                this.thumbnails && this.thumbnails.hide();
             }
         });
 
-        this.player.template.playedBarWrap.addEventListener('mouseleave', () => {
-            if (this.player.video.duration) {
-                this.thumbnails && this.thumbnails.hide();
-                this.player.template.playedBarTime.classList.add('hidden');
-            }
-        });
+        if (!utils.isMobile) {
+            this.player.template.playedBarWrap.addEventListener('mouseenter', () => {
+                if (this.player.video.duration) {
+                    this.thumbnails && this.thumbnails.show();
+                    this.player.template.playedBarTime.classList.remove('hidden');
+                }
+            });
+
+            this.player.template.playedBarWrap.addEventListener('mouseleave', () => {
+                if (this.player.video.duration) {
+                    this.thumbnails && this.thumbnails.hide();
+                    this.player.template.playedBarTime.classList.add('hidden');
+                }
+            });
+        }
     }
 
     initFullButton () {

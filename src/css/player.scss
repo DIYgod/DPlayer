@@ -140,15 +140,20 @@
         width: 100%;
         height: 100%;
     }
-    &.dplayer-mobile .dplayer-controller .dplayer-icons {
-        .dplayer-volume,
-        .dplayer-camera-icon {
-            display: none;
+    &.dplayer-mobile {
+        .dplayer-controller .dplayer-icons {
+            .dplayer-volume,
+            .dplayer-camera-icon {
+                display: none;
+            }
+            .dplayer-full .dplayer-full-in-icon {
+                position: static;
+                display: inline-block;
+            }
         }
 
-        .dplayer-full .dplayer-full-in-icon {
-            position: static;
-            display: inline-block;
+        .dplayer-bar-time {
+            display: none;
         }
     }
 }
