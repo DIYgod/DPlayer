@@ -22,14 +22,14 @@
             .dplayer-danmaku-bottom {
                 &.dplayer-danmaku-move {
                     animation: danmaku-center 6s linear;
-                    animation-play-state: paused;
+                    animation-play-state: inherit;
                 }
             }
 
             .dplayer-danmaku-right {
                 &.dplayer-danmaku-move {
                     animation: danmaku 8s linear;
-                    animation-play-state: paused;
+                    animation-play-state: inherit;
                 }
             }
         }
@@ -106,8 +106,12 @@
         .dplayer-bezel .diplayer-loading-icon {
             display: block;
         }
+    }
 
-        .dplayer-danmaku .dplayer-danmaku-move {
+    &.dplayer-loading,
+    &.dplayer-paused {
+        .dplayer-danmaku,
+        .dplayer-danmaku-move {
             animation-play-state: paused;
         }
     }
