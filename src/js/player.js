@@ -183,6 +183,7 @@ class DPlayer {
         }).then(() => {
         });
         this.time.enable();
+        this.container.classList.remove('dplayer-paused');
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
             this.danmaku.play();
@@ -212,6 +213,7 @@ class DPlayer {
         this.video.pause();
         this.time.disable();
         this.container.classList.remove('dplayer-playing');
+        this.container.classList.add('dplayer-paused');
         if (this.danmaku) {
             this.danmaku.pause();
         }
