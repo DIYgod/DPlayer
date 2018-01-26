@@ -112,7 +112,7 @@ Most mobile browsers forbid video autoplay, you wont be able to achieve it witho
       </td>
       <td align="center" valign="middle">
         <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-          <img width="222px" src="https://imgur.com/JqKipm4.png">
+          <img width="222px" src="https://imgur.com/apG1uKf.png">
         </a>
       </td>
     </tr>
