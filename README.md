@@ -140,6 +140,8 @@ Most mobile browsers forbid video autoplay, you wont be able to achieve it witho
 - [react-dplayer](https://github.com/hnsylitao/react-dplayer)
 - [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite)
 - [DPlayerHandle](https://github.com/kn007/DPlayerHandle)
+- [laravel-danmaku](https://github.com/MoePlayer/laravel-danmaku)
+- [dplayer-live-backend](https://github.com/Izumi-kun/dplayer-live-backend)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Who use DPlayer?
