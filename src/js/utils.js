@@ -6,13 +6,22 @@ const utils = {
     * Parse second to 00:00 format
     *
     * @param {Number} second
-    * @return {String} 00:00 format
+    * @return {String} 00:00:00 format
     */
     secondToTime: (second) => {
+        let i = 2;
         const add0 = (num) => num < 10 ? '0' + num : '' + num;
-        const min = parseInt(second / 60);
-        const sec = parseInt(second - min * 60);
-        return add0(min) + ':' + add0(sec);
+        const gtime = () => {
+            const p = Math.pow(60, i--);
+            const r = parseInt(second / p);
+            second -= r * p;
+            return r;
+        };
+        const hour = gtime();
+        const min = gtime();
+        const sec = add0(gtime());
+        return hour > 0 ? [hour, add0(min), sec].join(':')
+            : [min, sec].join(':');
     },
 
     /**
