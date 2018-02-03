@@ -88,9 +88,6 @@ class DPlayer {
                         if (this.options.autoplay) {
                             this.play();
                         }
-                        else if (utils.isMobile) {
-                            this.pause();
-                        }
                     }, 0);
                 },
                 error: (msg) => {
