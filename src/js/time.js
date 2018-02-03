@@ -15,7 +15,7 @@ class Time {
             }
         )();
 
-        this.types = ['loading', 'progress'];
+        this.types = ['loading', 'progress', 'info', 'fps'];
 
         this.init();
     }
@@ -23,7 +23,9 @@ class Time {
     init () {
         for (let i = 0; i < this.types.length; i++) {
             const type = this.types[i];
-            this[`init${type}Checker`]();
+            if (type !== 'fps') {
+                this[`init${type}Checker`]();
+            }
         }
     }
 
@@ -64,39 +66,53 @@ class Time {
         }, 100);
     }
 
-    enable (type) {
-        if (type) {
-            this[`enable${type}Checker`] = true;
-        }
-        else {
-            for (let i = 0; i < this.types.length; i++) {
-                const type = this.types[i];
-                this[`enable${type}Checker`] = true;
+    initfpsChecker () {
+        window.requestAnimationFrame(() => {
+            if (this.enablefpsChecker) {
+                this.initfpsChecker();
+                if (!this.fpsStart) {
+                    this.fpsStart = new Date();
+                    this.fpsIndex = 0;
+                }
+                else {
+                    this.fpsIndex++;
+                    const fpsCurrent = new Date();
+                    if (fpsCurrent - this.fpsStart > 1000) {
+                        this.player.infoPanel.fps(this.fpsIndex / (fpsCurrent - this.fpsStart) * 1000);
+                        this.fpsStart = new Date();
+                        this.fpsIndex = 0;
+                    }
+                }
             }
+            else {
+                this.fpsStart = 0;
+                this.fpsIndex = 0;
+            }
+        });
+    }
+
+    initinfoChecker () {
+        this.infoChecker = setInterval(() => {
+            if (this.enableinfoChecker) {
+                this.player.infoPanel.update();
+            }
+        }, 1000);
+    }
+
+    enable (type) {
+        this[`enable${type}Checker`] = true;
+
+        if (type === 'fps') {
+            this.initfpsChecker();
         }
     }
 
     disable (type) {
-        if (type) {
-            this[`enable${type}Checker`] = false;
-        }
-        else {
-            for (let i = 0; i < this.types.length; i++) {
-                const type = this.types[i];
-                this[`enable${type}Checker`] = false;
-            }
-        }
+        this[`enable${type}Checker`] = false;
     }
 
     destroy (type) {
-        if (type) {
-            clearInterval(this[`${type}Checker`]);
-        }
-        else {
-            for (let i = 0; i < this.types.length; i++) {
-                clearInterval(this[`${this.types[i]}Checker`]);
-            }
-        }
+        this[`${type}Checker`] && clearInterval(this[`${type}Checker`]);
     }
 }
 

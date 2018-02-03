@@ -182,7 +182,8 @@ class DPlayer {
             this.pause();
         }).then(() => {
         });
-        this.time.enable();
+        this.time.enable('loading');
+        this.time.enable('progress');
         this.container.classList.remove('dplayer-paused');
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
@@ -211,7 +212,8 @@ class DPlayer {
         this.ended = false;
         this.template.playButton.innerHTML = this.icons.get('play');
         this.video.pause();
-        this.time.disable();
+        this.time.disable('loading');
+        this.time.disable('progress');
         this.container.classList.remove('dplayer-playing');
         this.container.classList.add('dplayer-paused');
         if (this.danmaku) {

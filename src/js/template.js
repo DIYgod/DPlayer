@@ -67,6 +67,16 @@ class Template {
         this.barWrap = this.container.querySelector('.dplayer-bar-wrap');
         this.notice = this.container.querySelector('.dplayer-notice');
         this.infoPanel = this.container.querySelector('.dplayer-info-panel');
+        this.infoPanelClose = this.container.querySelector('.dplayer-info-panel-close');
+        this.infoVersion = this.container.querySelector('.dplayer-info-panel-item-version .dplayer-info-panel-item-data');
+        this.infoFPS = this.container.querySelector('.dplayer-info-panel-item-fps .dplayer-info-panel-item-data');
+        this.infoType = this.container.querySelector('.dplayer-info-panel-item-type .dplayer-info-panel-item-data');
+        this.infoUrl = this.container.querySelector('.dplayer-info-panel-item-url .dplayer-info-panel-item-data');
+        this.infoResolution = this.container.querySelector('.dplayer-info-panel-item-resolution .dplayer-info-panel-item-data');
+        this.infoDuration = this.container.querySelector('.dplayer-info-panel-item-duration .dplayer-info-panel-item-data');
+        this.infoDanmakuId = this.container.querySelector('.dplayer-info-panel-item-danmaku-id .dplayer-info-panel-item-data');
+        this.infoDanmakuApi = this.container.querySelector('.dplayer-info-panel-item-danmaku-api .dplayer-info-panel-item-data');
+        this.infoDanmakuAmount = this.container.querySelector('.dplayer-info-panel-item-danmaku-amount .dplayer-info-panel-item-data');
     }
 
     tpl (options, index, tran, icons) {
@@ -300,7 +310,46 @@ class Template {
                 </div>
             </div>
         </div>
-        <div class="dplayer-info-panel dplayer-info-panel-hide"></div>
+        <div class="dplayer-info-panel dplayer-info-panel-hide">
+            <div class="dplayer-info-panel-close">[x]</div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-version">
+                <span class="dplayer-info-panel-item-title">Player version</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-fps">
+                <span class="dplayer-info-panel-item-title">Player FPS</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-type">
+                <span class="dplayer-info-panel-item-title">Video type</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-url">
+                <span class="dplayer-info-panel-item-title">Video url</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-resolution">
+                <span class="dplayer-info-panel-item-title">Video resolution</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-duration">
+                <span class="dplayer-info-panel-item-title">Video duration</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            ${options.danmaku ? `
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-danmaku-id">
+                <span class="dplayer-info-panel-item-title">Danamku id</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-danmaku-api">
+                <span class="dplayer-info-panel-item-title">Danamku api</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>
+            <div class="dplayer-info-panel-item dplayer-info-panel-item-danmaku-amount">
+                <span class="dplayer-info-panel-item-title">Danamku amount</span>
+                <span class="dplayer-info-panel-item-data"></span>
+            </div>` : ''}
+        </div>
         ${this.tplContextmenuList(options.contextmenu, tran)}
         <div class="dplayer-notice"></div>`;
     }
