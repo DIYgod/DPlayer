@@ -1,4 +1,4 @@
-/* global DPLAYER_VERSION GIT_HASH */
+/* global DPLAYER_VERSION */
 import objectAssign from 'object-assign';
 import defaultApiBackend from './api.js';
 
@@ -122,20 +122,18 @@ export default (options) => {
 
     options.contextmenu = options.contextmenu.concat([
         {
+            text: 'Video info',
+            click: (player) => {
+                player.infoPanel.show();
+            }
+        },
+        {
             text: 'About author',
             link: 'https://diygod.me'
         },
         {
-            text: 'About DPlayer',
+            text: `DPlayer v${DPLAYER_VERSION}`,
             link: 'https://github.com/MoePlayer/DPlayer'
-        },
-        {
-            text: 'DPlayer feedback',
-            link: 'https://github.com/DIYgod/DPlayer/issues'
-        },
-        {
-            text: `DPlayer ${DPLAYER_VERSION} ${GIT_HASH}`,
-            link: 'https://github.com/MoePlayer/DPlayer/releases'
         }
     ]);
 

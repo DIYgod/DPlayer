@@ -56,6 +56,7 @@ const tranTxt = {
         'Hide subtitle': '隐藏字幕',
         'Volume': '音量',
         'Live': '直播',
+        'Video info': '视频统计信息',
     },
     "zh-tw" : {
         'Danmaku is loading': '彈幕加載中',
@@ -92,6 +93,7 @@ const tranTxt = {
         'Hide subtitle': '隱藏字幕',
         'Volume': '音量',
         'Live': '直播',
+        'Video info': '視頻統計信息',
     }
 };
 

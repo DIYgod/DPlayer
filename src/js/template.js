@@ -56,6 +56,7 @@ class Template {
         this.browserFullButton = this.container.querySelector('.dplayer-full-icon');
         this.webFullButton = this.container.querySelector('.dplayer-full-in-icon');
         this.menu = this.container.querySelector('.dplayer-menu');
+        this.menuItem = this.container.querySelectorAll('.dplayer-menu-item');
         this.qualityList = this.container.querySelector('.dplayer-quality-list');
         this.camareButton = this.container.querySelector('.dplayer-camera-icon');
         this.subtitleButton = this.container.querySelector('.dplayer-subtitle-icon');
@@ -315,7 +316,7 @@ class Template {
     tplContextmenuList (contextmenu, tran) {
         let result = '<div class="dplayer-menu">';
         for (let i = 0; i < contextmenu.length; i++) {
-            result += `<div class="dplayer-menu-item"><a target="_blank" href="${contextmenu[i].link}">${tran(contextmenu[i].text)}</a></div>`;
+            result += `<div class="dplayer-menu-item"><a target="_blank" href="${contextmenu[i].link || 'javascript:void(0);'}">${tran(contextmenu[i].text)}</a></div>`;
         }
         result += '</div>';
 
