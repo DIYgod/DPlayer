@@ -1,0 +1,10 @@
+.dplayer-info-panel {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 400px;
+
+    &-hide {
+        display: none;
+    }
+}

@@ -124,7 +124,7 @@ export default (options) => {
         {
             text: 'Video info',
             click: (player) => {
-                player.infoPanel.show();
+                player.infoPanel.triggle();
             }
         },
         {

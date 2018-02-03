@@ -6,6 +6,7 @@ class ContextMenu {
             if (this.player.options.contextmenu[index].click) {
                 item.addEventListener('click', () => {
                     this.player.options.contextmenu[index].click(this.player);
+                    this.hide();
                 });
             }
             return item;

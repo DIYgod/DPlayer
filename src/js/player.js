@@ -18,6 +18,7 @@ import Setting from './setting';
 import Comment from './comment';
 import HotKey from './hotkey';
 import ContextMenu from './contextmenu';
+import InfoPanel from './info-panel';
 
 let index = 0;
 const instances = [];
@@ -130,6 +131,8 @@ class DPlayer {
         this.contextmenu = new ContextMenu(this);
 
         this.initVideo(this.video, this.quality && this.quality.type || this.options.video.type);
+
+        this.infoPanel = new InfoPanel(this);
 
         if (!this.danmaku && this.options.autoplay) {
             this.play();

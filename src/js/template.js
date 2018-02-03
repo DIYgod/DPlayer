@@ -66,6 +66,7 @@ class Template {
         this.barPreview = this.container.querySelector('.dplayer-bar-preview');
         this.barWrap = this.container.querySelector('.dplayer-bar-wrap');
         this.notice = this.container.querySelector('.dplayer-notice');
+        this.infoPanel = this.container.querySelector('.dplayer-info-panel');
     }
 
     tpl (options, index, tran, icons) {
@@ -299,6 +300,7 @@ class Template {
                 </div>
             </div>
         </div>
+        <div class="dplayer-info-panel dplayer-info-panel-hide"></div>
         ${this.tplContextmenuList(options.contextmenu, tran)}
         <div class="dplayer-notice"></div>`;
     }
