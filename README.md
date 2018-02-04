@@ -11,7 +11,7 @@
 [![size](https://badge-size.herokuapp.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js?compression=gzip&style=flat-square)](https://github.com/MoePlayer/DPlayer/tree/master/dist)
 [![Travis](https://img.shields.io/travis/MoePlayer/DPlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/DPlayer)
 [![devDependency Status](https://img.shields.io/david/dev/MoePlayer/dplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/DPlayer#info=devDependencies)
-[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer#donate)
+[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer#donate) [![Backers on Open Collective](https://opencollective.com/DPlayer/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/DPlayer/sponsors/badge.svg)](#sponsors) 
 
 ## Introduction
 
@@ -183,3 +183,33 @@ Most mobile browsers forbid video autoplay, you wont be able to achieve it witho
 Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/DPlayer/contributors)).
 
 > [Blog](https://diygod.me) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/DPlayer#backer)]
+
+<a href="https://opencollective.com/DPlayer#backers" target="_blank"><img src="https://opencollective.com/DPlayer/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/DPlayer#sponsor)]
+
+<a href="https://opencollective.com/DPlayer/sponsor/0/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/1/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/2/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/3/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/4/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/5/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/6/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/7/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/8/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/DPlayer/sponsor/9/website" target="_blank"><img src="https://opencollective.com/DPlayer/sponsor/9/avatar.svg"></a>
+
+
