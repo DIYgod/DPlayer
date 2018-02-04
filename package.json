@@ -8,7 +8,8 @@
     "start": "npm run dev",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
-    "test": "eslint src webpack"
+    "test": "eslint src webpack",
+    "postinstall": "opencollective postinstall"
   },
   "files": [
     "dist"
@@ -55,6 +56,11 @@
   "dependencies": {
     "balloon-css": "^0.5.0",
     "object-assign": "4.1.1",
+    "opencollective": "^1.0.3",
     "promise-polyfill": "7.0.2"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/DPlayer"
   }
 }
