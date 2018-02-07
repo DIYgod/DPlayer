@@ -77,6 +77,12 @@ var dp = new DPlayer({
 
 [Read the Docs](http://dplayer.js.org/docs)
 
+## CDN
+
+- [jsDelivr](https://www.jsdelivr.com/package/npm/dplayer)
+- [cdnjs](https://cdnjs.com/libraries/dplayer)
+- [unpkg](https://unpkg.com/dplayer/)
+
 ## FAQ
 
 <details><summary>Why can't some videos be full screen?</summary><br>
@@ -100,13 +106,48 @@ For full browser support it should look like this:
 Most mobile browsers forbid video autoplay, you wont be able to achieve it without hacks.
 </details>
 
-## Contributors
+## Join the Discussion
 
-This project exists thanks to all the people who contribute.
+- [Telegram Group](https://t.me/adplayer)
+- [QQ Group](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17): 415835947
 
-<a href="graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
+## Related Projects
 
-## Sponsor
+- [DPlayer-backend](https://github.com/MoePlayer/DPlayer-backend)
+- [DPlayer-data(weekly backup for api.prprpr.me/dplayer)](https://github.com/MoePlayer/DPlayer-data)
+- [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
+- [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
+- [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
+- [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
+- [纸飞机视频区插件(DPlayer for Discuz!)](https://coding.net/u/Click_04/p/video/git)
+- [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
+- [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
+- [react-dplayer](https://github.com/hnsylitao/react-dplayer)
+- [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite)
+- [DPlayerHandle](https://github.com/kn007/DPlayerHandle)
+- [laravel-danmaku](https://github.com/MoePlayer/laravel-danmaku)
+- [dplayer-live-backend](https://github.com/Izumi-kun/dplayer-live-backend)
+- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
+
+## Who use DPlayer?
+
+- [嘀哩嘀哩](http://www.dilidili.wang/)
+- [银弹字幕组](https://www.sbsub.com/)
+- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
+- [otomads](https://otomads.com/)
+- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
+
+## Donate
+
+- [Donate via OpenCollective](https://opencollective.com/dplayer)
+- [Donate via Paypal](https://www.paypal.me/DIYgod)
+- [Donate via WeChat Pay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1uowywej307s07st8h.jpg)
+- [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
+- Donate via Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+
+## Sponsors
+
+Thank you to all our sponsors!
 
 <table>
   <tbody>
@@ -125,66 +166,17 @@ This project exists thanks to all the people who contribute.
   </tbody>
 </table>
 
+## Contributors
+
+This project exists thanks to all the people who contribute.
+
+<a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
+
+## Backers
+
+Thank you to all our backers!
+
 <a href="https://opencollective.com/DPlayer#backers" target="_blank"><img src="https://opencollective.com/DPlayer/backers.svg?width=890"></a>
-
-## Join the Discussion
-
-- [Telegram Group](https://t.me/adplayer)
-- [QQ Group](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17): 415835947
-
-## Related Projects
-
-- [DPlayer-backend](https://github.com/MoePlayer/DPlayer-backend)
-- [DPlayer-data(weekly backup for api.prprpr.me/dplayer)](https://github.com/MoePlayer/DPlayer-data)
-- [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
-- [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
-- [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
-- [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
-- [纸飞机视频区插件(DPlayer for Discuz!)](https://coding.net/u/Click_04/p/video/git)
-- [dplayer_py_backend](https://github.com/dixyes/dplayer_py_backend)
-- [dplayer_lua_backend](https://github.com/dixyes/dplayer_lua_backend)
-- [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
-- [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
-- [react-dplayer](https://github.com/hnsylitao/react-dplayer)
-- [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite)
-- [DPlayerHandle](https://github.com/kn007/DPlayerHandle)
-- [laravel-danmaku](https://github.com/MoePlayer/laravel-danmaku)
-- [dplayer-live-backend](https://github.com/Izumi-kun/dplayer-live-backend)
-- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
-
-## Who use DPlayer?
-
-- [Hi, DIYgod](https://diygod.me)
-- [嘀哩嘀哩](http://www.dilidili.wang/)
-- [0xBBC](https://blog.0xbbc.com/2016/09/dplayer-for-wordpress/)
-- [树洞](https://aoaoao.me/1031.html)
-- [FGHRSH的博客](https://www.fghrsh.net/post/57.html)
-- [银色子弹](https://www.sbsub.com/)
-- [妖气山弹幕网](http://www.m173.tv/)
-- [御宅同萌 – 聖域](https://wp.acg-moe.com/)
-- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
-- [otomads](https://otomads.com/)
-- [JA 日本動漫交流平台Ω](http://jac-animation-net.blogspot.tw/)
-- [九妖萌弹幕动漫网](http://www.91moe.com/)
-- [爱弹幕](https://www.idanmu.pw/)
-- [萌心次元](https://moxacg.moe/)
-- [kn007的个人博客](https://kn007.net/)
-- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
-
-## CDN
-
-- [jsDelivr](https://www.jsdelivr.com/package/npm/dplayer)
-- [cdnjs](https://cdnjs.com/libraries/dplayer)
-- [unpkg](https://unpkg.com/dplayer/dist/)
-- [RawGit](https://rawgit.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js)
-
-## Donate
-
-- [Donate via OpenCollective](https://opencollective.com/dplayer)
-- [Donate via Paypal](https://www.paypal.me/DIYgod)
-- [Donate via WeChat Pay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1uowywej307s07st8h.jpg)
-- [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
-- Donate via Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
 
 ## Author
 
