@@ -100,6 +100,12 @@ For full browser support it should look like this:
 Most mobile browsers forbid video autoplay, you wont be able to achieve it without hacks.
 </details>
 
+## Contributors
+
+This project exists thanks to all the people who contribute.
+
+<a href="graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
+
 ## Sponsor
 
 <table>
@@ -118,6 +124,8 @@ Most mobile browsers forbid video autoplay, you wont be able to achieve it witho
     </tr>
   </tbody>
 </table>
+
+<a href="https://opencollective.com/DPlayer#backers" target="_blank"><img src="https://opencollective.com/DPlayer/backers.svg?width=890"></a>
 
 ## Join the Discussion
 
@@ -172,6 +180,7 @@ Most mobile browsers forbid video autoplay, you wont be able to achieve it witho
 
 ## Donate
 
+- [Donate via OpenCollective](https://opencollective.com/dplayer)
 - [Donate via Paypal](https://www.paypal.me/DIYgod)
 - [Donate via WeChat Pay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1uowywej307s07st8h.jpg)
 - [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
