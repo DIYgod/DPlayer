@@ -197,7 +197,7 @@ art-template-loader@1.4.3:
 
 art-template@4.12.2:
   version "4.12.2"
-  resolved "http://registry.npm.bilibili.co/art-template/download/art-template-4.12.2.tgz#a41eb82d9679bbd1c73f1f838ff46e8eb0612565"
+  resolved "http://registry.npm.taobao.org/art-template/download/art-template-4.12.2.tgz#a41eb82d9679bbd1c73f1f838ff46e8eb0612565"
   dependencies:
     acorn "^5.0.3"
     detect-node "^2.0.3"
@@ -1027,7 +1027,7 @@ callsites@^0.2.0:
 
 camel-case@3.0.x:
   version "3.0.0"
-  resolved "http://registry.npm.bilibili.co/camel-case/download/camel-case-3.0.0.tgz#ca3c3688a4e9cf3a4cda777dc4dcbc713249cf73"
+  resolved "http://registry.npm.taobao.org/camel-case/download/camel-case-3.0.0.tgz#ca3c3688a4e9cf3a4cda777dc4dcbc713249cf73"
   dependencies:
     no-case "^2.2.0"
     upper-case "^1.1.1"
@@ -1173,7 +1173,7 @@ class-utils@^0.3.5:
 
 clean-css@4.1.x:
   version "4.1.9"
-  resolved "http://registry.npm.bilibili.co/clean-css/download/clean-css-4.1.9.tgz#35cee8ae7687a49b98034f70de00c4edd3826301"
+  resolved "http://registry.npm.taobao.org/clean-css/download/clean-css-4.1.9.tgz#35cee8ae7687a49b98034f70de00c4edd3826301"
   dependencies:
     source-map "0.5.x"
 
@@ -1285,7 +1285,7 @@ commander@2.12.x, commander@^2.9.0:
 
 commander@~2.13.0:
   version "2.13.0"
-  resolved "http://registry.npm.bilibili.co/commander/download/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
+  resolved "http://registry.npm.taobao.org/commander/download/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -2624,7 +2624,7 @@ hawk@~6.0.2:
 
 he@1.1.x:
   version "1.1.1"
-  resolved "http://registry.npm.bilibili.co/he/download/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
+  resolved "http://registry.npm.taobao.org/he/download/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -2672,7 +2672,7 @@ html-entities@^1.2.0:
 
 html-minifier@^3.4.3:
   version "3.5.8"
-  resolved "http://registry.npm.bilibili.co/html-minifier/download/html-minifier-3.5.8.tgz#5ccdb1f73a0d654e6090147511f6e6b2ee312700"
+  resolved "http://registry.npm.taobao.org/html-minifier/download/html-minifier-3.5.8.tgz#5ccdb1f73a0d654e6090147511f6e6b2ee312700"
   dependencies:
     camel-case "3.0.x"
     clean-css "4.1.x"
@@ -2993,7 +2993,7 @@ is-glob@^4.0.0:
 
 is-keyword-js@^1.0.3:
   version "1.0.3"
-  resolved "http://registry.npm.bilibili.co/is-keyword-js/download/is-keyword-js-1.0.3.tgz#ac30dcf35b671f4b27b17f5cb57235126021132d"
+  resolved "http://registry.npm.taobao.org/is-keyword-js/download/is-keyword-js-1.0.3.tgz#ac30dcf35b671f4b27b17f5cb57235126021132d"
 
 is-my-json-valid@^2.12.4:
   version "2.16.1"
@@ -3379,7 +3379,7 @@ loud-rejection@^1.0.0:
 
 lower-case@^1.1.1:
   version "1.1.4"
-  resolved "http://registry.npm.bilibili.co/lower-case/download/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
+  resolved "http://registry.npm.taobao.org/lower-case/download/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
 
 lru-cache@^4.0.1:
   version "4.1.1"
@@ -3461,7 +3461,7 @@ merge-descriptors@1.0.1:
 
 merge-source-map@^1.0.3:
   version "1.1.0"
-  resolved "http://registry.npm.bilibili.co/merge-source-map/download/merge-source-map-1.1.0.tgz#2fdde7e6020939f70906a68f2d7ae685e4c8c646"
+  resolved "http://registry.npm.taobao.org/merge-source-map/download/merge-source-map-1.1.0.tgz#2fdde7e6020939f70906a68f2d7ae685e4c8c646"
   dependencies:
     source-map "^0.6.1"
 
@@ -3625,7 +3625,7 @@ natural-compare@^1.4.0:
 
 ncname@1.0.x:
   version "1.0.0"
-  resolved "http://registry.npm.bilibili.co/ncname/download/ncname-1.0.0.tgz#5b57ad18b1ca092864ef62b0b1ed8194f383b71c"
+  resolved "http://registry.npm.taobao.org/ncname/download/ncname-1.0.0.tgz#5b57ad18b1ca092864ef62b0b1ed8194f383b71c"
   dependencies:
     xml-char-classes "^1.0.0"
 
@@ -3635,7 +3635,7 @@ negotiator@0.6.1:
 
 no-case@^2.2.0:
   version "2.3.2"
-  resolved "http://registry.npm.bilibili.co/no-case/download/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
+  resolved "http://registry.npm.taobao.org/no-case/download/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
   dependencies:
     lower-case "^1.1.1"
 
@@ -3942,7 +3942,7 @@ pako@~1.0.5:
 
 param-case@2.1.x:
   version "2.1.1"
-  resolved "http://registry.npm.bilibili.co/param-case/download/param-case-2.1.1.tgz#df94fd8cf6531ecf75e6bef9a0858fbc72be2247"
+  resolved "http://registry.npm.taobao.org/param-case/download/param-case-2.1.1.tgz#df94fd8cf6531ecf75e6bef9a0858fbc72be2247"
   dependencies:
     no-case "^2.2.0"
 
@@ -4651,7 +4651,7 @@ regjsparser@^0.1.4:
 
 relateurl@0.2.x:
   version "0.2.7"
-  resolved "http://registry.npm.bilibili.co/relateurl/download/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
+  resolved "http://registry.npm.taobao.org/relateurl/download/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
@@ -5506,7 +5506,7 @@ typedarray@^0.0.6:
 
 uglify-js@3.3.x:
   version "3.3.9"
-  resolved "http://registry.npm.bilibili.co/uglify-js/download/uglify-js-3.3.9.tgz#33869666c8ab7f7658ce3d22f0f1ced40097d33a"
+  resolved "http://registry.npm.taobao.org/uglify-js/download/uglify-js-3.3.9.tgz#33869666c8ab7f7658ce3d22f0f1ced40097d33a"
   dependencies:
     commander "~2.13.0"
     source-map "~0.6.1"
@@ -5572,7 +5572,7 @@ unset-value@^1.0.0:
 
 upper-case@^1.1.1:
   version "1.1.3"
-  resolved "http://registry.npm.bilibili.co/upper-case/download/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
+  resolved "http://registry.npm.taobao.org/upper-case/download/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
 
 urix@^0.1.0:
   version "0.1.0"
@@ -5822,7 +5822,7 @@ write@^0.2.1:
 
 xml-char-classes@^1.0.0:
   version "1.0.0"
-  resolved "http://registry.npm.bilibili.co/xml-char-classes/download/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
+  resolved "http://registry.npm.taobao.org/xml-char-classes/download/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
 
 xtend@^4.0.0:
   version "4.0.1"
