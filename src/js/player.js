@@ -19,6 +19,7 @@ import Comment from './comment';
 import HotKey from './hotkey';
 import ContextMenu from './contextmenu';
 import InfoPanel from './info-panel';
+import tplVideo from '../template/video.art';
 
 let index = 0;
 const instances = [];
@@ -492,7 +493,14 @@ class DPlayer {
 
         const paused = this.video.paused;
         this.video.pause();
-        const videoHTML = this.template.tplVideo(false, null, this.options.screenshot, 'auto', this.quality.url, this.options.subtitle);
+        const videoHTML = tplVideo({
+            current: false,
+            pic: null,
+            screenshot: this.options.screenshot,
+            preload: 'auto',
+            url: this.quality.url,
+            subtitle: this.options.subtitle
+        });
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
         this.template.videoWrap.insertBefore(videoEle, this.template.videoWrap.getElementsByTagName('div')[0]);
         this.prevVideo = this.video;

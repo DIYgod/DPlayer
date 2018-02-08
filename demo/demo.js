@@ -64,9 +64,7 @@ function initPlayers () {
             token: 'tokendemo',
             maximum: 3000,
             user: 'DIYgod',
-            margin: {
-                bottom: '15%'
-            },
+            bottom: '15%',
             unlimited: true
         },
         contextmenu: [

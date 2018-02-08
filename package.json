@@ -30,6 +30,8 @@
   },
   "homepage": "https://github.com/DIYgod/DPlayer#readme",
   "devDependencies": {
+    "art-template": "4.12.2",
+    "art-template-loader": "1.4.3",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
