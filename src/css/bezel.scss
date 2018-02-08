@@ -59,7 +59,6 @@
         .diplayer-loading-dot {
             animation: diplayer-loading-dot-fade .8s ease infinite;
             opacity: 0;
-            fill: #fff;
             transform-origin: 4px 4px;
             @for $i from 7 through 1 {
                 &.diplayer-loading-dot-#{$i} {

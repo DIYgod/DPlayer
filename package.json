@@ -47,6 +47,7 @@
     "sass-loader": "^6.0.6",
     "strip-loader": "^0.1.2",
     "style-loader": "^0.20.1",
+    "svg-inline-loader": "0.8.0",
     "template-string-optimize-loader": "^2.2.3",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
@@ -54,7 +55,6 @@
   },
   "dependencies": {
     "balloon-css": "^0.5.0",
-    "object-assign": "4.1.1",
     "promise-polyfill": "7.0.2"
   }
 }

@@ -1,15 +1,16 @@
+import Icons from './icons';
+
 class Template {
     constructor (options) {
         this.container = options.container;
         this.options = options.options;
         this.index = options.index;
         this.tran = options.tran;
-        this.icons = options.icons;
         this.init();
     }
 
     init () {
-        this.container.innerHTML = this.tpl(this.options, this.index, this.tran, this.icons);
+        this.container.innerHTML = this.tpl(this.options, this.index, this.tran);
 
         this.volumeBar = this.container.querySelector('.dplayer-volume-bar-inner');
         this.volumeBarWrap = this.container.querySelector('.dplayer-volume-bar');
@@ -49,9 +50,9 @@ class Template {
         this.commentButton = this.container.querySelector('.dplayer-comment-icon');
         this.commentSettingBox = this.container.querySelector('.dplayer-comment-setting-box');
         this.commentSettingButton = this.container.querySelector('.dplayer-comment-setting-icon');
-        this.commentSettingFill = this.container.querySelector('.dplayer-comment-setting-icon .dplayer-fill');
+        this.commentSettingFill = this.container.querySelector('.dplayer-comment-setting-icon path');
         this.commentSendButton = this.container.querySelector('.dplayer-send-icon');
-        this.commentSendFill = this.container.querySelector('.dplayer-send-icon .dplayer-fill');
+        this.commentSendFill = this.container.querySelector('.dplayer-send-icon path');
         this.commentColorSettingBox = this.container.querySelector('.dplayer-comment-setting-color');
         this.browserFullButton = this.container.querySelector('.dplayer-full-icon');
         this.webFullButton = this.container.querySelector('.dplayer-full-in-icon');
@@ -79,7 +80,7 @@ class Template {
         this.infoDanmakuAmount = this.container.querySelector('.dplayer-info-panel-item-danmaku-amount .dplayer-info-panel-item-data');
     }
 
-    tpl (options, index, tran, icons) {
+    tpl (options, index, tran) {
         return `
         <div class="dplayer-mask"></div>
         <div class="dplayer-video-wrap">
@@ -94,41 +95,14 @@ class Template {
             <div class="dplayer-bezel">
                 <span class="dplayer-bezel-icon"></span>
                 ${options.danmaku ? `<span class="dplayer-danloading">${tran('Danmaku is loading')}</span>` : ``}
-                <span class="diplayer-loading-icon">
-                    <svg height="100%" version="1.1" viewBox="0 0 22 22" width="100%">
-                        <svg x="7" y="1">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-0" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <svg x="11" y="3">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-1" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <svg x="13" y="7">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-2" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <svg x="11" y="11">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-3" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <svg x="7" y="13">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-4" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <svg x="3" y="11">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-5" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <svg x="1" y="7">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-6" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <svg x="3" y="3">
-                            <circle class="diplayer-loading-dot diplayer-loading-dot-7" cx="4" cy="4" r="2"></circle>
-                        </svg>
-                    </svg>
-                </span>
+                <span class="diplayer-loading-icon">${Icons.loading}</span>
             </div>
         </div>
         <div class="dplayer-controller-mask"></div>
         <div class="dplayer-controller">
             <div class="dplayer-icons dplayer-comment-box">
                 <button class="dplayer-icon dplayer-comment-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
-                    <span class="dplayer-icon-content">${icons.get('pallette')}</span>
+                    <span class="dplayer-icon-content">${Icons.pallette}</span>
                 </button>
                 <div class="dplayer-comment-setting-box">
                     <div class="dplayer-comment-setting-color">
@@ -176,16 +150,16 @@ class Template {
                 </div>
                 <input class="dplayer-comment-input" type="text" placeholder="${tran('Input danmaku, hit Enter')}" maxlength="30">
                 <button class="dplayer-icon dplayer-send-icon" data-balloon="${tran('Send')}" data-balloon-pos="up">
-                    <span class="dplayer-icon-content">${icons.get('send')}</span>
+                    <span class="dplayer-icon-content">${Icons.send}</span>
                 </button>
             </div>
             <div class="dplayer-icons dplayer-icons-left">
                 <button class="dplayer-icon dplayer-play-icon">
-                    <span class="dplayer-icon-content">${icons.get('play')}</span>
+                    <span class="dplayer-icon-content">${Icons.play}</span>
                 </button>
                 <div class="dplayer-volume">
                     <button class="dplayer-icon dplayer-volume-icon">
-                        <span class="dplayer-icon-content">${icons.get('volume-down')}</span>
+                        <span class="dplayer-icon-content">${Icons.volumeDown}</span>
                     </button>
                     <div class="dplayer-volume-bar-wrap" data-balloon-pos="up">
                         <div class="dplayer-volume-bar">
@@ -209,31 +183,31 @@ class Template {
                 ` : ``}
                 ${options.screenshot ? `
                 <a href="#" class="dplayer-icon dplayer-camera-icon" data-balloon="${tran('Screenshot')}" data-balloon-pos="up">
-                    <span class="dplayer-icon-content">${icons.get('camera')}</span>
+                    <span class="dplayer-icon-content">${Icons.camera}</span>
                 </a>
                 ` : ``}
                 <div class="dplayer-comment">
                     <button class="dplayer-icon dplayer-comment-icon" data-balloon="${tran('Send danmaku')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${icons.get('comment')}</span>
+                        <span class="dplayer-icon-content">${Icons.comment}</span>
                     </button>
                 </div>
                 ${options.subtitle ? `
                 <div class="dplayer-subtitle-btn">
                     <button class="dplayer-icon dplayer-subtitle-icon" data-balloon="${tran('Hide subtitle')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${icons.get('subtitle')}</span>
+                        <span class="dplayer-icon-content">${Icons.subtitle}</span>
                     </button>
                 </div>
                 ` : ``}
                 <div class="dplayer-setting">
                     <button class="dplayer-icon dplayer-setting-icon" data-balloon="${tran('Setting')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${icons.get('setting')}</span>
+                        <span class="dplayer-icon-content">${Icons.setting}</span>
                     </button>
                     <div class="dplayer-setting-box">
                         <div class="dplayer-setting-origin-panel">
                             <div class="dplayer-setting-item dplayer-setting-speed">
                                 <span class="dplayer-label">${tran('Speed')}</span>
                                 <div class="dplayer-toggle">
-                                    ${icons.get('right')}
+                                    ${Icons.right}
                                 </div>
                             </div>
                             <div class="dplayer-setting-item dplayer-setting-loop">
@@ -292,10 +266,10 @@ class Template {
                 </div>
                 <div class="dplayer-full">
                     <button class="dplayer-icon dplayer-full-in-icon" data-balloon="${tran('Web full screen')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${icons.get('full-in')}</span>
+                        <span class="dplayer-icon-content">${Icons.fullWeb}</span>
                     </button>
                     <button class="dplayer-icon dplayer-full-icon" data-balloon="${tran('Full screen')}" data-balloon-pos="up">
-                        <span class="dplayer-icon-content">${icons.get('full')}</span>
+                        <span class="dplayer-icon-content">${Icons.full}</span>
                     </button>
                 </div>
             </div>

@@ -8,6 +8,16 @@
         box-sizing: content-box;
     }
 
+    svg {
+        width: 100%;
+        height: 100%;
+        
+        path,
+        circle {
+            fill: #fff;
+        }
+    }
+
     &:-webkit-full-screen {
         width: 100%;
         height: 100%;

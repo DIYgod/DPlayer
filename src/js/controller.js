@@ -1,5 +1,6 @@
 import utils from './utils';
 import Thumbnails from './thumbnails';
+import Icons from './icons';
 
 class Controller {
     constructor (player) {
@@ -180,7 +181,7 @@ class Controller {
             }
             else {
                 this.player.video.muted = true;
-                this.player.template.volumeIcon.innerHTML = this.player.icons.get('volume-off');
+                this.player.template.volumeIcon.innerHTML = Icons.volumeOff;
                 this.player.bar.set('volume', 0, 'width');
             }
         });
