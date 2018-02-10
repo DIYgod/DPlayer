@@ -24,6 +24,7 @@ const SendXMLHttpRequest = (url, data, success, error, fail) => {
     };
 
     xhr.open(data !== null ? 'POST' : 'GET', url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     xhr.send(data !== null ? JSON.stringify(data) : null);
 };
 
