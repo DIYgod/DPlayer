@@ -102,7 +102,7 @@
         <div class="dplayer-quality">
             <button class="dplayer-icon dplayer-quality-icon">{{ options.video.quality[options.video.defaultQuality].name }}</button>
             <div class="dplayer-quality-mask">
-                <div class="dplayer-quality-list"></div>
+                <div class="dplayer-quality-list">
                 {{ each options.video.quality }}
                     <div class="dplayer-quality-item" data-index="{{ $index }}">{{ $value.name }}</div>
                 {{ /each }}

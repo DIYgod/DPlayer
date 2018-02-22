@@ -1,6 +1,6 @@
 {
   "name": "dplayer",
-  "version": "1.22.0",
+  "version": "1.22.1",
   "description": "Wow, such a lovely HTML5 danmaku video player",
   "main": "dist/DPlayer.min.js",
   "style": "dist/DPlayer.min.css",
