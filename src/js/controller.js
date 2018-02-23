@@ -200,14 +200,23 @@ class Controller {
     initScreenshotButton () {
         if (this.player.options.screenshot) {
             this.player.template.camareButton.addEventListener('click', () => {
-                const canvas = document.createElement("canvas");
+                const canvas = document.createElement('canvas');
                 canvas.width = this.player.video.videoWidth;
                 canvas.height = this.player.video.videoHeight;
                 canvas.getContext('2d').drawImage(this.player.video, 0, 0, canvas.width, canvas.height);
 
-                const dataURL = canvas.toDataURL();
-                this.player.template.camareButton.href = dataURL;
-                this.player.template.camareButton.download = "DPlayer.png";
+                let dataURL;
+                canvas.toBlob((blob) => {
+                    dataURL = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = dataURL;
+                    link.download = 'DPlayer.png';
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(dataURL);
+                });
 
                 this.player.events.trigger('screenshot', dataURL);
             });

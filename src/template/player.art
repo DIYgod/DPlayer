@@ -111,9 +111,9 @@
         </div>
         {{ /if }}
         {{ if options.screenshot }}
-        <a href="#" class="dplayer-icon dplayer-camera-icon" data-balloon="{{ tran('Screenshot') }}" data-balloon-pos="up">
+        <div class="dplayer-icon dplayer-camera-icon" data-balloon="{{ tran('Screenshot') }}" data-balloon-pos="up">
             <span class="dplayer-icon-content">{{@ icons.camera }}</span>
-        </a>
+        </div>
         {{ /if }}
         <div class="dplayer-comment">
             <button class="dplayer-icon dplayer-comment-icon" data-balloon="{{ tran('Send danmaku') }}" data-balloon-pos="up">
