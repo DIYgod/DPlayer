@@ -39,9 +39,7 @@ export default (options) => {
     }
 
     if (options.video.quality) {
-        options.video.url = [
-            options.video.quality[options.video.defaultQuality].url
-        ];
+        options.video.url = options.video.quality[options.video.defaultQuality].url;
     }
 
     if (options.lang) {
