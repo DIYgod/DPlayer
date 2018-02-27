@@ -1,0 +1,83 @@
+<h1>DPlayer</h1>
+
+<h3>🍭 Wow, such a lovely HTML5 danmaku video player.</h3>
+
+<div class="dplayer-wrap">
+    <div id="dplayer1"></div>
+</div>
+
+<div class="landing-buttons">
+    <a class="landing-button" target="_blank" href="https://github.com/MoePlayer/DPlayer">
+        GitHub
+    </a>
+
+    <a class="landing-button" router-link="/home">
+        Docs
+    </a>
+</div>
+
+<style>
+    h1 {
+        margin: 0;
+        margin-top: -50px;
+        font-weight: normal;
+        font-size: 40px;
+        letter-spacing: 1px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        color: #999;
+        font-weight: normal;
+        letter-spacing: 1px;
+    }
+
+    .landing {
+        padding: 10px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        height: 100%;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    .features {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .landing-button {
+        border: 1px solid #ccc;
+        border-radius: 33px;
+        padding: 10px 30px;
+        background-color: white;
+        display: inline-block;
+        margin-right: 20px;
+        color: #333;
+    }
+
+    .landing-button:hover {
+        border-color: #42b983;
+        color: #42b983;
+        text-decoration: none;
+    }
+
+    .dplayer-wrap {
+        max-width: 600px;
+        margin: 20px 0 40px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+</style>
