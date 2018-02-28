@@ -8,22 +8,12 @@ search: english
 
 ## Special Sponsors
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="middle">
-        <a href="https://pear.hk/" target="_blank">
-          <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
-        </a>
-      </td>
-      <td align="center" valign="middle">
-        <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-          <img width="222px" src="https://imgur.com/apG1uKf.png">
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<a href="https://pear.hk/" target="_blank">
+    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+</a>
+<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
+    <img width="222px" src="https://imgur.com/apG1uKf.png">
+</a>
 
 ## Installation
 

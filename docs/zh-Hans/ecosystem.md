@@ -48,13 +48,8 @@ search: zh-Hans
 
 ## 谁在用 DPlayer?
 
-- [嘀哩嘀哩](http://www.dilidili.wang/)
-- [银弹字幕组](https://www.sbsub.com/)
-- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
-- [otomads](https://otomads.com/)
-
-## 贡献者
-
-感谢所有贡献者。
-
-<a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
+- [嘀哩嘀哩](http://www.dilidili.wang/): 兴趣使然的无名小站（D站）
+- [银色子弹](https://www.sbsub.com/): 银色子弹，简称银弹，由多数柯南热爱者聚集在一起的组织
+- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html): 南京航空航天大学门户网站
+- [otomads](https://otomads.com/): 专注于音MAD的视频弹幕网站
+- [Cloudreve](https://github.com/HFO4/Cloudreve): 基于ThinkPHP构建的网盘系统

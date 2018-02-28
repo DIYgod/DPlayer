@@ -1,5 +1,5 @@
 const langs = [
-    { title: 'English', path: '/home', matchPath: /^\/(home|ecosystem)/ },
+    { title: 'English', path: '/home', matchPath: /^\/(home|ecosystem|support)/ },
     { title: '简体中文', path: '/zh-Hans/', matchPath: /^\/zh-Hans/ },
 ];
 
@@ -18,6 +18,9 @@ docute.init({
                 title: 'Ecosystem', path: '/ecosystem'
             },
             {
+                title: 'Support DPlayer', path: '/support'
+            },
+            {
                 title: 'Languages', type: 'dropdown', items: langs
             }
         ],
@@ -27,6 +30,9 @@ docute.init({
             },
             {
                 title: '生态', path: '/zh-Hans/ecosystem'
+            },
+            {
+                title: '支持 DPlayer', path: '/zh-Hans/support'
             },
             {
                 title: '选择语言', type: 'dropdown', items: langs

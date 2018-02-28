@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">DPlayer</h1>
 
-> Wow, such a lovely HTML5 danmaku video player
+> 🍭 Wow, such a lovely HTML5 danmaku video player
 
 [![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
@@ -41,70 +41,9 @@ DPlayer is a lovely HTML5 danmaku video player to help people build video and da
 
 Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/issues/31)
 
-**[Demo](http://dplayer.js.org/)**
+**[Docs](http://dplayer.js.org)**
 
-**[Docs](http://dplayer.js.org/docs)**
-
-## Install
-
-```
-$ npm install dplayer --save
-```
-
-## Quick Start
-
-```html
-<link rel="stylesheet" href="dist/DPlayer.min.css">
-<div id="player1"></div>
-<script src="dist/DPlayer.min.js"></script>
-```
-
-```js
-var dp = new DPlayer({
-    element: document.getElementById('player1'),
-    video: {
-        url: 'dplayer.mp4',
-        pic: 'dplayer.png'
-    },
-    danmaku: {
-        id: 'testid',
-        api: 'https://api.prprpr.me/dplayer/'
-    }
-});
-```
-
-## Usage
-
-[Read the Docs](http://dplayer.js.org/docs)
-
-## CDN
-
-- [jsDelivr](https://www.jsdelivr.com/package/npm/dplayer)
-- [cdnjs](https://cdnjs.com/libraries/dplayer)
-- [unpkg](https://unpkg.com/dplayer/)
-
-## FAQ
-
-<details><summary>Why can't some videos be full screen?</summary><br>
-
-If player is contained in a iframe, try adding the allowfullscreen attribute to the iframe.
-
-For full browser support it should look like this:
-
-```html
-<iframe src="example.com"
-        allowfullscreen="allowfullscreen"
-        mozallowfullscreen="mozallowfullscreen"
-        msallowfullscreen="msallowfullscreen"
-        oallowfullscreen="oallowfullscreen"
-        webkitallowfullscreen="webkitallowfullscreen"></iframe> 
-```
-</details>
-
-<details><summary>Why can't player autoplay in some mobile browsers?</summary><br>
-
-Most mobile browsers forbid video autoplay, you wont be able to achieve it without hacks.
-</details>
+**[中文文档](http://dplayer.js.org/#/zh-Hans/)**
 
 ## Join the Discussion
 
@@ -113,70 +52,83 @@ Most mobile browsers forbid video autoplay, you wont be able to achieve it witho
 
 ## Related Projects
 
-- [DPlayer-backend](https://github.com/MoePlayer/DPlayer-backend)
-- [DPlayer-data(weekly backup for api.prprpr.me/dplayer)](https://github.com/MoePlayer/DPlayer-data)
-- [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails)
-- [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho)
-- [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer)
-- [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP)
-- [纸飞机视频区插件(DPlayer for Discuz!)](https://coding.net/u/Click_04/p/video/git)
-- [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress)
-- [Vue-DPlayer](https://github.com/sinchang/vue-dplayer)
-- [react-dplayer](https://github.com/hnsylitao/react-dplayer)
-- [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite)
-- [DPlayerHandle](https://github.com/kn007/DPlayerHandle)
-- [laravel-danmaku](https://github.com/MoePlayer/laravel-danmaku)
-- [dplayer-live-backend](https://github.com/Izumi-kun/dplayer-live-backend)
-- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
+Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
+
+### Tooling
+
+- [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails): generate video thumbnails
+
+### Danamku api
+
+- [DPlayer-node](https://github.com/MoePlayer/DPlayer-node): Node.js
+- [laravel-danmaku](https://github.com/MoePlayer/laravel-danmaku): PHP
+- [dplayer-live-backend](https://github.com/Izumi-kun/dplayer-live-backend): Node.js, WebSocket live backend
+- [RailsGun](https://github.com/MoePlayer/RailsGun): Ruby
+
+### Plugins
+
+- [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho): Typecho
+- [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer): Hexo
+- [DPlayer_for_Z-BlogPHP](https://github.com/fghrsh/DPlayer_for_Z-BlogPHP): Z-BlogPHP
+- [DPlayer for Discuz!](https://coding.net/u/Click_04/p/video/git): Discuz!
+- [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress): WordPress
+- [DPlayerHandle](https://github.com/kn007/DPlayerHandle): WordPress
+- [Vue-DPlayer](https://github.com/sinchang/vue-dplayer): Vue
+- [react-dplayer](https://github.com/hnsylitao/react-dplayer): React
+
+### Other
+
+- [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite): lite version
 
 ## Who use DPlayer?
 
-- [嘀哩嘀哩](http://www.dilidili.wang/)
-- [银弹字幕组](https://www.sbsub.com/)
-- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
-- [otomads](https://otomads.com/)
+- [嘀哩嘀哩](http://www.dilidili.wang/): 兴趣使然的无名小站（D站）
+- [银色子弹](https://www.sbsub.com/): 银色子弹，简称银弹，由多数柯南热爱者聚集在一起的组织
+- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html): 南京航空航天大学门户网站
+- [otomads](https://otomads.com/): 专注于音MAD的视频弹幕网站
+- [Cloudreve](https://github.com/HFO4/Cloudreve): 基于ThinkPHP构建的网盘系统
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Donate
 
-- [Donate via OpenCollective](https://opencollective.com/dplayer)
-- [Donate via Paypal](https://www.paypal.me/DIYgod)
-- [Donate via WeChat Pay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1uowywej307s07st8h.jpg)
-- [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
-- Donate via Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+DPlayer is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
 
-## Sponsors
+## One-time Donations
 
-Thank you to all our sponsors!
+We accept donations through these channels:
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="middle">
-        <a href="https://pear.hk/" target="_blank">
-          <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
-        </a>
-      </td>
-      <td align="center" valign="middle">
-        <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-          <img width="222px" src="https://imgur.com/apG1uKf.png">
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+- [Paypal](https://www.paypal.me/DIYgod)
+- [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
+- [Alipay](https://i.imgur.com/wv1Pj2k.png)
+- Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+
+## Recurring Pledges
+
+Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the DPlayer GitHub repository and this website.
+
+- Become a backer or sponsor via [OpenCollective](https://opencollective.com/dplayer)
+- E-mail us: i#html.love
+
+## Current Premium Sponsors
+
+### Special Sponsors
+
+<a href="https://pear.hk/" target="_blank">
+    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+</a>
+<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
+    <img width="222px" src="https://imgur.com/apG1uKf.png">
+</a>
+
+### OpenCollective backers
+
+![](https://opencollective.com/DPlayer/backers.svg?width=890)
 
 ## Contributors
 
 This project exists thanks to all the people who contribute.
 
 <a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
-
-## Backers
-
-Thank you to all our backers!
-
-<a href="https://opencollective.com/DPlayer#backers" target="_blank"><img src="https://opencollective.com/DPlayer/backers.svg?width=890"></a>
 
 ## Author
 
