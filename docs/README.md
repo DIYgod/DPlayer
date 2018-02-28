@@ -81,7 +81,7 @@ const dp = new DPlayer(options);
 
 ## Options
 
-Name|Default|Note
+Name | Default | Description
 ----|-------|----
 container | document.querySelector('.dplayer') | player container
 live | false | enable live mode, [see more details](http://dplayer.js.org/#/home?id=live)
@@ -105,9 +105,9 @@ video.type | 'auto' | values: 'auto', 'hls', 'flv', 'dash', 'webtorrent' or cust
 video.customType | - | custom video type, [see more details](http://dplayer.js.org/#/home?id=mse-support)
 subtitle | - | external subtitle
 subtitle.url | `required` | subtitle url
-subtitle.type | 'webvtt' | values: 'webvtt', 'ass', but only webvtt is supported for now
+subtitle.type | 'webvtt' | subtitle type, values: 'webvtt', 'ass', but only webvtt is supported for now
 subtitle.fontSize | '20px' | subtitle font size
-subtitle.bottom | '40px' | values like: '10px' '10%', the distance between the subtitle and player bottom
+subtitle.bottom | '40px' | the distance between the subtitle and player bottom, values like: '10px' '10%'
 subtitle.color | '#fff' | subtitle color
 danmaku | - | showing danmaku
 danmaku.id | `required` | danamku pool id, it must be unique
@@ -117,9 +117,9 @@ danmaku.maximum | - | danmaku maximum quantity
 danmaku.addition | - | additional danmaku, [see more details](http://dplayer.js.org/#/home?id=bilibili-danmaku)
 danmaku.user | 'DIYgod' | danmaku user name
 danmaku.bottom | - | values like: '10px' '10%', the distance between the danmaku bottom and player bottom, in order to prevent warding off subtitle
-danmaku.unlimited | false | allow danmaku overlap, notice that player will remember user setting, default setting will not work after user set it themselves
+danmaku.unlimited | false | display all danmaku even though danmaku overlap, notice that player will remember user setting, default setting will not work after user set it themselves
 contextmenu | [] | custom contextmenu
-mutex | true | pause other players when this player start play
+mutex | true | prevent to play multiple player at the same time, pause other players when this player start play
 
 For example:
 
@@ -194,7 +194,7 @@ const dp = new DPlayer({
 
 + `dp.on(event: string, handler: function)`: bind video and player events, [see more details](http://dplayer.js.org/#/home?id=event-binding)
 
-+ `dp.switchVideo(video, danmaku)`: switch to a new video, the parameters in `video` and `danmaku` is the same as option
++ `dp.switchVideo(video, danmaku)`: switch to a new video
 
   ```js
   dp.switchVideo({
@@ -340,7 +340,7 @@ Player events
 
 ## Quality switching
 
-Set video url and video type in video.quality, set default quality by video.defaultQuality.
+Set video url and video type in `video.quality`, set default quality by `video.defaultQuality`.
 
 <div class="dplayer-wrap">
     <div id="dplayer4"><button class="docute-button load">Click to load player</div>
@@ -370,6 +370,8 @@ const dp = new DPlayer({
 
 ### Danmaku API
 
+`danmaku.api`
+
 **Ready-made API**
 
 url: https://api.prprpr.me/dplayer/
@@ -380,7 +382,9 @@ Daily backup data: [DPlayer-data](https://github.com/DIYgod/DPlayer-data)
 
 [DPlayer-node](https://github.com/MoePlayer/DPlayer-node)
 
-### Bilibili danmaku
+### bilibili danmaku
+
+`danmaku.addition`
 
 API: [https://api.prprpr.me/dplayer/v2/bilibili?aid=[aid]](https://api.prprpr.me/dplayer/v2/bilibili?aid=[aid]) or [https://api.prprpr.me/dplayer/v2/bilibili?cid=[cid]](https://api.prprpr.me/dplayer/v2/bilibili?cid=[cid])
 
@@ -582,9 +586,9 @@ const dp = new DPlayer({
     <div id="dplayer9"><button class="docute-button load">Click to load player</div>
 </div>
 
-You can also regard DPlayer as a live player, at first, you should prepare a WebSocket backend yourself.
+You can use DPlayer in live, but if you want live danmaku, you should prepare a WebSocket backend yourself.
 
-Init DPlayer:
+Init player:
 
 ```js
 const dp = new DPlayer({
@@ -608,7 +612,7 @@ const dp = new DPlayer({
 });
 ```
 
-After getting a danmaku via WebSocket:
+Draw danmaku after getting a danmaku via WebSocket:
 
 ```js
 const danmaku = {
@@ -627,9 +631,9 @@ dp.danmaku.draw(danmaku);
 
 ## FAQ
 
-### Why can't some videos be full screen?
+### Why can't player be full screen?
 
-If player is contained in a iframe, try adding the allowfullscreen attribute to the iframe.
+If player is contained in a iframe, try adding the `allowfullscreen` attribute to the iframe.
 
 For full browser support it should look like this:
 

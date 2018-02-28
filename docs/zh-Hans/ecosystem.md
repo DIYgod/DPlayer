@@ -3,35 +3,35 @@ nav: zh-Hans
 search: zh-Hans
 ---
 
-# 生态系统
+# 生态
 
-Let's make DPlayer better, feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
+让 DPlayer 变得更好，请随意在 [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31) 提交你的项目和产品
 
-## Help
+## 帮助
 
-### Joining the Discussion
+### 参与讨论
 
-- [Telegram Group](https://t.me/adplayer)
-- [QQ Group](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17): 415835947
+- [Telegram 群](https://t.me/adplayer)
+- [QQ 群](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17): 415835947
 
-### Creating issue
+### 提交 issue
 
 - [MoePlayer/DPlayer/issues](https://github.com/MoePlayer/DPlayer/issues)
 
-## Related Projects
+## 相关项目
 
-### Tooling
+### 工具
 
 - [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails): generate video thumbnails
 
-### Danamku api
+### 弹幕接口
 
 - [DPlayer-node](https://github.com/MoePlayer/DPlayer-node): Node.js
 - [laravel-danmaku](https://github.com/MoePlayer/laravel-danmaku): PHP
 - [dplayer-live-backend](https://github.com/Izumi-kun/dplayer-live-backend): Node.js, WebSocket live backend
 - [RailsGun](https://github.com/MoePlayer/RailsGun): Ruby
 
-### Plugins
+### 插件
 
 - [DPlayer-for-typecho](https://github.com/volio/DPlayer-for-typecho): Typecho
 - [Hexo-tag-dplayer](https://github.com/NextMoe/hexo-tag-dplayer): Hexo
@@ -42,19 +42,19 @@ Let's make DPlayer better, feel free to submit yours in [`Let me know!`](https:/
 - [Vue-DPlayer](https://github.com/sinchang/vue-dplayer): Vue
 - [react-dplayer](https://github.com/hnsylitao/react-dplayer): React
 
-### Other
+### 其他
 
 - [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite): lite version
 
-## Who use DPlayer?
+## 谁在用 DPlayer?
 
 - [嘀哩嘀哩](http://www.dilidili.wang/)
 - [银弹字幕组](https://www.sbsub.com/)
 - [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
 - [otomads](https://otomads.com/)
 
-## Contributors
+## 贡献者
 
-This project exists thanks to all the people who contribute.
+感谢所有贡献者。
 
 <a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
