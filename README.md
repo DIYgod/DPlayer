@@ -32,7 +32,7 @@ DPlayer is a lovely HTML5 danmaku video player to help people build video and da
     - WebM
     - Ogg Theora Vorbis
 - Features
-    - Danamku
+    - Danmaku
     - Screenshot
     - Hotkeys
     - Quality switching
@@ -58,7 +58,7 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 
 - [DPlayer-thumbnails](https://github.com/MoePlayer/DPlayer-thumbnails): generate video thumbnails
 
-### Danamku api
+### Danmaku api
 
 - [DPlayer-node](https://github.com/MoePlayer/DPlayer-node): Node.js
 - [laravel-danmaku](https://github.com/MoePlayer/laravel-danmaku): PHP
