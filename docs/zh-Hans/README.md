@@ -175,7 +175,7 @@ const dp = new DPlayer({
 
 + `dp.pause()`: 暂停视频
 
-+ `dp.seek(time: number)`: 跳转到特定事件
++ `dp.seek(time: number)`: 跳转到特定时间
 
   ```js
   dp.seek(1000);
