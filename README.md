@@ -79,35 +79,17 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 ### Other
 
 - [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite): lite version
+- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Who use DPlayer?
 
 - [嘀哩嘀哩](http://www.dilidili.wang/): 兴趣使然的无名小站（D站）
 - [银色子弹](https://www.sbsub.com/): 银色子弹，简称银弹，由多数柯南热爱者聚集在一起的组织
+- [浙江大学CC98论坛](https://zh.wikipedia.org/wiki/CC98%E8%AE%BA%E5%9D%9B): 浙江大学校网内规模最大的论坛，中国各大学中较活跃的BBS之一
 - [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html): 南京航空航天大学门户网站
 - [otomads](https://otomads.com/): 专注于音MAD的视频弹幕网站
 - [Cloudreve](https://github.com/HFO4/Cloudreve): 基于ThinkPHP构建的网盘系统
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
-
-## Donate
-
-DPlayer is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
-
-## One-time Donations
-
-We accept donations through these channels:
-
-- [Paypal](https://www.paypal.me/DIYgod)
-- [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
-- [Alipay](https://i.imgur.com/wv1Pj2k.png)
-- Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
-
-## Recurring Pledges
-
-Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the DPlayer GitHub repository and this website.
-
-- Become a backer or sponsor via [OpenCollective](https://opencollective.com/dplayer)
-- E-mail us: i#html.love
 
 ## Current Premium Sponsors
 
@@ -129,6 +111,26 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 This project exists thanks to all the people who contribute.
 
 <a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
+
+## Donate
+
+DPlayer is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
+
+## One-time Donations
+
+We accept donations through these channels:
+
+- [Paypal](https://www.paypal.me/DIYgod)
+- [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
+- [Alipay](https://i.imgur.com/wv1Pj2k.png)
+- Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+
+## Recurring Pledges
+
+Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the DPlayer GitHub repository and this website.
+
+- Become a backer or sponsor via [OpenCollective](https://opencollective.com/dplayer)
+- E-mail us: i#html.love
 
 ## Author
 
