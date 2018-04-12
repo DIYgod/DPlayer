@@ -17,8 +17,8 @@ class Thumbnails {
         this.events && this.events.trigger('thumbnails_show');
     }
 
-    move (position) {
-        this.container.style.backgroundPosition = `-${(Math.ceil(position / this.barWidth * 100) - 1) * 160}px 0`;
+    move (position, totalWidth) {
+        this.container.style.backgroundPosition = `-${(Math.ceil(position / totalWidth * 100) - 1) * 160}px 0`;
         this.container.style.left = `${(position - this.container.offsetWidth / 2)}px`;
     }
 
