@@ -47,10 +47,14 @@ Let's make DPlayer better, feel free to submit yours in [`Let me know!`](https:/
 
 ## Who use DPlayer?
 
-- [嘀哩嘀哩](http://www.dilidili.wang/)
-- [银弹字幕组](https://www.sbsub.com/)
-- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html)
-- [otomads](https://otomads.com/)
+- [小红书](https://www.xiaohongshu.com/): 中国最大的生活社区分享平台，同时也是发现全球好物的电商平台
+- [极客时间](https://time.geekbang.org/): 极客邦科技出品的一款 IT 内容知识服务 App
+- [嘀哩嘀哩](http://www.dilidili.wang/): 兴趣使然的无名小站（D站）
+- [银色子弹](https://www.sbsub.com/): 银色子弹，简称银弹，由多数柯南热爱者聚集在一起的组织
+- [浙江大学CC98论坛](https://zh.wikipedia.org/wiki/CC98%E8%AE%BA%E5%9D%9B): 浙江大学校网内规模最大的论坛，中国各大学中较活跃的BBS之一
+- [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html): 南京航空航天大学门户网站
+- [otomads](https://otomads.com/): 专注于音MAD的视频弹幕网站
+- [Cloudreve](https://github.com/HFO4/Cloudreve): 基于ThinkPHP构建的网盘系统
 
 ## Contributors
 
