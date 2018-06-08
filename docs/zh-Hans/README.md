@@ -579,7 +579,7 @@ const dp = new DPlayer({
 
 ### Work with other HLS library
 
-DPlayer 可以与任何 HLS 库一起使用
+DPlayer 可以通过 `customType` 参数与任何 HLS 库一起使用
 
 <div class="dplayer-wrap">
     <div id="dplayer10"><button class="docute-button load">点击加载播放器</div>

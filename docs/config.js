@@ -250,7 +250,7 @@ function dplayer9 () {
 }
 
 function dplayer10 () {
-    window.dp9 = new DPlayer({
+    window.dp10 = new DPlayer({
         container: document.getElementById('dplayer10'),
         video: {
             url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
