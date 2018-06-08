@@ -71,7 +71,7 @@ function player () {
 }
 
 function clearPlayer () {
-    for (let i = 1; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
         if (window['dp' + (i + 1)]) {
             window['dp' + (i + 1)].destroy();
         }
@@ -245,6 +245,24 @@ function dplayer9 () {
         video: {
             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
             type: 'hls'
+        }
+    });
+}
+
+function dplayer10 () {
+    window.dp9 = new DPlayer({
+        container: document.getElementById('dplayer10'),
+        video: {
+            url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
+            type: 'pearplayer',
+            customType: {
+                'pearplayer': function (video, player) {
+                    new PearPlayer(video, {
+                        src: video.src,
+                        autoplay: player.options.autoplay
+                    });
+                }
+            }
         }
     });
 }
