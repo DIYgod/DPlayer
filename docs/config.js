@@ -250,19 +250,41 @@ function dplayer9 () {
 }
 
 function dplayer10 () {
-    window.dp10 = new DPlayer({
-        container: document.getElementById('dplayer10'),
-        video: {
-            url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
-            type: 'pearplayer',
-            customType: {
-                'pearplayer': function (video, player) {
-                    new PearPlayer(video, {
-                        src: video.src,
-                        autoplay: player.options.autoplay
-                    });
+    loadScript('https://cdn.jsdelivr.net/npm/pearplayer', function () {
+        window.dp10 = new DPlayer({
+            container: document.getElementById('dplayer10'),
+            video: {
+                url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
+                type: 'pearplayer',
+                customType: {
+                    'pearplayer': function (video, player) {
+                        new PearPlayer(video, {
+                            src: video.src,
+                            autoplay: player.options.autoplay
+                        });
+                    }
                 }
             }
-        }
+        });
     });
+}
+
+function loadScript (src, callback) {
+    let s,
+        r,
+        t;
+    r = false;
+    s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.src = src;
+    s.onload = s.onreadystatechange = function () {
+    // console.log( this.readyState ); //uncomment this line to see which ready states are called.
+        if (!r && (!this.readyState || this.readyState == 'complete'))
+        {
+            r = true;
+            callback();
+        }
+    };
+    t = document.getElementsByTagName('script')[0];
+    t.parentNode.insertBefore(s, t);
 }

@@ -580,9 +580,9 @@ const dp = new DPlayer({
 });
 ```
 
-### Work with other HLS library
+### Work with other MSE library
 
-DPlayer can work with any HLS library via `customType` option.
+DPlayer can work with any MSE library via `customType` option.
 
 <div class="dplayer-wrap">
     <div id="dplayer10"><button class="docute-button load">Click to load player</div>
