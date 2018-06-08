@@ -577,7 +577,7 @@ const dp = new DPlayer({
 });
 ```
 
-### Work with other MSE library
+### 配合其他 MSE 库使用
 
 DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用
 
