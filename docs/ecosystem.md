@@ -44,6 +44,7 @@ Let's make DPlayer better, feel free to submit yours in [`Let me know!`](https:/
 ### Other
 
 - [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite): lite version
+- [hlsjs-p2p-engine](https://github.com/cdnbye/hlsjs-p2p-engine)
 
 ## Who use DPlayer?
 

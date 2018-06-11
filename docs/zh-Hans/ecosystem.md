@@ -45,6 +45,7 @@ search: zh-Hans
 ### 其他
 
 - [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite): lite version
+- [hlsjs-p2p-engine](https://github.com/cdnbye/hlsjs-p2p-engine)
 
 ## 谁在用 DPlayer?
 
