@@ -13,7 +13,7 @@ export default (options) => {
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
         hotkey: true,
-        preload: 'auto',
+        preload: 'metadata',
         volume: 0.7,
         apiBackend: defaultApiBackend,
         video: {},
