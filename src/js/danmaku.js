@@ -214,8 +214,8 @@ class Danmaku {
                 if (!dan[i].color) {
                     dan[i].color = '#fff';
                 }
-                const item = document.createElement(`div`);
-                item.classList.add(`dplayer-danmaku-item`);
+                const item = document.createElement('div');
+                item.classList.add('dplayer-danmaku-item');
                 item.classList.add(`dplayer-danmaku-${dan[i].type}`);
                 if (dan[i].border) {
                     item.innerHTML = `<span style="border:${dan[i].border}">${dan[i].text}</span>`;
@@ -260,7 +260,7 @@ class Danmaku {
 
                 if (tunnel >= 0) {
                     // move
-                    item.classList.add(`dplayer-danmaku-move`);
+                    item.classList.add('dplayer-danmaku-move');
 
                     // insert
                     docFragment.appendChild(item);
@@ -315,12 +315,12 @@ class Danmaku {
 
     htmlEncode (str) {
         return str.
-            replace(/&/g, "&amp;").
-            replace(/</g, "&lt;").
-            replace(/>/g, "&gt;").
-            replace(/"/g, "&quot;").
-            replace(/'/g, "&#x27;").
-            replace(/\//g, "&#x2f;");
+            replace(/&/g, '&amp;').
+            replace(/</g, '&lt;').
+            replace(/>/g, '&gt;').
+            replace(/"/g, '&quot;').
+            replace(/'/g, '&#x27;').
+            replace(/\//g, '&#x2f;');
     }
 
     resize () {

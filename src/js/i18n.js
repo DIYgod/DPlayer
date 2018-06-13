@@ -21,7 +21,7 @@ function i18n (lang) {
 
 // add translation text here
 const tranTxt = {
-    "zh-cn" : {
+    'zh-cn' : {
         'Danmaku is loading': '弹幕加载中',
         'Top': '顶部',
         'Bottom': '底部',
@@ -58,7 +58,7 @@ const tranTxt = {
         'Live': '直播',
         'Video info': '视频统计信息',
     },
-    "zh-tw" : {
+    'zh-tw' : {
         'Danmaku is loading': '彈幕加載中',
         'Top': '頂部',
         'Bottom': '底部',
