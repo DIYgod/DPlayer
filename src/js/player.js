@@ -337,7 +337,7 @@ class DPlayer {
             // https://github.com/video-dev/hls.js
             case 'hls':
                 if (Hls) {
-                    if (Hls.isSupported()) {
+                    if (Hls.isSupported()||video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL')) {
                         const hls = new Hls();
                         hls.loadSource(video.src);
                         hls.attachMedia(video);
