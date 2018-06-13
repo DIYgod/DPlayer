@@ -48,7 +48,6 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 ## Join the Discussion
 
 - [Telegram Group](https://t.me/adplayer)
-- [QQ Group](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17): 415835947
 
 ## Related Projects
 

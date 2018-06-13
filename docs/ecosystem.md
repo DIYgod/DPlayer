@@ -11,7 +11,6 @@ Let's make DPlayer better, feel free to submit yours in [`Let me know!`](https:/
 ### Joining the Discussion
 
 - [Telegram Group](https://t.me/adplayer)
-- [QQ Group](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17): 415835947
 
 ### Creating issue
 
