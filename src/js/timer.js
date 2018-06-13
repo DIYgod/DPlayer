@@ -1,5 +1,3 @@
-import utils from './utils';
-
 class Timer {
     constructor (player) {
         this.player = player;
@@ -15,7 +13,7 @@ class Timer {
             }
         )();
 
-        this.types = ['loading', 'progress', 'info', 'fps'];
+        this.types = ['loading', 'info', 'fps'];
 
         this.init();
     }
@@ -50,18 +48,6 @@ class Timer {
                     bufferingDetected = false;
                 }
                 lastPlayPos = currentPlayPos;
-            }
-        }, 100);
-    }
-
-    initprogressChecker () {
-        this.progressChecker = setInterval(() => {
-            if (this.enableprogressChecker) {
-                this.player.bar.set('played', this.player.video.currentTime / this.player.video.duration, 'width');
-                const currentTime = utils.secondToTime(this.player.video.currentTime);
-                if (this.player.template.ptime.innerHTML !== currentTime) {
-                    this.player.template.ptime.innerHTML = currentTime;
-                }
             }
         }, 100);
     }

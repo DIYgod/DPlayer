@@ -183,7 +183,6 @@ class DPlayer {
         }).then(() => {
         });
         this.timer.enable('loading');
-        this.timer.enable('progress');
         this.container.classList.remove('dplayer-paused');
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
@@ -211,9 +210,7 @@ class DPlayer {
 
         this.template.playButton.innerHTML = Icons.play;
         this.video.pause();
-        this.player.container.classList.remove('dplayer-loading');  // TODO
         this.timer.disable('loading');
-        this.timer.disable('progress');
         this.container.classList.remove('dplayer-playing');
         this.container.classList.add('dplayer-paused');
         if (this.danmaku) {
@@ -460,6 +457,14 @@ class DPlayer {
         this.on('pause', () => {
             if (!this.paused) {
                 this.pause();
+            }
+        });
+
+        this.on('timeupdate', () => {
+            this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
+            const currentTime = utils.secondToTime(this.video.currentTime);
+            if (this.template.ptime.innerHTML !== currentTime) {
+                this.template.ptime.innerHTML = currentTime;
             }
         });
 
