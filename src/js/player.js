@@ -11,7 +11,7 @@ import FullScreen from './fullscreen';
 import User from './user';
 import Subtitle from './subtitle';
 import Bar from './bar';
-import Time from './time';
+import Timer from './timer';
 import Bezel from './bezel';
 import Controller from './controller';
 import Setting from './setting';
@@ -123,7 +123,7 @@ class DPlayer {
 
         this.paused = true;
 
-        this.time = new Time(this);
+        this.timer = new Timer(this);
 
         this.hotkey = new HotKey(this);
 
@@ -163,6 +163,7 @@ class DPlayer {
         }
 
         this.bar.set('played', time / this.video.duration, 'width');
+        this.template.ptime.innerHTML = utils.secondToTime(time);
     }
 
     /**
@@ -181,8 +182,8 @@ class DPlayer {
             this.pause();
         }).then(() => {
         });
-        this.time.enable('loading');
-        this.time.enable('progress');
+        this.timer.enable('loading');
+        this.timer.enable('progress');
         this.container.classList.remove('dplayer-paused');
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
@@ -208,11 +209,11 @@ class DPlayer {
             this.bezel.switch(Icons.pause);
         }
 
-        this.ended = false;
         this.template.playButton.innerHTML = Icons.play;
         this.video.pause();
-        this.time.disable('loading');
-        this.time.disable('progress');
+        this.player.container.classList.remove('dplayer-loading');  // TODO
+        this.timer.disable('loading');
+        this.timer.disable('progress');
         this.container.classList.remove('dplayer-playing');
         this.container.classList.add('dplayer-paused');
         if (this.danmaku) {
@@ -436,11 +437,9 @@ class DPlayer {
         });
 
         // video end
-        this.ended = false;
         this.on('ended', () => {
             this.bar.set('played', 1, 'width');
             if (!this.setting.loop) {
-                this.ended = true;
                 this.pause();
             }
             else {
@@ -558,16 +557,15 @@ class DPlayer {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
         this.controller.destroy();
-        this.time.destroy();
+        this.timer.destroy();
         this.video.src = '';
         this.container.innerHTML = '';
         this.events.trigger('destroy');
+    }
 
-        for (const key in this) {
-            if (this.hasOwnProperty(key) && key !== 'paused') {
-                delete this[key];
-            }
-        }
+    static get version () {
+        /* global DPLAYER_VERSION */
+        return DPLAYER_VERSION;
     }
 }
 

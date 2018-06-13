@@ -1,6 +1,6 @@
 import utils from './utils';
 
-class Time {
+class Timer {
     constructor (player) {
         this.player = player;
 
@@ -21,12 +21,12 @@ class Time {
     }
 
     init () {
-        for (let i = 0; i < this.types.length; i++) {
-            const type = this.types[i];
-            if (type !== 'fps') {
-                this[`init${type}Checker`]();
+        this.types.map((item) => {
+            if (item !== 'fps') {
+                this[`init${item}Checker`]();
             }
-        }
+            return item;
+        });
     }
 
     initloadingChecker () {
@@ -60,7 +60,7 @@ class Time {
                 this.player.bar.set('played', this.player.video.currentTime / this.player.video.duration, 'width');
                 const currentTime = utils.secondToTime(this.player.video.currentTime);
                 if (this.player.template.ptime.innerHTML !== currentTime) {
-                    this.player.template.ptime.innerHTML = utils.secondToTime(this.player.video.currentTime);
+                    this.player.template.ptime.innerHTML = currentTime;
                 }
             }
         }, 100);
@@ -111,9 +111,13 @@ class Time {
         this[`enable${type}Checker`] = false;
     }
 
-    destroy (type) {
-        this[`${type}Checker`] && clearInterval(this[`${type}Checker`]);
+    destroy () {
+        this.types.map((item) => {
+            this[`enable${item}Checker`] = false;
+            this[`${item}Checker`] && clearInterval(this[`${item}Checker`]);
+            return item;
+        });
     }
 }
 
-export default Time;
+export default Timer;

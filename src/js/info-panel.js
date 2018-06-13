@@ -15,14 +15,14 @@ class InfoPanel {
     show () {
         this.beginTime = Date.now();
         this.update();
-        this.player.time.enable('info');
-        this.player.time.enable('fps');
+        this.player.timer.enable('info');
+        this.player.timer.enable('fps');
         this.container.classList.remove('dplayer-info-panel-hide');
     }
 
     hide () {
-        this.player.time.disable('info');
-        this.player.time.disable('fps');
+        this.player.timer.disable('info');
+        this.player.timer.disable('fps');
         this.container.classList.add('dplayer-info-panel-hide');
     }
 
