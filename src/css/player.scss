@@ -76,6 +76,12 @@
         .dplayer-setting-loop {
             display: none;
         }
+
+        &.dplayer-no-danmaku {
+            .dplayer-setting {
+                display: none;
+            }
+        }
     }
 
     &.dplayer-arrow {
