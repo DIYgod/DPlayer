@@ -236,6 +236,9 @@
                     color: #fff;
                     opacity: 0.8;
                 }
+                &::-ms-clear {
+                    display: none;
+                }
             }
         }
         &.dplayer-icons-left {
