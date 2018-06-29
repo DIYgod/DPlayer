@@ -83,7 +83,7 @@ function dplayer1 () {
         container: document.getElementById('dplayer1'),
         screenshot: true,
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
+            url: 'https://pan.prprpr.me/?/dplayer/hikarunara.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
             thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg'
         },
