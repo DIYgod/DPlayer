@@ -88,7 +88,32 @@ const utils = {
         dragStart: isMobile ? 'touchstart' : 'mousedown',
         dragMove: isMobile ? 'touchmove' : 'mousemove',
         dragEnd: isMobile ? 'touchend' : 'mouseup'
-    }
+    },
+
+    color2Number: (color) => {
+        if (color[0] === '#') {
+            color = color.substr(1);
+        }
+        if (color.length === 3) {
+            color = `${color[0]}${color[0]}${color[1]}${color[1]}${color[2]}${color[2]}`;
+        }
+        return parseInt(color, 16) + 0x000000 & 0xffffff;
+    },
+
+    number2Color: (number) => '#' + ('00000' + number.toString(16)).slice(-6),
+
+    number2Type: (number) => {
+        switch (number) {
+        case 0:
+            return 'right';
+        case 1:
+            return 'top';
+        case 2:
+            return 'bottom';
+        default:
+            return 'right';
+        }
+    },
 };
 
 export default utils;

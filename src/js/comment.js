@@ -1,3 +1,5 @@
+import utils from './utils';
+
 class Comment {
     constructor (player) {
         this.player = player;
@@ -81,8 +83,8 @@ class Comment {
 
         this.player.danmaku.send({
             text: this.player.template.commentInput.value,
-            color: this.player.container.querySelector('.dplayer-comment-setting-color input:checked').value,
-            type: this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value
+            color: utils.color2Number(this.player.container.querySelector('.dplayer-comment-setting-color input:checked').value),
+            type: parseInt(this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value),
         }, () => {
             this.player.template.commentInput.value = '';
             this.hide();

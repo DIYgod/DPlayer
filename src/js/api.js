@@ -44,7 +44,7 @@ export default {
 
     read: (endpoint, callback) => {
         SendXMLHttpRequest(endpoint, null, (xhr, response) => {
-            callback(null, response.danmaku);
+            callback(null, response.data);
         }, (xhr, response) => {
             callback({ status: xhr.status, response });
         }, (xhr) => {

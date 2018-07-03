@@ -1,3 +1,5 @@
+import utils from './utils';
+
 class Danmaku {
     constructor (options) {
         this.options = options;
@@ -21,10 +23,10 @@ class Danmaku {
     load () {
         let apiurl;
         if (this.options.api.maximum) {
-            apiurl = `${this.options.api.address}v2/?id=${this.options.api.id}&max=${this.options.api.maximum}`;
+            apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}&max=${this.options.api.maximum}`;
         }
         else {
-            apiurl = `${this.options.api.address}v2/?id=${this.options.api.id}`;
+            apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}`;
         }
         const endpoints = (this.options.api.addition || []).slice(0);
         endpoints.push(apiurl);
@@ -67,11 +69,10 @@ class Danmaku {
                 results[i] = [];
             }
             else {
-                const typeMap = ['right', 'top', 'bottom'];
                 if (data) {
                     results[i] = data.map((item) => ({
                         time: item[0],
-                        type: typeMap[item[1]],
+                        type: item[1],
                         color: item[2],
                         author: item[3],
                         text: item[4]
@@ -94,14 +95,14 @@ class Danmaku {
     send (dan, callback) {
         const danmakuData = {
             token: this.options.api.token,
-            player: this.options.api.id,
+            id: this.options.api.id,
             author: this.options.api.user,
             time: this.options.time(),
             text: dan.text,
             color: dan.color,
             type: dan.type
         };
-        this.options.apiBackend.send(this.options.api.address + 'v2/', danmakuData, callback);
+        this.options.apiBackend.send(this.options.api.address + 'v3/', danmakuData, callback);
 
         this.dan.splice(this.danIndex, 0, danmakuData);
         this.danIndex++;
@@ -208,11 +209,9 @@ class Danmaku {
             const docFragment = document.createDocumentFragment();
 
             for (let i = 0; i < dan.length; i++) {
-                if (!dan[i].type) {
-                    dan[i].type = 'right';
-                }
+                dan[i].type = utils.number2Type(dan[i].type);
                 if (!dan[i].color) {
-                    dan[i].color = '#fff';
+                    dan[i].color = 16777215;
                 }
                 const item = document.createElement('div');
                 item.classList.add('dplayer-danmaku-item');
@@ -224,7 +223,7 @@ class Danmaku {
                     item.innerHTML = dan[i].text;
                 }
                 item.style.opacity = this._opacity;
-                item.style.color = dan[i].color;
+                item.style.color = utils.number2Color(dan[i].color);
                 item.addEventListener('animationend', () => {
                     this.container.removeChild(item);
                 });

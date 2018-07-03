@@ -55,15 +55,15 @@
             <div class="dplayer-comment-setting-type">
                 <div class="dplayer-comment-setting-title">{{ tran('Set danmaku type') }}</div>
                 <label>
-                    <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="top">
+                    <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="1">
                     <span>{{ tran('Top') }}</span>
                 </label>
                 <label>
-                    <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="right" checked>
+                    <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="0" checked>
                     <span>{{ tran('Rolling') }}</span>
                 </label>
                 <label>
-                    <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="bottom">
+                    <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="2">
                     <span>{{ tran('Bottom') }}</span>
                 </label>
             </div>
