@@ -106,7 +106,8 @@ class DPlayer {
                     addition: this.options.danmaku.addition,
                     user: this.options.danmaku.user,
                 },
-                events: this.events
+                events: this.events,
+                tran: (msg) => this.tran(msg),
             });
 
             this.comment = new Comment(this);
@@ -434,7 +435,7 @@ class DPlayer {
 
         // video download error: an error occurs
         this.on('error', () => {
-            this.tran && this.notice && this.type !== 'webtorrent' & this.notice(this.tran('This video fails to load'), -1);
+            this.tran && this.notice && this.type !== 'webtorrent' & this.notice(this.tran('Video load failed'), -1);
         });
 
         // video end

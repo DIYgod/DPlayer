@@ -1,54 +1,41 @@
-/*
- * xhr.status ---> fail
- * response.code === 0 ---> success
- * response.code !== 0 ---> error
- * */
-
-const SendXMLHttpRequest = (url, data, success, error, fail) => {
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                const response = JSON.parse(xhr.responseText);
-
-                if (response.code !== 0) {
-                    return error(xhr, response);
-                }
-
-                return success(xhr, response);
-            }
-
-            fail(xhr);
-        }
-    };
-
-    xhr.open(data !== null ? 'POST' : 'GET', url, true);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-    xhr.send(data !== null ? JSON.stringify(data) : null);
-};
+import axios from 'axios';
 
 export default {
-    send: (endpoint, danmakuData, callback) => {
-        SendXMLHttpRequest(endpoint, danmakuData, (xhr, response) => {
-            console.log('Post danmaku: ', response);
-            if (callback) {
-                callback();
-            }
-        }, (xhr, response) => {
-            alert(response.msg);
-        }, (xhr) => {
-            console.log('Request was unsuccessful: ' + xhr.status);
-        });
+    send: (options) => {
+        axios.post(options.url, options.data).
+            then((response) => {
+                const data = response.data;
+                if (!data || data.code !== 0) {
+                    options.error && options.error(data && data.msg);
+                    return;
+                }
+                options.success && options.success(data);
+            }).
+            catch((e) => {
+                console.error(e);
+                options.error && options.error();
+            });
     },
 
-    read: (endpoint, callback) => {
-        SendXMLHttpRequest(endpoint, null, (xhr, response) => {
-            callback(null, response.data);
-        }, (xhr, response) => {
-            callback({ status: xhr.status, response });
-        }, (xhr) => {
-            callback({ status: xhr.status, response: null });
-        });
+    read: (options) => {
+        axios.get(options.url).
+            then((response) => {
+                const data = response.data;
+                if (!data || data.code !== 0) {
+                    options.error && options.error(data && data.msg);
+                    return;
+                }
+                options.success && options.success(data.data.map((item) => ({
+                    time: item[0],
+                    type: item[1],
+                    color: item[2],
+                    author: item[3],
+                    text: item[4]
+                })));
+            }).
+            catch((e) => {
+                console.error(e);
+                options.error && options.error();
+            });
     }
 };

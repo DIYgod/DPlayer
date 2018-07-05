@@ -57,38 +57,28 @@ class Danmaku {
     _readAllEndpoints (endpoints, callback) {
         const results = [];
         let readCount = 0;
-        const cbk = (i) => (err, data) => {
-            ++readCount;
-            if (err) {
-                if (err.response) {
-                    this.options.error(err.response.msg);
-                }
-                else {
-                    this.options.error('Request was unsuccessful: ' + err.status);
-                }
-                results[i] = [];
-            }
-            else {
-                if (data) {
-                    results[i] = data.map((item) => ({
-                        time: item[0],
-                        type: item[1],
-                        color: item[2],
-                        author: item[3],
-                        text: item[4]
-                    }));
-                }
-                else {
-                    results[i] = [];
-                }
-            }
-            if (readCount === endpoints.length) {
-                return callback(results);
-            }
-        };
 
         for (let i = 0; i < endpoints.length; ++i) {
-            this.options.apiBackend.read(endpoints[i], cbk(i));
+            this.options.apiBackend.read({
+                url: endpoints[i],
+                success: (data) => {
+                    results[i] = data;
+
+                    ++readCount;
+                    if (readCount === endpoints.length) {
+                        callback(results);
+                    }
+                },
+                error: (msg) => {
+                    this.options.error(msg || this.options.tran('Danmaku load failed'));
+                    results[i] = [];
+
+                    ++readCount;
+                    if (readCount === endpoints.length) {
+                        callback(results);
+                    }
+                },
+            });
         }
     }
 
@@ -102,7 +92,14 @@ class Danmaku {
             color: dan.color,
             type: dan.type
         };
-        this.options.apiBackend.send(this.options.api.address + 'v3/', danmakuData, callback);
+        this.options.apiBackend.send({
+            url: this.options.api.address + 'v3/',
+            data: danmakuData,
+            success: callback,
+            error: (msg) => {
+                this.options.error(msg || this.options.tran('Danmaku send failed'));
+            },
+        });
 
         this.dan.splice(this.danIndex, 0, danmakuData);
         this.danIndex++;
