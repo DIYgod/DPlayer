@@ -29,7 +29,7 @@ function initPlayers () {
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
-            api: 'https://dan.prprpr.me/'
+            api: 'https://api.prprpr.me/dplayer3/'
         }
     });
 
@@ -60,7 +60,7 @@ function initPlayers () {
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
-            api: 'https://dan.prprpr.me/',
+            api: 'https://api.prprpr.me/dplayer3/',
             token: 'tokendemo',
             maximum: 3000,
             user: 'DIYgod',
@@ -209,7 +209,7 @@ function switchDPlayer () {
             type: 'auto',
         }, {
             id: '5rGf5Y2X55qu6Z2p',
-            api: 'https://dan.prprpr.me/',
+            api: 'https://api.prprpr.me/dplayer3/',
             maximum: 3000,
             user: 'DIYgod'
         });
@@ -221,7 +221,7 @@ function switchDPlayer () {
             type: 'auto'
         }, {
             id: '9E2E3368B56CDBB42',
-            api: 'https://dan.prprpr.me/',
+            api: 'https://api.prprpr.me/dplayer3/',
             maximum: 3000,
             user: 'DIYgod'
         });

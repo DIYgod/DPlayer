@@ -56,7 +56,7 @@ const dp = new DPlayer({
     },
     danmaku: {
         id: 'demo',
-        api: 'https://api.prprpr.me/dplayer/'
+        api: 'https://api.prprpr.me/dplayer3/'
     }
 });
 ```
@@ -146,10 +146,10 @@ const dp = new DPlayer({
     },
     danmaku: {
         id: '9E2E3368B56CDBB4',
-        api: 'https://api.prprpr.me/dplayer/',
+        api: 'https://api.prprpr.me/dplayer3/',
         token: 'tokendemo',
         maximum: 1000,
-        addition: ['https://api.prprpr.me/dplayer/bilibili?aid=4157142'],
+        addition: ['https://api.prprpr.me/dplayer3/bilibili?aid=4157142'],
         user: 'DIYgod',
         bottom: '15%',
         unlimited: true
@@ -194,7 +194,7 @@ const dp = new DPlayer({
       thumbnails: 'second.jpg'
   }, {
       id: 'test',
-      api: 'https://api.prprpr.me/dplayer/',
+      api: 'https://api.prprpr.me/dplayer3/',
       maximum: 3000,
       user: 'DIYgod'
   });
@@ -371,7 +371,7 @@ const dp = new DPlayer({
 
 **现成的接口**
 
-链接: https://api.prprpr.me/dplayer/
+链接: https://api.prprpr.me/dplayer3/
 
 每日备份: [DPlayer-data](https://github.com/DIYgod/DPlayer-data)
 
@@ -383,13 +383,13 @@ const dp = new DPlayer({
 
 `danmaku.addition`
 
-API: [https://api.prprpr.me/dplayer/v2/bilibili?aid=[aid]](https://api.prprpr.me/dplayer/v2/bilibili?aid=[aid]) or [https://api.prprpr.me/dplayer/v2/bilibili?cid=[cid]](https://api.prprpr.me/dplayer/v2/bilibili?cid=[cid])
+API: [https://api.prprpr.me/dplayer3/v2/bilibili?aid=[aid]](https://api.prprpr.me/dplayer3/v2/bilibili?aid=[aid]) or [https://api.prprpr.me/dplayer3/v2/bilibili?cid=[cid]](https://api.prprpr.me/dplayer3/v2/bilibili?cid=[cid])
 
 ```js
 const option = {
     danmaku: {
         // ...
-        addition: ['https://api.prprpr.me/dplayer/v2/bilibili?aid=[aid]']
+        addition: ['https://api.prprpr.me/dplayer3/v2/bilibili?aid=[aid]']
     }
 }
 ```
