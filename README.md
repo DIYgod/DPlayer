@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fhu01y9uy7j305k04s3yc.jpg" alt="ADPlayer" width="100">
+<img src="https://i.imgur.com/LnPvZvO.png" alt="ADPlayer" width="100">
 </p>
 <h1 align="center">DPlayer</h1>
 
@@ -11,7 +11,6 @@
 [![size](https://badge-size.herokuapp.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js?compression=gzip&style=flat-square)](https://github.com/MoePlayer/DPlayer/tree/master/dist)
 [![Travis](https://img.shields.io/travis/MoePlayer/DPlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/DPlayer)
 [![devDependency Status](https://img.shields.io/david/dev/MoePlayer/dplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/DPlayer#info=devDependencies)
-[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer#donate)
 
 ## Introduction
 
@@ -44,6 +43,21 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 **[Docs](http://dplayer.js.org)**
 
 **[中文文档](http://dplayer.js.org/#/zh-Hans/)**
+
+## Thanks
+
+### Sponsors
+
+<a href="https://pear.hk/" target="_blank">
+    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+</a>
+<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
+    <img width="222px" src="https://imgur.com/apG1uKf.png">
+</a>
+
+### Contributors
+
+<a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
 
 ## Join the Discussion
 
@@ -91,28 +105,8 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 - [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html): 南京航空航天大学门户网站
 - [otomads](https://otomads.com/): 专注于音MAD的视频弹幕网站
 - [Cloudreve](https://github.com/HFO4/Cloudreve): 基于ThinkPHP构建的网盘系统
+- [oneindex](https://github.com/donwa/oneindex): Onedrive Directory Index
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
-
-## Current Premium Sponsors
-
-### Special Sponsors
-
-<a href="https://pear.hk/" target="_blank">
-    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
-</a>
-<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-    <img width="222px" src="https://imgur.com/apG1uKf.png">
-</a>
-
-### OpenCollective backers
-
-![](https://opencollective.com/DPlayer/backers.svg?width=890)
-
-## Contributors
-
-This project exists thanks to all the people who contribute.
-
-<a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
 
 ## Donate
 
@@ -129,9 +123,9 @@ We accept donations through these channels:
 
 ## Recurring Pledges
 
-Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the DPlayer GitHub repository and this website.
+Recurring pledges come with exclusive perks, e.g. enabling faster GitHub response, having your name or your company logo listed in the DPlayer GitHub repository and this website.
 
-- Become a backer or sponsor via [OpenCollective](https://opencollective.com/dplayer)
+- Become a backer or sponsor via [Patreon](https://www.patreon.com/DIYgod)
 - E-mail us: i#html.love
 
 ## Author
