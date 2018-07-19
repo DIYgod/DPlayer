@@ -12,8 +12,48 @@ function animate () {
 requestAnimationFrame(animate);
 
 initPlayers();
+handleEvent();
+
+function handleEvent () {
+    document.getElementById('dplayer-dialog').addEventListener('click', (e) => {
+        const $clickDom = e.currentTarget;
+        const isShowStatus = $clickDom.getAttribute('data-show');
+
+        if (!!isShowStatus) {
+            document.getElementById('float-dplayer').style.display = 'none';
+        } else {
+          $clickDom.setAttribute('data-show', 1);
+            document.getElementById('float-dplayer').style.display = 'block';
+        }
+    });
+
+    document.getElementById('close-dialog').addEventListener('click', () => {
+        const $openDialogBtnDom = document.getElementById('dplayer-dialog');
+
+        $openDialogBtnDom.setAttribute('data-show', '');
+        document.getElementById('float-dplayer').style.display = 'none';
+    });
+}
 
 function initPlayers () {
+    // dplayer-float
+    window.dpFloat = new DPlayer({
+        container: document.getElementById('dplayer-container'),
+        preload: 'none',
+        screenshot: true,
+        video: {
+          url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
+          pic: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg',
+          thumbnails: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg'
+        },
+        subtitle: {
+          url: 'subtitle test'
+        },
+        danmaku: {
+          id: '9E2E3368B56CDBB4',
+          api: 'https://api.prprpr.me/dplayer3/'
+        }
+    });
     // dp1
     window.dp1 = new DPlayer({
         container: document.getElementById('dplayer1'),
