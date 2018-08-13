@@ -22,15 +22,33 @@ class FullScreen {
                 this.player.events.trigger('fullscreen_cancel');
             }
         };
-        this.player.container.addEventListener('fullscreenchange', fullscreenchange);
-        this.player.container.addEventListener('mozfullscreenchange', fullscreenchange);
-        this.player.container.addEventListener('webkitfullscreenchange', fullscreenchange);
+        const docfullscreenchange = () => {
+            let fullEle = document.fullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+            if(fullEle && fullEle !== this.player.container){
+                return;
+            }
+            if(fullEle){
+                this.player.events.trigger('fullscreen');
+            } else {
+                utils.setScrollPosition(this.lastScrollPosition);
+                this.player.events.trigger('fullscreen_cancel');
+            }
+        }
+        if(/Firefox/.test(navigator.userAgent)){
+            document.addEventListener('mozfullscreenchange', docfullscreenchange);
+            document.addEventListener('fullscreenchange', docfullscreenchange);
+        } else {
+            this.player.container.addEventListener('fullscreenchange', fullscreenchange);
+            this.player.container.addEventListener('webkitfullscreenchange', fullscreenchange);
+            document.addEventListener('msfullscreenchange', docfullscreenchange);
+            document.addEventListener('MSFullscreenChange', docfullscreenchange);
+        }
     }
 
     isFullScreen (type = 'browser') {
         switch (type) {
         case 'browser':
-            return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+            return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
         case 'web':
             return this.player.container.classList.contains('dplayer-fulled');
         }
@@ -57,6 +75,12 @@ class FullScreen {
             else if (this.player.video.webkitEnterFullscreen) {   // Safari for iOS
                 this.player.video.webkitEnterFullscreen();
             }
+            else if (this.player.video.webkitEnterFullScreen) {
+                this.player.video.webkitEnterFullScreen();
+            }
+            else if (this.player.container.msRequestFullscreen) {
+                this.player.container.msRequestFullscreen();
+            }
             break;
         case 'web':
             this.player.container.classList.add('dplayer-fulled');
@@ -81,6 +105,15 @@ class FullScreen {
             }
             else if (document.webkitCancelFullScreen) {
                 document.webkitCancelFullScreen();
+            }
+            else if (document.webkitCancelFullscreen) {
+                document.webkitCancelFullscreen();
+            }
+            else if (document.msCancelFullScreen) {
+                document.msCancelFullScreen();
+            }
+            else if (document.msExitFullscreen){
+                document.msExitFullscreen();
             }
             break;
         case 'web':
