@@ -422,7 +422,8 @@ class DPlayer {
          */
         // show video time: the metadata has loaded or changed
         this.on('durationchange', () => {
-            if (video.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+            // compatibility: Android browsers will output 1 or Infinity at first
+            if (video.duration !== 1 && video.duration !== Infinity) {
                 this.template.dtime.innerHTML = utils.secondToTime(video.duration);
             }
         });
