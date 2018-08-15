@@ -30,6 +30,7 @@ class Template {
         this.volumeBarWrap = this.container.querySelector('.dplayer-volume-bar');
         this.volumeBarWrapWrap = this.container.querySelector('.dplayer-volume-bar-wrap');
         this.volumeButton = this.container.querySelector('.dplayer-volume');
+        this.volumeButtonIcon = this.container.querySelector('.dplayer-volume-icon');
         this.volumeIcon = this.container.querySelector('.dplayer-volume-icon .dplayer-icon-content');
         this.playedBar = this.container.querySelector('.dplayer-played');
         this.loadedBar = this.container.querySelector('.dplayer-loaded');
