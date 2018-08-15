@@ -173,7 +173,7 @@ class Controller {
             document.addEventListener(utils.nameMap.dragEnd, volumeUp);
             this.player.template.volumeButton.classList.add('dplayer-volume-active');
         });
-        this.player.template.volumeIcon.addEventListener('click', () => {
+        this.player.template.volumeButtonIcon.addEventListener('click', () => {
             if (this.player.video.muted) {
                 this.player.video.muted = false;
                 this.player.switchVolumeIcon();
