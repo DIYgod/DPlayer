@@ -447,7 +447,7 @@ class DPlayer {
             }
             else {
                 this.seek(0);
-                video.play();
+                this.play();
             }
             if (this.danmaku) {
                 this.danmaku.danIndex = 0;
