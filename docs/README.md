@@ -109,6 +109,7 @@ danmaku.user | 'DIYgod' | danmaku user name
 danmaku.bottom | - | values like: '10px' '10%', the distance between the danmaku bottom and player bottom, in order to prevent warding off subtitle
 danmaku.unlimited | false | display all danmaku even though danmaku overlap, notice that player will remember user setting, default setting will not work after user set it themselves
 contextmenu | [] | custom contextmenu
+highlight | [] | custom time markers upon progress bar
 mutex | true | prevent to play multiple player at the same time, pause other players when this player start play
 
 For example:
@@ -163,6 +164,16 @@ const dp = new DPlayer({
             click: (player) => {
                 console.log(player);
             }
+        }
+    ],
+    highlight: [
+        {
+            text: 'marker for 20s',
+            time: 20
+        },
+        {
+            text: 'marker for 2mins',
+            time: 120
         }
     ]
 });
