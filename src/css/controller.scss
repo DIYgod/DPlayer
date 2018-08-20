@@ -35,6 +35,49 @@
             .dplayer-bar .dplayer-played .dplayer-thumb {
                 transform: scale(1);
             }
+            .dplayer-highlight {
+                display: block;
+                width: 8px;
+                transform: translateX(-4px);
+                top: 4px;
+                height: 40%;
+            }
+        }
+        .dplayer-highlight {
+            z-index: 12;
+            position: absolute;
+            top: 5px;
+            width: 6px;
+            height: 20%;
+            border-radius: 6px;
+            background-color: #fff;
+            text-align: center;
+            transform: translateX(-3px);
+            transition: all .2s ease-in-out;
+            &:hover {
+                .dplayer-highlight-text {
+                    display: block;
+                }
+                &~.dplayer-bar-preview {
+                    opacity: 0;
+                },
+                &~.dplayer-bar-time {
+                    opacity: 0;
+                }
+            }
+            .dplayer-highlight-text {
+                display: none;
+                position: absolute;
+                left: 50%;
+                top: -24px;
+                padding: 5px 8px;
+                background-color: rgba(0, 0, 0, .62);
+                color: #fff;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                transform: translateX(-50%);
+            }
         }
         .dplayer-bar-preview {
             position: absolute;

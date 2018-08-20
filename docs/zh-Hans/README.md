@@ -110,6 +110,7 @@ danmaku.user | 'DIYgod' | 弹幕用户名
 danmaku.bottom | - | 弹幕距离播放器底部的距离，防止遮挡字幕，取值形如: '10px' '10%'
 danmaku.unlimited | false | 海量弹幕模式，即使重叠也展示全部弹幕，请注意播放器会记忆用户设置，用户手动设置后即失效
 contextmenu | [] | 自定义右键菜单
+highlight | [] | 自定义进度条提示点
 mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
 
 例如:
@@ -164,6 +165,16 @@ const dp = new DPlayer({
             click: (player) => {
                 console.log(player);
             }
+        }
+    ],
+    highlight: [
+        {
+            time: 20,
+            text: '这是第 20 秒'
+        },
+        {
+            time: 120,
+            text: '这是 2 分钟'
         }
     ]
 });
