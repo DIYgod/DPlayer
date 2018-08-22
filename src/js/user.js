@@ -11,7 +11,7 @@ class User {
         };
         this.default = {
             opacity: 0.7,
-            volume: player.options.volume || 0.7,
+            volume: player.options.hasOwnProperty('volume') ? player.options.volume : 0.7,
             unlimited: (player.options.danmaku && player.options.danmaku.unlimited ? 1 : 0) || 0,
             danmaku: 1,
             subtitle: 1
