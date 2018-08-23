@@ -19,7 +19,7 @@ class Thumbnails {
 
     move (position) {
         this.container.style.backgroundPosition = `-${(Math.ceil(position / this.barWidth * 100) - 1) * 160}px 0`;
-        this.container.style.left = `${(position - this.container.offsetWidth / 2)}px`;
+        this.container.style.left = `${Math.min(Math.max(position - this.container.offsetWidth / 2, -10), this.barWidth - 150)}px`;
     }
 
     hide () {
