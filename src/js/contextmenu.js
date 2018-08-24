@@ -2,14 +2,13 @@ class ContextMenu {
     constructor (player) {
         this.player = player;
 
-        [...this.player.template.menuItem].map((item, index) => {
+        Array.prototype.slice.call(this.player.template.menuItem).forEach((item, index) => {
             if (this.player.options.contextmenu[index].click) {
                 item.addEventListener('click', () => {
                     this.player.options.contextmenu[index].click(this.player);
                     this.hide();
                 });
             }
-            return item;
         });
 
         this.player.container.addEventListener('contextmenu', (e) => {
