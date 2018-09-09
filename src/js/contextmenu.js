@@ -1,6 +1,7 @@
 class ContextMenu {
     constructor (player) {
         this.player = player;
+        this.shown = false;
 
         Array.prototype.slice.call(this.player.template.menuItem).forEach((item, index) => {
             if (this.player.options.contextmenu[index].click) {
@@ -12,6 +13,11 @@ class ContextMenu {
         });
 
         this.player.container.addEventListener('contextmenu', (e) => {
+            if (this.shown) {
+                this.hide();
+                return;
+            }
+            
             const event = e || window.event;
             event.preventDefault();
 
@@ -47,6 +53,7 @@ class ContextMenu {
 
         this.player.template.mask.classList.add('dplayer-mask-show');
 
+        this.shown = true;
         this.player.events.trigger('contextmenu_show');
     }
 
@@ -54,6 +61,7 @@ class ContextMenu {
         this.player.template.mask.classList.remove('dplayer-mask-show');
         this.player.template.menu.classList.remove('dplayer-menu-show');
 
+        this.shown = false;
         this.player.events.trigger('contextmenu_hide');
     }
 }
