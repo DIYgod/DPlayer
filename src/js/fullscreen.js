@@ -34,7 +34,7 @@ class FullScreen {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
             }
-        }
+        };
         if (/Firefox/.test(navigator.userAgent)) {
             document.addEventListener('mozfullscreenchange', docfullscreenchange);
             document.addEventListener('fullscreenchange', docfullscreenchange);

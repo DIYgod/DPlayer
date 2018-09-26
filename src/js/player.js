@@ -438,7 +438,7 @@ class DPlayer {
         this.on('error', () => {
             if (!this.video.error) {
                 // Not a video load error, may be poster load failed, see #307
-                return
+                return;
             }
             this.tran && this.notice && this.type !== 'webtorrent' & this.notice(this.tran('Video load failed'), -1);
         });

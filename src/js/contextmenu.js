@@ -17,7 +17,7 @@ class ContextMenu {
                 this.hide();
                 return;
             }
-            
+
             const event = e || window.event;
             event.preventDefault();
 
