@@ -88,7 +88,7 @@ function dplayer1 () {
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer3/'
+            api: 'https://api.prprpr.me/dplayer/'
         }
     });
 }
@@ -107,7 +107,7 @@ function dplayer2 () {
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer3/'
+            api: 'https://api.prprpr.me/dplayer/'
         }
     });
 }
@@ -140,10 +140,10 @@ function dplayer3 () {
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer3/',
+            api: 'https://api.prprpr.me/dplayer/',
             token: 'tokendemo',
             maximum: 1000,
-            addition: ['https://api.prprpr.me/dplayer3/bilibili?aid=4157142'],
+            addition: ['https://api.prprpr.me/dplayer/v3/bilibili?aid=4157142'],
             user: 'DIYgod',
             bottom: '15%',
             unlimited: true
