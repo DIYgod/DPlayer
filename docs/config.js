@@ -82,7 +82,7 @@ function dplayer1 () {
     window.dp1 = new DPlayer({
         container: document.getElementById('dplayer1'),
         video: {
-            url: 'https://pan.prprpr.me/?/dplayer/hikarunara.mp4',
+            url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
             thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg'
         },
