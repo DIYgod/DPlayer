@@ -85,7 +85,7 @@ class Controller {
         if (this.player.options.video.thumbnails) {
             this.thumbnails = new Thumbnails({
                 container: this.player.template.barPreview,
-                barWidth: this.player.template.barWrap.offsetWidth,
+                barWrap: this.player.template.barWrap,
                 url: this.player.options.video.thumbnails,
                 events: this.player.events
             });
