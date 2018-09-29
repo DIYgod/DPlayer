@@ -85,13 +85,13 @@ class Controller {
         if (this.player.options.video.thumbnails) {
             this.thumbnails = new Thumbnails({
                 container: this.player.template.barPreview,
-                barWrap: this.player.template.barWrap,
+                barWidth: this.player.template.barWrap.offsetWidth,
                 url: this.player.options.video.thumbnails,
                 events: this.player.events
             });
 
             this.player.on('loadedmetadata', () => {
-                this.thumbnails.resize(160, this.player.video.videoHeight / this.player.video.videoWidth * 160);
+                this.thumbnails.resize(160, this.player.video.videoHeight / this.player.video.videoWidth * 160, this.player.template.barWrap.offsetWidth);
             });
         }
     }
