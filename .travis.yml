@@ -7,3 +7,6 @@ cache:
   yarn: true
   directories:
     - node_modules
+
+script:
+  yarn run build

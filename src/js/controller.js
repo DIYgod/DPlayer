@@ -57,13 +57,13 @@ class Controller {
             });
         }
     }
-    
+
     initHighlights () {
         this.player.on('durationchange', () => {
             if (this.player.video.duration !== 1 && this.player.video.duration !== Infinity) {
                 if (this.player.options.highlight) {
                     const highlights = document.querySelectorAll('.dplayer-highlight');
-                    [].slice.call(highlights, 0).map((item) => {
+                    [].slice.call(highlights, 0).forEach((item) => {
                         this.player.template.playedBarWrap.removeChild(item);
                     });
                     for (let i = 0; i < this.player.options.highlight.length; i++) {
@@ -72,7 +72,7 @@ class Controller {
                         }
                         const p = document.createElement('div');
                         p.classList.add('dplayer-highlight');
-                        p.style.left = ( (this.player.options.highlight[i].time / this.player.video.duration) * 100) + '%';
+                        p.style.left =  this.player.options.highlight[i].time / this.player.video.duration * 100 + '%';
                         p.innerHTML = '<span class="dplayer-highlight-text">' + this.player.options.highlight[i].text + '</span>';
                         this.player.template.playedBarWrap.insertBefore(p, this.player.template.playedBarTime);
                     }
