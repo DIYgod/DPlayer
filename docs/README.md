@@ -345,6 +345,8 @@ Player events
 - resize
 - fullscreen
 - fullscreen_cancel
+- webfullscreen
+- webfullscreen_cancel
 - subtitle_show
 - subtitle_hide
 - subtitle_change
