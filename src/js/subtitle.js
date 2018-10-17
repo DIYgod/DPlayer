@@ -23,7 +23,7 @@ class Subtitle {
                     const template = document.createElement('div');
                     template.appendChild(cue.getCueAsHTML());
                     const trackHtml = template.innerHTML.split(/\r?\n/).map(item => `<p>${item}</p>`).join('');
-                    this.container.insertAdjacentHTML('beforeend', trackHtml);
+                    this.container.innerHTML = trackHtml;
                 }
                 this.events.trigger('subtitle_change');
             };
