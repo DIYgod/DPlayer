@@ -32,8 +32,8 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 
 ### Special Sponsors
 
-<a href="https://pear.hk/" target="_blank">
-    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
+    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
 <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
     <img width="222px" src="https://imgur.com/apG1uKf.png">
