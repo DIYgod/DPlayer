@@ -30,7 +30,13 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 
 ## Current Premium Sponsors
 
-### Special Sponsors
+## Special Sponsors
+
+<a href="http://www.polyv.net/" target="_blank">
+    <img width="600px" src="https://i.imgur.com/d4XabAe.png">
+</a>
+
+### Sponsors
 
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
