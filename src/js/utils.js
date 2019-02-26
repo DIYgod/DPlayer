@@ -48,7 +48,7 @@ const utils = {
     * getBoundingClientRect 在 Opera 10.5 及以下返回的值缺失 width、height 值
     */
     getBoundingClientRectViewLeft (element) {
-        const scrollTop = document.documentElement.scrollTop;
+        const scrollTop = window.scrollY || window.pageYOffset || document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
 
         if (element.getBoundingClientRect) {
             if (typeof this.getBoundingClientRectViewLeft.offset !== 'number') {
