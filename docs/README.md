@@ -69,8 +69,8 @@ const dp = new DPlayer({
 Work with module bundler:
 
 ```js
-import 'DPlayer/dist/DPlayer.min.css';
-import DPlayer from 'DPlayer';
+import 'dplayer/dist/DPlayer.min.css';
+import DPlayer from 'dplayer';
 
 const dp = new DPlayer(options);
 ```
