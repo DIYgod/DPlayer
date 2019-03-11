@@ -3,6 +3,7 @@
     class="dplayer-video {{ if current }}dplayer-video-current{{ /if }}"
     webkit-playsinline
     playsinline
+    x5-video-player-type="h5"
     {{ if pic }}poster="{{ pic }}"{{ /if }}
     {{ if screenshot || enableSubtitle }}crossorigin="anonymous"{{ /if }}
     {{ if preload }}preload="{{ preload }}"{{ /if }}
