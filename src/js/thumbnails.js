@@ -6,10 +6,11 @@ class Thumbnails {
         this.events = options.events;
     }
 
-    resize (width, height) {
+    resize (width, height, barWrapWidth) {
         this.container.style.width = `${width}px`;
         this.container.style.height = `${height}px`;
         this.container.style.top = `${-height + 2}px`;
+        this.barWidth = barWrapWidth;
     }
 
     show () {
