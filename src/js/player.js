@@ -564,6 +564,9 @@ class DPlayer {
         if (this.danmaku) {
             this.danmaku.resize();
         }
+        if (this.controller.thumbnails) {
+            this.controller.thumbnails.resize(160, this.video.videoHeight / this.video.videoWidth * 160, this.template.barWrap.offsetWidth);
+        }
         this.events.trigger('resize');
     }
 
