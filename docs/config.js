@@ -83,8 +83,8 @@ function dplayer1 () {
         container: document.getElementById('dplayer1'),
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
-            thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg'
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
+            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
@@ -96,14 +96,10 @@ function dplayer1 () {
 function dplayer2 () {
     window.dp2 = new DPlayer({
         container: document.getElementById('dplayer2'),
-        screenshot: true,
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
-            pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
-            thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg'
-        },
-        subtitle: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt'
+            url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
+            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
@@ -119,24 +115,16 @@ function dplayer3 () {
         theme: '#FADFA3',
         loop: true,
         lang: 'zh-cn',
-        screenshot: true,
         hotkey: true,
         preload: 'auto',
-        logo: 'https://moeplayer.b0.upaiyun.com/dplayer/DPlayer.png',
+        logo: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/DPlayer.png',
         volume: 0.7,
         mutex: true,
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
-            pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
-            thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg',
+            url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
+            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg',
             type: 'auto'
-        },
-        subtitle: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt',
-            type: 'webvtt',
-            fontSize: '25px',
-            bottom: '10%',
-            color: '#b7daff'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
@@ -179,16 +167,16 @@ function dplayer4 () {
         video: {
             quality: [{
                 name: 'HD',
-                url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+                url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8',
                 type: 'hls'
             }, {
                 name: 'SD',
-                url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
+                url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
                 type: 'normal'
             }],
             defaultQuality: 0,
-            pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
-            thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg'
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
+            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg'
         }
     });
 }
@@ -197,27 +185,27 @@ function dplayer5 () {
     window.dp5 = new DPlayer({
         container: document.getElementById('dplayer5'),
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+            url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8',
             type: 'hls'
         }
     });
 }
 
 function dplayer6 () {
-    window.dp6 = new DPlayer({
-        container: document.getElementById('dplayer6'),
-        video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/dash/hikarunara.mpd',
-            type: 'dash'
-        }
-    });
+    // window.dp6 = new DPlayer({
+    //     container: document.getElementById('dplayer6'),
+    //     video: {
+    //         url: 'https://moeplayer.b0.upaiyun.com/dplayer/dash/hikarunara.mpd',
+    //         type: 'dash'
+    //     }
+    // });
 }
 
 function dplayer7 () {
     window.dp7 = new DPlayer({
         container: document.getElementById('dplayer7'),
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.flv',
+            url: 'https://api.dogecloud.com/player/get.flv?vcode=5ac682e6f8231991&userId=17&ext=.flv',
             type: 'flv'
         }
     });
@@ -249,7 +237,7 @@ function dplayer9 () {
             }
         },
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+            url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8',
             type: 'hls'
         }
     });

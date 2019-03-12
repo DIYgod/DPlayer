@@ -495,6 +495,7 @@ class DPlayer {
     }
 
     switchQuality (index) {
+        index = typeof index === 'string' ? parseInt(index) : index;
         if (this.qualityIndex === index || this.switchingQuality) {
             return;
         }

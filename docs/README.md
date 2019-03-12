@@ -8,8 +8,14 @@ search: english
 
 ## Special Sponsors
 
-<a href="https://pear.hk/" target="_blank">
-    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+<a href="https://www.polyv.net/?f=git_DPlayer-20190212-01" target="_blank">
+    <img width="600px" src="https://i.imgur.com/d4XabAe.png">
+</a>
+
+## Sponsors
+
+<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
+    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
 <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
     <img width="222px" src="https://imgur.com/apG1uKf.png">
@@ -63,8 +69,8 @@ const dp = new DPlayer({
 Work with module bundler:
 
 ```js
-import 'DPlayer/dist/DPlayer.min.css';
-import DPlayer from 'DPlayer';
+import 'dplayer/dist/DPlayer.min.css';
+import DPlayer from 'dplayer';
 
 const dp = new DPlayer(options);
 ```
@@ -345,6 +351,8 @@ Player events
 - resize
 - fullscreen
 - fullscreen_cancel
+- webfullscreen
+- webfullscreen_cancel
 - subtitle_show
 - subtitle_hide
 - subtitle_change
