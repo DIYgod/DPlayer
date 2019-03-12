@@ -7,7 +7,17 @@ search: zh-Hans
 
 🍭 Wow, such a lovely HTML5 danmaku video player
 
-## 特别赞助商
+## Special Sponsors
+
+<a href="https://www.polyv.net/?f=git_DPlayer-20190212-01" target="_blank">
+    <img width="600px" src="https://i.imgur.com/d4XabAe.png">
+</a>
+
+<a href="https://www.9ccms.net" target="_blank">
+    <img width="330px" src="https://i.imgur.com/YBV6kfb.png">
+</a>
+
+### Sponsors
 
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
