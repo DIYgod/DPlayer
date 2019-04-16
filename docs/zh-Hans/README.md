@@ -501,6 +501,35 @@ const dp = new DPlayer({
 });
 ```
 
+### MPEG DASH (Shaka)
+
+需要在 `DPlayer.min.js` 前面加载 [shaka-player.compiled.js](https://github.com/google/shaka-player)。
+
+```html
+<link rel="stylesheet" href="DPlayer.min.css">
+<div id="dplayer"></div>
+<script src="shaka-player.compiled.js"></script>
+<script src="DPlayer.min.js"></script>
+```
+
+```js
+const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    screenshot: true,
+    video: {
+        url: 'demo.mpd',
+        type: 'shakaDash',
+        customType: {
+            'shakaDash': function (video, player) {
+                var src = video.src;
+                var playerShaka = new shaka.Player(video); // 将会修改 video.src
+                playerShaka.load(src);
+            }
+        }
+    }
+});
+```
+
 ### FLV
 
 需要在 `DPlayer.min.js` 前面加载 [flv.js](https://github.com/Bilibili/flv.js)。
