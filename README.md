@@ -48,8 +48,8 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 
 ## Special Sponsors
 
-<a href="https://www.polyv.net/?f=git_DPlayer-20190212-01" target="_blank">
-    <img width="600px" src="https://i.imgur.com/d4XabAe.png">
+<a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
+    <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
 </a>
 
 <a href="https://www.9ccms.net" target="_blank">
