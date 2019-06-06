@@ -38,6 +38,7 @@
     "babel-loader": "^8.0.6",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
+    "cssnano": "^4.1.10",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "exports-loader": "^0.7.0",
