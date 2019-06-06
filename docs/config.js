@@ -83,8 +83,8 @@ function dplayer1 () {
         container: document.getElementById('dplayer1'),
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
-            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg'
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
@@ -98,8 +98,8 @@ function dplayer2 () {
         container: document.getElementById('dplayer2'),
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
-            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg'
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
@@ -117,13 +117,13 @@ function dplayer3 () {
         lang: 'zh-cn',
         hotkey: true,
         preload: 'auto',
-        logo: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/DPlayer.png',
+        logo: 'https://i.loli.net/2019/06/06/5cf8c5d94521136430.png',
         volume: 0.7,
         mutex: true,
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
-            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg',
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',
             type: 'auto'
         },
         danmaku: {
@@ -175,8 +175,8 @@ function dplayer4 () {
                 type: 'normal'
             }],
             defaultQuality: 0,
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara.png',
-            thumbnails: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/hikarunara_thumbnails.jpg'
+            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         }
     });
 }
