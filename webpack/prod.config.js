@@ -48,8 +48,8 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            compact: true,
-                            presets: ['env']
+                            cacheDirectory: true,
+                            presets: ['@babel/preset-env']
                         }
                     }
                 ]

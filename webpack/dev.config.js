@@ -45,7 +45,7 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             cacheDirectory: true,
-                            presets: ['env']
+                            presets: ['@babel/preset-env']
                         }
                     }
                 ]
