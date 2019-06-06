@@ -96,6 +96,7 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 - [DPlayer for Discuz!](https://coding.net/u/Click_04/p/video/git): Discuz!
 - [DPlayer for WordPress](https://github.com/BlueCocoa/DPlayer-WordPress): WordPress
 - [DPlayerHandle](https://github.com/kn007/DPlayerHandle): WordPress
+- [Selection](https://github.com/GreatSatan79/Selection): WordPress
 - [Vue-DPlayer](https://github.com/sinchang/vue-dplayer): Vue
 - [react-dplayer](https://github.com/hnsylitao/react-dplayer): React
 

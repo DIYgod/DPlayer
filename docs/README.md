@@ -506,6 +506,35 @@ const dp = new DPlayer({
 });
 ```
 
+### MPEG DASH (Shaka)
+
+It requires the library [shaka-player](https://github.com/google/shaka-player) and it should be loaded before `DPlayer.min.js`.
+
+```html
+<link rel="stylesheet" href="DPlayer.min.css">
+<div id="dplayer"></div>
+<script src="shaka-player.compiled.js"></script>
+<script src="DPlayer.min.js"></script>
+```
+
+```js
+const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    screenshot: true,
+    video: {
+        url: 'demo.mpd',
+        type: 'shakaDash',
+        customType: {
+            'shakaDash': function (video, player) {
+                var src = video.src;
+                var playerShaka = new shaka.Player(video); // 将会修改 video.src
+                playerShaka.load(src);
+            }
+        }
+    }
+});
+```
+
 ### FLV
 
 It requires the library [flv.js](https://github.com/Bilibili/flv.js) and it should be loaded before `DPlayer.min.js`.
