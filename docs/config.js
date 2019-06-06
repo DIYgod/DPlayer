@@ -83,7 +83,7 @@ function dplayer1 () {
         container: document.getElementById('dplayer1'),
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
         danmaku: {
@@ -98,7 +98,7 @@ function dplayer2 () {
         container: document.getElementById('dplayer2'),
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
         danmaku: {
@@ -122,7 +122,7 @@ function dplayer3 () {
         mutex: true,
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',
             type: 'auto'
         },
@@ -175,7 +175,7 @@ function dplayer4 () {
                 type: 'normal'
             }],
             defaultQuality: 0,
-            pic: 'https://cn-east-17-dplayer-86110920.oss.dogecdn.com/https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         }
     });
