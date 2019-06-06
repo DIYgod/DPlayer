@@ -18,14 +18,12 @@ class Subtitle {
 
             track.oncuechange = () => {
                 const cue = track.activeCues[0];
+                this.container.innerHTML = '';
                 if (cue) {
-                    this.container.innerHTML = '';
-                    const p = document.createElement('p');
-                    p.appendChild(cue.getCueAsHTML());
-                    this.container.appendChild(p);
-                }
-                else {
-                    this.container.innerHTML = '';
+                    const template = document.createElement('div');
+                    template.appendChild(cue.getCueAsHTML());
+                    const trackHtml = template.innerHTML.split(/\r?\n/).map(item => `<p>${item}</p>`).join('');
+                    this.container.innerHTML = trackHtml;
                 }
                 this.events.trigger('subtitle_change');
             };
