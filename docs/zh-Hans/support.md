@@ -20,7 +20,6 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 - [微信支付](https://i.imgur.com/aq6PtWa.png)
 - [支付宝](https://i.imgur.com/wv1Pj2k.png)
 - [Paypal](https://www.paypal.me/DIYgod)
-- 比特币: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
 
 ## 周期性赞助
 
@@ -31,10 +30,20 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 
 ## 当前的顶级赞助商
 
-### 特别赞助商
+## Special Sponsors
 
-<a href="https://pear.hk/" target="_blank">
-    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+<a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
+    <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
+</a>
+
+<a href="https://www.9ccms.net" target="_blank">
+    <img width="330px" src="https://i.imgur.com/YBV6kfb.png">
+</a>
+
+### Sponsors
+
+<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
+    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
 <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
     <img width="222px" src="https://imgur.com/apG1uKf.png">

@@ -7,10 +7,20 @@ search: zh-Hans
 
 🍭 Wow, such a lovely HTML5 danmaku video player
 
-## 特别赞助商
+## Special Sponsors
 
-<a href="https://pear.hk/" target="_blank">
-    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+<a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
+    <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
+</a>
+
+<a href="https://www.9ccms.net" target="_blank">
+    <img width="330px" src="https://i.imgur.com/YBV6kfb.png">
+</a>
+
+### Sponsors
+
+<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
+    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
 <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
     <img width="222px" src="https://imgur.com/apG1uKf.png">
@@ -64,8 +74,8 @@ const dp = new DPlayer({
 使用模块管理器:
 
 ```js
-import 'DPlayer/dist/DPlayer.min.css';
-import DPlayer from 'DPlayer';
+import 'dplayer/dist/DPlayer.min.css';
+import DPlayer from 'dplayer';
 
 const dp = new DPlayer(options);
 ```
