@@ -130,7 +130,6 @@ We accept donations through these channels:
 - [Paypal](https://www.paypal.me/DIYgod)
 - [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
 - [Alipay](https://i.imgur.com/wv1Pj2k.png)
-- Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
 
 ## Recurring Pledges
 

@@ -20,7 +20,6 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 - [微信支付](https://i.imgur.com/aq6PtWa.png)
 - [支付宝](https://i.imgur.com/wv1Pj2k.png)
 - [Paypal](https://www.paypal.me/DIYgod)
-- 比特币: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
 
 ## 周期性赞助
 
