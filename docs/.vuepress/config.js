@@ -45,7 +45,7 @@ module.exports = {
                 nav: [
                     {
                         text: '指南',
-                        link: '/zh/',
+                        link: '/zh/guide/',
                     },
                     {
                         text: '生态',
@@ -66,7 +66,7 @@ module.exports = {
                 nav: [
                     {
                         text: 'Guide',
-                        link: '/',
+                        link: '/guide/',
                     },
                     {
                         text: 'Ecosystem',

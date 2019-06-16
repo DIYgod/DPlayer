@@ -79,11 +79,17 @@ export default {
     },
     mounted: function () {
         if (this.immediate) {
-            this.dplayer = new DPlayer(this.options);
+            if (!window) {
+                this.dplayer = new DPlayer(this.options);
+            } else {
+                window.onload = () => {
+                    this.dplayer = new DPlayer(this.options);
+                }
+            }
         }
     },
     beforeDestroy: function () {
-        this.dplayer.destroy();
+        this.dplayer && this.dplayer.destroy();
     }
 }
 </script>
