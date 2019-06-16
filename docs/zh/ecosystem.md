@@ -1,6 +1,5 @@
 ---
-nav: zh-Hans
-search: zh-Hans
+sidebar: auto
 ---
 
 # 生态

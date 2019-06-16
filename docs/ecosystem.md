@@ -1,5 +1,5 @@
 ---
-search: english
+sidebar: auto
 ---
 
 # Ecosystem

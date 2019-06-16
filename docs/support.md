@@ -1,5 +1,5 @@
 ---
-search: english
+sidebar: auto
 ---
 
 # Sponsor DPlayer Development
@@ -24,19 +24,23 @@ We accept donations through these channels:
 
 Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the DPlayer GitHub repository and this website.
 
-- Become a backer or sponsor via [OpenCollective](https://opencollective.com/dplayer)
-- E-mail us: i#html.love
+- Become a Backer or a Sponser on [Patreon](https://www.patreon.com/DIYgod)
+- E-mail us: i#diygod.me
 
 ## Current Premium Sponsors
 
-## Special Sponsors
+### Special Sponsors
+
+&nbsp;
 
 <a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
     <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
 </a>
 
+&nbsp;
+
 <a href="https://www.9ccms.net" target="_blank">
-    <img width="330px" src="https://i.imgur.com/YBV6kfb.png">
+    <img width="280px" src="https://i.imgur.com/YBV6kfb.png">
 </a>
 
 ### Sponsors
@@ -44,13 +48,6 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
-<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-    <img width="222px" src="https://imgur.com/apG1uKf.png">
-</a>
-
-### OpenCollective backers
-
-![](https://opencollective.com/DPlayer/backers.svg?width=890)
 
 ## DPlayer contributors
 

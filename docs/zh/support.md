@@ -1,6 +1,5 @@
 ---
-nav: zh-Hans
-search: zh-Hans
+sidebar: auto
 ---
 
 # 赞助 DPlayer 的研发
@@ -25,19 +24,23 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 
 周期性赞助可以获得额外的回报，比如你的名字或你的公司 logo 会出现在 DPlayer 的 GitHub 仓库和现在我们的官网中。
 
-- 通过 [OpenCollective](https://opencollective.com/dplayer) 赞助成为 backer 或 sponsor 
-- 给我们发邮件联系赞助事宜: i#html.love
+- 通过 [Patreon](https://www.patreon.com/DIYgod) 赞助
+- 给我们发邮件联系赞助事宜: i#diygod.me
 
 ## 当前的顶级赞助商
 
-## Special Sponsors
+### Special Sponsors
+
+&nbsp;
 
 <a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
     <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
 </a>
 
+&nbsp;
+
 <a href="https://www.9ccms.net" target="_blank">
-    <img width="330px" src="https://i.imgur.com/YBV6kfb.png">
+    <img width="280px" src="https://i.imgur.com/YBV6kfb.png">
 </a>
 
 ### Sponsors
@@ -45,13 +48,6 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
-<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-    <img width="222px" src="https://imgur.com/apG1uKf.png">
-</a>
-
-### OpenCollective backers
-
-![](https://opencollective.com/DPlayer/backers.svg?width=890)
 
 ## DPlayer 贡献者
 
