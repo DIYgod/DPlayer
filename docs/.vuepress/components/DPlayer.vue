@@ -4,9 +4,6 @@
 </div>
 </template>
 <script>
-import DPlayer from 'dplayer';
-import 'dplayer/dist/DPlayer.min.css';
-
 export default {
     props: {
         immediate: {
