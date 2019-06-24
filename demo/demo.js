@@ -69,7 +69,8 @@ function initPlayers () {
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer/'
+            api: 'https://api.prprpr.me/dplayer/',
+            addition: ['https://cn-south-17-dplayer-49648867.oss.dogecdn.com/1678963.json']
         }
     });
 

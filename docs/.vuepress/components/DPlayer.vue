@@ -40,11 +40,8 @@ export default {
                     id: '9E2E3368B56CDBB4',
                     api: 'https://api.prprpr.me/dplayer/',
                     token: 'tokendemo',
-                    maximum: 1000,
-                    addition: ['https://api.prprpr.me/dplayer/v3/bilibili?aid=4157142'],
                     user: 'DIYgod',
-                    bottom: '15%',
-                    unlimited: true
+                    addition: ['https://cn-south-17-dplayer-49648867.oss.dogecdn.com/1678963.json']
                 },
                 contextmenu: [
                     {
