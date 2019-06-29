@@ -27,6 +27,10 @@ export default (options) => {
     }
     if (options.video) {
         !options.video.type && (options.video.type = 'auto');
+        !options.video.playsinline && (options.video.playsinline = true);
+        !options.video.x5VideoPlayerType && (options.video.x5VideoPlayerType = '');
+        !options.video.x5VideoPlayerFullscreen && (options.video.x5VideoPlayerFullscreen = '');
+        !options.video.x5VideoOrientation && (options.video.x5VideoOrientation = '')
     }
     if (typeof options.danmaku === 'object' && options.danmaku) {
         !options.danmaku.user && (options.danmaku.user = 'DIYgod');
