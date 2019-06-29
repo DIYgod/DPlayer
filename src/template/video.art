@@ -1,8 +1,12 @@
 {{ set enableSubtitle = subtitle && subtitle.type === 'webvtt' }}
 <video
     class="dplayer-video {{ if current }}dplayer-video-current{{ /if }}"
-    webkit-playsinline
-    playsinline
+    playsinline="{{playsinline}}"
+    webkit-playsinline="{{playsinline}}"
+    x5-playsinline="{{playsinline}}"
+    x5-video-player-type="{{x5VideoPlayerType}}"
+    x5-video-player-fullscreen="{{x5VideoPlayerFullscreen}}"
+    x5-video-orientation="{{x5VideoOrientation}}"
     {{ if pic }}poster="{{ pic }}"{{ /if }}
     {{ if screenshot || enableSubtitle }}crossorigin="anonymous"{{ /if }}
     {{ if preload }}preload="{{ preload }}"{{ /if }}
