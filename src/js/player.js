@@ -346,6 +346,9 @@ class DPlayer {
                         const hls = new Hls();
                         hls.loadSource(video.src);
                         hls.attachMedia(video);
+                        this.events.on('destroy', () => {
+                            hls.destroy();
+                        });
                     }
                     else {
                         this.notice('Error: Hls is not supported.');
@@ -358,7 +361,7 @@ class DPlayer {
 
             // https://github.com/Bilibili/flv.js
             case 'flv':
-                if (flvjs && flvjs.isSupported()) {
+                if (flvjs) {
                     if (flvjs.isSupported()) {
                         const flvPlayer = flvjs.createPlayer({
                             type: 'flv',
@@ -366,6 +369,11 @@ class DPlayer {
                         });
                         flvPlayer.attachMediaElement(video);
                         flvPlayer.load();
+                        this.events.on('destroy', () => {
+                            flvPlayer.unload();
+                            flvPlayer.detachMediaElement();
+                            flvPlayer.destroy();
+                        });
                     }
                     else {
                         this.notice('Error: flvjs is not supported.');
@@ -380,6 +388,9 @@ class DPlayer {
             case 'dash':
                 if (dashjs) {
                     dashjs.MediaPlayer().create().initialize(video, video.src, false);
+                    this.events.on('destroy', () => {
+                        dashjs.MediaPlayer().reset();
+                    });
                 }
                 else {
                     this.notice('Error: Can\'t find dashjs.');
@@ -400,6 +411,10 @@ class DPlayer {
                             }, () => {
                                 this.container.classList.remove('dplayer-loading');
                             });
+                        });
+                        this.events.on('destroy', () => {
+                            client.remove(torrentId);
+                            client.destroy();
                         });
                     }
                     else {
