@@ -344,8 +344,10 @@ class DPlayer {
                 if (Hls) {
                     if (Hls.isSupported()) {
                         const hls = new Hls();
+                        this.hls = hls;
                         hls.loadSource(video.src);
-                        hls.attachMedia(video);
+                        
+                        .attachMedia(video);
                         this.events.on('destroy', () => {
                             hls.destroy();
                         });
