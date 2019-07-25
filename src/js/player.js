@@ -350,6 +350,7 @@ class DPlayer {
                         hls.attachMedia(video);
                         this.events.on('destroy', () => {
                             hls.destroy();
+                            delete this.plugins.Hls;
                         });
                     }
                     else {
@@ -369,12 +370,14 @@ class DPlayer {
                             type: 'flv',
                             url: video.src
                         });
+                        this.plugins.flvjs = flvPlayer;
                         flvPlayer.attachMediaElement(video);
                         flvPlayer.load();
                         this.events.on('destroy', () => {
                             flvPlayer.unload();
                             flvPlayer.detachMediaElement();
                             flvPlayer.destroy();
+                            delete this.plugins.flvjs;
                         });
                     }
                     else {
@@ -389,9 +392,11 @@ class DPlayer {
             // https://github.com/Dash-Industry-Forum/dash.js
             case 'dash':
                 if (dashjs) {
-                    dashjs.MediaPlayer().create().initialize(video, video.src, false);
+                    const dashjsPlayer = dashjs.MediaPlayer().create().initialize(video, video.src, false);
+                    this.plugins.dash = dashjsPlayer;
                     this.events.on('destroy', () => {
                         dashjs.MediaPlayer().reset();
+                        delete this.plugins.dash;
                     });
                 }
                 else {
@@ -401,10 +406,12 @@ class DPlayer {
 
             // https://github.com/webtorrent/webtorrent
             case 'webtorrent':
-                if (WebTorrent) {
+                if (
+                ) {
                     if (WebTorrent.WEBRTC_SUPPORT) {
                         this.container.classList.add('dplayer-loading');
                         const client = new WebTorrent();
+                        this.plugins.webtorrent = client;
                         const torrentId = video.src;
                         client.add(torrentId, (torrent) => {
                             const file = torrent.files.find((file) => file.name.endsWith('.mp4'));
@@ -417,6 +424,7 @@ class DPlayer {
                         this.events.on('destroy', () => {
                             client.remove(torrentId);
                             client.destroy();
+                            delete this.plugins.webtorrent;
                         });
                     }
                     else {
