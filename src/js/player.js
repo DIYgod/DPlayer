@@ -114,6 +114,7 @@ class DPlayer {
         }
 
         this.setting = new Setting(this);
+        this.plugins = {};
 
         document.addEventListener('click', () => {
             this.focus = false;
@@ -344,7 +345,7 @@ class DPlayer {
                 if (Hls) {
                     if (Hls.isSupported()) {
                         const hls = new Hls();
-                        this.hls = hls;
+                        this.plugins.Hls = hls;
                         hls.loadSource(video.src);
                         
                         .attachMedia(video);
