@@ -347,8 +347,7 @@ class DPlayer {
                         const hls = new Hls();
                         this.plugins.Hls = hls;
                         hls.loadSource(video.src);
-                        
-                        .attachMedia(video);
+                        hls.attachMedia(video);
                         this.events.on('destroy', () => {
                             hls.destroy();
                         });
