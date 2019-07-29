@@ -344,8 +344,9 @@ class DPlayer {
             case 'hls':
                 if (Hls) {
                     if (Hls.isSupported()) {
-                        const hls = new Hls();
-                        this.plugins.Hls = hls;
+						const options = this.options.pluginsOption.hls;
+                        const hls = new Hls(options);
+                        this.plugins.hls = hls;
                         hls.loadSource(video.src);
                         hls.attachMedia(video);
                         this.events.on('destroy', () => {
@@ -366,10 +367,11 @@ class DPlayer {
             case 'flv':
                 if (flvjs) {
                     if (flvjs.isSupported()) {
-                        const flvPlayer = flvjs.createPlayer({
+						const options = Object.assign(this.options.pluginsOption.flvjs,{
                             type: 'flv',
                             url: video.src
                         });
+                        const flvPlayer = flvjs.createPlayer(options);
                         this.plugins.flvjs = flvPlayer;
                         flvPlayer.attachMediaElement(video);
                         flvPlayer.load();
@@ -393,6 +395,8 @@ class DPlayer {
             case 'dash':
                 if (dashjs) {
                     const dashjsPlayer = dashjs.MediaPlayer().create().initialize(video, video.src, false);
+					const options = this.options.pluginsOption.dash;
+					dashjsPlayer.updateSettings(options);
                     this.plugins.dash = dashjsPlayer;
                     this.events.on('destroy', () => {
                         dashjs.MediaPlayer().reset();
@@ -406,11 +410,11 @@ class DPlayer {
 
             // https://github.com/webtorrent/webtorrent
             case 'webtorrent':
-                if (
-                ) {
+                if (WebTorrent) {
                     if (WebTorrent.WEBRTC_SUPPORT) {
                         this.container.classList.add('dplayer-loading');
-                        const client = new WebTorrent();
+						const options = this.options.pluginsOption.webtorrent;
+                        const client = new WebTorrent(options);
                         this.plugins.webtorrent = client;
                         const torrentId = video.src;
                         client.add(torrentId, (torrent) => {

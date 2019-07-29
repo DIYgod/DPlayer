@@ -18,7 +18,8 @@ export default (options) => {
         apiBackend: defaultApiBackend,
         video: {},
         contextmenu: [],
-        mutex: true
+        mutex: true,
+		pluginsOption:{hls:{},flvjs:{},dash:{},webtorrent:{}}
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
