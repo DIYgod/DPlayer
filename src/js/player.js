@@ -344,7 +344,7 @@ class DPlayer {
             case 'hls':
                 if (Hls) {
                     if (Hls.isSupported()) {
-						const options = this.options.pluginsOption.hls;
+						const options = this.options.pluginOptions.hls;
                         const hls = new Hls(options);
                         this.plugins.hls = hls;
                         hls.loadSource(video.src);
@@ -367,7 +367,7 @@ class DPlayer {
             case 'flv':
                 if (flvjs) {
                     if (flvjs.isSupported()) {
-						const options = Object.assign(this.options.pluginsOption.flvjs,{
+						const options = Object.assign(this.options.pluginOptions.flvjs,{
                             type: 'flv',
                             url: video.src
                         });
@@ -395,7 +395,7 @@ class DPlayer {
             case 'dash':
                 if (dashjs) {
                     const dashjsPlayer = dashjs.MediaPlayer().create().initialize(video, video.src, false);
-					const options = this.options.pluginsOption.dash;
+					const options = this.options.pluginOptions.dash;
 					dashjsPlayer.updateSettings(options);
                     this.plugins.dash = dashjsPlayer;
                     this.events.on('destroy', () => {
@@ -413,7 +413,7 @@ class DPlayer {
                 if (WebTorrent) {
                     if (WebTorrent.WEBRTC_SUPPORT) {
                         this.container.classList.add('dplayer-loading');
-						const options = this.options.pluginsOption.webtorrent;
+						const options = this.options.pluginOptions.webtorrent;
                         const client = new WebTorrent(options);
                         this.plugins.webtorrent = client;
                         const torrentId = video.src;
