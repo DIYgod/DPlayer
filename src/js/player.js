@@ -351,7 +351,7 @@ class DPlayer {
                         hls.attachMedia(video);
                         this.events.on('destroy', () => {
                             hls.destroy();
-                            delete this.plugins.Hls;
+                            delete this.plugins.hls;
                         });
                     }
                     else {
