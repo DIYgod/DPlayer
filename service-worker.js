@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "57eb9db3d951e3455c37014f4e3c8187"
+    "revision": "ab876e836f0e4408b5b763fe64e59cb8"
   },
   {
     "url": "assets/css/0.styles.7532768e.css",
@@ -36,16 +36,16 @@ self.__precacheManifest = [
     "revision": "e36cef7e6eb137dcb7495b371f879df0"
   },
   {
-    "url": "assets/js/11.b9839980.js",
-    "revision": "81787c65d815c2890e874fa4e9f5e2ba"
+    "url": "assets/js/11.eb11204f.js",
+    "revision": "83f2a4c53591c1d3dad48bf92517856b"
   },
   {
     "url": "assets/js/12.d5444c63.js",
     "revision": "4df9c7a7f44515434c1f72c647f71c14"
   },
   {
-    "url": "assets/js/13.b70a2ed5.js",
-    "revision": "48fd52fafa0acab71fdd2610714c497a"
+    "url": "assets/js/13.002beadd.js",
+    "revision": "53ec45c7920f98652665287cb791cc14"
   },
   {
     "url": "assets/js/14.464fc8da.js",
@@ -76,32 +76,32 @@ self.__precacheManifest = [
     "revision": "ae5f57cfc237392966df5ed0d18f924d"
   },
   {
-    "url": "assets/js/7.9813b36d.js",
-    "revision": "807d43d5df18f8bb0a40d114f9ad8f55"
+    "url": "assets/js/7.b7c98697.js",
+    "revision": "8eaa8bb54a4115ae021b909491cafedd"
   },
   {
     "url": "assets/js/8.b58f1b57.js",
     "revision": "8596155e6fcdc8eee7c66c633573b294"
   },
   {
-    "url": "assets/js/9.68c8ac8e.js",
-    "revision": "8d55ec6b08a344658e700198634ca373"
+    "url": "assets/js/9.8782d46a.js",
+    "revision": "7d35472440dbf004e9407e253e73b8af"
   },
   {
-    "url": "assets/js/app.b09df9ca.js",
-    "revision": "320698fa690bf4a79374189eef2e73da"
+    "url": "assets/js/app.eaa93baf.js",
+    "revision": "2cc30bcdb2fe0a2d3b8810654675ab27"
   },
   {
     "url": "ecosystem.html",
-    "revision": "b7f7ac649a375eaa51330e3b091816b1"
+    "revision": "e0562721178c4299d39f80f84f65ed43"
   },
   {
     "url": "guide.html",
-    "revision": "c5033f1de3e5df61ffc630becf7e1fef"
+    "revision": "eb49341827fb2405099802ea211185ba"
   },
   {
     "url": "index.html",
-    "revision": "d61920cb7ba043d7dc1508a8ff54106b"
+    "revision": "d05d653f18a861bb6b03a4466967e45e"
   },
   {
     "url": "logo.png",
@@ -109,23 +109,23 @@ self.__precacheManifest = [
   },
   {
     "url": "support.html",
-    "revision": "7df52aa4c92e68f91d4cd560f855aa4d"
+    "revision": "505521a9dfeb9e3477b1aed9e6918c4f"
   },
   {
     "url": "zh/ecosystem.html",
-    "revision": "230e7b83a0a0fcd0d8036e36ea527cb1"
+    "revision": "54281e5af14916557f29c90b497579a6"
   },
   {
     "url": "zh/guide.html",
-    "revision": "5cb82f0eea23719bb101bf2c831975e5"
+    "revision": "50d50f26ab30757bb4c9bd13853d16ed"
   },
   {
     "url": "zh/index.html",
-    "revision": "4b57c77905c444d2fb17d1d00395dbf2"
+    "revision": "fad0ca822190fc50ec33e99c88f7f2b8"
   },
   {
     "url": "zh/support.html",
-    "revision": "e17e936ad5fb446e7b3f89418783c3aa"
+    "revision": "e25a036bccdc45f0934edc398e4ce547"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
