@@ -57,7 +57,7 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 </a>
 
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="280px" src="https://i.imgur.com/BBKXPAp.png">
+    <img width="280px" src="https://i.imgur.com/C2NgugY.png">
 </a>
 
 ### Sponsors
