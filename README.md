@@ -46,24 +46,30 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 
 ## Thanks
 
-## Special Sponsors
+### Special Sponsors
+
+&nbsp;
 
 <a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
     <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
 </a>
 
+&nbsp;
+
 <a href="https://www.9ccms.net" target="_blank">
-    <img width="330px" src="https://i.imgur.com/YBV6kfb.png">
+    <img width="280px" src="https://i.imgur.com/YBV6kfb.png">
+</a>
+
+&nbsp;
+
+<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
+    <img width="280px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
 
 ### Sponsors
 
-<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
-</a>
-<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-    <img width="222px" src="https://imgur.com/apG1uKf.png">
-</a>
+| [极酷社](https://www.acg.app) |
+| :--------------------------: |
 
 ### Contributors
 
