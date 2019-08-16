@@ -43,11 +43,16 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
     <img width="280px" src="https://i.imgur.com/YBV6kfb.png">
 </a>
 
-### Sponsors
+&nbsp;
 
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
+    <img width="280px" src="https://i.imgur.com/C2NgugY.png">
 </a>
+
+### Sponsors
+
+| [极酷社](https://www.acg.app) |
+| :--------------------------: |
 
 ## DPlayer contributors
 

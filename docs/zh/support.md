@@ -43,11 +43,16 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
     <img width="280px" src="https://i.imgur.com/YBV6kfb.png">
 </a>
 
-### Sponsors
+&nbsp;
 
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
+    <img width="280px" src="https://i.imgur.com/C2NgugY.png">
 </a>
+
+### Sponsors
+
+| [极酷社](https://www.acg.app) |
+| :--------------------------: |
 
 ## DPlayer 贡献者
 
