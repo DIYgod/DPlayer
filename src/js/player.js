@@ -33,7 +33,7 @@ class DPlayer {
      * @constructor
      */
     constructor (options) {
-        this.options = handleOption(options);
+        this.options = handleOption({preload:options.video.type === 'webtorrent' ? 'none' : 'metadata', ...options});
 
         if (this.options.video.quality) {
             this.qualityIndex = this.options.video.defaultQuality;
@@ -404,12 +404,13 @@ class DPlayer {
                         this.container.classList.add('dplayer-loading');
                         const client = new WebTorrent();
                         const torrentId = video.src;
+                        video.src = '';
+                        video.preload = 'metadata';
+                        video.addEventListener('durationchange', () => this.container.classList.remove('dplayer-loading'), {once: true});
                         client.add(torrentId, (torrent) => {
                             const file = torrent.files.find((file) => file.name.endsWith('.mp4'));
                             file.renderTo(this.video, {
                                 autoplay: this.options.autoplay
-                            }, () => {
-                                this.container.classList.remove('dplayer-loading');
                             });
                         });
                         this.events.on('destroy', () => {
@@ -455,7 +456,7 @@ class DPlayer {
                 // Not a video load error, may be poster load failed, see #307
                 return;
             }
-            this.tran && this.notice && this.type !== 'webtorrent' & this.notice(this.tran('Video load failed'), -1);
+            this.tran && this.notice && this.type !== 'webtorrent' && this.notice(this.tran('Video load failed'), -1);
         });
 
         // video end
