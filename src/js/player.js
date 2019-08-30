@@ -333,8 +333,8 @@ class DPlayer {
                     this.type = 'normal';
                 }
             }
-            const u = navigator.userAgent, app = navigator.appVersion;
-            const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+            
+            const isIOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
             if (this.type === 'hls' && isIOS && (video.canPlayType('application/x-mpegURL') !='' || video.canPlayType('application/vnd.apple.mpegURL') !='' )) {
                 this.type = 'normal';
             }
