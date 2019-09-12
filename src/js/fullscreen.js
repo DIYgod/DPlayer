@@ -3,7 +3,7 @@ import utils from './utils';
 class FullScreen {
     constructor (player) {
         this.player = player;
-
+        this.lastScrollPosition = {left: 0, top: 0};
         this.player.events.on('webfullscreen', () => {
             this.player.resize();
         });
