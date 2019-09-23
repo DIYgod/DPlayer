@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "4c48efb0ff754fa839fc47a8130ac887"
+    "revision": "777178e9120d5e5f7983acd2d704c737"
   },
   {
     "url": "assets/css/0.styles.efe65f2d.css",
@@ -88,20 +88,20 @@ self.__precacheManifest = [
     "revision": "2c2c1d5f2ff004965cf5bc76b0a03334"
   },
   {
-    "url": "assets/js/app.f158c441.js",
-    "revision": "7389f043690d7a799ef90ba1b7104f4d"
+    "url": "assets/js/app.bead4ad3.js",
+    "revision": "76d3c6f6b7b53cd7ed54b256a7f17952"
   },
   {
     "url": "ecosystem.html",
-    "revision": "29d20fd9329fccfdb3fcf38327a07485"
+    "revision": "d7c05e1c0a49d17e3854d7af4d21d562"
   },
   {
     "url": "guide.html",
-    "revision": "625386ccdc981679cd418365bcfe0dff"
+    "revision": "9f0bdcc076df61ccbca7a0c7b78eee36"
   },
   {
     "url": "index.html",
-    "revision": "d80717a1901fc9e0d45284d677c57faf"
+    "revision": "e2699e2ffb4d7dca14648ea434128e10"
   },
   {
     "url": "logo.png",
@@ -109,23 +109,23 @@ self.__precacheManifest = [
   },
   {
     "url": "support.html",
-    "revision": "0cb21b8e2a9d03c89db00191e83aa259"
+    "revision": "0555012f9c78d478f6131e0345536ab7"
   },
   {
     "url": "zh/ecosystem.html",
-    "revision": "0e644544a26fec744baf5e2e8766dc2a"
+    "revision": "c71dcd360e5e29dab47435a0fb56168f"
   },
   {
     "url": "zh/guide.html",
-    "revision": "88c45d3c083f0c019aa08e680377f4f9"
+    "revision": "7bd77b73a4c1c8ce54381b3032b6728e"
   },
   {
     "url": "zh/index.html",
-    "revision": "1b6b79056313142af08bffc515df8ba9"
+    "revision": "bc593917ee91e7d69b482f2692e88984"
   },
   {
     "url": "zh/support.html",
-    "revision": "4b275189cf3640401937451829505a38"
+    "revision": "e099b443efa8bd3cbed1329ecf9f9938"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
