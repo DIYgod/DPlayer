@@ -114,6 +114,7 @@ class DPlayer {
         }
 
         this.setting = new Setting(this);
+        this.plugins = {};
 
         document.addEventListener('click', () => {
             this.focus = false;
@@ -343,11 +344,14 @@ class DPlayer {
             case 'hls':
                 if (Hls) {
                     if (Hls.isSupported()) {
-                        const hls = new Hls();
+						const options = this.options.pluginOptions.hls;
+                        const hls = new Hls(options);
+                        this.plugins.hls = hls;
                         hls.loadSource(video.src);
                         hls.attachMedia(video);
                         this.events.on('destroy', () => {
                             hls.destroy();
+                            delete this.plugins.hls;
                         });
                     }
                     else {
@@ -363,16 +367,19 @@ class DPlayer {
             case 'flv':
                 if (flvjs) {
                     if (flvjs.isSupported()) {
-                        const flvPlayer = flvjs.createPlayer({
+						const options = Object.assign(this.options.pluginOptions.flvjs,{
                             type: 'flv',
                             url: video.src
                         });
+                        const flvPlayer = flvjs.createPlayer(options);
+                        this.plugins.flvjs = flvPlayer;
                         flvPlayer.attachMediaElement(video);
                         flvPlayer.load();
                         this.events.on('destroy', () => {
                             flvPlayer.unload();
                             flvPlayer.detachMediaElement();
                             flvPlayer.destroy();
+                            delete this.plugins.flvjs;
                         });
                     }
                     else {
@@ -387,9 +394,13 @@ class DPlayer {
             // https://github.com/Dash-Industry-Forum/dash.js
             case 'dash':
                 if (dashjs) {
-                    dashjs.MediaPlayer().create().initialize(video, video.src, false);
+                    const dashjsPlayer = dashjs.MediaPlayer().create().initialize(video, video.src, false);
+					const options = this.options.pluginOptions.dash;
+					dashjsPlayer.updateSettings(options);
+                    this.plugins.dash = dashjsPlayer;
                     this.events.on('destroy', () => {
                         dashjs.MediaPlayer().reset();
+                        delete this.plugins.dash;
                     });
                 }
                 else {
@@ -402,7 +413,9 @@ class DPlayer {
                 if (WebTorrent) {
                     if (WebTorrent.WEBRTC_SUPPORT) {
                         this.container.classList.add('dplayer-loading');
-                        const client = new WebTorrent();
+						const options = this.options.pluginOptions.webtorrent;
+                        const client = new WebTorrent(options);
+                        this.plugins.webtorrent = client;
                         const torrentId = video.src;
                         video.src = '';
                         video.preload = 'metadata';
@@ -416,6 +429,7 @@ class DPlayer {
                         this.events.on('destroy', () => {
                             client.remove(torrentId);
                             client.destroy();
+                            delete this.plugins.webtorrent;
                         });
                     }
                     else {
