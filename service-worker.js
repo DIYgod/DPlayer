@@ -21,11 +21,11 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "24c28f466f81d72a61f660294a6bb52f"
+    "revision": "4c48efb0ff754fa839fc47a8130ac887"
   },
   {
-    "url": "assets/css/0.styles.7532768e.css",
-    "revision": "f65e13fcb8aef4adea3506e4a633ccff"
+    "url": "assets/css/0.styles.efe65f2d.css",
+    "revision": "709d4311818ca6be782bc6610098d3fa"
   },
   {
     "url": "assets/img/search.83621669.svg",
@@ -88,20 +88,20 @@ self.__precacheManifest = [
     "revision": "2c2c1d5f2ff004965cf5bc76b0a03334"
   },
   {
-    "url": "assets/js/app.d7449517.js",
-    "revision": "35ab23a0184b3baac1de95b02ff676a3"
+    "url": "assets/js/app.f158c441.js",
+    "revision": "7389f043690d7a799ef90ba1b7104f4d"
   },
   {
     "url": "ecosystem.html",
-    "revision": "63fecf3e4ccb65b6e65f5d8a6c86716a"
+    "revision": "29d20fd9329fccfdb3fcf38327a07485"
   },
   {
     "url": "guide.html",
-    "revision": "67f34c58d846bdb4af2cc88c8199d8c0"
+    "revision": "625386ccdc981679cd418365bcfe0dff"
   },
   {
     "url": "index.html",
-    "revision": "adc713c7cf2249a328a08710c90da7ef"
+    "revision": "d80717a1901fc9e0d45284d677c57faf"
   },
   {
     "url": "logo.png",
@@ -109,23 +109,23 @@ self.__precacheManifest = [
   },
   {
     "url": "support.html",
-    "revision": "334765ebdc183c5eeeeec2573ac11a4b"
+    "revision": "0cb21b8e2a9d03c89db00191e83aa259"
   },
   {
     "url": "zh/ecosystem.html",
-    "revision": "ec670d44770ab45dd865b1f3483119ba"
+    "revision": "0e644544a26fec744baf5e2e8766dc2a"
   },
   {
     "url": "zh/guide.html",
-    "revision": "b55f6723cec27c227cca49b5c6a685a0"
+    "revision": "88c45d3c083f0c019aa08e680377f4f9"
   },
   {
     "url": "zh/index.html",
-    "revision": "e4d8c8ac6ccfb1ef6bed31ef60d00a95"
+    "revision": "1b6b79056313142af08bffc515df8ba9"
   },
   {
     "url": "zh/support.html",
-    "revision": "829bf4ab47df4425ead760b5007cdaf9"
+    "revision": "4b275189cf3640401937451829505a38"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
