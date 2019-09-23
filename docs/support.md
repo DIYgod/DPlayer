@@ -16,16 +16,16 @@ You can support DPlayer development via the following methods:
 
 We accept donations through these channels:
 
-- [Paypal](https://www.paypal.me/DIYgod)
-- [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
-- [Alipay](https://i.imgur.com/wv1Pj2k.png)
+-   [Paypal](https://www.paypal.me/DIYgod)
+-   [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
+-   [Alipay](https://i.imgur.com/wv1Pj2k.png)
 
 ## Recurring Pledges
 
 Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the DPlayer GitHub repository and this website.
 
-- Become a Backer or a Sponser on [Patreon](https://www.patreon.com/DIYgod)
-- E-mail us: i#diygod.me
+-   Become a Backer or a Sponser on [Patreon](https://www.patreon.com/DIYgod)
+-   E-mail us: i#diygod.me
 
 ## Current Premium Sponsors
 
@@ -52,7 +52,8 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 ### Sponsors
 
 | [极酷社](https://www.acg.app) |
-| :--------------------------: |
+| :---------------------------: |
+
 
 ## DPlayer contributors
 

@@ -1,7 +1,7 @@
 import utils from './utils';
 
 class Setting {
-    constructor (player) {
+    constructor(player) {
         this.player = player;
 
         this.player.template.mask.addEventListener('click', () => {
@@ -18,8 +18,7 @@ class Setting {
             this.player.template.loopToggle.checked = !this.player.template.loopToggle.checked;
             if (this.player.template.loopToggle.checked) {
                 this.loop = true;
-            }
-            else {
+            } else {
                 this.loop = false;
             }
             this.hide();
@@ -36,8 +35,7 @@ class Setting {
             if (this.player.template.showDanmakuToggle.checked) {
                 this.showDanmaku = true;
                 this.player.danmaku.show();
-            }
-            else {
+            } else {
                 this.showDanmaku = false;
                 this.player.danmaku.hide();
             }
@@ -53,8 +51,7 @@ class Setting {
             if (this.player.template.unlimitDanmakuToggle.checked) {
                 this.unlimitDanmaku = true;
                 this.player.danmaku.unlimit(true);
-            }
-            else {
+            } else {
                 this.unlimitDanmaku = false;
                 this.player.danmaku.unlimit(false);
             }
@@ -111,7 +108,7 @@ class Setting {
         }
     }
 
-    hide () {
+    hide() {
         this.player.template.settingBox.classList.remove('dplayer-setting-box-open');
         this.player.template.mask.classList.remove('dplayer-mask-show');
         setTimeout(() => {
@@ -122,7 +119,7 @@ class Setting {
         this.player.controller.disableAutoHide = false;
     }
 
-    show () {
+    show() {
         this.player.template.settingBox.classList.add('dplayer-setting-box-open');
         this.player.template.mask.classList.add('dplayer-mask-show');
 

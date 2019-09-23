@@ -1,7 +1,7 @@
 import utils from './utils';
 
 class Comment {
-    constructor (player) {
+    constructor(player) {
         this.player = player;
 
         this.player.template.mask.addEventListener('click', () => {
@@ -39,7 +39,7 @@ class Comment {
         });
     }
 
-    show () {
+    show() {
         this.player.controller.disableAutoHide = true;
         this.player.template.controller.classList.add('dplayer-controller-comment');
         this.player.template.mask.classList.add('dplayer-mask-show');
@@ -47,7 +47,7 @@ class Comment {
         this.player.template.commentInput.focus();
     }
 
-    hide () {
+    hide() {
         this.player.template.controller.classList.remove('dplayer-controller-comment');
         this.player.template.mask.classList.remove('dplayer-mask-show');
         this.player.container.classList.remove('dplayer-show-controller');
@@ -55,24 +55,23 @@ class Comment {
         this.hideSetting();
     }
 
-    showSetting () {
+    showSetting() {
         this.player.template.commentSettingBox.classList.add('dplayer-comment-setting-open');
     }
 
-    hideSetting () {
+    hideSetting() {
         this.player.template.commentSettingBox.classList.remove('dplayer-comment-setting-open');
     }
 
-    toggleSetting () {
+    toggleSetting() {
         if (this.player.template.commentSettingBox.classList.contains('dplayer-comment-setting-open')) {
             this.hideSetting();
-        }
-        else {
+        } else {
             this.showSetting();
         }
     }
 
-    send () {
+    send() {
         this.player.template.commentInput.blur();
 
         // text can't be empty
@@ -81,14 +80,17 @@ class Comment {
             return;
         }
 
-        this.player.danmaku.send({
-            text: this.player.template.commentInput.value,
-            color: utils.color2Number(this.player.container.querySelector('.dplayer-comment-setting-color input:checked').value),
-            type: parseInt(this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value),
-        }, () => {
-            this.player.template.commentInput.value = '';
-            this.hide();
-        });
+        this.player.danmaku.send(
+            {
+                text: this.player.template.commentInput.value,
+                color: utils.color2Number(this.player.container.querySelector('.dplayer-comment-setting-color input:checked').value),
+                type: parseInt(this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value),
+            },
+            () => {
+                this.player.template.commentInput.value = '';
+                this.hide();
+            }
+        );
     }
 }
 

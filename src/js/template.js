@@ -2,7 +2,7 @@ import Icons from './icons';
 import tplPlayer from '../template/player.art';
 
 class Template {
-    constructor (options) {
+    constructor(options) {
         this.container = options.container;
         this.options = options.options;
         this.index = options.index;
@@ -10,7 +10,7 @@ class Template {
         this.init();
     }
 
-    init () {
+    init() {
         this.container.innerHTML = tplPlayer({
             options: this.options,
             index: this.index,
@@ -22,8 +22,8 @@ class Template {
                 screenshot: this.options.screenshot,
                 preload: this.options.preload,
                 url: this.options.video.url,
-                subtitle: this.options.subtitle
-            }
+                subtitle: this.options.subtitle,
+            },
         });
 
         this.volumeBar = this.container.querySelector('.dplayer-volume-bar-inner');

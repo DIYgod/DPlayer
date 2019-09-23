@@ -1,13 +1,13 @@
 import utils from './utils';
 
 class Danmaku {
-    constructor (options) {
+    constructor(options) {
         this.options = options;
         this.container = this.options.container;
         this.danTunnel = {
             right: {},
             top: {},
-            bottom: {}
+            bottom: {},
         };
         this.danIndex = 0;
         this.dan = [];
@@ -20,12 +20,11 @@ class Danmaku {
         this.load();
     }
 
-    load () {
+    load() {
         let apiurl;
         if (this.options.api.maximum) {
             apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}&max=${this.options.api.maximum}`;
-        }
-        else {
+        } else {
             apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}`;
         }
         const endpoints = (this.options.api.addition || []).slice(0);
@@ -44,7 +43,7 @@ class Danmaku {
         });
     }
 
-    reload (newAPI) {
+    reload(newAPI) {
         this.options.api = newAPI;
         this.dan = [];
         this.clear();
@@ -52,9 +51,9 @@ class Danmaku {
     }
 
     /**
-    * Asynchronously read danmaku from all API endpoints
-    */
-    _readAllEndpoints (endpoints, callback) {
+     * Asynchronously read danmaku from all API endpoints
+     */
+    _readAllEndpoints(endpoints, callback) {
         const results = [];
         let readCount = 0;
 
@@ -82,7 +81,7 @@ class Danmaku {
         }
     }
 
-    send (dan, callback) {
+    send(dan, callback) {
         const danmakuData = {
             token: this.options.api.token,
             id: this.options.api.id,
@@ -90,7 +89,7 @@ class Danmaku {
             time: this.options.time(),
             text: dan.text,
             color: dan.color,
-            type: dan.type
+            type: dan.type,
         };
         this.options.apiBackend.send({
             url: this.options.api.address + 'v3/',
@@ -107,14 +106,14 @@ class Danmaku {
             text: this.htmlEncode(danmakuData.text),
             color: danmakuData.color,
             type: danmakuData.type,
-            border: `2px solid ${this.options.borderColor}`
+            border: `2px solid ${this.options.borderColor}`,
         };
         this.draw(danmaku);
 
         this.events && this.events.trigger('danmaku_send', danmakuData);
     }
 
-    frame () {
+    frame() {
         if (this.dan.length && !this.paused && this.showing) {
             let item = this.dan[this.danIndex];
             const dan = [];
@@ -129,7 +128,7 @@ class Danmaku {
         });
     }
 
-    opacity (percentage) {
+    opacity(percentage) {
         if (percentage !== undefined) {
             const items = this.container.getElementsByClassName('dplayer-danmaku-item');
             for (let i = 0; i < items.length; i++) {
@@ -150,7 +149,7 @@ class Danmaku {
      * color - danmaku color, default: `#fff`
      * type - danmaku type, `right` `top` `bottom`, default: `right`
      */
-    draw (dan) {
+    draw(dan) {
         if (this.showing) {
             const itemHeight = this.options.height;
             const danWidth = this.container.offsetWidth;
@@ -187,8 +186,7 @@ class Danmaku {
                                 return i % itemY;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         this.danTunnel[type][i + ''] = [ele];
                         ele.addEventListener('animationend', () => {
                             this.danTunnel[type][i + ''].splice(0, 1);
@@ -215,8 +213,7 @@ class Danmaku {
                 item.classList.add(`dplayer-danmaku-${dan[i].type}`);
                 if (dan[i].border) {
                     item.innerHTML = `<span style="border:${dan[i].border}">${dan[i].text}</span>`;
-                }
-                else {
+                } else {
                     item.innerHTML = dan[i].text;
                 }
                 item.style.opacity = this._opacity;
@@ -230,28 +227,28 @@ class Danmaku {
 
                 // adjust
                 switch (dan[i].type) {
-                case 'right':
-                    tunnel = getTunnel(item, dan[i].type, itemWidth);
-                    if (tunnel >= 0) {
-                        item.style.width = itemWidth + 1 + 'px';
-                        item.style.top = itemHeight * tunnel + 'px';
-                        item.style.transform = `translateX(-${danWidth}px)`;
-                    }
-                    break;
-                case 'top':
-                    tunnel = getTunnel(item, dan[i].type);
-                    if (tunnel >= 0) {
-                        item.style.top = itemHeight * tunnel + 'px';
-                    }
-                    break;
-                case 'bottom':
-                    tunnel = getTunnel(item, dan[i].type);
-                    if (tunnel >= 0) {
-                        item.style.bottom = itemHeight * tunnel + 'px';
-                    }
-                    break;
-                default:
-                    console.error(`Can't handled danmaku type: ${dan[i].type}`);
+                    case 'right':
+                        tunnel = getTunnel(item, dan[i].type, itemWidth);
+                        if (tunnel >= 0) {
+                            item.style.width = itemWidth + 1 + 'px';
+                            item.style.top = itemHeight * tunnel + 'px';
+                            item.style.transform = `translateX(-${danWidth}px)`;
+                        }
+                        break;
+                    case 'top':
+                        tunnel = getTunnel(item, dan[i].type);
+                        if (tunnel >= 0) {
+                            item.style.top = itemHeight * tunnel + 'px';
+                        }
+                        break;
+                    case 'bottom':
+                        tunnel = getTunnel(item, dan[i].type);
+                        if (tunnel >= 0) {
+                            item.style.bottom = itemHeight * tunnel + 'px';
+                        }
+                        break;
+                    default:
+                        console.error(`Can't handled danmaku type: ${dan[i].type}`);
                 }
 
                 if (tunnel >= 0) {
@@ -269,15 +266,15 @@ class Danmaku {
         }
     }
 
-    play () {
+    play() {
         this.paused = false;
     }
 
-    pause () {
+    pause() {
         this.paused = true;
     }
 
-    _measure (text) {
+    _measure(text) {
         if (!this.context) {
             const measureStyle = getComputedStyle(this.container.getElementsByClassName('dplayer-danmaku-item')[0], null);
             this.context = document.createElement('canvas').getContext('2d');
@@ -286,7 +283,7 @@ class Danmaku {
         return this.context.measureText(text).width;
     }
 
-    seek () {
+    seek() {
         this.clear();
         for (let i = 0; i < this.dan.length; i++) {
             if (this.dan[i].time >= this.options.time()) {
@@ -297,11 +294,11 @@ class Danmaku {
         }
     }
 
-    clear () {
+    clear() {
         this.danTunnel = {
             right: {},
             top: {},
-            bottom: {}
+            bottom: {},
         };
         this.danIndex = 0;
         this.options.container.innerHTML = '';
@@ -309,17 +306,17 @@ class Danmaku {
         this.events && this.events.trigger('danmaku_clear');
     }
 
-    htmlEncode (str) {
-        return str.
-            replace(/&/g, '&amp;').
-            replace(/</g, '&lt;').
-            replace(/>/g, '&gt;').
-            replace(/"/g, '&quot;').
-            replace(/'/g, '&#x27;').
-            replace(/\//g, '&#x2f;');
+    htmlEncode(str) {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#x27;')
+            .replace(/\//g, '&#x2f;');
     }
 
-    resize () {
+    resize() {
         const danWidth = this.container.offsetWidth;
         const items = this.container.getElementsByClassName('dplayer-danmaku-item');
         for (let i = 0; i < items.length; i++) {
@@ -327,7 +324,7 @@ class Danmaku {
         }
     }
 
-    hide () {
+    hide() {
         this.showing = false;
         this.pause();
         this.clear();
@@ -335,7 +332,7 @@ class Danmaku {
         this.events && this.events.trigger('danmaku_hide');
     }
 
-    show () {
+    show() {
         this.seek();
         this.showing = true;
         this.play();
@@ -343,7 +340,7 @@ class Danmaku {
         this.events && this.events.trigger('danmaku_show');
     }
 
-    unlimit (boolean) {
+    unlimit(boolean) {
         this.unlimited = boolean;
     }
 }
