@@ -1,12 +1,11 @@
-/* eslint-disable no-undef */
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 
 module.exports = {
-
     mode: 'production',
 
     bail: true,
@@ -14,7 +13,7 @@ module.exports = {
     devtool: 'source-map',
 
     entry: {
-        'DPlayer': './src/js/index.js'
+        DPlayer: './src/js/index.js',
     },
 
     output: {
@@ -24,23 +23,17 @@ module.exports = {
         libraryTarget: 'umd',
         libraryExport: 'default',
         umdNamedDefine: true,
-        publicPath: '/'
+        publicPath: '/',
     },
 
     resolve: {
         modules: ['node_modules'],
-        extensions: ['.js', '.scss']
+        extensions: ['.js', '.scss'],
     },
 
     module: {
         strictExportPresence: true,
         rules: [
-            {
-                test: /\.js$/,
-                enforce: 'pre',
-                loader: 'eslint-loader',
-                include: path.resolve(__dirname, '../src/js'),
-            },
             {
                 test: /\.js$/,
                 use: [
@@ -49,59 +42,53 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             cacheDirectory: true,
-                            presets: ['@babel/preset-env']
-                        }
-                    }
-                ]
+                            presets: ['@babel/preset-env'],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.scss$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
-                            sourceMap: true
-                        }
+                        },
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            config: {
-                                path: path.join(__dirname, 'postcss.config.js')
-                            }
-                        }
+                            plugins: [autoprefixer, cssnano],
+                        },
                     },
                     'sass-loader',
-                ]
+                ],
             },
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader',
                 options: {
-                    'limit': 40000
-                }
+                    limit: 40000,
+                },
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-inline-loader'
+                loader: 'svg-inline-loader',
             },
             {
                 test: /\.art$/,
-                loader: 'art-template-loader'
-            }
-        ]
+                loader: 'art-template-loader',
+            },
+        ],
     },
 
     plugins: [
         new webpack.DefinePlugin({
             DPLAYER_VERSION: `"${require('../package.json').version}"`,
-            GIT_HASH: JSON.stringify(gitRevisionPlugin.version())
+            GIT_HASH: JSON.stringify(gitRevisionPlugin.version()),
         }),
-        new MiniCssExtractPlugin({
-            filename: '[name].min.css'
-        })
     ],
 
     node: {
@@ -109,6 +96,5 @@ module.exports = {
         fs: 'empty',
         net: 'empty',
         tls: 'empty',
-    }
-
+    },
 };

@@ -2,7 +2,6 @@
 import defaultApiBackend from './api.js';
 
 export default (options) => {
-
     // default options
     const defaultOption = {
         container: options.element || document.getElementsByClassName('dplayer')[0],
@@ -19,7 +18,7 @@ export default (options) => {
         video: {},
         contextmenu: [],
         mutex: true,
-		pluginOptions:{hls:{},flvjs:{},dash:{},webtorrent:{}}
+        pluginOptions: { hls: {}, flvjs: {}, dash: {}, webtorrent: {} },
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
@@ -52,16 +51,16 @@ export default (options) => {
             text: 'Video info',
             click: (player) => {
                 player.infoPanel.triggle();
-            }
+            },
         },
         {
             text: 'About author',
-            link: 'https://diygod.me'
+            link: 'https://diygod.me',
         },
         {
             text: `DPlayer v${DPLAYER_VERSION}`,
-            link: 'https://github.com/MoePlayer/DPlayer'
-        }
+            link: 'https://github.com/MoePlayer/DPlayer',
+        },
     ]);
 
     return options;

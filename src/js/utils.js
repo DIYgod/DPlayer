@@ -1,19 +1,18 @@
 const isMobile = /mobile/i.test(window.navigator.userAgent);
 
 const utils = {
-
     /**
-    * Parse second to time string
-    *
-    * @param {Number} second
-    * @return {String} 00:00 or 00:00:00
-    */
+     * Parse second to time string
+     *
+     * @param {Number} second
+     * @return {String} 00:00 or 00:00:00
+     */
     secondToTime: (second) => {
         second = second || 0;
-        if (second === 0 || second == Infinity || second.toString() === 'NaN') {
-          return '00:00'
+        if (second === 0 || second === Infinity || second.toString() === 'NaN') {
+            return '00:00';
         }
-        const add0 = (num) => num < 10 ? '0' + num : '' + num;
+        const add0 = (num) => (num < 10 ? '0' + num : '' + num);
         const hour = Math.floor(second / 3600);
         const min = Math.floor((second - hour * 3600) / 60);
         const sec = Math.floor(second - hour * 3600 - min * 60);
@@ -33,8 +32,7 @@ const utils = {
                 actualLeft += current.offsetLeft;
                 current = current.offsetParent;
             }
-        }
-        else {
+        } else {
             while (current !== null && current !== element) {
                 actualLeft += current.offsetLeft;
                 current = current.offsetParent;
@@ -51,8 +49,8 @@ const utils = {
     * getBoundingClientRect 在 Firefox 11 及以下返回的值会把 transform 的值也包含进去
     * getBoundingClientRect 在 Opera 10.5 及以下返回的值缺失 width、height 值
     */
-    getBoundingClientRectViewLeft (element) {
-        const scrollTop = window.scrollY || window.pageYOffset || document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
+    getBoundingClientRectViewLeft(element) {
+        const scrollTop = window.scrollY || window.pageYOffset || document.body.scrollTop + ((document.documentElement && document.documentElement.scrollTop) || 0);
 
         if (element.getBoundingClientRect) {
             if (typeof this.getBoundingClientRectViewLeft.offset !== 'number') {
@@ -73,19 +71,18 @@ const utils = {
         }
     },
 
-    getScrollPosition () {
+    getScrollPosition() {
         return {
             left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-            top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+            top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
         };
     },
 
-    setScrollPosition ({left = 0, top = 0}) {
+    setScrollPosition({ left = 0, top = 0 }) {
         if (this.isFirefox) {
             document.documentElement.scrollLeft = left;
             document.documentElement.scrollTop = top;
-        }
-        else {
+        } else {
             window.scrollTo(left, top);
         }
     },
@@ -101,11 +98,12 @@ const utils = {
             localStorage.setItem(key, value);
         },
 
-        get: (key) => localStorage.getItem(key)
+        get: (key) => localStorage.getItem(key),
     },
 
     cumulativeOffset: (element) => {
-        let top = 0, left = 0;
+        let top = 0,
+            left = 0;
         do {
             top += element.offsetTop || 0;
             left += element.offsetLeft || 0;
@@ -114,14 +112,14 @@ const utils = {
 
         return {
             top: top,
-            left: left
+            left: left,
         };
     },
 
     nameMap: {
         dragStart: isMobile ? 'touchstart' : 'mousedown',
         dragMove: isMobile ? 'touchmove' : 'mousemove',
-        dragEnd: isMobile ? 'touchend' : 'mouseup'
+        dragEnd: isMobile ? 'touchend' : 'mouseup',
     },
 
     color2Number: (color) => {
@@ -131,21 +129,21 @@ const utils = {
         if (color.length === 3) {
             color = `${color[0]}${color[0]}${color[1]}${color[1]}${color[2]}${color[2]}`;
         }
-        return parseInt(color, 16) + 0x000000 & 0xffffff;
+        return (parseInt(color, 16) + 0x000000) & 0xffffff;
     },
 
     number2Color: (number) => '#' + ('00000' + number.toString(16)).slice(-6),
 
     number2Type: (number) => {
         switch (number) {
-        case 0:
-            return 'right';
-        case 1:
-            return 'top';
-        case 2:
-            return 'bottom';
-        default:
-            return 'right';
+            case 0:
+                return 'right';
+            case 1:
+                return 'top';
+            case 2:
+                return 'bottom';
+            default:
+                return 'right';
         }
     },
 };

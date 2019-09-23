@@ -1,71 +1,82 @@
 {
-  "name": "dplayer",
-  "version": "1.25.0",
-  "description": "Wow, such a lovely HTML5 danmaku video player",
-  "main": "dist/DPlayer.min.js",
-  "style": "dist/DPlayer.min.css",
-  "scripts": {
-    "start": "npm run dev",
-    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
-    "test": "eslint src webpack",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
-  },
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "url": "git+https://github.com/DIYgod/DPlayer.git",
-    "type": "git"
-  },
-  "keywords": [
-    "player",
-    "danmaku",
-    "video",
-    "html5"
-  ],
-  "author": "DIYgod",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/DIYgod/DPlayer/issues"
-  },
-  "homepage": "https://github.com/DIYgod/DPlayer#readme",
-  "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "@vuepress/plugin-back-to-top": "1.0.1",
-    "@vuepress/plugin-google-analytics": "1.0.1",
-    "@vuepress/plugin-pwa": "1.0.1",
-    "art-template": "4.13.2",
-    "art-template-loader": "1.4.3",
-    "autoprefixer": "^9.6.0",
-    "babel-loader": "^8.0.6",
-    "cross-env": "^5.2.0",
-    "css-loader": "^2.1.1",
-    "cssnano": "^4.1.10",
-    "eslint": "^5.16.0",
-    "eslint-loader": "^2.1.2",
-    "exports-loader": "^0.7.0",
-    "file-loader": "^4.0.0",
-    "git-revision-webpack-plugin": "^3.0.3",
-    "mini-css-extract-plugin": "0.7.0",
-    "node-sass": "^4.12.0",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^7.1.0",
-    "strip-loader": "^0.1.2",
-    "style-loader": "^1.0.0",
-    "svg-inline-loader": "0.8.0",
-    "template-string-optimize-loader": "^3.0.0",
-    "url-loader": "^2.0.0",
-    "vuepress": "1.0.1",
-    "webpack": "^4.33.0",
-    "webpack-cli": "3.3.2",
-    "webpack-dev-server": "^3.6.0"
-  },
-  "dependencies": {
-    "axios": "0.19.0",
-    "balloon-css": "^0.5.0",
-    "promise-polyfill": "8.1.0"
-  }
+    "name": "dplayer",
+    "version": "1.25.0",
+    "description": "Wow, such a lovely HTML5 danmaku video player",
+    "main": "dist/DPlayer.min.js",
+    "scripts": {
+        "start": "npm run dev",
+        "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
+        "test": "eslint src webpack",
+        "format": "eslint \"**/*.js\" --fix && prettier \"**/*.{js,json,md}\" --write",
+        "format:staged": "eslint \"**/*.js\" --fix && pretty-quick --staged --verbose --pattern \"**/*.{js,json,md}\"",
+        "format:check": "eslint \"**/*.js\" && prettier-check \"**/*.{js,json,md}\"",
+        "docs:dev": "vuepress dev docs",
+        "docs:build": "vuepress build docs"
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "url": "git+https://github.com/DIYgod/DPlayer.git",
+        "type": "git"
+    },
+    "keywords": [
+        "player",
+        "danmaku",
+        "video",
+        "html5"
+    ],
+    "gitHooks": {
+        "pre-commit": "npm run format:staged"
+    },
+    "author": "DIYgod",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/DIYgod/DPlayer/issues"
+    },
+    "homepage": "https://github.com/DIYgod/DPlayer#readme",
+    "devDependencies": {
+        "@babel/core": "^7.6.0",
+        "@babel/preset-env": "^7.4.5",
+        "@vuepress/plugin-back-to-top": "1.1.0",
+        "@vuepress/plugin-google-analytics": "1.1.0",
+        "@vuepress/plugin-pwa": "1.1.0",
+        "art-template": "4.13.2",
+        "art-template-loader": "1.4.3",
+        "autoprefixer": "^9.6.1",
+        "babel-loader": "^8.0.6",
+        "cross-env": "^6.0.0",
+        "css-loader": "^3.2.0",
+        "cssnano": "^4.1.10",
+        "eslint": "^6.4.0",
+        "eslint-config-prettier": "^6.3.0",
+        "eslint-loader": "^3.0.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "exports-loader": "^0.7.0",
+        "file-loader": "^4.0.0",
+        "git-revision-webpack-plugin": "^3.0.3",
+        "mini-css-extract-plugin": "0.8.0",
+        "node-sass": "^4.12.0",
+        "postcss-loader": "^3.0.0",
+        "prettier": "^1.18.2",
+        "prettier-check": "^2.0.0",
+        "pretty-quick": "^1.11.1",
+        "sass-loader": "^8.0.0",
+        "strip-loader": "^0.1.2",
+        "style-loader": "^1.0.0",
+        "svg-inline-loader": "0.8.0",
+        "template-string-optimize-loader": "^3.0.0",
+        "url-loader": "^2.1.0",
+        "vuepress": "1.1.0",
+        "webpack": "^4.40.2",
+        "webpack-cli": "3.3.9",
+        "webpack-dev-server": "^3.8.1",
+        "yorkie": "^2.0.0"
+    },
+    "dependencies": {
+        "axios": "0.19.0",
+        "balloon-css": "^1.0.3",
+        "promise-polyfill": "8.1.3"
+    }
 }
