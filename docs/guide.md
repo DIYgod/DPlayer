@@ -149,7 +149,7 @@ mutex | true | prevent to play multiple player at the same time, pause other pla
 
 ```js
 const dp = new DPlayer({
-    container: document.getElementById('player'),
+    container: document.getElementById('dplayer'),
     autoplay: false,
     theme: '#FADFA3',
     loop: true,

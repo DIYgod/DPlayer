@@ -140,7 +140,7 @@ mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播�
 
 ```js
 const dp = new DPlayer({
-    container: document.getElementById('player'),
+    container: document.getElementById('dplayer'),
     autoplay: false,
     theme: '#FADFA3',
     loop: true,
