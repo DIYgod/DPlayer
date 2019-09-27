@@ -489,7 +489,13 @@ const dp = new DPlayer({
         url: 'demo.m3u8',
         type: 'hls',
     },
+    pluginOptions: {
+        hls: {
+            // hls config
+        },
+    },
 });
+console.log(dp.plugins.hls); // Hls instance
 ```
 
 ```js
@@ -528,7 +534,13 @@ const dp = new DPlayer({
         url: 'demo.mpd',
         type: 'dash',
     },
+    pluginOptions: {
+        dash: {
+            // dash config
+        },
+    },
 });
+console.log(dp.plugins.dash); // Dash instance
 ```
 
 ```js
@@ -604,7 +616,13 @@ const dp = new DPlayer({
         url: 'demo.flv',
         type: 'flv',
     },
+    pluginOptions: {
+        flv: {
+            // flv config
+        },
+    },
 });
+console.log(dp.plugins.flv); // flv instance
 ```
 
 ```js
@@ -653,7 +671,13 @@ const dp = new DPlayer({
         url: 'magnet:demo',
         type: 'webtorrent',
     },
+    pluginOptions: {
+        webtorrent: {
+            // webtorrent config
+        },
+    },
 });
+console.log(dp.plugins.webtorrent); // WebTorrent instance
 ```
 
 ```js
