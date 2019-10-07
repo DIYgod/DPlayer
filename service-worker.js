@@ -27,11 +27,11 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "b43baa125d12e091cbfcdfb597b53ae6"
+    "revision": "cdc305c8509c3dad7799c0b6333839d2"
   },
   {
     "url": "assets/css/0.styles.c6b0d222.css",
-    "revision": "67c80014283c32390318a2b7e8bb3a94"
+    "revision": "fa54d1d74262ce5cfa6f619e74c0a59e"
   },
   {
     "url": "assets/img/search.83621669.svg",
@@ -94,20 +94,20 @@ self.__precacheManifest = [
     "revision": "b55f016a460ce4d12054ac85704c64f2"
   },
   {
-    "url": "assets/js/app.3cf44bd5.js",
-    "revision": "343d5c7c7fdd4ea2bd56ab0e1d9903d0"
+    "url": "assets/js/app.1e06c868.js",
+    "revision": "9699a39ad5bf705ae70c4a428d6a25a0"
   },
   {
     "url": "ecosystem.html",
-    "revision": "3b9349119b297f305a29bcd2754d34e5"
+    "revision": "f94e7edcc3108de2f88325a17972ca41"
   },
   {
     "url": "guide.html",
-    "revision": "63388de27571f3a0b6cdc63ac4956fec"
+    "revision": "a2a05b8d275e936a51803484720a8a8b"
   },
   {
     "url": "index.html",
-    "revision": "df8d557cdcf258e336e48bf54be4672e"
+    "revision": "61710cecf3ef464530d785b8344fbc25"
   },
   {
     "url": "logo.png",
@@ -115,23 +115,23 @@ self.__precacheManifest = [
   },
   {
     "url": "support.html",
-    "revision": "587a92b1e0aa9b6b8211f265b4d1fbd3"
+    "revision": "3d7cd5d1c75cfddb439dd087caf94d1e"
   },
   {
     "url": "zh/ecosystem.html",
-    "revision": "9d24474d43186b1cf053758189ea34ec"
+    "revision": "7f63f6906a394711a73dcced283c5fee"
   },
   {
     "url": "zh/guide.html",
-    "revision": "92f6f0058ec2cb10503d2e170a980d54"
+    "revision": "482e8d83bf258d4fb41e863950071fd1"
   },
   {
     "url": "zh/index.html",
-    "revision": "736ecd2f62b4362c16badab76f01b093"
+    "revision": "f2f35a7cadd659135660355890996ae0"
   },
   {
     "url": "zh/support.html",
-    "revision": "33abd34b9f311d3813a143ee558fa9fb"
+    "revision": "fa7cce1f9e24eb47b16cb84518f5b1ba"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
