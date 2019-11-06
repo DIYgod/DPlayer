@@ -70,7 +70,7 @@
         "url-loader": "^2.1.0",
         "vuepress": "1.2.0",
         "webpack": "^4.40.2",
-        "webpack-cli": "3.3.9",
+        "webpack-cli": "3.3.10",
         "webpack-dev-server": "^3.8.1",
         "yorkie": "^2.0.0"
     },
