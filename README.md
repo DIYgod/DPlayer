@@ -118,7 +118,7 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 -   [学习强国](https://itunes.apple.com/cn/app/%E5%AD%A6%E4%B9%A0%E5%BC%BA%E5%9B%BD/id1426355645?mt=8): “学习强国”学习平台精心打造的手机客户端
 -   [小红书](https://www.xiaohongshu.com/): 中国最大的生活社区分享平台，同时也是发现全球好物的电商平台
 -   [极客时间](https://time.geekbang.org/): 极客邦科技出品的一款 IT 内容知识服务 App
--   [嘀哩嘀哩](http://www.dilidili.wang/): 兴趣使然的无名小站（D 站）
+-   [嘀哩嘀哩](http://www.dilidili.one/): 兴趣使然的无名小站（D 站）
 -   [银色子弹](https://www.sbsub.com/): 银色子弹，简称银弹，由多数柯南热爱者聚集在一起的组织
 -   [浙江大学 CC98 论坛](https://zh.wikipedia.org/wiki/CC98%E8%AE%BA%E5%9D%9B): 浙江大学校网内规模最大的论坛，中国各大学中较活跃的 BBS 之一
 -   [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html): 南京航空航天大学门户网站
