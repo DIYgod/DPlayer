@@ -368,7 +368,8 @@ class DPlayer {
                                 type: 'flv',
                                 url: video.src,
                             });
-                            const flvPlayer = window.flvjs.createPlayer(options);
+                            const config = Object.assign(this.options.pluginOptions.flv, {});
+                            const flvPlayer = window.flvjs.createPlayer(options, config);
                             this.plugins.flvjs = flvPlayer;
                             flvPlayer.attachMediaElement(video);
                             flvPlayer.load();

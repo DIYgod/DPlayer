@@ -604,7 +604,10 @@ const dp = new DPlayer({
     },
     pluginOptions: {
         flv: {
-            // flv config
+            // flv.js Config
+        },
+        flvjs: {
+            // flv.js MediaDataSource
         },
     },
 });

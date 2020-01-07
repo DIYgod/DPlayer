@@ -18,7 +18,7 @@ export default (options) => {
         video: {},
         contextmenu: [],
         mutex: true,
-        pluginOptions: { hls: {}, flvjs: {}, dash: {}, webtorrent: {} },
+        pluginOptions: { hls: {}, flv: {}, flvjs: {}, dash: {}, webtorrent: {} },
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
