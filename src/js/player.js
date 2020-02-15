@@ -179,11 +179,12 @@ class DPlayer {
      */
     play() {
         this.paused = false;
-        if (this.video.paused) {
+        if (this.video.paused && !utils.isMobile) {
             this.bezel.switch(Icons.play);
         }
 
         this.template.playButton.innerHTML = Icons.pause;
+        this.template.mobilePlayButton.innerHTML = Icons.pause;
 
         const playedPromise = Promise.resolve(this.video.play());
         playedPromise
@@ -213,11 +214,12 @@ class DPlayer {
         this.paused = true;
         this.container.classList.remove('dplayer-loading');
 
-        if (!this.video.paused) {
+        if (!this.video.paused && !utils.isMobile) {
             this.bezel.switch(Icons.pause);
         }
 
         this.template.playButton.innerHTML = Icons.play;
+        this.template.mobilePlayButton.innerHTML = Icons.play;
         this.video.pause();
         this.timer.disable('loading');
         this.container.classList.remove('dplayer-playing');

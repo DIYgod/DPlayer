@@ -652,3 +652,21 @@
         }
     }
 }
+
+.dplayer-mobile-play {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    opacity: 0.8;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

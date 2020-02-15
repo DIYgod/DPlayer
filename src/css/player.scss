@@ -166,7 +166,8 @@
     &.dplayer-mobile {
         .dplayer-controller .dplayer-icons {
             .dplayer-volume,
-            .dplayer-camera-icon {
+            .dplayer-camera-icon,
+            .dplayer-play-icon {
                 display: none;
             }
             .dplayer-full .dplayer-full-in-icon {
@@ -177,6 +178,16 @@
 
         .dplayer-bar-time {
             display: none;
+        }
+
+        &.dplayer-hide-controller {
+            .dplayer-mobile-play {
+                display: none;
+            }
+        }
+
+        .dplayer-mobile-play {
+            display: block;
         }
     }
 }
