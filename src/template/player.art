@@ -170,24 +170,11 @@
                     </div>
                 </div>
                 <div class="dplayer-setting-speed-panel">
-                    <div class="dplayer-setting-speed-item" data-speed="0.5">
-                        <span class="dplayer-label">0.5</span>
-                    </div>
-                    <div class="dplayer-setting-speed-item" data-speed="0.75">
-                        <span class="dplayer-label">0.75</span>
-                    </div>
-                    <div class="dplayer-setting-speed-item" data-speed="1">
-                        <span class="dplayer-label">{{ tran('Normal') }}</span>
-                    </div>
-                    <div class="dplayer-setting-speed-item" data-speed="1.25">
-                        <span class="dplayer-label">1.25</span>
-                    </div>
-                    <div class="dplayer-setting-speed-item" data-speed="1.5">
-                        <span class="dplayer-label">1.5</span>
-                    </div>
-                    <div class="dplayer-setting-speed-item" data-speed="2">
-                        <span class="dplayer-label">2</span>
-                    </div>
+                    {{ each options.playbackSpeed }}
+                        <div class="dplayer-setting-speed-item" data-speed="{{ $value }}">
+                            <span class="dplayer-label">{{ $value === 1 ? tran('Normal') : $value }}</span>
+                        </div>
+                    {{ /each }}
                 </div>
             </div>
         </div>
