@@ -19,6 +19,7 @@ export default (options) => {
         contextmenu: [],
         mutex: true,
         pluginOptions: { hls: {}, flvjs: {}, dash: {}, webtorrent: {} },
+        musicRecognition: { isActive: false, apiUrl: '', apiKey: '', songSearch: '' },
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {

@@ -213,6 +213,8 @@
 </div>
 <div class="dplayer-info-panel dplayer-info-panel-hide">
     <div class="dplayer-info-panel-close">[x]</div>
+    <div><b>Video inf</b></div>
+    </br>
     <div class="dplayer-info-panel-item dplayer-info-panel-item-version">
         <span class="dplayer-info-panel-item-title">Player version</span>
         <span class="dplayer-info-panel-item-data"></span>
@@ -248,6 +250,23 @@
     </div>
     <div class="dplayer-info-panel-item dplayer-info-panel-item-danmaku-amount">
         <span class="dplayer-info-panel-item-title">Danamku amount</span>
+        <span class="dplayer-info-panel-item-data"></span>
+    </div>
+    {{ /if }}
+    {{ if options.musicRecognition.isActive }}
+    </br>
+    <div><b>Music in this video</b></div>
+    </br>
+    <div class="dplayer-info-panel-item dplayer-info-panel-item-musicRecognition-title">
+        <span class="dplayer-info-panel-item-title">Song</span>
+        <span class="dplayer-info-panel-item-data"></span>
+    </div>
+    <div class="dplayer-info-panel-item dplayer-info-panel-item-musicRecognition-artist">
+        <span class="dplayer-info-panel-item-title">Artist</span>
+        <span class="dplayer-info-panel-item-data"></span>
+    </div>
+    <div class="dplayer-info-panel-item dplayer-info-panel-item-musicRecognition-lyrics">
+        <span class="dplayer-info-panel-item-title">Lyrics</span>
         <span class="dplayer-info-panel-item-data"></span>
     </div>
     {{ /if }}
