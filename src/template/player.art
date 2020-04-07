@@ -255,6 +255,7 @@
     {{ if options.musicRecognition.isActive }}
     </br>
     <div><b>Music in this video</b></div>
+    <div>Information are given from Genius</div>
     </br>
     <div class="dplayer-info-panel-item dplayer-info-panel-item-musicRecognition-title">
         <span class="dplayer-info-panel-item-title">Song</span>
