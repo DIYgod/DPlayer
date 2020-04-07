@@ -71,12 +71,6 @@ function initPlayers () {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
             addition: ['https://cn-south-17-dplayer-49648867.oss.dogecdn.com/1678963.json']
-        },
-        musicRecognition: {
-            isActive: true,
-            apiUrl: '',
-            apiKey: '',
-            songSearch: 'Goose House Hikaru Nara'
         }
     });
 

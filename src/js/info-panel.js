@@ -72,11 +72,8 @@ class InfoPanel {
             }
 
             const obj = JSON.parse(body);
-            localStorage.removeItem('title');
             localStorage.setItem('title', obj.response.hits[0].result.title.toString());
-            localStorage.removeItem('artist');
             localStorage.setItem('artist', obj.response.hits[0].result.primary_artist.name.toString());
-            localStorage.removeItem('album');
             localStorage.setItem('lyrics', obj.response.hits[0].result.url.toString());
         });
     }
