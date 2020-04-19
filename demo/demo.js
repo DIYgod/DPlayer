@@ -65,12 +65,12 @@ function initPlayers () {
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
         subtitle: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt'
+            url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
-            addition: ['https://cn-south-17-dplayer-49648867.oss.dogecdn.com/1678963.json']
+            addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
         }
     });
 
@@ -93,7 +93,7 @@ function initPlayers () {
             type: 'auto'
         },
         subtitle: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt',
+            url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt',
             type: 'webvtt',
             fontSize: '25px',
             bottom: '10%',
@@ -148,7 +148,7 @@ function initPlayers () {
     //     video: {
     //         quality: [{
     //             name: 'HD',
-    //             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+    //             url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
     //             type: 'hls'
     //         }, {
     //             name: 'SD',
@@ -165,7 +165,7 @@ function initPlayers () {
     //     container: document.getElementById('dplayer4'),
     //     preload: 'none',
     //     video: {
-    //         url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+    //         url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
     //         type: 'hls'
     //     }
     // });
@@ -213,7 +213,7 @@ function initPlayers () {
     //         }
     //     },
     //     video: {
-    //         url: 'https://moeplayer.b0.upaiyun.com/dplayer/hls/hikarunara.m3u8',
+    //         url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
     //         type: 'hls'
     //     }
     // });

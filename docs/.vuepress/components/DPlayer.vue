@@ -24,7 +24,7 @@ export default {
                 mutex: true,
                 screenshot: true,
                 subtitle: {
-                    url: 'https://cn-south-17-dplayer-49648867.oss.dogecdn.com/hikarunara.vtt',
+                    url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt',
                     type: 'webvtt',
                     fontSize: '20px',
                     bottom: '10%',
@@ -41,7 +41,7 @@ export default {
                     api: 'https://api.prprpr.me/dplayer/',
                     token: 'tokendemo',
                     user: 'DIYgod',
-                    addition: ['https://cn-south-17-dplayer-49648867.oss.dogecdn.com/1678963.json']
+                    addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
                 },
                 contextmenu: [
                     {
