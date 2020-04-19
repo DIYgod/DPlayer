@@ -177,7 +177,7 @@ class DPlayer {
     /**
      * Play video
      */
-    play() {
+    play(fromNative) {
         this.paused = false;
         if (this.video.paused && !utils.isMobile) {
             this.bezel.switch(Icons.play);
@@ -186,12 +186,14 @@ class DPlayer {
         this.template.playButton.innerHTML = Icons.pause;
         this.template.mobilePlayButton.innerHTML = Icons.pause;
 
-        const playedPromise = Promise.resolve(this.video.play());
-        playedPromise
-            .catch(() => {
-                this.pause();
-            })
-            .then(() => {});
+        if (!fromNative) {
+            const playedPromise = Promise.resolve(this.video.play());
+            playedPromise
+                .catch(() => {
+                    this.pause();
+                })
+                .then(() => {});
+        }
         this.timer.enable('loading');
         this.container.classList.remove('dplayer-paused');
         this.container.classList.add('dplayer-playing');
@@ -210,7 +212,7 @@ class DPlayer {
     /**
      * Pause video
      */
-    pause() {
+    pause(fromNative) {
         this.paused = true;
         this.container.classList.remove('dplayer-loading');
 
@@ -220,7 +222,9 @@ class DPlayer {
 
         this.template.playButton.innerHTML = Icons.play;
         this.template.mobilePlayButton.innerHTML = Icons.play;
-        this.video.pause();
+        if (!fromNative) {
+            this.video.pause();
+        }
         this.timer.disable('loading');
         this.container.classList.remove('dplayer-playing');
         this.container.classList.add('dplayer-paused');
@@ -486,13 +490,13 @@ class DPlayer {
 
         this.on('play', () => {
             if (this.paused) {
-                this.play();
+                this.play(true);
             }
         });
 
         this.on('pause', () => {
             if (!this.paused) {
-                this.pause();
+                this.pause(true);
             }
         });
 
