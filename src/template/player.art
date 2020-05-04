@@ -115,6 +115,11 @@
             <span class="dplayer-icon-content">{{@ icons.camera }}</span>
         </div>
         {{ /if }}
+        {{ if options.airplay }}
+        <div class="dplayer-icon dplayer-airplay-icon" data-balloon="{{ tran('AirPlay') }}" data-balloon-pos="up">
+            <span class="dplayer-icon-content">{{@ icons.airplay }}</span>
+        </div>
+        {{ /if }}
         <div class="dplayer-comment">
             <button class="dplayer-icon dplayer-comment-icon" data-balloon="{{ tran('Send danmaku') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.comment }}</span>
