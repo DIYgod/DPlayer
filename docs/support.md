@@ -31,23 +31,17 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 
 ### Special Sponsors
 
-&nbsp;
-
-<a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
-    <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
+<div>
+<a href="https://www.cdnbye.com" target="_blank">
+    <img height="60px" src="https://i.imgur.com/K1UsCZT.jpg">
 </a>
+</div>
 
-&nbsp;
-
-<a href="https://www.9ccms.net" target="_blank">
-    <img width="280px" src="https://i.imgur.com/YBV6kfb.png">
-</a>
-
-&nbsp;
-
+<div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="280px" src="https://i.imgur.com/C2NgugY.png">
+    <img height="60px" src="https://i.imgur.com/C2NgugY.png">
 </a>
+</div>
 
 ### Sponsors
 

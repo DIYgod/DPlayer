@@ -23,23 +23,17 @@ sidebar: auto
 
 ### Special Sponsors
 
-&nbsp;
-
-<a href="https://www.polyv.net/?f=git_DPlayer-20190518-02" target="_blank">
-    <img width="600px" src="https://i.loli.net/2019/06/03/5cf4028f7b8f716387.gif">
+<div>
+<a href="https://www.cdnbye.com" target="_blank">
+    <img height="60px" src="https://i.imgur.com/K1UsCZT.jpg">
 </a>
+</div>
 
-&nbsp;
-
-<a href="https://www.9ccms.net" target="_blank">
-    <img width="280px" src="https://i.imgur.com/YBV6kfb.png">
-</a>
-
-&nbsp;
-
+<div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="280px" src="https://i.imgur.com/C2NgugY.png">
+    <img height="60px" src="https://i.imgur.com/C2NgugY.png">
 </a>
+</div>
 
 ### Sponsors
 
@@ -270,7 +264,7 @@ const dp = new DPlayer({
             color: '#b7daff',
             type: 'right', // should be `top` `bottom` or `right`
         },
-        function() {
+        function () {
             console.log('success');
         }
     );
@@ -317,7 +311,7 @@ const dp = new DPlayer({
 `dp.on(event, handler)`
 
 ```js
-dp.on('ended', function() {
+dp.on('ended', function () {
     console.log('player ended');
 });
 ```
@@ -492,7 +486,7 @@ const dp = new DPlayer({
         url: 'demo.m3u8',
         type: 'customHls',
         customType: {
-            customHls: function(video, player) {
+            customHls: function (video, player) {
                 const hls = new Hls();
                 hls.loadSource(video.src);
                 hls.attachMedia(video);
@@ -537,11 +531,8 @@ const dp = new DPlayer({
         url: 'demo.mpd',
         type: 'customDash',
         customType: {
-            customDash: function(video, player) {
-                dashjs
-                    .MediaPlayer()
-                    .create()
-                    .initialize(video, video.src, false);
+            customDash: function (video, player) {
+                dashjs.MediaPlayer().create().initialize(video, video.src, false);
             },
         },
     },
@@ -567,7 +558,7 @@ const dp = new DPlayer({
         url: 'demo.mpd',
         type: 'shakaDash',
         customType: {
-            shakaDash: function(video, player) {
+            shakaDash: function (video, player) {
                 var src = video.src;
                 var playerShaka = new shaka.Player(video); // 将会修改 video.src
                 playerShaka.load(src);
@@ -619,7 +610,7 @@ const dp = new DPlayer({
         url: 'demo.flv',
         type: 'customFlv',
         customType: {
-            customFlv: function(video, player) {
+            customFlv: function (video, player) {
                 const flvPlayer = flvjs.createPlayer({
                     type: 'flv',
                     url: video.src,
@@ -674,7 +665,7 @@ const dp = new DPlayer({
         url: 'magnet:demo',
         type: 'customWebTorrent',
         customType: {
-            customWebTorrent: function(video, player) {
+            customWebTorrent: function (video, player) {
                 player.container.classList.add('dplayer-loading');
                 const client = new WebTorrent();
                 const torrentId = video.src;
@@ -714,7 +705,7 @@ const dp = new DPlayer({
         url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
         type: 'pearplayer',
         customType: {
-            pearplayer: function(video, player) {
+            pearplayer: function (video, player) {
                 new PearPlayer(video, {
                     src: video.src,
                     autoplay: player.options.autoplay,
@@ -745,11 +736,11 @@ const dp = new DPlayer({
     live: true,
     danmaku: true,
     apiBackend: {
-        read: function(endpoint, callback) {
+        read: function (endpoint, callback) {
             console.log('Pretend to connect WebSocket');
             callback();
         },
-        send: function(endpoint, danmakuData, callback) {
+        send: function (endpoint, danmakuData, callback) {
             console.log('Pretend to send danamku via WebSocket', danmakuData);
             callback();
         },
