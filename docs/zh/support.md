@@ -33,7 +33,7 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 
 <div>
 <a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://i.imgur.com/K1UsCZT.jpg">
+    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
 </a>
 </div>
 
