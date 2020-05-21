@@ -64,7 +64,6 @@ At first, let's initialize a simplest DPlayer
 Load DPlayer files
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="DPlayer.min.js"></script>
 ```
@@ -72,7 +71,6 @@ Load DPlayer files
 Or work with module bundler:
 
 ```js
-import 'dplayer/dist/DPlayer.min.css';
 import DPlayer from 'dplayer';
 
 const dp = new DPlayer(options);

@@ -62,7 +62,6 @@ yarn add dplayer
 加载播放器文件:
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="DPlayer.min.js"></script>
 ```
@@ -70,7 +69,6 @@ yarn add dplayer
 或者使用模块管理器:
 
 ```js
-import 'dplayer/dist/DPlayer.min.css';
 import DPlayer from 'dplayer';
 
 const dp = new DPlayer(options);
