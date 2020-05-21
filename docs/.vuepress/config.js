@@ -30,7 +30,14 @@ module.exports = {
             description: '🍭 Wow, such a lovely HTML5 danmaku video player',
         },
     },
-    head: [['link', { rel: 'icon', href: `/logo.png` }]],
+    head: [
+        ['link', { rel: 'icon', href: `/logo.png` }],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js' }],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js' }],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js' }],
+        ['script', { src: 'https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js' }],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js' }],
+    ],
     themeConfig: {
         repo: 'MoePlayer/DPlayer',
         editLinks: true,

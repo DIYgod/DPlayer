@@ -5,9 +5,6 @@ actionLink: /guide/
 footer: MIT Licensed | Made with love by DIYgod
 ---
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-<script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
-
 <div>
   <DPlayer :immediate="true"></DPlayer>
 </div>
