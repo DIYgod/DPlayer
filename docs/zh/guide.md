@@ -447,7 +447,6 @@ const option = {
 }"></DPlayer>
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="hls.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -492,7 +491,6 @@ const dp = new DPlayer({
 需要在 `DPlayer.min.js` 前面加载 [dash.js](https://github.com/Dash-Industry-Forum/dash.js)。
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="dash.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -535,7 +533,6 @@ const dp = new DPlayer({
 需要在 `DPlayer.min.js` 前面加载 [shaka-player.compiled.js](https://github.com/google/shaka-player)。
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="shaka-player.compiled.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -571,7 +568,6 @@ const dp = new DPlayer({
 }"></DPlayer>
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="flv.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -626,7 +622,6 @@ const dp = new DPlayer({
 }"></DPlayer>
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="webtorrent.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -683,7 +678,6 @@ const dp = new DPlayer({
 DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="pearplayer.js"></script>
 <script src="DPlayer.min.js"></script>

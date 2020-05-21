@@ -463,7 +463,6 @@ It requires the library [hls.js](https://github.com/video-dev/hls.js) and it sho
 }"></DPlayer>
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="hls.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -508,7 +507,6 @@ const dp = new DPlayer({
 It requires the library [dash.js](https://github.com/Dash-Industry-Forum/dash.js) and it should be loaded before `DPlayer.min.js`.
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="dash.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -551,7 +549,6 @@ const dp = new DPlayer({
 It requires the library [shaka-player](https://github.com/google/shaka-player) and it should be loaded before `DPlayer.min.js`.
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="shaka-player.compiled.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -587,7 +584,6 @@ It requires the library [flv.js](https://github.com/Bilibili/flv.js) and it shou
 }"></DPlayer>
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="flv.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -642,7 +638,6 @@ It requires the library [webtorrent](https://github.com/webtorrent/webtorrent) a
 }"></DPlayer>
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="webtorrent.min.js"></script>
 <script src="DPlayer.min.js"></script>
@@ -699,7 +694,6 @@ const dp = new DPlayer({
 DPlayer can work with any MSE library via `customType` option.
 
 ```html
-<link rel="stylesheet" href="DPlayer.min.css" />
 <div id="dplayer"></div>
 <script src="pearplayer.js"></script>
 <script src="DPlayer.min.js"></script>
