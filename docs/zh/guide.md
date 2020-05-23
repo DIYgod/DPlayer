@@ -582,7 +582,13 @@ const dp = new DPlayer({
     },
     pluginOptions: {
         flv: {
-            // flv config
+            // refer to https://github.com/bilibili/flv.js/blob/master/docs/api.md#flvjscreateplayer
+            mediaDataSource: {
+                // mediaDataSource config
+            },
+            config: {
+                // config
+            },
         },
     },
 });
