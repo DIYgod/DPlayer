@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "fa58f888e23e5a1b0faae26c4d9c0ff4"
+    "revision": "6ce74058108bb7d23e6595495de91ca6"
   },
   {
     "url": "assets/css/0.styles.5f20ea74.css",
@@ -94,20 +94,20 @@ self.__precacheManifest = [
     "revision": "2363e10218a28c246b35a2a3ce07043e"
   },
   {
-    "url": "assets/js/app.f34510e5.js",
-    "revision": "3a451f5479a8601d28f2038ed5dbf0f5"
+    "url": "assets/js/app.b6e0a3a5.js",
+    "revision": "79650b72c3bc997cc1c76778e39b634b"
   },
   {
     "url": "ecosystem.html",
-    "revision": "f6f93e37051a81f0f11b8f80b6ce564d"
+    "revision": "d52c519d4c4326315deb26c027127926"
   },
   {
     "url": "guide.html",
-    "revision": "5b002b47ead003fcfdcbb3aede237a0a"
+    "revision": "021c8c919f8c0e80e4812c2784b860a4"
   },
   {
     "url": "index.html",
-    "revision": "34002b0c846edbdc44d82d058a0aa476"
+    "revision": "5cb85fcdc26a6e4ec090c38946ee3425"
   },
   {
     "url": "logo.png",
@@ -115,23 +115,23 @@ self.__precacheManifest = [
   },
   {
     "url": "support.html",
-    "revision": "a2c1491b163f241e72ec0278c4911e08"
+    "revision": "4703b55fc1661e7d33e8a5297923ca6d"
   },
   {
     "url": "zh/ecosystem.html",
-    "revision": "d772c9d7694e512dac932ddb3e6e3268"
+    "revision": "891c4979e1f48e570f3863573e39a36c"
   },
   {
     "url": "zh/guide.html",
-    "revision": "8d863b7c969550332e0c41a423efb088"
+    "revision": "5f8936633cd8d2786e6e30a813cf110b"
   },
   {
     "url": "zh/index.html",
-    "revision": "7955873a749b23fc0ae5864455c16e48"
+    "revision": "1a8d36b83a8b39677966e1bd41a33b68"
   },
   {
     "url": "zh/support.html",
-    "revision": "3aa3b69e53a5d2a640335833845787ef"
+    "revision": "81ff9b8723494845057828ba056a87a3"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
