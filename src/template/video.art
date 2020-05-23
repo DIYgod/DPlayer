@@ -2,6 +2,7 @@
 <video
     class="dplayer-video {{ if current }}dplayer-video-current{{ /if }}"
     webkit-playsinline
+    {{ if airplay }} x-webkit-airplay="allow" {{ /if }}
     playsinline
     {{ if pic }}poster="{{ pic }}"{{ /if }}
     {{ if screenshot || enableSubtitle }}crossorigin="anonymous"{{ /if }}

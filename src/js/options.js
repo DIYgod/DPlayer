@@ -11,6 +11,7 @@ export default (options) => {
         loop: false,
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
+        airplay: false,
         hotkey: true,
         preload: 'metadata',
         volume: 0.7,

@@ -2,7 +2,7 @@
 const stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom);
-function animate () {
+function animate() {
     stats.begin();
     // monitored code goes here
     stats.end();
@@ -14,7 +14,7 @@ requestAnimationFrame(animate);
 initPlayers();
 handleEvent();
 
-function handleEvent () {
+function handleEvent() {
     document.getElementById('dplayer-dialog').addEventListener('click', (e) => {
         const $clickDom = e.currentTarget;
         const isShowStatus = $clickDom.getAttribute('data-show');
@@ -35,7 +35,7 @@ function handleEvent () {
     });
 }
 
-function initPlayers () {
+function initPlayers() {
     // dplayer-float
     window.dpFloat = new DPlayer({
         container: document.getElementById('dplayer-container'),
@@ -82,6 +82,7 @@ function initPlayers () {
         theme: '#FADFA3',
         loop: true,
         screenshot: true,
+        airplay: true,
         hotkey: true,
         logo: 'https://i.loli.net/2019/06/06/5cf8c5d94521136430.png',
         volume: 0.2,
@@ -235,14 +236,14 @@ function initPlayers () {
     // });
 }
 
-function clearPlayers () {
+function clearPlayers() {
     for (let i = 0; i < 6; i++) {
         window['dp' + (i + 1)].pause();
         document.getElementById('dplayer' + (i + 1)).innerHTML = '';
     }
 }
 
-function switchDPlayer () {
+function switchDPlayer() {
     if (dp2.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
         dp2.switchVideo({
             url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',

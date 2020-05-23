@@ -1,5 +1,7 @@
 const isMobile = /mobile/i.test(window.navigator.userAgent);
 
+const isSafari = /Safari/i.test(window.navigator.userAgent);
+
 const utils = {
     /**
      * Parse second to time string
@@ -88,6 +90,8 @@ const utils = {
     },
 
     isMobile: isMobile,
+
+    isSafari: isSafari,
 
     isFirefox: /firefox/i.test(window.navigator.userAgent),
 

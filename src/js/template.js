@@ -22,6 +22,7 @@ class Template {
                 current: true,
                 pic: this.options.video.pic,
                 screenshot: this.options.screenshot,
+                airplay: this.options.airplay,
                 preload: this.options.preload,
                 url: this.options.video.url,
                 subtitle: this.options.subtitle,
@@ -78,6 +79,7 @@ class Template {
         this.menuItem = this.container.querySelectorAll('.dplayer-menu-item');
         this.qualityList = this.container.querySelector('.dplayer-quality-list');
         this.camareButton = this.container.querySelector('.dplayer-camera-icon');
+        this.airplayButton = this.container.querySelector('.dplayer-airplay-icon');
         this.subtitleButton = this.container.querySelector('.dplayer-subtitle-icon');
         this.subtitleButtonInner = this.container.querySelector('.dplayer-subtitle-icon .dplayer-icon-content');
         this.subtitle = this.container.querySelector('.dplayer-subtitle');
