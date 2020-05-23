@@ -125,7 +125,7 @@ You can custom your player instance by those options
 | subtitle.bottom      | '40px'                             | the distance between the subtitle and player bottom, values like: '10px' '10%'                                                                             |
 | subtitle.color       | '#fff'                             | subtitle color                                                                                                                                             |
 | danmaku              | -                                  | showing danmaku                                                                                                                                            |
-| danmaku.id           | `required`                         | danamku pool id, it must be unique                                                                                                                         |
+| danmaku.id           | `required`                         | danmaku pool id, it must be unique                                                                                                                         |
 | danmaku.api          | `required`                         | see [#Danmaku API](#danmaku-api)                                                                                                                           |
 | danmaku.token        | -                                  | back end verification token                                                                                                                                |
 | danmaku.maximum      | -                                  | danmaku maximum quantity                                                                                                                                   |
@@ -750,7 +750,7 @@ const dp = new DPlayer({
             callback();
         },
         send: function (options) {
-            console.log('Pretend to send danamku via WebSocket', options.data);
+            console.log('Pretend to send danmaku via WebSocket', options.data);
             callback();
         },
     },
@@ -765,7 +765,7 @@ Draw danmaku after getting a danmaku via WebSocket:
 
 ```js
 const danmaku = {
-    text: 'Get a danamku via WebSocket',
+    text: 'Get a danmaku via WebSocket',
     color: '#fff',
     type: 'right',
 };

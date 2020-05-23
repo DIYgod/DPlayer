@@ -734,7 +734,7 @@ const dp = new DPlayer({
             callback();
         },
         send: function (endpoint, danmakuData, callback) {
-            console.log('Pretend to send danamku via WebSocket', danmakuData);
+            console.log('Pretend to send danmaku via WebSocket', danmakuData);
             callback();
         },
     },
@@ -749,7 +749,7 @@ const dp = new DPlayer({
 
 ```js
 const danmaku = {
-    text: 'Get a danamku via WebSocket',
+    text: 'Get a danmaku via WebSocket',
     color: '#fff',
     type: 'right',
 };

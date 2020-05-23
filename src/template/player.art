@@ -231,15 +231,15 @@
     </div>
     {{ if options.danmaku }}
     <div class="dplayer-info-panel-item dplayer-info-panel-item-danmaku-id">
-        <span class="dplayer-info-panel-item-title">Danamku id</span>
+        <span class="dplayer-info-panel-item-title">Danmaku id</span>
         <span class="dplayer-info-panel-item-data"></span>
     </div>
     <div class="dplayer-info-panel-item dplayer-info-panel-item-danmaku-api">
-        <span class="dplayer-info-panel-item-title">Danamku api</span>
+        <span class="dplayer-info-panel-item-title">Danmaku api</span>
         <span class="dplayer-info-panel-item-data"></span>
     </div>
     <div class="dplayer-info-panel-item dplayer-info-panel-item-danmaku-amount">
-        <span class="dplayer-info-panel-item-title">Danamku amount</span>
+        <span class="dplayer-info-panel-item-title">Danmaku amount</span>
         <span class="dplayer-info-panel-item-data"></span>
     </div>
     {{ /if }}
