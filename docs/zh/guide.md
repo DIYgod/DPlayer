@@ -94,6 +94,7 @@ DPlayer 有丰富的参数可以自定义你的播放器实例
 | lang                 | navigator.language.toLowerCase()   | 可选值: 'en', 'zh-cn', 'zh-tw'                                                                          |
 | screenshot           | false                              | 开启截图，如果开启，视频和视频封面需要允许跨域                                                          |
 | hotkey               | true                               | 开启热键，支持快进、快退、音量控制、播放暂停                                                            |
+| airplay              | true                               | 在 Safari 中开启 AirPlay                                                                                |
 | preload              | 'auto'                             | 视频预加载，可选值: 'none', 'metadata', 'auto'                                                          |
 | volume               | 0.7                                | 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效                                  |
 | playbackSpeed        | [0.5, 0.75, 1, 1.25, 1.5, 2]       | 可选的播放速率，可以设置成自定义的数组                                                                  |
