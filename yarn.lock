@@ -1824,9 +1824,9 @@ balanced-match@^1.0.0:
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
 balloon-css@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/balloon-css/-/balloon-css-1.0.4.tgz#fbef7890bd89aa61c474df734c3923a97ebf43d8"
-  integrity sha512-sq9vMyTN8dVYPvoS0rTSxlfYq2tPNM9E2t30CHJlRDUQibD6PtMVHjTbbpj3yRZvMPFev31lggAOLG2cxmwJ7w==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/balloon-css/-/balloon-css-1.1.0.tgz#9fafebeb307757f888e62833361b5cb273d37fc7"
+  integrity sha512-mOugfCpq55mEIIbb2VKazDLD0m56If633T0hiwQ2bQy2gdj/AakoP59fQgJdiHpG1lJiY0APzhu5Gin2izUsjw==
 
 base64-js@^1.0.2:
   version "1.2.1"
