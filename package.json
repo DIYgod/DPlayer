@@ -68,7 +68,7 @@
         "svg-inline-loader": "0.8.2",
         "template-string-optimize-loader": "^3.0.0",
         "url-loader": "^4.1.0",
-        "vuepress": "1.5.0",
+        "vuepress": "1.5.1",
         "webpack": "^4.40.2",
         "webpack-cli": "3.3.11",
         "webpack-dev-server": "^3.8.1",
