@@ -30,9 +30,7 @@ class Controller {
         this.initScreenshotButton();
         this.initSubtitleButton();
         this.initHighlights();
-        if (utils.isSafari) {
-            this.initAirplayButton();
-        }
+        this.initAirplayButton();
         if (!utils.isMobile) {
             this.initVolumeButton();
         }
