@@ -12,6 +12,7 @@ export default (options) => {
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
         airplay: true,
+        chromecast: false,
         hotkey: true,
         preload: 'metadata',
         volume: 0.7,
