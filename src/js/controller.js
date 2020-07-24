@@ -36,9 +36,7 @@ class Controller {
         this.initSubtitleButton();
         this.initHighlights();
         this.initAirplayButton();
-        if (utils.isChrome) {
-            this.initChromecastButton();
-        }
+        this.initChromecastButton();
         if (!utils.isMobile) {
             this.initVolumeButton();
         }
