@@ -243,9 +243,8 @@ class Controller {
                     link.click();
                     document.body.removeChild(link);
                     URL.revokeObjectURL(dataURL);
+                    this.player.events.trigger('screenshot', dataURL);
                 });
-
-                this.player.events.trigger('screenshot', dataURL);
             });
         }
     }
