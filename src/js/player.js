@@ -613,6 +613,9 @@ class DPlayer {
         this.video.src = '';
         this.container.innerHTML = '';
         this.events.trigger('destroy');
+        Object.keys(this.events.events).forEach((key) => {
+            this.off(key);
+        });
     }
 
     static get version() {
