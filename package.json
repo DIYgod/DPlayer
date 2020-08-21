@@ -75,7 +75,7 @@
         "yorkie": "^2.0.0"
     },
     "dependencies": {
-        "axios": "0.19.2",
+        "axios": "0.20.0",
         "balloon-css": "^1.0.3",
         "promise-polyfill": "8.1.3"
     }
