@@ -747,11 +747,11 @@ const dp = new DPlayer({
     apiBackend: {
         read: function (options) {
             console.log('Pretend to connect WebSocket');
-            callback();
+            options.success([]);
         },
         send: function (options) {
             console.log('Pretend to send danmaku via WebSocket', options.data);
-            callback();
+            options.success();
         },
     },
     video: {
