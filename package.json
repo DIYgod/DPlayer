@@ -64,7 +64,7 @@
         "pretty-quick": "^3.0.0",
         "sass-loader": "^10.0.0",
         "strip-loader": "^0.1.2",
-        "style-loader": "^1.0.0",
+        "style-loader": "^2.0.0",
         "svg-inline-loader": "0.8.2",
         "template-string-optimize-loader": "^3.0.0",
         "url-loader": "^4.1.0",
