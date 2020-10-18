@@ -244,7 +244,7 @@ function clearPlayers() {
 }
 
 function switchDPlayer() {
-    if (dp2.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
+    if (dp2.options.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
         dp2.switchVideo({
             url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
             pic: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg',
