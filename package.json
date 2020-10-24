@@ -56,7 +56,7 @@
         "exports-loader": "^1.0.0",
         "file-loader": "^6.0.0",
         "git-revision-webpack-plugin": "^3.0.3",
-        "mini-css-extract-plugin": "1.1.1",
+        "mini-css-extract-plugin": "1.2.0",
         "node-sass": "^4.12.0",
         "postcss-loader": "^3.0.0",
         "prettier": "^2.0.4",
