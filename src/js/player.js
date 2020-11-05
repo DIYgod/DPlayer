@@ -79,6 +79,7 @@ class DPlayer {
 
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
+                player: this,
                 container: this.template.danmaku,
                 opacity: this.user.get('opacity'),
                 callback: () => {
@@ -106,6 +107,7 @@ class DPlayer {
                     maximum: this.options.danmaku.maximum,
                     addition: this.options.danmaku.addition,
                     user: this.options.danmaku.user,
+                    speedRate: this.options.danmaku.speedRate,
                 },
                 events: this.events,
                 tran: (msg) => this.tran(msg),
