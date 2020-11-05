@@ -24,7 +24,8 @@
         transform: translateX(100%);
         &.dplayer-danmaku-move {
             will-change: transform;
-            animation: danmaku 5s linear;
+            animation-name: 'danmaku';
+            animation-timing-function: linear;
             animation-play-state: paused;
         }
     }
@@ -41,7 +42,8 @@
         visibility: hidden;
         &.dplayer-danmaku-move {
             will-change: visibility;
-            animation: danmaku-center 4s linear;
+            animation-name: 'danmaku-center';
+            animation-timing-function: linear;
             animation-play-state: paused;
         }
     }
