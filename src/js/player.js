@@ -531,6 +531,7 @@ class DPlayer {
         if (this.qualityIndex === index || this.switchingQuality) {
             return;
         } else {
+            this.prevIndex = this.qualityIndex;
             this.qualityIndex = index;
         }
         this.switchingQuality = true;
@@ -572,6 +573,27 @@ class DPlayer {
                 this.switchingQuality = false;
 
                 this.events.trigger('quality_end');
+            }
+        });
+
+        this.on('error', () => {
+            if (!this.video.error) {
+                return;
+            }
+            if (this.prevVideo) {
+                this.template.videoWrap.removeChild(this.video);
+                this.video = this.prevVideo;
+                if (!paused) {
+                    this.video.play();
+                }
+                this.qualityIndex = this.prevIndex;
+                this.quality = this.options.video.quality[this.qualityIndex];
+                this.noticeTime = setTimeout(() => {
+                    this.template.notice.style.opacity = 0;
+                    this.events.trigger('notice_hide');
+                }, 3000);
+                this.prevVideo = null;
+                this.switchingQuality = false;
             }
         });
     }
