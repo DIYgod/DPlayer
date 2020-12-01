@@ -683,28 +683,38 @@ const dp = new DPlayer({
 
 ### 配合其他 MSE 库使用
 
-DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用
+DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用，例如支持P2P插件：
 
 ```html
 <div id="dplayer"></div>
-<script src="pearplayer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cdnbye@latest"></script>
 <script src="DPlayer.min.js"></script>
 ```
 
 ```js
+var type = 'normal';
+if(Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
+    type = 'customHls';
+}
 const dp = new DPlayer({
     container: document.getElementById('dplayer'),
     video: {
-        url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
-        type: 'pearplayer',
+        url: 'demo.m3u8',
+        type: type,
         customType: {
-            pearplayer: function (video, player) {
-                new PearPlayer(video, {
-                    src: video.src,
-                    autoplay: player.options.autoplay,
+            'customHls': function (video, player) {
+                const hls = new Hls({
+                    debug: false,
+                    // Other hlsjsConfig options provided by hls.js
+                    p2pConfig: {
+                        live: false,        // 如果是直播设为true
+                        // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/cn/
+                    }
                 });
-            },
-        },
+                hls.loadSource(video.src);
+                hls.attachMedia(video);
+            }
+        }
     },
 });
 ```
