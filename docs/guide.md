@@ -703,24 +703,34 @@ DPlayer can work with any MSE library via `customType` option.
 
 ```html
 <div id="dplayer"></div>
-<script src="pearplayer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cdnbye@latest"></script>
 <script src="DPlayer.min.js"></script>
 ```
 
 ```js
+var type = 'normal';
+if(Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
+    type = 'customHls';
+}
 const dp = new DPlayer({
     container: document.getElementById('dplayer'),
     video: {
-        url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
-        type: 'pearplayer',
+        url: 'demo.m3u8',
+        type: type,
         customType: {
-            pearplayer: function (video, player) {
-                new PearPlayer(video, {
-                    src: video.src,
-                    autoplay: player.options.autoplay,
+            'customHls': function (video, player) {
+                const hls = new Hls({
+                    debug: false,
+                    // Other hlsjsConfig options provided by hls.js
+                    p2pConfig: {
+                        live: false,        
+                        // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/en/
+                    }
                 });
-            },
-        },
+                hls.loadSource(video.src);
+                hls.attachMedia(video);
+            }
+        }
     },
 });
 ```
