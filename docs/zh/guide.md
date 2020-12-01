@@ -708,7 +708,7 @@ const dp = new DPlayer({
                     // Other hlsjsConfig options provided by hls.js
                     p2pConfig: {
                         live: false,        // 如果是直播设为true
-                        // Other p2pConfig options provided by CDNBye
+                        // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/cn/
                     }
                 });
                 hls.loadSource(video.src);
