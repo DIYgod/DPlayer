@@ -683,7 +683,7 @@ const dp = new DPlayer({
 
 ### 配合其他 MSE 库使用
 
-DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用
+DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用，例如支持P2P插件：
 
 ```html
 <div id="dplayer"></div>
