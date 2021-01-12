@@ -8,18 +8,11 @@ class Controller {
 
         this.autoHideTimer = 0;
         if (!utils.isMobile) {
-            this.player.container.addEventListener('mousemove', () => {
-                this.setAutoHide();
-            });
-            this.player.container.addEventListener('click', () => {
-                this.setAutoHide();
-            });
-            this.player.on('play', () => {
-                this.setAutoHide();
-            });
-            this.player.on('pause', () => {
-                this.setAutoHide();
-            });
+            this.setAutoHideHandler = this.setAutoHide.bind(this);
+            this.player.container.addEventListener('mousemove', this.setAutoHideHandler);
+            this.player.container.addEventListener('click', this.setAutoHideHandler);
+            this.player.on('play', this.setAutoHideHandler);
+            this.player.on('pause', this.setAutoHideHandler);
         }
 
         this.initPlayButton();
@@ -331,6 +324,10 @@ class Controller {
     }
 
     destroy() {
+        if (!utils.isMobile) {
+            this.player.container.removeEventListener('mousemove', this.setAutoHideHandler);
+            this.player.container.removeEventListener('click', this.setAutoHideHandler);
+        }
         clearTimeout(this.autoHideTimer);
     }
 }

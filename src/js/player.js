@@ -116,21 +116,14 @@ class DPlayer {
 
         this.setting = new Setting(this);
         this.plugins = {};
-
-        document.addEventListener(
-            'click',
-            () => {
-                this.focus = false;
-            },
-            true
-        );
-        this.container.addEventListener(
-            'click',
-            () => {
-                this.focus = true;
-            },
-            true
-        );
+        this.docClickFun = () => {
+            this.focus = false;
+        };
+        this.containerClickFun = () => {
+            this.focus = true;
+        };
+        document.addEventListener('click', this.docClickFun, true);
+        this.container.addEventListener('click', this.containerClickFun, true);
 
         this.paused = true;
 
@@ -608,6 +601,11 @@ class DPlayer {
     destroy() {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
+        document.removeEventListener('click', this.docClickFun, true);
+        this.container.removeEventListener('click', this.containerClickFun, true);
+        this.fullScreen.destroy();
+        this.hotkey.destroy();
+        this.contextmenu.destroy();
         this.controller.destroy();
         this.timer.destroy();
         this.video.src = '';
