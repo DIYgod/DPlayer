@@ -35,7 +35,6 @@ sidebar: auto
 | [极酷社](https://www.acg.app) |
 | :---------------------------: |
 
-
 ## Installation
 
 Using npm:
@@ -709,7 +708,7 @@ DPlayer can work with any MSE library via `customType` option.
 
 ```js
 var type = 'normal';
-if(Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
+if (Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
     type = 'customHls';
 }
 const dp = new DPlayer({
@@ -718,19 +717,19 @@ const dp = new DPlayer({
         url: 'demo.m3u8',
         type: type,
         customType: {
-            'customHls': function (video, player) {
+            customHls: function (video, player) {
                 const hls = new Hls({
                     debug: false,
                     // Other hlsjsConfig options provided by hls.js
                     p2pConfig: {
-                        live: false,        
+                        live: false,
                         // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/en/
-                    }
+                    },
                 });
                 hls.loadSource(video.src);
                 hls.attachMedia(video);
-            }
-        }
+            },
+        },
     },
 });
 ```

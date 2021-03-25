@@ -48,7 +48,6 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 | [极酷社](https://www.acg.app) |
 | :---------------------------: |
 
-
 ## DPlayer contributors
 
 This project exists thanks to all the people who contribute.

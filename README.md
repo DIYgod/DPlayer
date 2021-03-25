@@ -65,7 +65,6 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 | [极酷社](https://www.acg.app) |
 | :---------------------------: |
 
-
 ### Contributors
 
 <a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
