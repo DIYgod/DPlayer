@@ -66,7 +66,7 @@ class Controller {
         this.player.on('durationchange', () => {
             if (this.player.video.duration !== 1 && this.player.video.duration !== Infinity) {
                 if (this.player.options.highlight) {
-                    const highlights = document.querySelectorAll('.dplayer-highlight');
+                    const highlights = this.player.template.playedBarWrap.querySelectorAll('.dplayer-highlight');
                     [].slice.call(highlights, 0).forEach((item) => {
                         this.player.template.playedBarWrap.removeChild(item);
                     });
