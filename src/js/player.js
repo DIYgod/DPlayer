@@ -577,17 +577,24 @@ class DPlayer {
     }
 
     notice(text, time = 2000, opacity = 0.8) {
-        this.template.notice.innerHTML = text;
-        this.template.notice.style.opacity = opacity;
-        if (this.noticeTime) {
-            clearTimeout(this.noticeTime);
-        }
-        this.events.trigger('notice_show', text);
+        const notice = Template.NewNotice(text, opacity);
+
+        this.template.noticeList.appendChild(notice);
+        this.events.trigger('notice_show', notice);
+
         if (time > 0) {
-            this.noticeTime = setTimeout(() => {
-                this.template.notice.style.opacity = 0;
-                this.events.trigger('notice_hide');
-            }, time);
+            setTimeout(
+                (function (e, dp) {
+                    return () => {
+                        e.addEventListener('animationend', () => {
+                            dp.template.noticeList.removeChild(e);
+                        });
+                        e.classList.add('remove-notice');
+                        dp.events.trigger('notice_hide');
+                    };
+                })(notice, this),
+                time
+            );
         }
     }
 

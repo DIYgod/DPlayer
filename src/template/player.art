@@ -251,7 +251,7 @@
         </div>
     {{ /each }}
 </div>
-<div class="dplayer-notice"></div>
+<div class="dplayer-notice-list"></div>
 <button class="dplayer-mobile-play">
     {{@ icons.play }}
 </button>
