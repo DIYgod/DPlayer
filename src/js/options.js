@@ -50,13 +50,13 @@ export default (options) => {
 
     options.contextmenu = options.contextmenu.concat([
         {
-            text: 'Video info',
+            key: 'video-info',
             click: (player) => {
                 player.infoPanel.triggle();
             },
         },
         {
-            text: 'About author',
+            key: 'about-author',
             link: 'https://diygod.me',
         },
         {

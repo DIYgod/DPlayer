@@ -69,7 +69,7 @@ class Danmaku {
                     }
                 },
                 error: (msg) => {
-                    this.options.error(msg || this.options.tran('Danmaku load failed'));
+                    this.options.error(msg || this.options.tran('danmaku-failed'));
                     results[i] = [];
 
                     ++readCount;
@@ -96,7 +96,7 @@ class Danmaku {
             data: danmakuData,
             success: callback,
             error: (msg) => {
-                this.options.error(msg || this.options.tran('Danmaku send failed'));
+                this.options.error(msg || this.options.tran('danmaku-failed'));
             },
         });
 
@@ -307,13 +307,7 @@ class Danmaku {
     }
 
     htmlEncode(str) {
-        return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#x27;')
-            .replace(/\//g, '&#x2f;');
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').replace(/\//g, '&#x2f;');
     }
 
     resize() {

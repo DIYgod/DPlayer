@@ -2,7 +2,7 @@ import Promise from 'promise-polyfill';
 
 import utils from './utils';
 import handleOption from './options';
-import i18n from './i18n';
+import { i18n, checkPresentTranslations } from './i18n';
 import Template from './template';
 import Icons from './icons';
 import Danmaku from './danmaku';
@@ -39,6 +39,7 @@ class DPlayer {
             this.quality = this.options.video.quality[this.options.video.defaultQuality];
         }
         this.tran = new i18n(this.options.lang).tran;
+        checkPresentTranslations(this.options.lang);
         this.events = new Events();
         this.user = new User(this);
         this.container = this.options.container;
@@ -161,9 +162,9 @@ class DPlayer {
             time = Math.min(time, this.video.duration);
         }
         if (this.video.currentTime < time) {
-            this.notice(`${this.tran('FF')} ${(time - this.video.currentTime).toFixed(0)} ${this.tran('s')}`);
+            this.notice(`${this.tran('ff').replace('%s', (time - this.video.currentTime).toFixed(0))}`);
         } else if (this.video.currentTime > time) {
-            this.notice(`${this.tran('REW')} ${(this.video.currentTime - time).toFixed(0)} ${this.tran('s')}`);
+            this.notice(`${this.tran('rew').replace('%s', (this.video.currentTime - time).toFixed(0))}`);
         }
 
         this.video.currentTime = time;
@@ -260,7 +261,7 @@ class DPlayer {
                 this.user.set('volume', percentage);
             }
             if (!nonotice) {
-                this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
+                this.notice(`${this.tran('volume')} ${(percentage * 100).toFixed(0)}%`);
             }
 
             this.video.volume = percentage;
@@ -473,7 +474,7 @@ class DPlayer {
                 // Not a video load error, may be poster load failed, see #307
                 return;
             }
-            this.tran && this.notice && this.type !== 'webtorrent' && this.notice(this.tran('Video load failed'), -1);
+            this.tran && this.notice && this.type !== 'webtorrent' && this.notice(this.tran('video-failed'), -1);
         });
 
         // video end
@@ -553,7 +554,7 @@ class DPlayer {
         this.video = videoEle;
         this.initVideo(this.video, this.quality.type || this.options.video.type);
         this.seek(this.prevVideo.currentTime);
-        this.notice(`${this.tran('Switching to')} ${this.quality.name} ${this.tran('quality')}`, -1);
+        this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, -1);
         this.events.trigger('quality_start', this.quality);
 
         this.on('canplay', () => {
@@ -568,7 +569,7 @@ class DPlayer {
                     this.video.play();
                 }
                 this.prevVideo = null;
-                this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
+                this.notice(`${this.tran('switched-quality').replace('%q', this.quality.name)}`);
                 this.switchingQuality = false;
 
                 this.events.trigger('quality_end');

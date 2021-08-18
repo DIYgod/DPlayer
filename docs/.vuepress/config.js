@@ -29,6 +29,11 @@ module.exports = {
             title: 'DPlayer',
             description: '🍭 Wow, such a lovely HTML5 danmaku video player',
         },
+        '/': {
+            lang: 'de-DE',
+            title: 'DPlayer',
+            description: '🍭 Wow, such a lovely HTML5 danmaku video player',
+        },
     },
     head: [
         ['link', { rel: 'icon', href: `/logo.png` }],
