@@ -2,6 +2,7 @@
 const stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom);
+
 function animate() {
     stats.begin();
     // monitored code goes here
@@ -12,260 +13,435 @@ function animate() {
 requestAnimationFrame(animate);
 
 initPlayers();
-handleEvent();
 
-function handleEvent() {
-    document.getElementById('dplayer-dialog').addEventListener('click', (e) => {
-        const $clickDom = e.currentTarget;
-        const isShowStatus = $clickDom.getAttribute('data-show');
-
-        if (isShowStatus) {
-            document.getElementById('float-dplayer').style.display = 'none';
-        } else {
-            $clickDom.setAttribute('data-show', 1);
-            document.getElementById('float-dplayer').style.display = 'block';
-        }
-    });
-
-    document.getElementById('close-dialog').addEventListener('click', () => {
-        const $openDialogBtnDom = document.getElementById('dplayer-dialog');
-
-        $openDialogBtnDom.setAttribute('data-show', '');
-        document.getElementById('float-dplayer').style.display = 'none';
-    });
-}
 
 function initPlayers() {
-    // dplayer-float
-    window.dpFloat = new DPlayer({
-        container: document.getElementById('dplayer-container'),
-        preload: 'none',
-        screenshot: true,
-        video: {
-            url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
-            pic: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg',
-            thumbnails: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg'
-        },
-        subtitle: {
-            url: 'subtitle test'
-        },
-        danmaku: {
-            id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer/'
-        }
-    });
-    // dp1
-    window.dp1 = new DPlayer({
-        container: document.getElementById('dplayer1'),
-        preload: 'none',
-        screenshot: true,
-        video: {
-            url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
-            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
-        },
-        subtitle: {
-            url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt'
-        },
-        danmaku: {
-            id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer/',
-            addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
-        }
-    });
 
-    // dp2
-    window.dp2 = new DPlayer({
-        container: document.getElementById('dplayer2'),
-        preload: 'none',
-        autoplay: false,
-        theme: '#FADFA3',
-        loop: true,
-        screenshot: true,
-        airplay: true,
-        hotkey: true,
-        logo: 'https://i.loli.net/2019/06/06/5cf8c5d94521136430.png',
-        volume: 0.2,
-        mutex: true,
-        video: {
-            url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
-            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',
-            type: 'auto'
+    const qualities = [{
+            "name": "1080p",
+            "url": "https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp",
+            "type": "normal"
         },
-        subtitle: {
-            url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt',
-            type: 'webvtt',
-            fontSize: '25px',
-            bottom: '10%',
-            color: '#b7daff'
-        },
-        danmaku: {
-            id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer/',
-            token: 'tokendemo',
-            maximum: 3000,
-            user: 'DIYgod',
-            bottom: '15%',
-            unlimited: true
-        },
-        contextmenu: [
-            {
-                text: 'custom contextmenu',
-                link: 'https://github.com/MoePlayer/DPlayer'
-            }
-        ]
-    });
-
-    const events = [
-        'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error',
-        'loadeddata', 'loadedmetadata', 'loadstart', 'mozaudioavailable', 'pause', 'play',
-        'playing', 'ratechange', 'seeked', 'seeking', 'stalled',
-        'volumechange', 'waiting',
-        'screenshot',
-        'thumbnails_show', 'thumbnails_hide',
-        'danmaku_show', 'danmaku_hide', 'danmaku_clear',
-        'danmaku_loaded', 'danmaku_send', 'danmaku_opacity',
-        'contextmenu_show', 'contextmenu_hide',
-        'notice_show', 'notice_hide',
-        'quality_start', 'quality_end',
-        'destroy',
-        'resize',
-        'fullscreen', 'fullscreen_cancel', 'webfullscreen', 'webfullscreen_cancel',
-        'subtitle_show', 'subtitle_hide', 'subtitle_change'
+        {
+            "name": "720p",
+            "url": "https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp",
+            "type": "normal"
+        }
     ];
-    const eventsEle = document.getElementById('events');
-    for (let i = 0; i < events.length; i++) {
-        dp2.on(events[i], (info) => {
-            eventsEle.innerHTML += '<p>Event: ' + events[i] + '</p>';
-            eventsEle.scrollTop = eventsEle.scrollHeight;
-        });
-    }
 
-    // dp3
-    // window.dp3 = new DPlayer({
-    //     container: document.getElementById('dplayer3'),
-    //     preload: 'none',
-    //     video: {
-    //         quality: [{
-    //             name: 'HD',
-    //             url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
-    //             type: 'hls'
-    //         }, {
-    //             name: 'SD',
-    //             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-    //             type: 'normal'
-    //         }],
-    //         defaultQuality: 0,
-    //         pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png'
-    //     }
-    // });
 
-    // // dp4
-    // window.dp4 = new DPlayer({
-    //     container: document.getElementById('dplayer4'),
-    //     preload: 'none',
-    //     video: {
-    //         url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
-    //         type: 'hls'
-    //     }
-    // });
+    const vtt_stamps = [{
+            "text": "Einführung",
+            "time": 0
+        },
+        {
+            "text": "Opening",
+            "time": 147.022
+        },
+        {
+            "text": "Episode",
+            "time": 262.012
+        },
+        {
+            "text": "Ending",
+            "time": 1285.035
+        },
+        {
+            "text": "Abschluss",
+            "time": 1364.99
+        },
+        {
+            "text": "Episoden Vorschau",
+            "time": 1424.967
+        }
+    ];
 
-    // // dp5
-    // window.dp5 = new DPlayer({
-    //     container: document.getElementById('dplayer5'),
-    //     preload: 'none',
-    //     video: {
-    //         url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.flv',
-    //         type: 'flv'
-    //     }
-    // });
 
-    // window.dp8 = new DPlayer({
-    //     container: document.getElementById('dplayer8'),
-    //     preload: 'none',
-    //     video: {
-    //         url: 'https://moeplayer.b0.upaiyun.com/dplayer/dash/hikarunara.mpd',
-    //         type: 'dash'
-    //     }
-    // });
+    const dp = new DPlayer({
+        container: document.getElementById("video-wrapper"),
+        screenshot: true,
+        lang: "de",
+        video: {
+            quality: qualities,
+            defaultQuality: 0,
+        },
+        theme: "var(--bar-color)",
+        hotkey: true,
+        /* contextmenu: [
+            { text: "custom1", link: "https://github.com/DIYgod/DPlayer" },
+            { text: "custom2", click: function(t) { console.log(t) } }
+        ], */
+        highlight: vtt_stamps,
+        airplay: false,
+    });
+    window.dp = dp;
+};
 
-    // window.dp9 = new DPlayer({
-    //     container: document.getElementById('dplayer9'),
-    //     video: {
-    //         url: 'magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&dn=Sintel&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel.torrent',
-    //         type: 'webtorrent'
-    //     }
-    // });
 
-    // window.dp6 = new DPlayer({
-    //     container: document.getElementById('dplayer6'),
-    //     preload: 'none',
-    //     live: true,
-    //     danmaku: true,
-    //     apiBackend: {
-    //         read: function (endpoint, callback) {
-    //             console.log('假装 WebSocket 连接成功');
-    //             callback();
-    //         },
-    //         send: function (endpoint, danmakuData, callback) {
-    //             console.log('假装通过 WebSocket 发送数据', danmakuData);
-    //             callback();
-    //         }
-    //     },
-    //     video: {
-    //         url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
-    //         type: 'hls'
-    //     }
-    // });
 
-    // window.dp10 = new DPlayer({
-    //     container: document.getElementById('dplayer10'),
-    //     video: {
-    //         url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
-    //         type: 'pearplayer',
-    //         customType: {
-    //             'pearplayer': function (video, player) {
-    //                 new PearPlayer(video, {
-    //                     src: video.src,
-    //                     autoplay: player.options.autoplay
-    //                 });
-    //             }
-    //         }
-    //     }
-    // });
-}
+/* 
 
-function clearPlayers() {
-    for (let i = 0; i < 6; i++) {
-        window['dp' + (i + 1)].pause();
-        document.getElementById('dplayer' + (i + 1)).innerHTML = '';
+window.trackTracker = null;
+
+window.Skip = async () => {
+    const SkipOpEd = document.getElementById("skipcheck").checked;
+    await store(key_oped, SkipOpEd);
+    if (trackTracker != null) {
+        trackTracker.dispatchEvent(new Event("cuechange"));
     }
 }
 
-function switchDPlayer() {
-    if (dp2.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
-        dp2.switchVideo({
-            url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
-            pic: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg',
-            type: 'auto',
-        }, {
-            id: '5rGf5Y2X55qu6Z2p',
-            api: 'https://api.prprpr.me/dplayer/',
-            maximum: 3000,
-            user: 'DIYgod'
+window.cSkip = async () => {
+    return await read(key_oped, false);
+}
+
+window.skipped = false;
+
+window.displayChapters = (trackElement) => {
+    if (trackElement && (textTrack = trackElement.track)) {
+        trackTracker = textTrack;
+        if (textTrack.kind === "chapters") {
+            textTrack.mode = "hidden";
+            for (let i = 0; i < textTrack.cues.length; ++i) {
+                const cue = textTrack.cues[i],
+                    chapterName = cue.text,
+                    start = cue.startTime,
+                    newLocale = document.createElement("li");
+                newLocale.setAttribute("id", start);
+                const localeDescription = document.createTextNode(cue.text);
+                newLocale.appendChild(localeDescription);
+                const locationList = document.getElementById("chapters");
+                locationList.appendChild(newLocale);
+                newLocale.addEventListener(
+                    "click",
+                    (element) => {
+                        document.getElementById("video").currentTime =
+                            +element.target.id;
+                    },
+                    false
+                );
+            }
+            textTrack.addEventListener(
+                "cuechange",
+                async function () {
+                    skipped = false;
+
+                    let currentLocation = 0;
+                    let text = "Error";
+
+                    if (
+                        this.activeCues !== undefined &&
+                        this.activeCues.length >= 1
+                    ) {
+                        let r = 0;
+                        if (this.activeCues.length >= 2) {
+                            r = this.activeCues.length - 1;
+                        }
+
+                        currentLocation = this.activeCues[r].startTime;
+                        text = this.activeCues[r].text;
+                    }
+
+                    const chapter = document.getElementById(currentLocation);
+                    if (chapter) {
+                        const locations = document
+                            .getElementById("chaptersfig")
+                            .getElementsByTagName("li");
+                        for (let i = 0; i < locations.length; ++i) {
+                            if (
+                                (text.includes("Opening") || text.includes("Ending")) && (await cSkip()) &&!skipped  ) {
+                                if (locations[i].innerHTML.includes(text)) {
+                                    document.getElementById(
+                                        "video"
+                                    ).currentTime = locations[i + 1].id;
+                                    skipped = true;
+                                }
+                            }
+
+                            locations[i].classList.remove("current");
+                        }
+                        chapter.classList.add("current");
+                        document.getElementById("chapters").style.top =
+                            "-" + chapter.parentNode.offsetTop + "px";
+                    }
+                },
+                false
+            );
+        }
+    }
+}
+
+window.makeVideoVis = () => {
+    const toHide = ["download-wrapper"];
+    const toShow  = ["video-wrapper","controls-prev","controls-next","download2","settingsbtn","title-vid","support-svg","playerSwitch"];
+
+    toHide.forEach(id=> document.getElementById(id).classList.add("hide"))
+    toShow.forEach(id=> document.getElementById(id).classList.remove("hide"))
+}
+window.attachVideoController = () => {
+    const vid = document.querySelector("#video");
+    if (typeof vid == "undefined") {
+        return "video is null";
+    }
+    let isSeeking = false;
+    let idSeekTest;
+    const SEEKEVENT_TIMEOUT = 30;
+
+    vid.onpause = function () {
+        idSeekTest = setTimeout(function () {
+            if (!isSeeking) {
+                if (typeof resumeFirework == "function") resumeFirework();
+                pausedVideo(document.querySelector("#video"));
+            }
+        }, SEEKEVENT_TIMEOUT);
+    };
+
+    vid.onplay = function () {
+        idSeekTest = setTimeout(function () {
+            if (!isSeeking) {
+                if (typeof pauseFirework == "function") pauseFirework();
+                setTimeout(() => {
+                    if (typeof clearFirework == "function") clearFirework();
+                }, 10);
+            }
+        }, SEEKEVENT_TIMEOUT);
+    };
+
+    vid.onseeking = function () {
+        isSeeking = true;
+        clearTimeout(idSeekTest);
+    };
+    vid.onseeked = function () {
+        isSeeking = false;
+    };
+    vid.onerror = function (e) {
+        console.log(e);
+    };
+    vid.addEventListener("loadeddata", async function () {
+        if (typeof this.webkitAudioDecodedByteCount !== "undefined") {
+            // non-zero if video has audio track
+            if (this.webkitAudioDecodedByteCount > 0) {
+                console.log("video has audio");
+            } else {
+                setstatus(true, "No audio present, Chrome");
+                console.log("video doesn't have audio");
+            }
+        } else if (typeof this.mozHasAudio !== "undefined") {
+            // true if video has audio track
+            if (this.mozHasAudio) {
+                console.log("video has audio");
+            } else {
+                console.log("video doesn't have audio");
+                setstatus(true, "No audio present, Firefox");
+            }
+        } else {
+            console.log("can't tell if video has audio");
+            setstatus(false, "audio status is undefined");
+        }
+    });
+    addCallback("auth-status-conf", seekToTime);
+    vid.addEventListener("loadstart", seekToTime);
+    vid.onloadstart = seekToTime;
+    vid.addEventListener("loadedmetadata", seekToTime);
+    //$("#video").on("loadstart", seekToTime);
+
+    addCallback("all", async () => {
+        await seekToTime();
+        //console.log($("#video")[0].readyState)
+    });
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+            if (pausedVideo) pausedVideo(document.querySelector("#video"));
+        }
+    });
+}
+
+window.seekToTime = async () => {
+    return new Promise(async (resolve, reject) => {
+        if (!window.seeked_ok) {
+            const vid = document.querySelector("#video");
+            if (
+                typeof getwatchlist == "undefined" ||
+                typeof window.auth["logged-in"] == "undefined"
+            ) {
+                //addCallback("all",seekToTime)
+                return;
+            }
+            const temp2 = await getwatchlist(window["video-metadata"].name);
+            if (temp2.nr) {
+                //name{nr:name,time:cT,finished,total:dur}
+                if (temp2.finished) {
+                    //TODO visual indication
+                }
+                vid.currentTime = temp2.time;
+            }
+            window.seeked_ok = true;
+            resolve();
+        }
+    });
+}
+
+window.pausedVideo = (vid) => {
+    if (!vid) {
+        return;
+    }
+    if (typeof vid == "undefined") {
+        return;
+    }
+  
+    
+    const cT = vid.currentTime;
+    const dur = vid.duration;
+    const name = window["video-metadata"].name;
+    const finished = dur - cT <= dur * GLOABL_FINISH_RATIO;
+    const t = { nr: name, time: cT, finished, total: dur };
+    if(window.auth.settings && window.auth.settings [key_no_rewatchs]){
+        const z = findByNr(window.auth.watchlist,name)
+        if(z){
+            if(z.finished){
+                return;
+            }else if(z.time>cT){
+                return;
+            }
+        }
+    }
+    if (window.auth["logged-in"]) {
+        const blob = new Blob([JSON.stringify(t)], {
+            type: "application/json; charset=UTF-8",
         });
+        const ff = navigator.sendBeacon(`/API/v1/users/watched`, blob);
+        if (!ff) {
+            console.log("Error in sendBeacon()");
+        }
     } else {
-        dp2.switchVideo({
-            url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
-            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',
-            type: 'auto'
-        }, {
-            id: '9E2E3368B56CDBB42',
-            api: 'https://api.prprpr.me/dplayer/',
-            maximum: 3000,
-            user: 'DIYgod'
-        });
+        setwatchlist(t, true);
     }
 }
+
+window.Playerupdate = async (standard_native, initialize) => {
+    return new Promise(async (resolve, reject) => {
+        if (initialize) {
+            if (!standard_native) {
+                if (typeof DPlayer == "undefined") {
+                    addCallback("dplayer", UseDPlayer);
+                    activateAddonByName("dplayer");
+                } else {
+                    await UseDPlayer();
+                }
+
+                //TODO window['video-metadata']
+            } else {
+                if (typeof window.chaptersTodisplay != "undefined") {
+                    displayChapters(window.chaptersTodisplay);
+                }
+                attachVideoController();
+            }
+            window.playerActive = standard_native ? "native" : "dplayer";
+            resolve();
+        } else {
+            if (window.playerActive == "native") {
+                if (typeof DPlayer == "undefined") {
+                    addCallback("dplayer", UseDPlayer);
+                    activateAddonByName("dplayer");
+                } else {
+                    UseDPlayer();
+                }
+                window.playerActive = "dplayer";
+                //document.getElementById('video-wrapper')
+                //TODO make it
+            } else {
+
+            }
+            resolve();
+        }
+    });
+}
+
+window.UseDPlayer = async () => {
+    return new Promise(async (resolve, reject) => {
+        const video = document.getElementById("video");
+    window["video-metadata"].native_video = video.outerHTML;
+
+
+    const FHD = window["video-metadata"].src;
+    const qualities = await videos(window["video-metadata"].name, FHD);
+    window["video-metadata"].origname = window["video-metadata"].name;
+    window["video-metadata"].names = [];
+    for (let i = 0; i < qualities.length; i++) {
+        const temp1 = qualities[i].url;
+        const res = temp1.substring(temp1.lastIndexOf("/") + 1);
+        window["video-metadata"].names.push(res);
+    }
+    const q = 0;
+    window["video-metadata"].name = qualities[q].url.substring(
+        qualities[q].url.lastIndexOf("/") + 1
+    );
+    const vtt_stamps = [];
+    if (video.children.length > 1) {
+        if (video.children[1].track) {
+            const cues = video.children[1].track.cues;
+            for (let j = 0; j < cues.length; j++) {
+                const cue = cues[j];
+                vtt_stamps.push({ text: cue.text, time: cue.startTime });
+            }
+        }
+    }
+
+    const dp = new DPlayer({
+        container: document.getElementById("video-wrapper"),
+        screenshot: true,
+        lang: "de",
+        video: {
+            quality: qualities,
+            defaultQuality: q,
+        },
+        theme: "var(--bar-color)",
+        hotkey: true,
+        contextmenu:[
+            {text:"custom1",link:"https://github.com/DIYgod/DPlayer"},
+            {text:"custom2",click:function(t){console.log(t)}}
+        ],
+        highlight: vtt_stamps,
+        airplay: false,
+    });
+    window.dp = dp;
+});
+}
+
+window.videos = async (num, standard) => {
+    return new Promise(async (resolve, reject) => {
+        const xhr2 = await makeRequest({
+        type: "GET",
+        url: `https://ddl.amalgam-fansubs.moe/API.php`,
+        query: ["source=1", `filter=${num}`],
+        synchronus: true,
+    });
+    const json = pJSON(xhr2.responseText);
+    const response = [];
+    Object.keys(json).forEach((s) => {
+        const o = json[s];
+        const g = Object.keys(o);
+        const url = o[g[0]];
+        let name = "480p";
+        if (s == "dch") {
+            name = "720p";
+        } else if (s == "dcf") {
+            name = "1080p";
+        } else if (s == "kn") {
+            name = "480p";
+        }
+        if (g.length >= 1) {
+            response.push({ name: name, url: url, type: "normal" });
+        }
+    });
+    if (response.length == 0) {
+        response.push({ name: "Standard", url: standard, type: "normal" });
+    }
+    resolve(response);
+});
+}
+
+//addons specific code
+if (window.handlers) window.handlers("video");
+ */

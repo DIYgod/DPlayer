@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DPlayer Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css">
+    <link rel="stylesheet" href="demo.css">
+    <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pearplayer"></script>
+    <script src="DPlayer.js"></script>
+</head>
+
+<body class="markdown-body">
+    <h2>在 dialog 中承载视频</h2>
+    <h3 id="dplayer-dialog" class="show-dialog">Show Dialog</h3>
+    <div id="float-dplayer" class="float-dplayer">
+        <div id="dplayer-container" class="dplayer-container"></div>
+        <h3 id="close-dialog" class="close-dialog">X</h3>
+    </div>
+
+    <h2 id="quick-start">Quick Start</h2>
+    <div class="example">
+        <div id="dplayer1"></div>
+    </div>
+
+    <h2 id="options">Options</h2>
+    <div class="example">
+        <button class="btn" onclick="switchDPlayer()">Switch Video</button>
+        <button class="btn" onclick="dp2.notice('Notice演示')">notice</button>
+        <button class="btn" onclick="dp2.seek(120)">seek</button>
+        <button class="btn" onclick="dp2.volume(0.2)">volume</button>
+        <button class="btn" onclick="dp2.toggle()">toggle</button>
+        <button class="btn" onclick="dp2.destroy()">destroy</button>
+        <button class="btn" onclick="dp2.danmaku.hide()">danmaku.hide</button>
+        <button class="btn" onclick="dp2.danmaku.show()">danmaku.show</button>
+        <div id="dplayer2"></div>
+        <div id="events"></div>
+    </div>
+
+    <h2 id="quality-switching">Quality switching</h2>
+    <div class="example">
+        <button class="btn" onclick="dp3.switchQuality(1)">Switch quality</button>
+        <div id="dplayer3"></div>
+    </div>
+
+    <h2 id="hls-support">HLS support</h2>
+    <div class="example">
+        <div id="dplayer4"></div>
+    </div>
+
+    <h2 id="dash-support">MPEG DASH support</h2>
+    <div class="example">
+        <div id="dplayer8"></div>
+    </div>
+
+    <h2 id="flv-support">FLV support</h2>
+    <div class="example">
+        <div id="dplayer5"></div>
+    </div>
+
+    <h2 id="webtorrent">WebTorrent</h2>
+    <div class="example">
+        <div id="dplayer9"></div>
+    </div>
+
+    <h2 id="live">Live</h2>
+    <div class="example">
+        <button class="btn" onclick="dp6.danmaku.draw({text: '假装收到 WebSocket 弹幕', color: '#fff', type: 'right'})">假装收到 WebSocket 弹幕</button>
+        <div id="dplayer6"></div>
+    </div>
+
+    <h2 id="custon-type">Custon video type</h2>
+    <div class="example">
+        <div id="dplayer10"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/stats.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>
