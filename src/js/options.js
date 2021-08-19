@@ -1,5 +1,6 @@
 /* global DPLAYER_VERSION */
 import defaultApiBackend from './api.js';
+import utils from './utils.js';
 
 export default (options) => {
     // default options
@@ -11,7 +12,8 @@ export default (options) => {
         loop: false,
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
-        airplay: true,
+        airplay: 'vendor',
+        chromecast: 'vendor',
         hotkey: true,
         preload: 'metadata',
         volume: 0.7,
@@ -46,6 +48,14 @@ export default (options) => {
 
     if (options.lang) {
         options.lang = options.lang.toLowerCase();
+    }
+
+    if (options.airplay) {
+        options.airplay = typeof options.airplay === 'string' && options.airplay === 'vendor' ? utils.supportsAirplay() : options.airplay;
+    }
+
+    if (options.chromecast) {
+        options.chromecast = typeof options.chromecast === 'string' && options.chromecast === 'vendor' ? utils.supportsChromeCast() : options.chromecast;
     }
 
     options.contextmenu = options.contextmenu.concat([

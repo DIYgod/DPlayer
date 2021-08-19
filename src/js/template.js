@@ -23,6 +23,7 @@ class Template {
                 pic: this.options.video.pic,
                 screenshot: this.options.screenshot,
                 airplay: this.options.airplay,
+                chromecast: this.options.chromecast,
                 preload: this.options.preload,
                 url: this.options.video.url,
                 subtitle: this.options.subtitle,
@@ -80,6 +81,7 @@ class Template {
         this.qualityList = this.container.querySelector('.dplayer-quality-list');
         this.camareButton = this.container.querySelector('.dplayer-camera-icon');
         this.airplayButton = this.container.querySelector('.dplayer-airplay-icon');
+        this.chromecastButton = this.container.querySelector('.dplayer-chromecast-icon');
         this.subtitleButton = this.container.querySelector('.dplayer-subtitle-icon');
         this.subtitleButtonInner = this.container.querySelector('.dplayer-subtitle-icon .dplayer-icon-content');
         this.subtitle = this.container.querySelector('.dplayer-subtitle');

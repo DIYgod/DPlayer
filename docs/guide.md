@@ -35,7 +35,6 @@ sidebar: auto
 | [极酷社](https://www.acg.app) |
 | :---------------------------: |
 
-
 ## Installation
 
 Using npm:
@@ -103,7 +102,8 @@ You can custom your player instance by those options
 | loop                 | false                              | video loop                                                                                                                                                 |
 | lang                 | navigator.language.toLowerCase()   | values: 'en', 'zh-cn', 'zh-tw'                                                                                                                             |
 | screenshot           | false                              | enable screenshot, if true, video and video poster must enable Cross-Origin                                                                                |
-| airplay              | true                               | enable airplay in Safari                                                                                                                                   |
+| airplay              | "vendor"                           | enable airplay in Safari, values: 'vendor', false. true                                                                                                    |
+| chromecast           | "vendor"                           | enable chromecast in Chrome, values: 'vendor', false. true                                                                                                 |
 | hotkey               | true                               | enable hotkey, support FF, FR, volume control, play & pause                                                                                                |
 | preload              | 'auto'                             | values: 'none', 'metadata', 'auto'                                                                                                                         |
 | volume               | 0.7                                | default volume, notice that player will remember user setting, default volume will not work after user set volume themselves                               |
@@ -709,7 +709,7 @@ DPlayer can work with any MSE library via `customType` option.
 
 ```js
 var type = 'normal';
-if(Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
+if (Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
     type = 'customHls';
 }
 const dp = new DPlayer({
@@ -718,19 +718,19 @@ const dp = new DPlayer({
         url: 'demo.m3u8',
         type: type,
         customType: {
-            'customHls': function (video, player) {
+            customHls: function (video, player) {
                 const hls = new Hls({
                     debug: false,
                     // Other hlsjsConfig options provided by hls.js
                     p2pConfig: {
-                        live: false,        
+                        live: false,
                         // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/en/
-                    }
+                    },
                 });
                 hls.loadSource(video.src);
                 hls.attachMedia(video);
-            }
-        }
+            },
+        },
     },
 });
 ```
@@ -757,11 +757,11 @@ const dp = new DPlayer({
     apiBackend: {
         read: function (options) {
             console.log('Pretend to connect WebSocket');
-            callback();
+            options.success([]);
         },
         send: function (options) {
             console.log('Pretend to send danmaku via WebSocket', options.data);
-            callback();
+            options.success([]);
         },
     },
     video: {

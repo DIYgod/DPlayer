@@ -80,6 +80,7 @@ class DPlayer {
 
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
+                player: this,
                 container: this.template.danmaku,
                 opacity: this.user.get('opacity'),
                 callback: () => {
@@ -107,6 +108,7 @@ class DPlayer {
                     maximum: this.options.danmaku.maximum,
                     addition: this.options.danmaku.addition,
                     user: this.options.danmaku.user,
+                    speedRate: this.options.danmaku.speedRate,
                 },
                 events: this.events,
                 tran: (msg) => this.tran(msg),
@@ -532,6 +534,7 @@ class DPlayer {
         if (this.qualityIndex === index || this.switchingQuality) {
             return;
         } else {
+            this.prevIndex = this.qualityIndex;
             this.qualityIndex = index;
         }
         this.switchingQuality = true;
@@ -575,6 +578,27 @@ class DPlayer {
                 this.events.trigger('quality_end');
             }
         });
+
+        this.on('error', () => {
+            if (!this.video.error) {
+                return;
+            }
+            if (this.prevVideo) {
+                this.template.videoWrap.removeChild(this.video);
+                this.video = this.prevVideo;
+                if (!paused) {
+                    this.video.play();
+                }
+                this.qualityIndex = this.prevIndex;
+                this.quality = this.options.video.quality[this.qualityIndex];
+                this.noticeTime = setTimeout(() => {
+                    this.template.notice.style.opacity = 0;
+                    this.events.trigger('notice_hide');
+                }, 3000);
+                this.prevVideo = null;
+                this.switchingQuality = false;
+            }
+        });
     }
 
     notice(text, time = 2000, opacity = 0.8) {
@@ -614,6 +638,9 @@ class DPlayer {
         this.video.src = '';
         this.container.innerHTML = '';
         this.events.trigger('destroy');
+        Object.keys(this.events.events).forEach((key) => {
+            this.off(key);
+        });
     }
 
     static get version() {

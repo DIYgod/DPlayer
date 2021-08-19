@@ -1,6 +1,11 @@
 import utils from './utils';
 import Thumbnails from './thumbnails';
 import Icons from './icons';
+import { Subject } from 'rxjs';
+
+let cast;
+let runOnce = true;
+let isCasting = false;
 
 class Controller {
     constructor(player) {
@@ -31,6 +36,7 @@ class Controller {
         this.initSubtitleButton();
         this.initHighlights();
         this.initAirplayButton();
+        this.initChromecastButton();
         if (!utils.isMobile) {
             this.initVolumeButton();
         }
@@ -234,18 +240,25 @@ class Controller {
 
                 let dataURL;
                 canvas.toBlob((blob) => {
-                    dataURL = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = dataURL;
-                    link.download = 'DPlayer.png';
-                    link.style.display = 'none';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(dataURL);
+                    // if video hasn't loaded yet, we get an error
+                    if (blob) {
+                        dataURL = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = dataURL;
+                        const temp = new URL(this.player.video.currentSrc).pathname;
+                        const name = decodeURI(temp.substring(temp.lastIndexOf('/') + 1));
+                        const time = utils.secondToTime(this.player.video.currentTime, '_');
+                        link.download = `${name}_Screenshot_${time}.png`;
+                        link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        this.player.events.trigger('screenshot', dataURL);
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(dataURL);
+                    } else {
+                        console.debug('Screenshot Error, video not loaded yet!');
+                    }
                 });
-
-                this.player.events.trigger('screenshot', dataURL);
             });
         }
     }
@@ -276,6 +289,90 @@ class Controller {
             } else {
                 this.player.template.airplayButton.style.display = 'none';
             }
+        }
+    }
+
+    initChromecast() {
+        const script = window.document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        script.setAttribute('src', 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
+        window.document.body.appendChild(script);
+
+        window.__onGCastApiAvailable = (isAvailable) => {
+            if (isAvailable) {
+                cast = window.chrome.cast;
+                const sessionRequest = new cast.SessionRequest(cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
+                const apiConfig = new cast.ApiConfig(
+                    sessionRequest,
+                    () => {},
+                    (status) => {
+                        if (status === cast.ReceiverAvailability.AVAILABLE) {
+                            console.log('chromecast: ', status);
+                        }
+                    }
+                );
+                cast.initialize(apiConfig, () => {});
+            }
+        };
+    }
+
+    initChromecastButton() {
+        if (this.player.options.chromecast) {
+            if (runOnce) {
+                runOnce = false;
+                this.initChromecast();
+            }
+            const discoverDevices = () => {
+                const subj = new Subject();
+                cast.requestSession(
+                    (s) => {
+                        this.session = s;
+                        subj.next('CONNECTED');
+                        launchMedia(this.player.options.video.url);
+                    },
+                    (err) => {
+                        if (err.code === 'cancel') {
+                            this.session = undefined;
+                            subj.next('CANCEL');
+                        } else {
+                            console.error('Error selecting a cast device', err);
+                        }
+                    }
+                );
+                return subj;
+            };
+
+            const launchMedia = (media) => {
+                const mediaInfo = new cast.media.MediaInfo(media);
+                const request = new cast.media.LoadRequest(mediaInfo);
+
+                if (!this.session) {
+                    window.open(media);
+                    return false;
+                }
+                this.session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError).play();
+                return true;
+            };
+
+            const onMediaDiscovered = (how, media) => {
+                this.currentMedia = media;
+            };
+
+            const onMediaError = (err) => {
+                console.error('Error launching media', err);
+            };
+
+            this.player.template.chromecastButton.addEventListener('click', () => {
+                if (isCasting) {
+                    isCasting = false;
+                    this.currentMedia.stop();
+                    this.session.stop();
+                    this.initChromecast();
+                } else {
+                    isCasting = true;
+                    discoverDevices();
+                }
+            });
         }
     }
 

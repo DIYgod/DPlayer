@@ -1,4 +1,7 @@
 const isMobile = /mobile/i.test(window.navigator.userAgent);
+const isChrome = /chrome/i.test(window.navigator.userAgent);
+const isSafari = /safari/i.test(window.navigator.userAgent);
+const isFirefox = /firefox/i.test(window.navigator.userAgent);
 
 const utils = {
     /**
@@ -7,16 +10,16 @@ const utils = {
      * @param {Number} second
      * @return {String} 00:00 or 00:00:00
      */
-    secondToTime: (second) => {
+    secondToTime: (second, delimiter = ':') => {
         second = second || 0;
         if (second === 0 || second === Infinity || second.toString() === 'NaN') {
-            return '00:00';
+            return `00${delimiter}00`;
         }
         const add0 = (num) => (num < 10 ? '0' + num : '' + num);
         const hour = Math.floor(second / 3600);
         const min = Math.floor((second - hour * 3600) / 60);
         const sec = Math.floor(second - hour * 3600 - min * 60);
-        return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
+        return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(delimiter);
     },
 
     /**
@@ -89,9 +92,11 @@ const utils = {
 
     isMobile: isMobile,
 
-    isFirefox: /firefox/i.test(window.navigator.userAgent),
+    isFirefox: isFirefox,
 
-    isChrome: /chrome/i.test(window.navigator.userAgent),
+    isChrome: isChrome,
+
+    isSafari: isSafari,
 
     storage: {
         set: (key, value) => {
@@ -100,6 +105,10 @@ const utils = {
 
         get: (key) => localStorage.getItem(key),
     },
+
+    supportsAirplay: () => isSafari && !isChrome && !isFirefox,
+
+    supportsChromeCast: () => isChrome && !isSafari && !isFirefox,
 
     nameMap: {
         dragStart: isMobile ? 'touchstart' : 'mousedown',
