@@ -62,37 +62,39 @@ class DPlayer {
         }
 
         // multi subtitles defaultSubtitle add index, off option
-        if (Array.isArray(this.options.subtitle.url)) {
-            const offSubtitle = {
-                subtitle: '',
-                lang: 'Off',
-            };
-            this.options.subtitle.url.push(offSubtitle);
-            if (this.options.subtitle.defaultSubtitle) {
-                if (typeof this.options.subtitle.defaultSubtitle === 'string') {
-                    // defaultSubtitle is string, match in lang then name.
-                    this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) =>
-                        /* if (sub.lang === this.options.subtitle.defaultSubtitle) {
+        if (this.options.subtitle) {
+            if (Array.isArray(this.options.subtitle.url)) {
+                const offSubtitle = {
+                    subtitle: '',
+                    lang: 'Off',
+                };
+                this.options.subtitle.url.push(offSubtitle);
+                if (this.options.subtitle.defaultSubtitle) {
+                    if (typeof this.options.subtitle.defaultSubtitle === 'string') {
+                        // defaultSubtitle is string, match in lang then name.
+                        this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) =>
+                            /* if (sub.lang === this.options.subtitle.defaultSubtitle) {
                             return true;
                         } else if (sub.name === this.options.subtitle.defaultSubtitle) {
                             return true;
                         } else {
                             return false;
                         } */
-                        sub.lang === this.options.subtitle.defaultSubtitle ? true : sub.name === this.options.subtitle.defaultSubtitle ? true : false
-                    );
-                } else if (typeof this.options.subtitle.defaultSubtitle === 'number') {
-                    // defaultSubtitle is int, directly use for index
-                    this.options.subtitle.index = this.options.subtitle.defaultSubtitle;
+                            sub.lang === this.options.subtitle.defaultSubtitle ? true : sub.name === this.options.subtitle.defaultSubtitle ? true : false
+                        );
+                    } else if (typeof this.options.subtitle.defaultSubtitle === 'number') {
+                        // defaultSubtitle is int, directly use for index
+                        this.options.subtitle.index = this.options.subtitle.defaultSubtitle;
+                    }
                 }
-            }
-            // defaultSubtitle not match or not exist or index bound(when defaultSubtitle is int), try browser language.
-            if (this.options.subtitle.index === -1 || !this.options.subtitle.index || this.options.subtitle.index > this.options.subtitle.url.length - 1) {
-                this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) => sub.lang === navigator.language);
-            }
-            // browser language not match, dedfault off title
-            if (this.options.subtitle.index === -1) {
-                this.options.subtitle.index = this.options.subtitle.url.length - 1;
+                // defaultSubtitle not match or not exist or index bound(when defaultSubtitle is int), try browser language.
+                if (this.options.subtitle.index === -1 || !this.options.subtitle.index || this.options.subtitle.index > this.options.subtitle.url.length - 1) {
+                    this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) => sub.lang === navigator.language);
+                }
+                // browser language not match, dedfault off title
+                if (this.options.subtitle.index === -1) {
+                    this.options.subtitle.index = this.options.subtitle.url.length - 1;
+                }
             }
         }
 
