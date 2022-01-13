@@ -28,7 +28,12 @@ class Controller {
         this.initFullButton();
         this.initQualityButton();
         this.initScreenshotButton();
-        this.initSubtitleButton();
+        // if subtitle url not array, not init old single subtitle button
+        if (this.player.options.subtitle) {
+            if (typeof this.player.options.subtitle.url === 'string') {
+                this.initSubtitleButton();
+            }
+        }
         this.initHighlights();
         this.initAirplayButton();
         if (!utils.isMobile) {
@@ -280,22 +285,20 @@ class Controller {
     }
 
     initSubtitleButton() {
-        if (this.player.options.subtitle) {
-            this.player.events.on('subtitle_show', () => {
-                this.player.template.subtitleButton.dataset.balloon = this.player.tran('Hide subtitle');
-                this.player.template.subtitleButtonInner.style.opacity = '';
-                this.player.user.set('subtitle', 1);
-            });
-            this.player.events.on('subtitle_hide', () => {
-                this.player.template.subtitleButton.dataset.balloon = this.player.tran('Show subtitle');
-                this.player.template.subtitleButtonInner.style.opacity = '0.4';
-                this.player.user.set('subtitle', 0);
-            });
+        this.player.events.on('subtitle_show', () => {
+            this.player.template.subtitleButton.dataset.balloon = this.player.tran('Hide subtitle');
+            this.player.template.subtitleButtonInner.style.opacity = '';
+            this.player.user.set('subtitle', 1);
+        });
+        this.player.events.on('subtitle_hide', () => {
+            this.player.template.subtitleButton.dataset.balloon = this.player.tran('Show subtitle');
+            this.player.template.subtitleButtonInner.style.opacity = '0.4';
+            this.player.user.set('subtitle', 0);
+        });
 
-            this.player.template.subtitleButton.addEventListener('click', () => {
-                this.player.subtitle.toggle();
-            });
-        }
+        this.player.template.subtitleButton.addEventListener('click', () => {
+            this.player.subtitle.toggle();
+        });
     }
 
     setAutoHide() {
