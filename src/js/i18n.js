@@ -61,9 +61,9 @@ const tranTxt = {
         Live: '直播',
         'Video info': '视频统计信息',
         Off: '关闭',
-        'zh-CN': '简体中文',
-        'zh-TW': '繁体中文',
-        'en-US': '英语',
+        'zh-cn': '简体中文',
+        'zh-tw': '繁体中文',
+        'en-us': '英语',
     },
     'zh-tw': {
         'Danmaku is loading': '彈幕載入中',
@@ -106,14 +106,14 @@ const tranTxt = {
         Live: '直播',
         'Video info': '影片統計訊息',
         Off: '關閉',
-        'zh-CN': '簡體中文',
-        'zh-TW': '繁體中文',
-        'en-US': '英語',
+        'zh-cn': '簡體中文',
+        'zh-tw': '繁體中文',
+        'en-us': '英語',
     },
     'en-us': {
-        'zh-CN': 'Chinese(Simplified)',
-        'zh-TW': 'Chinese(Traditional)',
-        'en-US': 'English(US)',
+        'zh-cn': 'Chinese(Simplified)',
+        'zh-tw': 'Chinese(Traditional)',
+        'en-us': 'English(US)',
     },
 };
 

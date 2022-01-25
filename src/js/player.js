@@ -89,9 +89,9 @@ class DPlayer {
                 }
                 // defaultSubtitle not match or not exist or index bound(when defaultSubtitle is int), try browser language.
                 if (this.options.subtitle.index === -1 || !this.options.subtitle.index || this.options.subtitle.index > this.options.subtitle.url.length - 1) {
-                    this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) => sub.lang === navigator.language);
+                    this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) => sub.lang === this.options.lang);
                 }
-                // browser language not match, dedfault off title
+                // browser language not match, default off title
                 if (this.options.subtitle.index === -1) {
                     this.options.subtitle.index = this.options.subtitle.url.length - 1;
                 }
