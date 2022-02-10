@@ -57,7 +57,7 @@
         "file-loader": "^6.0.0",
         "git-revision-webpack-plugin": "^3.0.3",
         "mini-css-extract-plugin": "1.3.0",
-        "node-sass": "^5.0.0",
+        "node-sass": "^7.0.0",
         "postcss-loader": "^3.0.0",
         "prettier": "^2.0.4",
         "prettier-check": "^2.0.0",
