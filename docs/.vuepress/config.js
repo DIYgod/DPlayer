@@ -38,6 +38,7 @@ module.exports = {
         ['script', { src: 'https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js' }],
         ['script', { src: 'https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js' }],
     ],
+    theme: 'vuepress-theme-dplayer',
     themeConfig: {
         repo: 'MoePlayer/DPlayer',
         editLinks: true,
