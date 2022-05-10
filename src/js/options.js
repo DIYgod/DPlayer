@@ -20,6 +20,7 @@ export default (options) => {
         video: {},
         contextmenu: [],
         mutex: true,
+        cancelClick: false,
         pluginOptions: { hls: {}, flv: {}, dash: {}, webtorrent: {} },
     };
     for (const defaultKey in defaultOption) {

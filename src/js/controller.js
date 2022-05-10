@@ -47,9 +47,12 @@ class Controller {
 
         if (!utils.isMobile) {
             this.player.template.videoWrap.addEventListener('click', () => {
-                this.player.toggle();
+                if (!this.player.options.cancelClick) {
+                    this.player.toggle();
+                }
             });
             this.player.template.controllerMask.addEventListener('click', () => {
+                console.log(this)
                 this.player.toggle();
             });
         } else {
@@ -71,13 +74,13 @@ class Controller {
                         this.player.template.playedBarWrap.removeChild(item);
                     });
                     for (let i = 0; i < this.player.options.highlight.length; i++) {
-                        if (!this.player.options.highlight[i].text || !this.player.options.highlight[i].time) {
+                        if (!this.player.options.highlight[ i ].text || !this.player.options.highlight[ i ].time) {
                             continue;
                         }
                         const p = document.createElement('div');
                         p.classList.add('dplayer-highlight');
-                        p.style.left = (this.player.options.highlight[i].time / this.player.video.duration) * 100 + '%';
-                        p.innerHTML = '<span class="dplayer-highlight-text">' + this.player.options.highlight[i].text + '</span>';
+                        p.style.left = (this.player.options.highlight[ i ].time / this.player.video.duration) * 100 + '%';
+                        p.innerHTML = '<span class="dplayer-highlight-text">' + this.player.options.highlight[ i ].text + '</span>';
                         this.player.template.playedBarWrap.insertBefore(p, this.player.template.playedBarTime);
                     }
                 }
@@ -102,7 +105,7 @@ class Controller {
 
     initPlayedBar() {
         const thumbMove = (e) => {
-            let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
+            let percentage = ((e.clientX || e.changedTouches[ 0 ].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
@@ -112,7 +115,7 @@ class Controller {
         const thumbUp = (e) => {
             document.removeEventListener(utils.nameMap.dragEnd, thumbUp);
             document.removeEventListener(utils.nameMap.dragMove, thumbMove);
-            let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
+            let percentage = ((e.clientX || e.changedTouches[ 0 ].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.playedBarWrap)) / this.player.template.playedBarWrap.clientWidth;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
@@ -129,7 +132,7 @@ class Controller {
         this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragMove, (e) => {
             if (this.player.video.duration) {
                 const px = this.player.template.playedBarWrap.getBoundingClientRect().left;
-                const tx = (e.clientX || e.changedTouches[0].clientX) - px;
+                const tx = (e.clientX || e.changedTouches[ 0 ].clientX) - px;
                 if (tx < 0 || tx > this.player.template.playedBarWrap.offsetWidth) {
                     return;
                 }
@@ -182,7 +185,7 @@ class Controller {
 
         const volumeMove = (event) => {
             const e = event || window.event;
-            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            const percentage = ((e.clientX || e.changedTouches[ 0 ].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
             this.player.volume(percentage);
         };
         const volumeUp = () => {
@@ -193,7 +196,7 @@ class Controller {
 
         this.player.template.volumeBarWrapWrap.addEventListener('click', (event) => {
             const e = event || window.event;
-            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            const percentage = ((e.clientX || e.changedTouches[ 0 ].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
             this.player.volume(percentage);
         });
         this.player.template.volumeBarWrapWrap.addEventListener(utils.nameMap.dragStart, () => {
