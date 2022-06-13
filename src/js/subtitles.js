@@ -6,6 +6,7 @@ class Subtitles {
             this.hide();
         });
         this.player.template.subtitlesButton.addEventListener('click', () => {
+            this.adaptiveHeight();
             this.show();
         });
 
@@ -60,6 +61,18 @@ class Subtitles {
         this.player.template.subtitlesBox.classList.add('dplayer-subtitles-box-open');
         this.player.template.mask.classList.add('dplayer-mask-show');
         this.player.controller.disableAutoHide = true;
+    }
+
+    adaptiveHeight() {
+        const curBoxHeight = this.player.template.subtitlesItem.length * 30 + 14;
+        const stdMaxHeight = this.player.template.videoWrap.offsetHeight * 0.8;
+        if (curBoxHeight >= stdMaxHeight - 50) {
+            this.player.template.subtitlesBox.style.bottom = '8px';
+            this.player.template.subtitlesBox.style['max-height'] = stdMaxHeight - 8 + 'px';
+        } else {
+            this.player.template.subtitlesBox.style.bottom = '50px';
+            this.player.template.subtitlesBox.style['max-height'] = stdMaxHeight - 50 + 'px';
+        }
     }
 }
 

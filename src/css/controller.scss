@@ -423,7 +423,7 @@
                 background: rgba(28, 28, 28, 0.9);
                 padding: 7px 0;
                 transition: all .3s ease-in-out;
-                overflow: hidden;
+                overflow: auto;
                 z-index: 2;
                 &.dplayer-subtitles-panel {
                     display: block;
