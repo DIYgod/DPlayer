@@ -10,44 +10,30 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 
 如果你是个人开发者并且享受 DPlayer 带来的高开发效率，可以用捐助来表示你的谢意 —— 比如偶尔给我买杯咖啡 :)
 
-你可以通过下列的方法来赞助 DPlayer 的开发。
-
-## 一次性赞助
-
-我们通过以下方式接受赞助：
-
--   [微信支付](https://i.imgur.com/aq6PtWa.png)
--   [支付宝](https://i.imgur.com/wv1Pj2k.png)
--   [Paypal](https://www.paypal.me/DIYgod)
+你可以通过下列的方法来赞助 DPlayer 的开发.
 
 ## 周期性赞助
 
-周期性赞助可以获得额外的回报，比如你的名字或你的公司 logo 会出现在 DPlayer 的 GitHub 仓库和现在我们的官网中。
-
+-   通过 [GitHub](https://github.com/sponsors/DIYgod) 赞助
 -   通过 [Patreon](https://www.patreon.com/DIYgod) 赞助
--   给我们发邮件联系赞助事宜: i#diygod.me
+-   通过 [爱发电](https://afdian.net/@diygod) 赞助
+-   给我们发邮件联系赞助事宜: <i@diygod.me>
 
-## 当前的顶级赞助商
+## 一次性赞助
 
-### Special Sponsors
+我们通过以下方式接受赞助:
 
-<div>
-<a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
-</a>
-</div>
+-   [微信支付](https://diygod.me/images/wx.jpg)
+-   [支付宝](https://diygod.me/images/zfb.jpg)
+-   [Paypal](https://www.paypal.me/DIYgod)
+
+## 赞助商
 
 <div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img height="60px" src="https://i.imgur.com/C2NgugY.png">
 </a>
 </div>
-
-### Sponsors
-
-| [极酷社](https://www.acg.app) |
-| :---------------------------: |
-
 
 ## DPlayer 贡献者
 

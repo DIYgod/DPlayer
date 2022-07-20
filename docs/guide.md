@@ -14,27 +14,15 @@ sidebar: auto
 
 ## Special Thanks
 
-### Special Sponsors
+### Sponsors
 
 &nbsp;
-
-<div>
-<a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
-</a>
-</div>
 
 <div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img height="60px" src="https://i.imgur.com/C2NgugY.png">
 </a>
 </div>
-
-### Sponsors
-
-| [极酷社](https://www.acg.app) |
-| :---------------------------: |
-
 
 ## Installation
 
@@ -709,7 +697,7 @@ DPlayer can work with any MSE library via `customType` option.
 
 ```js
 var type = 'normal';
-if(Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
+if (Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
     type = 'customHls';
 }
 const dp = new DPlayer({
@@ -718,19 +706,19 @@ const dp = new DPlayer({
         url: 'demo.m3u8',
         type: type,
         customType: {
-            'customHls': function (video, player) {
+            customHls: function (video, player) {
                 const hls = new Hls({
                     debug: false,
                     // Other hlsjsConfig options provided by hls.js
                     p2pConfig: {
-                        live: false,        
+                        live: false,
                         // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/en/
-                    }
+                    },
                 });
                 hls.loadSource(video.src);
                 hls.attachMedia(video);
-            }
-        }
+            },
+        },
     },
 });
 ```

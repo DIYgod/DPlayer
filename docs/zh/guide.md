@@ -14,25 +14,13 @@ sidebar: auto
 
 ## Special Thanks
 
-### Special Sponsors
-
-<div>
-<a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
-</a>
-</div>
+### Sponsors
 
 <div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img height="60px" src="https://i.imgur.com/C2NgugY.png">
 </a>
 </div>
-
-### Sponsors
-
-| [极酷社](https://www.acg.app) |
-| :---------------------------: |
-
 
 ## 安装
 
@@ -683,7 +671,7 @@ const dp = new DPlayer({
 
 ### 配合其他 MSE 库使用
 
-DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用，例如支持P2P插件：
+DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用，例如支持 P2P 插件：
 
 ```html
 <div id="dplayer"></div>
@@ -693,7 +681,7 @@ DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用，例如�
 
 ```js
 var type = 'normal';
-if(Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
+if (Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
     type = 'customHls';
 }
 const dp = new DPlayer({
@@ -702,19 +690,19 @@ const dp = new DPlayer({
         url: 'demo.m3u8',
         type: type,
         customType: {
-            'customHls': function (video, player) {
+            customHls: function (video, player) {
                 const hls = new Hls({
                     debug: false,
                     // Other hlsjsConfig options provided by hls.js
                     p2pConfig: {
-                        live: false,        // 如果是直播设为true
+                        live: false, // 如果是直播设为true
                         // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/cn/
-                    }
+                    },
                 });
                 hls.loadSource(video.src);
                 hls.attachMedia(video);
-            }
-        }
+            },
+        },
     },
 });
 ```
