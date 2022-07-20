@@ -127,14 +127,6 @@ We accept donations via the following ways:
 -   [Alipay](https://diygod.me/images/zfb.jpg)
 -   [Paypal](https://www.paypal.me/DIYgod)
 
-## Current Premium Sponsors
-
-### Special Sponsors
-
-<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
-</a>
-
 ## Author
 
 **DPlayer** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
