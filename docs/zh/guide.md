@@ -727,13 +727,13 @@ const dp = new DPlayer({
     live: true,
     danmaku: true,
     apiBackend: {
-        read: function (endpoint, callback) {
+        read: function (options) {
             console.log('Pretend to connect WebSocket');
-            callback();
+            options.success([]);
         },
-        send: function (endpoint, danmakuData, callback) {
-            console.log('Pretend to send danmaku via WebSocket', danmakuData);
-            callback();
+        send: function (options) {
+            console.log('Pretend to send danmaku via WebSocket', options.data);
+            options.success();
         },
     },
     video: {
