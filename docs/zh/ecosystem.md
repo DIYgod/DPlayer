@@ -55,3 +55,5 @@ sidebar: auto
 -   [Cloudreve](https://github.com/HFO4/Cloudreve): 基于 ThinkPHP 构建的网盘系统
 -   [arozos](https://github.com/tobychui/arozos): General purposed Web Desktop Operating Platform / OS for Raspberry Pis
 -   [新东方云教室](https://roombox.xdf.cn/)
+-   [BBHouse](https://github.com/endcloud/bbhouse-tauri): A Bilibili Cross-Platform Desktop Client Powered By Tauri
+-   [Tampermonkey 阿里云盘](https://greasyfork.org/zh-CN/scripts/425955-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98)

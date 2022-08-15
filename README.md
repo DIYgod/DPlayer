@@ -104,6 +104,8 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 -   [oneindex](https://github.com/donwa/oneindex): Onedrive Directory Index
 -   [arozos](https://github.com/tobychui/arozos): General purposed Web Desktop Operating Platform / OS for Raspberry Pis
 -   [新东方云教室](https://roombox.xdf.cn/)
+-   [BBHouse](https://github.com/endcloud/bbhouse-tauri): A Bilibili Cross-Platform Desktop Client Powered By Tauri
+-   [Tampermonkey 阿里云盘](https://greasyfork.org/zh-CN/scripts/425955-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98)
 -   Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Donate
