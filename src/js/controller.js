@@ -45,12 +45,14 @@ class Controller {
         });
 
         if (!utils.isMobile) {
-            this.player.template.videoWrap.addEventListener('click', () => {
-                this.player.toggle();
-            });
-            this.player.template.controllerMask.addEventListener('click', () => {
-                this.player.toggle();
-            });
+            if (!this.player.options.preventClickToggle) {
+                this.player.template.videoWrap.addEventListener('click', () => {
+                    this.player.toggle();
+                });
+                this.player.template.controllerMask.addEventListener('click', () => {
+                    this.player.toggle();
+                });
+            }
         } else {
             this.player.template.videoWrap.addEventListener('click', () => {
                 this.toggle();

@@ -89,6 +89,7 @@ DPlayer 有丰富的参数可以自定义你的播放器实例
 | playbackSpeed        | [0.5, 0.75, 1, 1.25, 1.5, 2]       | 可选的播放速率，可以设置成自定义的数组                                                                  |
 | logo                 | -                                  | 在左上角展示一个 logo，你可以通过 CSS 调整它的大小和位置                                                |
 | apiBackend           | -                                  | 自定义获取和发送弹幕行为，见[#直播](#直播)                                                              |
+| preventClickToggle   | false                              | 阻止点击播放器时候自动切换播放/暂停                                                                     |
 | video                | -                                  | 视频信息                                                                                                |
 | video.quality        | -                                  | 见[#清晰度切换](#清晰度切换)                                                                            |
 | video.defaultQuality | -                                  | 见[#清晰度切换](#清晰度切换)                                                                            |
