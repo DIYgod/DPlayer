@@ -13,13 +13,13 @@ class ContextMenu {
         });
 
         this.contextmenuHandler = (e) => {
-            const event = e || window.event;
-            event.preventDefault();
-
             if (this.shown) {
                 this.hide();
                 return;
             }
+
+            const event = e || window.event;
+            event.preventDefault();
 
             const clientRect = this.player.container.getBoundingClientRect();
             this.show(event.clientX - clientRect.left, event.clientY - clientRect.top);
