@@ -1,6 +1,14 @@
 name: Build and Deploy
 on: [push]
 jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.0.2
+
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
