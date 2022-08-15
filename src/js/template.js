@@ -22,7 +22,7 @@ class Template {
                 current: true,
                 pic: this.options.video.pic,
                 screenshot: this.options.screenshot,
-                airplay: this.options.airplay,
+                airplay: utils.isSafari && !utils.isChrome ? this.options.airplay : false,
                 chromecast: this.options.chromecast,
                 preload: this.options.preload,
                 url: this.options.video.url,
