@@ -3,19 +3,6 @@ module.exports = {
         '@vuepress/google-analytics': {
             ga: 'UA-48084758-9',
         },
-        '@vuepress/pwa': {
-            serviceWorker: true,
-            updatePopup: {
-                '/zh/': {
-                    message: '发现新内容可用',
-                    buttonText: '刷新',
-                },
-                '/': {
-                    message: 'New content is available',
-                    buttonText: 'Refresh',
-                },
-            },
-        },
         '@vuepress/back-to-top': true,
     },
     locales: {
@@ -42,7 +29,7 @@ module.exports = {
     themeConfig: {
         repo: 'MoePlayer/DPlayer',
         editLinks: true,
-        docsDir: 'docs',
+        docsDir: '.',
         locales: {
             '/zh/': {
                 lang: 'zh-CN',

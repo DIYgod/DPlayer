@@ -39,8 +39,6 @@
     "devDependencies": {
         "@babel/core": "^7.6.0",
         "@babel/preset-env": "^7.4.5",
-        "@vuepress/plugin-back-to-top": "1.9.7",
-        "@vuepress/plugin-google-analytics": "1.9.7",
         "@vuepress/plugin-pwa": "1.9.7",
         "art-template": "4.13.2",
         "art-template-loader": "1.4.3",
@@ -69,7 +67,6 @@
         "svg-inline-loader": "0.8.2",
         "template-string-optimize-loader": "^3.0.0",
         "url-loader": "^4.1.0",
-        "vuepress": "1.9.7",
         "webpack": "^5.74.0",
         "webpack-cli": "4.10.0",
         "webpack-dev-server": "^4.10.0",
