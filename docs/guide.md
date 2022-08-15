@@ -91,7 +91,8 @@ You can custom your player instance by those options
 | loop                 | false                              | video loop                                                                                                                                                 |
 | lang                 | navigator.language.toLowerCase()   | values: 'en', 'zh-cn', 'zh-tw'                                                                                                                             |
 | screenshot           | false                              | enable screenshot, if true, video and video poster must enable Cross-Origin                                                                                |
-| airplay              | true                               | enable airplay in Safari                                                                                                                                   |
+| airplay              | false                              | enable airplay in Safari                                                                                                                                   |
+| chromecast           | false                              | enable Chromecast                                                                                                                                          |
 | hotkey               | true                               | enable hotkey, support FF, FR, volume control, play & pause                                                                                                |
 | preload              | 'auto'                             | values: 'none', 'metadata', 'auto'                                                                                                                         |
 | volume               | 0.7                                | default volume, notice that player will remember user setting, default volume will not work after user set volume themselves                               |
@@ -121,6 +122,7 @@ You can custom your player instance by those options
 | danmaku.user         | 'DIYgod'                           | danmaku user name                                                                                                                                          |
 | danmaku.bottom       | -                                  | values like: '10px' '10%', the distance between the danmaku bottom and player bottom, in order to prevent warding off subtitle                             |
 | danmaku.unlimited    | false                              | display all danmaku even though danmaku overlap, notice that player will remember user setting, default setting will not work after user set it themselves |
+| danmaku.speedRate    | 1                                  | danmaku speed multiplier, the larger the faster                                                                                                            |
 | contextmenu          | []                                 | custom contextmenu                                                                                                                                         |
 | highlight            | []                                 | custom time markers upon progress bar                                                                                                                      |
 | mutex                | true                               | prevent to play multiple player at the same time, pause other players when this player start play                                                          |
@@ -160,6 +162,7 @@ const dp = new DPlayer({
         user: 'DIYgod',
         bottom: '15%',
         unlimited: true,
+        speedRate: 0.5,
     },
     contextmenu: [
         {

@@ -83,6 +83,7 @@ function initPlayers() {
         loop: true,
         screenshot: true,
         airplay: true,
+        chromecast: true,
         hotkey: true,
         logo: 'https://i.loli.net/2019/06/06/5cf8c5d94521136430.png',
         volume: 0.2,
@@ -103,11 +104,13 @@ function initPlayers() {
         danmaku: {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
+            addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json'],
             token: 'tokendemo',
             maximum: 3000,
             user: 'DIYgod',
             bottom: '15%',
-            unlimited: true
+            unlimited: true,
+            speedRate: 0.5,
         },
         contextmenu: [
             {
