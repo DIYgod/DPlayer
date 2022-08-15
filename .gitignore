@@ -8,3 +8,5 @@ wxw
 .vscode
 package-lock.json
 docs/.vuepress/dist
+docs/.vuepress/.cache
+docs/.vuepress/.temp
