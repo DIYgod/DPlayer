@@ -131,11 +131,29 @@
             </button>
         </div>
         {{ if options.subtitle }}
+        {{ if (typeof options.subtitle.url === 'string') }}
         <div class="dplayer-subtitle-btn">
             <button class="dplayer-icon dplayer-subtitle-icon" data-balloon="{{ tran('hide-subs') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.subtitle }}</span>
             </button>
         </div>
+        {{ else }}
+        <div class="dplayer-subtitles">
+            <button class="dplayer-icon dplayer-subtitles-icon" data-balloon="{{ tran('Subtitle') }}" data-balloon-pos="up">
+                <span class="dplayer-icon-content">{{@ icons.subtitle }}</span>
+            </button>
+            <div class="dplayer-subtitles-box">
+                <div class="dplayer-subtitles-panel">
+                    {{ each options.subtitle.url }}
+                        <div class="dplayer-subtitles-item" data-subtitle="{{ $value.url }}">
+                            <!-- if lang, show tran(lang). if lang and name, show name + (tran(lang)). if name, show name. off option use lang for translation. -->
+                            <span class="dplayer-label">{{ $value.lang ? $value.name ?  $value.name+' ('+tran($value.lang)+')' : tran($value.lang) : $value.name }}</span>
+                        </div>
+                    {{ /each }}
+                </div>
+            </div>
+        </div>
+        {{ /if }}
         {{ /if }}
         <div class="dplayer-setting">
             <button class="dplayer-icon dplayer-setting-icon" data-balloon="{{ tran('setting') }}" data-balloon-pos="up">

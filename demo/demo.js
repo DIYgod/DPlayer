@@ -65,7 +65,23 @@ function initPlayers() {
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
         subtitle: {
-            url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt'
+            url: [
+                {
+                    url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt',
+                    lang: 'zh-cn',
+                    name: '光',
+                },
+                {
+                    url: 'https://gist.githubusercontent.com/samdutton/ca37f3adaf4e23679957b8083e061177/raw/e19399fbccbc069a2af4266e5120ae6bad62699a/sample.vtt',
+                    lang: 'en-us',
+                    name: 'github',
+                },
+            ],
+            defaultSubtitle: 7,
+            type: 'webvtt',
+            fontSize: '25px',
+            bottom: '10%',
+            color: '#b7daff'
         },
         danmaku: {
             id: '9E2E3368B56CDBB4',
