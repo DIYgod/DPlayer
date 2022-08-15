@@ -366,12 +366,12 @@ class Controller {
     initSubtitleButton() {
         if (this.player.options.subtitle) {
             this.player.events.on('subtitle_show', () => {
-                this.player.template.subtitleButton.dataset.balloon = this.player.tran('Hide subtitle');
+                this.player.template.subtitleButton.dataset.balloon = this.player.tran('hide-subs');
                 this.player.template.subtitleButtonInner.style.opacity = '';
                 this.player.user.set('subtitle', 1);
             });
             this.player.events.on('subtitle_hide', () => {
-                this.player.template.subtitleButton.dataset.balloon = this.player.tran('Show subtitle');
+                this.player.template.subtitleButton.dataset.balloon = this.player.tran('show-subs');
                 this.player.template.subtitleButtonInner.style.opacity = '0.4';
                 this.player.user.set('subtitle', 0);
             });
