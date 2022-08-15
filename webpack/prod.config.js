@@ -1,9 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const GitRevisionPlugin = require('git-revision-webpack-plugin');
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
 
 module.exports = {
     mode: 'production',
@@ -28,7 +26,13 @@ module.exports = {
 
     resolve: {
         modules: ['node_modules'],
-        extensions: ['.js', '.scss'],
+        extensions: ['.js', '.less'],
+        fallback: {
+            dgram: false,
+            fs: false,
+            net: false,
+            tls: false,
+        },
     },
 
     module: {
@@ -48,7 +52,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: [
                     'style-loader',
                     {
@@ -60,10 +64,12 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [autoprefixer, cssnano],
+                            postcssOptions: {
+                                plugins: ['postcss-preset-env'],
+                            },
                         },
                     },
-                    'sass-loader',
+                    'less-loader',
                 ],
             },
             {
@@ -90,11 +96,4 @@ module.exports = {
             GIT_HASH: JSON.stringify(gitRevisionPlugin.version()),
         }),
     ],
-
-    node: {
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-    },
 };
