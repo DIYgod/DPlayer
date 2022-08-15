@@ -66,7 +66,7 @@ class DPlayer {
             if (Array.isArray(this.options.subtitle.url)) {
                 const offSubtitle = {
                     subtitle: '',
-                    lang: 'Off',
+                    lang: 'off',
                 };
                 this.options.subtitle.url.push(offSubtitle);
                 if (this.options.subtitle.defaultSubtitle) {

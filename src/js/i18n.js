@@ -17,8 +17,10 @@ function i18n(lang) {
             return tranTxt[this.lang][key];
         } else if (tranTxt[this.fallbackLang] && tranTxt[this.fallbackLang][key]) {
             return tranTxt[this.fallbackLang][key];
-        } else {
+        } else if (standard[key]) {
             return standard[key];
+        } else {
+            return key;
         }
     };
 }
@@ -98,6 +100,8 @@ const standard = {
     screenshot: 'Screenshot',
     airplay: 'AirPlay',
     chromecast: 'ChromeCast',
+    subtitle: 'Subtitle',
+    off: 'Off',
     'show-subs': 'Show subtitle',
     'hide-subs': 'Hide subtitle',
     volume: 'Volume',
@@ -141,6 +145,8 @@ const tranTxt = {
         screenshot: '截图',
         airplay: '无线投屏',
         chromecast: 'ChromeCast',
+        subtitle: '字幕',
+        off: '关闭',
         'show-subs': '显示字幕',
         'hide-subs': '隐藏字幕',
         volume: '音量',
@@ -180,6 +186,8 @@ const tranTxt = {
         screenshot: '截圖',
         airplay: '無線投屏',
         chromecast: 'ChromeCast',
+        subtitle: '字幕',
+        off: '關閉',
         'show-subs': '顯示字幕',
         'hide-subs': '隱藏字幕',
         volume: '音量',
@@ -221,6 +229,8 @@ const tranTxt = {
         screenshot: '화면 캡쳐',
         airplay: '에어플레이',
         chromecast: 'ChromeCast',
+        subtitle: '부제',
+        off: '끄다',
         'show-subs': '자막 보이기',
         'hide-subs': '자막 숨기기',
         Volume: '볼륨',
@@ -261,6 +271,8 @@ const tranTxt = {
         airplay: 'AirPlay',
         'show-subs': 'Zeige Untertitel',
         chromecast: 'ChromeCast',
+        subtitle: 'Untertitel',
+        off: 'Schließung',
         'hide-subs': 'Verstecke Untertitel',
         volume: 'Lautstärke',
         live: 'Live',

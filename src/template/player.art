@@ -139,7 +139,7 @@
         </div>
         {{ else }}
         <div class="dplayer-subtitles">
-            <button class="dplayer-icon dplayer-subtitles-icon" data-balloon="{{ tran('Subtitle') }}" data-balloon-pos="up">
+            <button class="dplayer-icon dplayer-subtitles-icon" data-balloon="{{ tran('subtitle') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.subtitle }}</span>
             </button>
             <div class="dplayer-subtitles-box">
