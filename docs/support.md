@@ -10,44 +10,30 @@ If you run a business and are using DPlayer in a revenue-generating product, it 
 
 If you are an individual user and have enjoyed the productivity of using DPlayer, consider donating as a sign of appreciation - like buying me coffee once in a while :)
 
-You can support DPlayer development via the following methods:
+You can support DPlayer via donations.
 
-## One-time Donations
+### Recurring Donation
 
-We accept donations through these channels:
+Recurring donors will be rewarded via express issue response, or even have your name displayed on our GitHub page and website.
 
+-   Become a Sponser on [GitHub](https://github.com/sponsors/DIYgod)
+-   Become a Sponser on [Patreon](https://www.patreon.com/DIYgod)
+-   Become a Sponser on [爱发电](https://afdian.net/@diygod)
+-   Contact us directly: i@diygod.me
+
+### One-time Donation
+
+We accept donations via the following ways:
+
+-   [WeChat Pay](https://diygod.me/images/wx.jpg)
+-   [Alipay](https://diygod.me/images/zfb.jpg)
 -   [Paypal](https://www.paypal.me/DIYgod)
--   [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
--   [Alipay](https://i.imgur.com/wv1Pj2k.png)
 
-## Recurring Pledges
+## Sponsors
 
-Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the DPlayer GitHub repository and this website.
-
--   Become a Backer or a Sponser on [Patreon](https://www.patreon.com/DIYgod)
--   E-mail us: i#diygod.me
-
-## Current Premium Sponsors
-
-### Special Sponsors
-
-<div>
-<a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
-</a>
-</div>
-
-<div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img height="60px" src="https://i.imgur.com/C2NgugY.png">
+    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
-</div>
-
-### Sponsors
-
-| [极酷社](https://www.acg.app) |
-| :---------------------------: |
-
 
 ## DPlayer contributors
 

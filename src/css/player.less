@@ -29,23 +29,7 @@
         margin: 0;
         padding: 0;
         transform: translate(0, 0);
-
-        .dplayer-danmaku {
-            .dplayer-danmaku-top,
-            .dplayer-danmaku-bottom {
-                &.dplayer-danmaku-move {
-                    animation: danmaku-center 6s linear;
-                    animation-play-state: inherit;
-                }
-            }
-
-            .dplayer-danmaku-right {
-                &.dplayer-danmaku-move {
-                    animation: danmaku 8s linear;
-                    animation-play-state: inherit;
-                }
-            }
-        }
+        
     }
 
     &.dplayer-no-danmaku {
@@ -167,6 +151,7 @@
             .dplayer-volume,
             .dplayer-camera-icon,
             .dplayer-airplay-icon,
+            .dplayer-chromecast-icon,
             .dplayer-play-icon {
                 display: none;
             }

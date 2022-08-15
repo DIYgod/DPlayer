@@ -9,8 +9,6 @@
 [![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [![size](https://badge-size.herokuapp.com/MoePlayer/DPlayer/master/dist/DPlayer.min.js?compression=gzip&style=flat-square)](https://github.com/MoePlayer/DPlayer/tree/master/dist)
-[![Travis](https://img.shields.io/travis/MoePlayer/DPlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/DPlayer)
-[![devDependency Status](https://img.shields.io/david/dev/MoePlayer/dplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/DPlayer#info=devDependencies)
 
 ## Introduction
 
@@ -46,13 +44,7 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 
 ## Thanks
 
-### Special Sponsors
-
-<div>
-<a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
-</a>
-</div>
+### Sponsors
 
 <div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
@@ -60,19 +52,9 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 </a>
 </div>
 
-### Sponsors
-
-| [极酷社](https://www.acg.app) |
-| :---------------------------: |
-
-
 ### Contributors
 
 <a href="https://github.com/MoePlayer/DPlayer/graphs/contributors"><img src="https://opencollective.com/DPlayer/contributors.svg?width=890" /></a>
-
-## Join the Discussion
-
--   [Telegram Group](https://t.me/adplayer)
 
 ## Related Projects
 
@@ -104,7 +86,8 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 ### Other
 
 -   [DPlayer-Lite](https://github.com/kn007/DPlayer-Lite): lite version
--   [hlsjs-p2p-engine](https://github.com/cdnbye/hlsjs-p2p-engine)
+-   [hlsjs-p2p-engine](https://github.com/cdnbye/hlsjs-p2p-engine): Let your viewers become your unlimitedly scalable CDN
+-   [CBPlayer](https://github.com/cdnbye/CBPlayer): Dplayer with CDNBye P2P plugin built in, supporting HLS, MP4 and MPEG-DASH P2P streaming.
 -   Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Who use DPlayer?
@@ -119,26 +102,32 @@ Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlay
 -   [otomads](https://otomads.com/): 专注于音 MAD 的视频弹幕网站
 -   [Cloudreve](https://github.com/HFO4/Cloudreve): 基于 ThinkPHP 构建的网盘系统
 -   [oneindex](https://github.com/donwa/oneindex): Onedrive Directory Index
+-   [arozos](https://github.com/tobychui/arozos): General purposed Web Desktop Operating Platform / OS for Raspberry Pis
+-   [新东方云教室](https://roombox.xdf.cn/)
+-   [BBHouse](https://github.com/endcloud/bbhouse-tauri): A Bilibili Cross-Platform Desktop Client Powered By Tauri
+-   [Tampermonkey 阿里云盘](https://greasyfork.org/zh-CN/scripts/425955-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98)
 -   Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
 
 ## Donate
 
 DPlayer is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
 
-## One-time Donations
+You can support DPlayer via donations.
 
-We accept donations through these channels:
+### Recurring Donation
 
+-   Become a Sponser on [GitHub](https://github.com/sponsors/DIYgod)
+-   Become a Sponser on [Patreon](https://www.patreon.com/DIYgod)
+-   Become a Sponser on [爱发电](https://afdian.net/@diygod)
+-   Contact us directly: i@diygod.me
+
+### One-time Donation
+
+We accept donations via the following ways:
+
+-   [WeChat Pay](https://diygod.me/images/wx.jpg)
+-   [Alipay](https://diygod.me/images/zfb.jpg)
 -   [Paypal](https://www.paypal.me/DIYgod)
--   [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
--   [Alipay](https://i.imgur.com/wv1Pj2k.png)
-
-## Recurring Pledges
-
-Recurring pledges come with exclusive perks, e.g. enabling faster GitHub response, having your name or your company logo listed in the DPlayer GitHub repository and this website.
-
--   Become a backer or sponsor via [Patreon](https://www.patreon.com/DIYgod)
--   E-mail us: i#html.love
 
 ## Author
 

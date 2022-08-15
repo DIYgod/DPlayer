@@ -3,6 +3,7 @@ import utils from './utils';
 class Danmaku {
     constructor(options) {
         this.options = options;
+        this.player = this.options.player;
         this.container = this.options.container;
         this.danTunnel = {
             right: {},
@@ -254,6 +255,7 @@ class Danmaku {
                 if (tunnel >= 0) {
                     // move
                     item.classList.add('dplayer-danmaku-move');
+                    item.style.animationDuration = this._danAnimation(dan[i].type);
 
                     // insert
                     docFragment.appendChild(item);
@@ -342,6 +344,21 @@ class Danmaku {
 
     unlimit(boolean) {
         this.unlimited = boolean;
+    }
+
+    speed(rate) {
+        this.options.api.speedRate = rate;
+    }
+
+    _danAnimation(position) {
+        const rate = this.options.api.speedRate || 1;
+        const isFullScreen = !!this.player.fullScreen.isFullScreen();
+        const animations = {
+            top: `${(isFullScreen ? 6 : 4) / rate}s`,
+            right: `${(isFullScreen ? 8 : 5) / rate}s`,
+            bottom: `${(isFullScreen ? 6 : 4) / rate}s`,
+        };
+        return animations[position];
     }
 }
 

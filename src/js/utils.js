@@ -93,6 +93,8 @@ const utils = {
 
     isChrome: /chrome/i.test(window.navigator.userAgent),
 
+    isSafari: /safari/i.test(window.navigator.userAgent),
+
     storage: {
         set: (key, value) => {
             localStorage.setItem(key, value);

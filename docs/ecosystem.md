@@ -8,10 +8,6 @@ Let's make DPlayer better, feel free to submit yours in [`Let me know!`](https:/
 
 ## Help
 
-### Joining the Discussion
-
--   [Telegram Group](https://t.me/adplayer)
-
 ### Creating issue
 
 -   [MoePlayer/DPlayer/issues](https://github.com/MoePlayer/DPlayer/issues)
@@ -57,6 +53,10 @@ Let's make DPlayer better, feel free to submit yours in [`Let me know!`](https:/
 -   [纸飞机南航青年网络社区](http://my.nuaa.edu.cn/video-video.html): 南京航空航天大学门户网站
 -   [otomads](https://otomads.com/): 专注于音 MAD 的视频弹幕网站
 -   [Cloudreve](https://github.com/HFO4/Cloudreve): 基于 ThinkPHP 构建的网盘系统
+-   [arozos](https://github.com/tobychui/arozos): General purposed Web Desktop Operating Platform / OS for Raspberry Pis
+-   [新东方云教室](https://roombox.xdf.cn/)
+-   [BBHouse](https://github.com/endcloud/bbhouse-tauri): A Bilibili Cross-Platform Desktop Client Powered By Tauri
+-   [Tampermonkey 阿里云盘](https://greasyfork.org/zh-CN/scripts/425955-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98)
 
 ## Contributors
 

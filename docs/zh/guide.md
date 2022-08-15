@@ -14,25 +14,13 @@ sidebar: auto
 
 ## Special Thanks
 
-### Special Sponsors
-
-<div>
-<a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
-</a>
-</div>
+### Sponsors
 
 <div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img height="60px" src="https://i.imgur.com/C2NgugY.png">
 </a>
 </div>
-
-### Sponsors
-
-| [极酷社](https://www.acg.app) |
-| :---------------------------: |
-
 
 ## 安装
 
@@ -94,7 +82,8 @@ DPlayer 有丰富的参数可以自定义你的播放器实例
 | lang                 | navigator.language.toLowerCase()   | 可选值: 'en', 'zh-cn', 'zh-tw'                                                                          |
 | screenshot           | false                              | 开启截图，如果开启，视频和视频封面需要允许跨域                                                          |
 | hotkey               | true                               | 开启热键，支持快进、快退、音量控制、播放暂停                                                            |
-| airplay              | true                               | 在 Safari 中开启 AirPlay                                                                                |
+| airplay              | false                              | 在 Safari 中开启 AirPlay                                                                                |
+| chromecast           | false                              | 启用 Chromecast                                                                                         |
 | preload              | 'auto'                             | 视频预加载，可选值: 'none', 'metadata', 'auto'                                                          |
 | volume               | 0.7                                | 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效                                  |
 | playbackSpeed        | [0.5, 0.75, 1, 1.25, 1.5, 2]       | 可选的播放速率，可以设置成自定义的数组                                                                  |
@@ -123,6 +112,7 @@ DPlayer 有丰富的参数可以自定义你的播放器实例
 | danmaku.user         | 'DIYgod'                           | 弹幕用户名                                                                                              |
 | danmaku.bottom       | -                                  | 弹幕距离播放器底部的距离，防止遮挡字幕，取值形如: '10px' '10%'                                          |
 | danmaku.unlimited    | false                              | 海量弹幕模式，即使重叠也展示全部弹幕，请注意播放器会记忆用户设置，用户手动设置后即失效                  |
+| danmaku.speedRate    | 1                                  | 弹幕速度倍率，越大速度越快                                                                              |
 | contextmenu          | []                                 | 自定义右键菜单                                                                                          |
 | highlight            | []                                 | 自定义进度条提示点                                                                                      |
 | mutex                | true                               | 互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器                                            |
@@ -162,6 +152,7 @@ const dp = new DPlayer({
         user: 'DIYgod',
         bottom: '15%',
         unlimited: true,
+        speedRate: 0.5,
     },
     contextmenu: [
         {
@@ -683,26 +674,36 @@ const dp = new DPlayer({
 
 ### 配合其他 MSE 库使用
 
-DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用
+DPlayer 可以通过 `customType` 参数与任何 MSE 库一起使用，例如支持 P2P 插件：
 
 ```html
 <div id="dplayer"></div>
-<script src="pearplayer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cdnbye@latest"></script>
 <script src="DPlayer.min.js"></script>
 ```
 
 ```js
+var type = 'normal';
+if (Hls.isSupported() && Hls.WEBRTC_SUPPORT) {
+    type = 'customHls';
+}
 const dp = new DPlayer({
     container: document.getElementById('dplayer'),
     video: {
-        url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
-        type: 'pearplayer',
+        url: 'demo.m3u8',
+        type: type,
         customType: {
-            pearplayer: function (video, player) {
-                new PearPlayer(video, {
-                    src: video.src,
-                    autoplay: player.options.autoplay,
+            customHls: function (video, player) {
+                const hls = new Hls({
+                    debug: false,
+                    // Other hlsjsConfig options provided by hls.js
+                    p2pConfig: {
+                        live: false, // 如果是直播设为true
+                        // Other p2pConfig options provided by CDNBye http://www.cdnbye.com/cn/
+                    },
                 });
+                hls.loadSource(video.src);
+                hls.attachMedia(video);
             },
         },
     },
@@ -729,13 +730,13 @@ const dp = new DPlayer({
     live: true,
     danmaku: true,
     apiBackend: {
-        read: function (endpoint, callback) {
+        read: function (options) {
             console.log('Pretend to connect WebSocket');
-            callback();
+            options.success([]);
         },
-        send: function (endpoint, danmakuData, callback) {
-            console.log('Pretend to send danmaku via WebSocket', danmakuData);
-            callback();
+        send: function (options) {
+            console.log('Pretend to send danmaku via WebSocket', options.data);
+            options.success();
         },
     },
     video: {
