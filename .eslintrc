@@ -22,7 +22,7 @@
         "comma-style": 1,
         "func-call-spacing": 1,
         "keyword-spacing": 1,
-        "linebreak-style": 1,
+        "linebreak-style": 0,
         "no-multiple-empty-lines": 1,
         "space-infix-ops": 1,
         "arrow-spacing": 1,
