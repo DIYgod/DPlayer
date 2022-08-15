@@ -17,7 +17,6 @@ specifiers:
   cssnano: ^5.1.13
   eslint: ^8.22.0
   eslint-config-prettier: ^8.5.0
-  eslint-loader: ^4.0.2
   eslint-plugin-prettier: ^4.2.1
   exports-loader: ^4.0.0
   file-loader: ^6.0.0
@@ -65,7 +64,6 @@ devDependencies:
   cssnano: 5.1.13_postcss@8.4.16
   eslint: 8.22.0
   eslint-config-prettier: 8.5.0_eslint@8.22.0
-  eslint-loader: 4.0.2_ctxf3msfijuf5mfgxrsgcchiry
   eslint-plugin-prettier: 4.2.1_i2cojdczqdiurzgttlwdgf764e
   exports-loader: 4.0.0_webpack@5.74.0
   file-loader: 6.2.0_webpack@5.74.0
@@ -5320,23 +5318,6 @@ packages:
       eslint: 8.22.0
     dev: true
 
-  /eslint-loader/4.0.2_ctxf3msfijuf5mfgxrsgcchiry:
-    resolution: {integrity: sha512-EDpXor6lsjtTzZpLUn7KmXs02+nIjGcgees9BYjNkWra3jVq5vVa8IoCKgzT2M7dNNeoMBtaSG83Bd40N3poLw==}
-    engines: {node: '>= 10.13.0'}
-    deprecated: This loader has been deprecated. Please use eslint-webpack-plugin
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0
-      webpack: ^4.0.0 || ^5.0.0
-    dependencies:
-      eslint: 8.22.0
-      find-cache-dir: 3.3.2
-      fs-extra: 8.1.0
-      loader-utils: 2.0.2
-      object-hash: 2.2.0
-      schema-utils: 2.7.1
-      webpack: 5.74.0_webpack-cli@4.10.0
-    dev: true
-
   /eslint-plugin-prettier/4.2.1_i2cojdczqdiurzgttlwdgf764e:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
@@ -6071,15 +6052,6 @@ packages:
 
   /fs-extra/7.0.1:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
-    engines: {node: '>=6 <7 || >=8'}
-    dependencies:
-      graceful-fs: 4.2.10
-      jsonfile: 4.0.0
-      universalify: 0.1.2
-    dev: true
-
-  /fs-extra/8.1.0:
-    resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
     engines: {node: '>=6 <7 || >=8'}
     dependencies:
       graceful-fs: 4.2.10
@@ -8301,11 +8273,6 @@ packages:
       copy-descriptor: 0.1.1
       define-property: 0.2.5
       kind-of: 3.2.2
-    dev: true
-
-  /object-hash/2.2.0:
-    resolution: {integrity: sha512-gScRMn0bS5fH+IuwyIFgnh9zBdo4DV+6GhygmWM9HyNJSgS0hScp1f5vjtm7oIIOiT9trXrShAkLFSc2IqKNgw==}
-    engines: {node: '>= 6'}
     dev: true
 
   /object-inspect/1.12.2:

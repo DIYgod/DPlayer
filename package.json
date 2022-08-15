@@ -51,7 +51,6 @@
         "cssnano": "^5.1.13",
         "eslint": "^8.22.0",
         "eslint-config-prettier": "^8.5.0",
-        "eslint-loader": "^4.0.2",
         "eslint-plugin-prettier": "^4.2.1",
         "exports-loader": "^4.0.0",
         "file-loader": "^6.0.0",
