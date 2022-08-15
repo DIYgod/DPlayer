@@ -79,6 +79,7 @@
     "dependencies": {
         "axios": "0.27.2",
         "balloon-css": "^1.0.3",
-        "promise-polyfill": "8.2.3"
+        "promise-polyfill": "8.2.3",
+        "rxjs": "^6.6.0"
     }
 }

@@ -1,6 +1,11 @@
 import utils from './utils';
 import Thumbnails from './thumbnails';
 import Icons from './icons';
+import { Subject } from 'rxjs';
+
+let cast;
+let runOnce = true;
+let isCasting = false;
 
 class Controller {
     constructor(player) {
@@ -31,6 +36,7 @@ class Controller {
         this.initSubtitleButton();
         this.initHighlights();
         this.initAirplayButton();
+        this.initChromecastButton();
         if (!utils.isMobile) {
             this.initVolumeButton();
         }
@@ -276,6 +282,90 @@ class Controller {
             } else {
                 this.player.template.airplayButton.style.display = 'none';
             }
+        }
+    }
+
+    initChromecast() {
+        const script = window.document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        script.setAttribute('src', 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
+        window.document.body.appendChild(script);
+
+        window.__onGCastApiAvailable = (isAvailable) => {
+            if (isAvailable) {
+                cast = window.chrome.cast;
+                const sessionRequest = new cast.SessionRequest(cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
+                const apiConfig = new cast.ApiConfig(
+                    sessionRequest,
+                    () => {},
+                    (status) => {
+                        if (status === cast.ReceiverAvailability.AVAILABLE) {
+                            console.log('chromecast: ', status);
+                        }
+                    }
+                );
+                cast.initialize(apiConfig, () => {});
+            }
+        };
+    }
+
+    initChromecastButton() {
+        if (this.player.options.chromecast) {
+            if (runOnce) {
+                runOnce = false;
+                this.initChromecast();
+            }
+            const discoverDevices = () => {
+                const subj = new Subject();
+                cast.requestSession(
+                    (s) => {
+                        this.session = s;
+                        subj.next('CONNECTED');
+                        launchMedia(this.player.options.video.url);
+                    },
+                    (err) => {
+                        if (err.code === 'cancel') {
+                            this.session = undefined;
+                            subj.next('CANCEL');
+                        } else {
+                            console.error('Error selecting a cast device', err);
+                        }
+                    }
+                );
+                return subj;
+            };
+
+            const launchMedia = (media) => {
+                const mediaInfo = new cast.media.MediaInfo(media);
+                const request = new cast.media.LoadRequest(mediaInfo);
+
+                if (!this.session) {
+                    window.open(media);
+                    return false;
+                }
+                this.session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError).play();
+                return true;
+            };
+
+            const onMediaDiscovered = (how, media) => {
+                this.currentMedia = media;
+            };
+
+            const onMediaError = (err) => {
+                console.error('Error launching media', err);
+            };
+
+            this.player.template.chromecastButton.addEventListener('click', () => {
+                if (isCasting) {
+                    isCasting = false;
+                    this.currentMedia.stop();
+                    this.session.stop();
+                    this.initChromecast();
+                } else {
+                    isCasting = true;
+                    discoverDevices();
+                }
+            });
         }
     }
 

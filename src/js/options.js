@@ -1,5 +1,6 @@
 /* global DPLAYER_VERSION */
 import defaultApiBackend from './api.js';
+import utils from './utils';
 
 export default (options) => {
     // default options
@@ -12,6 +13,7 @@ export default (options) => {
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
         airplay: true,
+        chromecast: utils.isChrome,
         hotkey: true,
         preload: 'metadata',
         volume: 0.7,
