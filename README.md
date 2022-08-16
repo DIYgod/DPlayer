@@ -38,9 +38,9 @@ DPlayer is a lovely HTML5 danmaku video player to help people build video and da
 
 Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/issues/31)
 
-**[Docs](http://dplayer.js.org)**
+**[Docs](https://dplayer.diygod.dev/)**
 
-**[中文文档](http://dplayer.js.org/#/zh-Hans/)**
+**[中文文档](https://dplayer.diygod.dev/zh/)**
 
 ## Thanks
 

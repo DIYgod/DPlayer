@@ -204,7 +204,7 @@ const dp = new DPlayer({
 
 -   `dp.toggle()`: toggle between play and pause
 
--   `dp.on(event: string, handler: function)`: bind video and player events, [see more details](http://dplayer.js.org/#/home?id=event-binding)
+-   `dp.on(event: string, handler: function)`: bind video and player events, [see more details](https://dplayer.diygod.dev/guide.html#event-binding)
 
 -   `dp.switchVideo(video, danmaku)`: switch to a new video
 

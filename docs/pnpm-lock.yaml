@@ -3,13 +3,11 @@ lockfileVersion: 5.4
 specifiers:
   '@vuepress/plugin-back-to-top': ^1.9.7
   '@vuepress/plugin-google-analytics': ^1.9.7
-  markdown-it-emoji: ^2.0.2
   vuepress: ^1.9.7
 
 devDependencies:
   '@vuepress/plugin-back-to-top': 1.9.7
   '@vuepress/plugin-google-analytics': 1.9.7
-  markdown-it-emoji: 2.0.2
   vuepress: 1.9.7
 
 packages:
@@ -6040,10 +6038,6 @@ packages:
 
   /markdown-it-emoji/1.4.0:
     resolution: {integrity: sha512-QCz3Hkd+r5gDYtS2xsFXmBYrgw6KuWcJZLCEkdfAuwzZbShCmCfta+hwAMq4NX/4xPzkSHduMKgMkkPUJxSXNg==}
-    dev: true
-
-  /markdown-it-emoji/2.0.2:
-    resolution: {integrity: sha512-zLftSaNrKuYl0kR5zm4gxXjHaOI3FAOEaloKmRA5hijmJZvSjmxcokOLlzycb/HXlUFWzXqpIEoyEMCE4i9MvQ==}
     dev: true
 
   /markdown-it-table-of-contents/0.4.4:
