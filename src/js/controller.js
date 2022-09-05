@@ -1,7 +1,6 @@
 import utils from './utils';
 import Thumbnails from './thumbnails';
 import Icons from './icons';
-import { Subject } from 'rxjs';
 
 let cast;
 let runOnce = true;
@@ -315,23 +314,19 @@ class Controller {
                 this.initChromecast();
             }
             const discoverDevices = () => {
-                const subj = new Subject();
                 cast.requestSession(
                     (s) => {
                         this.session = s;
-                        subj.next('CONNECTED');
                         launchMedia(this.player.options.video.url);
                     },
                     (err) => {
                         if (err.code === 'cancel') {
                             this.session = undefined;
-                            subj.next('CANCEL');
                         } else {
                             console.error('Error selecting a cast device', err);
                         }
                     }
                 );
-                return subj;
             };
 
             const launchMedia = (media) => {

@@ -29,7 +29,6 @@ specifiers:
   prettier-check: ^2.0.0
   pretty-quick: ^3.0.0
   promise-polyfill: 8.2.3
-  rxjs: ^7.5.6
   strip-loader: ^0.1.2
   style-loader: ^3.3.1
   svg-inline-loader: 0.8.2
@@ -44,7 +43,6 @@ dependencies:
   axios: 0.27.2
   balloon-css: 1.2.0
   promise-polyfill: 8.2.3
-  rxjs: 7.5.6
 
 devDependencies:
   '@babel/core': 7.18.10
@@ -6132,12 +6130,6 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
-  /rxjs/7.5.6:
-    resolution: {integrity: sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==}
-    dependencies:
-      tslib: 2.4.0
-    dev: false
-
   /safe-buffer/5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
     dev: true
@@ -6742,6 +6734,7 @@ packages:
 
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
+    dev: true
 
   /type-check/0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==}
