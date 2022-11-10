@@ -48,7 +48,7 @@ Using DPlayer on your project? [Let me know!](https://github.com/DIYgod/DPlayer/
 
 <div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img height="60px" src="https://i.imgur.com/C2NgugY.png">
+    <img height="60px" src="https://player.dogecloud.com/img/logo_with_product3.png">
 </a>
 </div>
 

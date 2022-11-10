@@ -31,7 +31,7 @@ DPlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 
 <div>
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img height="60px" src="https://i.imgur.com/C2NgugY.png">
+    <img height="60px" src="https://player.dogecloud.com/img/logo_with_product3.png">
 </a>
 </div>
 
