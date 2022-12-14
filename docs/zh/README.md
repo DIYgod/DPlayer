@@ -1,7 +1,7 @@
 ---
 home: true
 actionText: Get Started →
-actionLink: /guide/
+actionLink: /zh/guide/
 footer: MIT Licensed | Made with love by DIYgod
 ---
 
