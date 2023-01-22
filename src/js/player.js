@@ -507,7 +507,7 @@ class DPlayer {
                 // Not a video load error, may be poster load failed, see #307
                 return;
             }
-            this.tran && this.notice && this.type !== 'webtorrent' && this.notice(this.tran('video-failed'), -1);
+            this.tran && this.notice && this.type !== 'webtorrent' && this.notice(this.tran('video-failed'));
         });
 
         // video end
