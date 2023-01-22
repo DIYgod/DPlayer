@@ -593,7 +593,7 @@ class DPlayer {
         this.video = videoEle;
         this.initVideo(this.video, this.quality.type || this.options.video.type);
         this.seek(this.prevVideo.currentTime);
-        this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, -1);
+        this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, -1, undefined, 'switch-quality');
         this.events.trigger('quality_start', this.quality);
 
         this.on('canplay', () => {
@@ -608,7 +608,7 @@ class DPlayer {
                     this.video.play();
                 }
                 this.prevVideo = null;
-                this.notice(`${this.tran('switched-quality').replace('%q', this.quality.name)}`);
+                this.notice(`${this.tran('switched-quality').replace('%q', this.quality.name)}`, undefined, undefined, 'switch-quality');
                 this.switchingQuality = false;
 
                 this.events.trigger('quality_end');
@@ -666,7 +666,7 @@ class DPlayer {
                         });
                         e.classList.add('remove-notice');
                         dp.events.trigger('notice_hide');
-                        this.noticeList[id] = null;
+                        dp.noticeList[id] = null;
                     };
                 })(oldNoticeEle, this),
                 time
