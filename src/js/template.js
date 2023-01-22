@@ -106,11 +106,14 @@ class Template {
         this.infoDanmakuAmount = this.container.querySelector('.dplayer-info-panel-item-danmaku-amount .dplayer-info-panel-item-data');
     }
 
-    static NewNotice(text, opacity) {
+    static NewNotice(text, opacity, id) {
         const notice = document.createElement('div');
         notice.classList.add('dplayer-notice');
         notice.style.opacity = opacity;
         notice.innerText = text;
+        if (id) {
+            notice.id = `dplayer-notice-${id}`;
+        }
         return notice;
     }
 }

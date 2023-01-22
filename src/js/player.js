@@ -43,6 +43,7 @@ class DPlayer {
         this.events = new Events();
         this.user = new User(this);
         this.container = this.options.container;
+        this.noticeList = {};
 
         this.container.classList.add('dplayer');
         if (!this.options.danmaku) {
@@ -293,7 +294,7 @@ class DPlayer {
                 this.user.set('volume', percentage);
             }
             if (!nonotice) {
-                this.notice(`${this.tran('volume')} ${(percentage * 100).toFixed(0)}%`);
+                this.notice(`${this.tran('volume')} ${(percentage * 100).toFixed(0)}%`, undefined, undefined, 'volume');
             }
 
             this.video.volume = percentage;
@@ -636,14 +637,28 @@ class DPlayer {
         });
     }
 
-    notice(text, time = 2000, opacity = 0.8) {
-        const notice = Template.NewNotice(text, opacity);
+    notice(text, time = 2000, opacity = 0.8, id) {
+        let oldNoticeEle;
+        if (id) {
+            oldNoticeEle = document.getElementById(`dplayer-notice-${id}`);
+            if (oldNoticeEle) {
+                oldNoticeEle.innerHTML = text;
+            }
+            if (this.noticeList[id]) {
+                clearTimeout(this.noticeList[id]);
+                this.noticeList[id] = null;
+            }
+        }
+        if (!oldNoticeEle) {
+            const notice = Template.NewNotice(text, opacity, id);
+            this.template.noticeList.appendChild(notice);
+            oldNoticeEle = notice;
+        }
 
-        this.template.noticeList.appendChild(notice);
-        this.events.trigger('notice_show', notice);
+        this.events.trigger('notice_show', oldNoticeEle);
 
         if (time > 0) {
-            setTimeout(
+            this.noticeList[id] = setTimeout(
                 (function (e, dp) {
                     return () => {
                         e.addEventListener('animationend', () => {
@@ -651,8 +666,9 @@ class DPlayer {
                         });
                         e.classList.add('remove-notice');
                         dp.events.trigger('notice_hide');
+                        this.noticeList[id] = null;
                     };
-                })(notice, this),
+                })(oldNoticeEle, this),
                 time
             );
         }
