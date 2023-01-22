@@ -545,8 +545,8 @@ class DPlayer {
         });
 
         for (let i = 0; i < this.events.videoEvents.length; i++) {
-            video.addEventListener(this.events.videoEvents[i], () => {
-                this.events.trigger(this.events.videoEvents[i]);
+            video.addEventListener(this.events.videoEvents[i], (e) => {
+                this.events.trigger(this.events.videoEvents[i], e);
             });
         }
 
