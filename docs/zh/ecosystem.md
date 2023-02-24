@@ -36,6 +36,7 @@ sidebar: auto
 -   [Selection](https://github.com/GreatSatan79/Selection): WordPress
 -   [Vue-DPlayer](https://github.com/sinchang/vue-dplayer): Vue
 -   [react-dplayer](https://github.com/hnsylitao/react-dplayer): React
+-   [rc-dplayer](https://github.com/tianfeng98/rc-dplayer): React
 
 ### 其他
 
@@ -57,3 +58,6 @@ sidebar: auto
 -   [新东方云教室](https://roombox.xdf.cn/)
 -   [BBHouse](https://github.com/endcloud/bbhouse-tauri): A Bilibili Cross-Platform Desktop Client Powered By Tauri
 -   [Tampermonkey 阿里云盘](https://greasyfork.org/zh-CN/scripts/425955-%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98)
+-   [arozos](https://github.com/tobychui/arozos)
+-   [GBCLStudio/fof-upload-qcloud](https://github.com/GBCLStudio/FoF-Upload-Qcloud)
+-   Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/DPlayer/issues/31)
