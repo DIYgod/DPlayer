@@ -593,7 +593,7 @@ class DPlayer {
         this.video = videoEle;
         this.initVideo(this.video, this.quality.type || this.options.video.type);
         this.seek(this.prevVideo.currentTime);
-        this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, -1, undefined, 'switch-quality');
+        this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, undefined, undefined, 'switch-quality');
         this.events.trigger('quality_start', this.quality);
 
         this.on('canplay', () => {
