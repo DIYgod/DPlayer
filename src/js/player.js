@@ -182,6 +182,8 @@ class DPlayer {
             this.play();
         }
 
+        this.moveBar = false;
+
         index++;
         instances.push(this);
     }
@@ -537,7 +539,9 @@ class DPlayer {
         });
 
         this.on('timeupdate', () => {
-            this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
+            if (!this.moveBar) {
+                this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
+            }
             const currentTime = utils.secondToTime(this.video.currentTime);
             if (this.template.ptime.innerHTML !== currentTime) {
                 this.template.ptime.innerHTML = currentTime;

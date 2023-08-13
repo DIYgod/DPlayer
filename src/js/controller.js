@@ -122,11 +122,11 @@ class Controller {
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
             this.player.seek(this.player.bar.get('played') * this.player.video.duration);
-            this.player.timer.enable('progress');
+            this.player.moveBar = false;
         };
 
         this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragStart, () => {
-            this.player.timer.disable('progress');
+            this.player.moveBar = true;
             document.addEventListener(utils.nameMap.dragMove, thumbMove);
             document.addEventListener(utils.nameMap.dragEnd, thumbUp);
         });
