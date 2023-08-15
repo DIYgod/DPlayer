@@ -7,8 +7,9 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@vuepress/plugin-back-to-top": "^1.9.7",
-        "@vuepress/plugin-google-analytics": "^1.9.7",
-        "vuepress": "^1.9.7"
+        "@vuepress/plugin-back-to-top": "^1.9.10",
+        "@vuepress/plugin-google-analytics": "^1.9.10",
+        "vuepress": "^1.9.10",
+        "vuepress-plugin-umami": "^0.0.4"
     }
 }

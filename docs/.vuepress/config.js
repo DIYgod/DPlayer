@@ -1,9 +1,10 @@
 module.exports = {
     plugins: {
-        '@vuepress/google-analytics': {
-            ga: 'UA-48084758-9',
-        },
         '@vuepress/back-to-top': true,
+        umami: {
+            trackerUrl: 'https://umami.diygod.dev',
+            siteId: 'f3b469a2-8054-4bbb-8873-4035761aa4e3',
+        },
     },
     locales: {
         '/zh/': {
