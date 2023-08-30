@@ -87,7 +87,8 @@ function initPlayers() {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
             addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
-        }
+        },
+        title: '这是标题'
     });
 
     // dp2

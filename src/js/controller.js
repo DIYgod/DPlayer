@@ -64,6 +64,7 @@ class Controller {
             this.player.template.controllerMask.addEventListener('click', () => {
                 this.toggle();
             });
+            this.scrollHandler(this.player.template.videoWrap);
         }
     }
 
@@ -418,6 +419,47 @@ class Controller {
             this.player.container.removeEventListener('click', this.setAutoHideHandler);
         }
         clearTimeout(this.autoHideTimer);
+    }
+
+    scrollHandler(wrapper) {
+        let startX, endX;
+        let movement = 0;
+        let indicator = this.player.template.dragIndicator;
+        let playButton = this.player.template.mobilePlayButton;
+        wrapper.addEventListener('touchstart', function (event) {
+            endX = startX = event.touches[0].clientX;
+        });
+
+        wrapper.addEventListener('touchmove', (event) => {
+            endX = event.touches[0].clientX;
+            if (this.player.video.duration) {
+                playButton.style.opacity = '0';
+                let wrapperWidth = wrapper.offsetWidth;
+                let percentage = (endX - startX) / wrapperWidth;
+                let totalMovement = getTotalMovementDuration(this.player.video.duration);
+                movement = totalMovement * percentage;
+                indicator.innerHTML = Number.parseInt(movement) + 's';
+                indicator.style.opacity = '1';
+            }
+        });
+
+        wrapper.addEventListener('touchend', () => {
+            indicator.style.opacity = '0';
+            playButton.style.opacity = '1';
+            if (this.player.video.duration && startX !== endX) {
+                this.player.seek(this.player.bar.get('played') * this.player.video.duration + movement);
+            }
+        });
+
+        function getTotalMovementDuration(duration) {
+            if (duration <= 3600) {
+                return 90;
+            } else if (duration <= 7200) {
+                return 280;
+            } else {
+                return 280 + 60 * ((duration - 7200) / 3600);
+            }
+        }
     }
 }
 

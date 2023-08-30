@@ -155,6 +155,12 @@ class DPlayer {
             this.comment = new Comment(this);
         }
 
+        if (this.options.title) {
+            this.template.titleContainer.innerHTML = this.options.title;
+        } else {
+            this.template.titleContainer.style.display = 'none';
+        }
+
         this.setting = new Setting(this);
         this.plugins = {};
         this.docClickFun = () => {

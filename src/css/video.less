@@ -29,3 +29,39 @@
         display: none;
     }
 }
+.dplayer-video-title {
+    position: absolute;
+    background: linear-gradient(to bottom, rgb(0 0 0 / 54%), rgba(0, 0, 0, 0));
+    top: 0;
+    color: #f3f3f3;
+    left: 0;
+    right: 0;
+    height: 41px;
+    text-shadow: 0 0 3px #000000c9;
+    line-height: 41px;
+    padding: 0 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.dplayer.dplayer-hide-controller .dplayer-video-title {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+.dp-drag-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+    background: rgb(0 0 0 / 71%);
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    color: #fff;
+    pointer-events: none;
+    opacity: 0;
+    animation: showNotice 0.3s ease 1 forwards;
+}

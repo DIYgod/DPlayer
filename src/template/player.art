@@ -226,6 +226,8 @@
         </div>
     </div>
 </div>
+<div class="dplayer-video-title">视频标题</div>
+<div class="dp-drag-indicator"></div>
 <div class="dplayer-info-panel dplayer-info-panel-hide">
     <div class="dplayer-info-panel-close">[x]</div>
     <div class="dplayer-info-panel-item dplayer-info-panel-item-version">
