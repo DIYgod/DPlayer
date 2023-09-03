@@ -156,7 +156,20 @@ class DPlayer {
         }
 
         if (this.options.title) {
-            this.template.titleContainer.innerHTML = this.options.title;
+            let titleContainer = this.template.titleContainer;
+            let container = this.container;
+            titleContainer.innerHTML = this.options.title;
+            container.addEventListener('mouseenter', (ev) => {
+                titleToggle(ev);
+            });
+            container.addEventListener('mouseleave', (ev) => {
+                titleToggle(ev);
+            });
+            const titleToggle = (event) => {
+                if (!utils.isMobile && !this.video.paused) {
+                    titleContainer.style.opacity = event.type === 'mouseleave' ? '0' : '1';
+                }
+            };
         } else {
             this.template.titleContainer.style.display = 'none';
         }
