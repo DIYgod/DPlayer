@@ -16,6 +16,8 @@ import airplay from '../assets/airplay.svg';
 import subtitle from '../assets/subtitle.svg';
 import loading from '../assets/loading.svg';
 import chromecast from '../assets/chromecast.svg';
+import lock from '../assets/lock.svg';
+import unlock from '../assets/unlock.svg';
 
 const Icons = {
     play: play,
@@ -36,6 +38,8 @@ const Icons = {
     loading: loading,
     airplay: airplay,
     chromecast: chromecast,
+    lock: lock,
+    unlock: unlock,
 };
 
 export default Icons;

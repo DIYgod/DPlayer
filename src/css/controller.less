@@ -1,5 +1,6 @@
 .dplayer-controller-mask {
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==)
+        repeat-x bottom;
     height: 98px;
     width: 100%;
     position: absolute;
@@ -53,15 +54,15 @@
             background-color: #fff;
             text-align: center;
             transform: translateX(-3px);
-            transition: all .2s ease-in-out;
+            transition: all 0.2s ease-in-out;
             &:hover {
                 .dplayer-highlight-text {
                     display: block;
                 }
-                &~.dplayer-bar-preview {
+                & ~ .dplayer-bar-preview {
                     opacity: 0;
                 }
-                &~.dplayer-bar-time {
+                & ~ .dplayer-bar-time {
                     opacity: 0;
                 }
             }
@@ -71,7 +72,7 @@
                 left: 50%;
                 top: -24px;
                 padding: 5px 8px;
-                background-color: rgba(0, 0, 0, .62);
+                background-color: rgba(0, 0, 0, 0.62);
                 color: #fff;
                 border-radius: 4px;
                 font-size: 12px;
@@ -107,7 +108,7 @@
             font-size: 12px;
             text-align: center;
             opacity: 1;
-            transition: opacity .1s ease-in-out;
+            transition: opacity 0.1s ease-in-out;
             word-wrap: normal;
             word-break: normal;
             z-index: 2;
@@ -117,14 +118,14 @@
             position: relative;
             height: 3px;
             width: 100%;
-            background: rgba(255, 255, 255, .2);
+            background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
             .dplayer-loaded {
                 position: absolute;
                 left: 0;
                 top: 0;
                 bottom: 0;
-                background: rgba(255, 255, 255, .4);
+                background: rgba(255, 255, 255, 0.4);
                 height: 3px;
                 transition: all 0.5s ease;
                 will-change: width;
@@ -146,7 +147,7 @@
                     width: 11px;
                     border-radius: 50%;
                     cursor: pointer;
-                    transition: all .3s ease-in-out;
+                    transition: all 0.3s ease-in-out;
                     transform: scale(0);
                 }
             }
@@ -159,7 +160,7 @@
         &.dplayer-comment-box {
             display: none;
             position: absolute;
-            transition: all .3s ease-in-out;
+            transition: all 0.3s ease-in-out;
             z-index: 2;
             height: 38px;
             bottom: 0;
@@ -184,17 +185,17 @@
                 background: rgba(28, 28, 28, 0.9);
                 bottom: 41px;
                 left: 0;
-                box-shadow: 0 0 25px rgba(0, 0, 0, .3);
+                box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
                 border-radius: 4px;
                 padding: 10px 10px 16px;
                 font-size: 14px;
                 width: 204px;
-                transition: all .3s ease-in-out;
+                transition: all 0.3s ease-in-out;
                 transform: scale(0);
                 &.dplayer-comment-setting-open {
                     transform: scale(1);
                 }
-                input[type=radio] {
+                input[type='radio'] {
                     display: none;
                 }
                 label {
@@ -235,8 +236,8 @@
                         text-align: center;
                         cursor: pointer;
                     }
-                    input:checked+span {
-                        background: #E4E4E6;
+                    input:checked + span {
+                        background: #e4e4e6;
                         color: #1c1c1c;
                     }
                 }
@@ -298,7 +299,7 @@
         .dplayer-live-badge {
             line-height: 38px;
             color: #eee;
-            text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
             vertical-align: middle;
             font-size: 13px;
             cursor: default;
@@ -323,8 +324,8 @@
             box-sizing: border-box;
             display: inline-block;
             .dplayer-icon-content {
-                transition: all .2s ease-in-out;
-                opacity: .8;
+                transition: all 0.2s ease-in-out;
+                opacity: 0.8;
             }
             &:hover {
                 .dplayer-icon-content {
@@ -397,7 +398,7 @@
                             width: 11px;
                             border-radius: 50%;
                             cursor: pointer;
-                            transition: all .3s ease-in-out;
+                            transition: all 0.3s ease-in-out;
                             transform: scale(0);
                         }
                     }
@@ -422,7 +423,7 @@
                 border-radius: 2px;
                 background: rgba(28, 28, 28, 0.9);
                 padding: 7px 0;
-                transition: all .3s ease-in-out;
+                transition: all 0.3s ease-in-out;
                 overflow: auto;
                 z-index: 2;
                 &.dplayer-subtitles-panel {
@@ -439,7 +440,7 @@
                 cursor: pointer;
                 position: relative;
                 &:hover {
-                    background-color: rgba(255, 255, 255, .1);
+                    background-color: rgba(255, 255, 255, 0.1);
                 }
             }
         }
@@ -455,10 +456,10 @@
                 border-radius: 2px;
                 background: rgba(28, 28, 28, 0.9);
                 padding: 7px 0;
-                transition: all .3s ease-in-out;
+                transition: all 0.3s ease-in-out;
                 overflow: hidden;
                 z-index: 2;
-                &>div {
+                & > div {
                     display: none;
                     &.dplayer-setting-origin-panel {
                         display: block;
@@ -488,7 +489,7 @@
                 cursor: pointer;
                 position: relative;
                 &:hover {
-                    background-color: rgba(255, 255, 255, .1);
+                    background-color: rgba(255, 255, 255, 0.1);
                 }
             }
             .dplayer-setting-danmaku {
@@ -545,7 +546,7 @@
                                 width: 11px;
                                 border-radius: 50%;
                                 cursor: pointer;
-                                transition: all .3s ease-in-out;
+                                transition: all 0.3s ease-in-out;
                                 background: #aaa;
                             }
                         }
@@ -597,7 +598,7 @@
                 border-radius: 2px;
                 background: rgba(28, 28, 28, 0.9);
                 padding: 5px 0;
-                transition: all .3s ease-in-out;
+                transition: all 0.3s ease-in-out;
                 overflow: hidden;
                 color: #fff;
                 text-align: center;
@@ -608,7 +609,7 @@
                 cursor: pointer;
                 line-height: 25px;
                 &:hover {
-                    background-color: rgba(255, 255, 255, .1);
+                    background-color: rgba(255, 255, 255, 0.1);
                 }
             }
         }
@@ -637,7 +638,7 @@
                 max-width: 0;
                 display: none;
             }
-            input+label {
+            input + label {
                 display: inline-block;
                 position: relative;
                 box-shadow: rgb(223, 223, 223) 0 0 0 0 inset;
@@ -647,10 +648,10 @@
                 border-radius: 10px;
                 box-sizing: border-box;
                 cursor: pointer;
-                transition: .2s ease-in-out;
+                transition: 0.2s ease-in-out;
             }
-            input+label:before {
-                content: "";
+            input + label:before {
+                content: '';
                 position: absolute;
                 display: block;
                 height: 18px;
@@ -658,29 +659,29 @@
                 top: 0;
                 left: 0;
                 border-radius: 15px;
-                transition: .2s ease-in-out;
+                transition: 0.2s ease-in-out;
             }
-            input+label:after {
-                content: "";
+            input + label:after {
+                content: '';
                 position: absolute;
                 display: block;
                 left: 0;
                 top: 0;
                 border-radius: 15px;
                 background: #fff;
-                transition: .2s ease-in-out;
+                transition: 0.2s ease-in-out;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
                 height: 18px;
                 width: 18px;
             }
-            input:checked+label {
+            input:checked + label {
                 border-color: rgba(255, 255, 255, 0.5);
             }
-            input:checked+label:before {
+            input:checked + label:before {
                 width: 30px;
                 background: rgba(255, 255, 255, 0.5);
             }
-            input:checked+label:after {
+            input:checked + label:after {
                 left: 12px;
             }
         }
@@ -703,4 +704,17 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.dplayer-lock-screen {
+    position: absolute;
+    transition-duration: 0.3s;
+    top: 50%;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    transform: translate(-50%, -50%);
+}
+.hide-play-button {
+    display: none !important;
 }

@@ -170,8 +170,6 @@ class DPlayer {
                     titleContainer.style.opacity = event.type === 'mouseleave' ? '0' : '1';
                 }
             };
-        } else {
-            this.template.titleContainer.style.display = 'none';
         }
 
         this.setting = new Setting(this);

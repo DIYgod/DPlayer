@@ -18,7 +18,9 @@ class Controller {
             this.player.on('play', this.setAutoHideHandler);
             this.player.on('pause', this.setAutoHideHandler);
         }
-
+        if (utils.isMobile) {
+            this.initLockButton();
+        }
         this.initPlayButton();
         this.initThumbnails();
         this.initPlayedBar();
@@ -432,7 +434,7 @@ class Controller {
 
         wrapper.addEventListener('touchmove', (event) => {
             endX = event.touches[0].clientX;
-            if (this.player.video.duration) {
+            if (this.player.video.duration && !this.isLocked) {
                 playButton.style.opacity = '0';
                 let wrapperWidth = wrapper.offsetWidth;
                 let percentage = (endX - startX) / wrapperWidth;
@@ -446,7 +448,7 @@ class Controller {
         wrapper.addEventListener('touchend', () => {
             indicator.style.opacity = '0';
             playButton.style.opacity = '1';
-            if (this.player.video.duration && startX !== endX) {
+            if (this.player.video.duration && startX !== endX && !this.isLocked) {
                 this.player.seek(this.player.bar.get('played') * this.player.video.duration + movement);
             }
         });
@@ -460,6 +462,28 @@ class Controller {
                 return 280 + 60 * ((duration - 7200) / 3600);
             }
         }
+    }
+
+    isLocked = false;
+    initLockButton() {
+        const btn = this.player.template.lockScreenBtn;
+
+        let controllerDOM = this.player.template.controller;
+        let controllerMask = this.player.template.controllerMask;
+        let titleDOM = this.player.template.titleContainer;
+        let mobilePlayBtn = this.player.template.mobilePlayButton;
+        btn.addEventListener('click', () => {
+            if (!this.isLocked) {
+                btn.innerHTML = Icons.lock;
+                controllerDOM.style.display = controllerMask.style.display = titleDOM.style.display = 'none';
+                mobilePlayBtn.classList.add('hide-play-button');
+            } else {
+                btn.innerHTML = Icons.unlock;
+                controllerDOM.style.display = controllerMask.style.display = titleDOM.style.display = 'block';
+                mobilePlayBtn.classList.remove('hide-play-button');
+            }
+            this.isLocked = !this.isLocked;
+        });
     }
 }
 

@@ -226,7 +226,14 @@
         </div>
     </div>
 </div>
-<div class="dplayer-video-title">视频标题</div>
+{{ if options.title }}
+<div class="dplayer-video-title"></div>
+{{ /if }}
+{{ if mobile }}
+<div class="dplayer-lock-screen">
+    <span class="dplayer-icon-content">{{@ icons.unlock}}</span>
+</div>
+{{ /if }}
 <div class="dp-drag-indicator"></div>
 <div class="dplayer-info-panel dplayer-info-panel-hide">
     <div class="dplayer-info-panel-close">[x]</div>
