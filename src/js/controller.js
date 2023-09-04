@@ -475,11 +475,17 @@ class Controller {
         btn.addEventListener('click', () => {
             if (!this.isLocked) {
                 btn.innerHTML = Icons.lock;
-                controllerDOM.style.display = controllerMask.style.display = titleDOM.style.display = 'none';
+                controllerDOM.style.display = controllerMask.style.display = 'none';
                 mobilePlayBtn.classList.add('hide-play-button');
+                if (titleDOM != null) {
+                    titleDOM.style.display = 'none';
+                }
             } else {
                 btn.innerHTML = Icons.unlock;
-                controllerDOM.style.display = controllerMask.style.display = titleDOM.style.display = 'block';
+                controllerDOM.style.display = controllerMask.style.display = 'block';
+                if (titleDOM != null) {
+                    titleDOM.style.display = 'block';
+                }
                 mobilePlayBtn.classList.remove('hide-play-button');
             }
             this.isLocked = !this.isLocked;
