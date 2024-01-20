@@ -12,7 +12,7 @@
         user-select: none;
         cursor: default;
         white-space: nowrap;
-        text-shadow: .5px .5px .5px rgba(0, 0, 0, .5);
+        text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
         &--demo {
             position: absolute;
             visibility: hidden;
@@ -24,7 +24,7 @@
         transform: translateX(100%);
         &.dplayer-danmaku-move {
             will-change: transform;
-            animation-name: 'danmaku';
+            animation-name: danmaku;
             animation-timing-function: linear;
             animation-play-state: paused;
         }
@@ -42,7 +42,7 @@
         visibility: hidden;
         &.dplayer-danmaku-move {
             will-change: visibility;
-            animation-name: 'danmaku-center';
+            animation-name: danmaku-center;
             animation-timing-function: linear;
             animation-play-state: paused;
         }
