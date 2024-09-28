@@ -437,12 +437,12 @@ class DPlayer {
                     if (window.dashjs) {
                         // const dashjsPlayer = window.dashjs.MediaPlayer().create().initialize(video, video.src, false); //undefined
                         const dashjsPlayer = window.dashjs.MediaPlayer().create();
-                        dashjsPlayer.initialize(video, video.src, false);
+                        dashjsPlayer.initialize(video, video.src, this.options.autoplay);
                         const options = this.options.pluginOptions.dash;
                         dashjsPlayer.updateSettings(options);
                         this.plugins.dash = dashjsPlayer;
                         this.events.on('destroy', () => {
-                            window.dashjs.MediaPlayer().reset();
+                            dashjsPlayer.destroy();
                             delete this.plugins.dash;
                         });
                     } else {
