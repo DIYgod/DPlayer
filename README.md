@@ -1,35 +1,35 @@
-<p align="center">
-<img src="https://i.imgur.com/LnPvZvO.png" alt="ADPlayer" width="100">
-</p>
-<h1 align="center">DPlayer</h1>
+<<p căn chỉnh="trung tâm">căn chỉnh="trung tâm">
+<Img SRC="https://i.imgur.com/LnPvZvO.png" Alt="Cầu thủ AD" chiều rộng="100">
+</P.>
+<H1 căn chỉnh="trung tâm">DPlayer</H1>
 
-> 🍭 Wow, such a lovely HTML5 danmaku video player
+> 🍭 Uầy, trình xem video HTML5 danmaku thật đáng yêu
 
-[![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
-[![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![](https://data.jsdelivr.com/v1/package/npm/dplayer/badge)](https://www.jsdelivr.com/package/npm/dplayer)
+[[!pm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
+[[!pm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
+[[!pm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
+[[!](https://data.jsdelivr.com/v1/package/npm/dplayer/badge)](https://www.jsdelivr.com/package/npm/dplayer)
 
-## Introduction
+## Giới thiệu
 
-![image](http://i.imgur.com/207ch36.jpg)
+[hình ảnh](http://i.imgur.com/207ch36.jpg)
 
-DPlayer is a lovely HTML5 danmaku video player to help people build video and danmaku easily.
+DPlayer là một trình phát video HTML5 danmaku đáng yêu giúp mọi người xây dựng video và danmaku dễ dàng.
 
-**DPlayer supports:**
+**Hỗ trợ DPlayer:**
 
--   Streaming formats
-    -   [HLS](https://github.com/video-dev/hls.js)
-    -   [FLV](https://github.com/Bilibili/flv.js)
-    -   [MPEG DASH](https://github.com/Dash-Industry-Forum/dash.js)
-    -   [WebTorrent](https://github.com/webtorrent/webtorrent)
-    -   Any other custom streaming formats
--   Media formats
-    -   MP4 H.264
-    -   WebM
-    -   Ogg Theora Vorbis
--   Features
-    -   Danmaku
+- Định dạng phát trực tuyến 
+    -   [HL](https://github.com/video-dev/hls.js)
+    -   [Vòi rồng](https://github.com/Bilibili/flv.js)
+    -   [TRUY CẬP NGÀY 6 THÁNG 1 NĂM 2011. ^ “MPEG DASH”.](https://github.com/Dash-Industry-Forum/dash.js)
+    -   [Webrental](https://github.com/webtorrent/webtorrent)
+    - Bất kỳ định dạng phát trực tuyến tùy chỉnh nào khác 
+- Định dạng phương tiện 
+    - MP4 H.264 
+    - WebM 
+    - Ogg: Theora vorbis 
+- Các tính năng 
+    - Danmaku, Khanapur 
     -   Screenshot
     -   Hotkeys
     -   Quality switching
