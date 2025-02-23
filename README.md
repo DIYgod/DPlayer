@@ -1,18 +1,18 @@
-<p align="center">
-<img src="https://i.imgur.com/LnPvZvO.png" alt="ADPlayer" width="100">
-</p>
-<h1 align="center">DPlayer</h1>
+<P. align="center">
+<Img SRC="https://i.imgur.com/LnPvZvO.png" Alt="Cầu thủ AD" chiều rộng="100">
+</P.>
+<H1 căn chỉnh="trung tâm">DPlayer</H1>
 
-> 🍭 Wow, such a lovely HTML5 danmaku video player
+> 🍭 Uầy, trình xem video HTML5 danmaku thật đáng yêu
 
-[![npm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![npm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
-[![npm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
-[![](https://data.jsdelivr.com/v1/package/npm/dplayer/badge)](https://www.jsdelivr.com/package/npm/dplayer)
+[[!pm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
+[[!pm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
+[[!pm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
+[[!](https://data.jsdelivr.com/v1/package/npm/dplayer/badge)](https://www.jsdelivr.com/package/npm/dplayer)
 
-## Introduction
+## Giới thiệu
 
-![image](http://i.imgur.com/207ch36.jpg)
+[hình ảnh](http://i.imgur.com/207ch36.jpg)
 
 DPlayer is a lovely HTML5 danmaku video player to help people build video and danmaku easily.
 
