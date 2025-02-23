@@ -3,14 +3,14 @@
 </P.>
 <H1 căn chỉnh="trung tâm">DPlayer</H1>
 
-> 🍭 Uầy, trình xem video HTML5 danmaku thật đáng yêu
+>  🍭 Uầy, trình xem video HTML5 danmaku thật đáng yêu
 
 [[!pm](https://img.shields.io/npm/v/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [[!pm](https://img.shields.io/npm/l/dplayer.svg?style=flat-square)](https://github.com/MoePlayer/DPlayer/blob/master/LICENSE)
 [[!pm](https://img.shields.io/npm/dt/dplayer.svg?style=flat-square)](https://www.npmjs.com/package/dplayer)
 [[!](https://data.jsdelivr.com/v1/package/npm/dplayer/badge)](https://www.jsdelivr.com/package/npm/dplayer)
 
-## Giới thiệu
+##  Giới thiệu
 
 [hình ảnh](http://i.imgur.com/207ch36.jpg)
 
