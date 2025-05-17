@@ -349,7 +349,8 @@ Player events
 -   danmaku_show
 -   danmaku_hide
 -   danmaku_clear
--   danmaku_loaded
+-   danmaku_load_start
+-   danmaku_load_end
 -   danmaku_send
 -   danmaku_opacity
 -   contextmenu_show
