@@ -12,7 +12,7 @@
 
 ## Introduction
 
-![image](http://i.imgur.com/207ch36.jpg)
+![image](https://i.imgur.com/207ch36.jpg)
 
 DPlayer is a lovely HTML5 danmaku video player to help people build video and danmaku easily.
 
