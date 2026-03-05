@@ -71,8 +71,12 @@
         "yorkie": "^2.0.0"
     },
     "dependencies": {
-        "axios": "1.4.0",
+        "axios": "^1.6.0",
         "balloon-css": "^1.0.3",
         "promise-polyfill": "8.3.0"
+    },
+    "overrides": {
+        "highlight.js": ">=11.9.0",
+        "http-proxy-middleware": ">=2.0.7"
     }
 }
