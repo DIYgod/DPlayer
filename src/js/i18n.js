@@ -7,22 +7,24 @@ W3C def language codes is :
 NOTE: use lowercase to prevent case typo from user!
 Use this as shown below..... */
 
-function i18n(lang) {
-    this.lang = lang;
-    // in case someone says en-us, and en is present!
-    this.fallbackLang = this.lang.includes('-') ? this.lang.split('-')[0] : this.lang;
-    this.tran = (key) => {
-        key = key.toLowerCase();
-        if (tranTxt[this.lang] && tranTxt[this.lang][key]) {
-            return tranTxt[this.lang][key];
-        } else if (tranTxt[this.fallbackLang] && tranTxt[this.fallbackLang][key]) {
-            return tranTxt[this.fallbackLang][key];
-        } else if (standard[key]) {
-            return standard[key];
-        } else {
-            return key;
-        }
-    };
+class i18n {
+    constructor(lang) {
+        this.lang = lang;
+        // in case someone says en-us, and en is present!
+        this.fallbackLang = this.lang.includes('-') ? this.lang.split('-')[0] : this.lang;
+        this.tran = (key) => {
+            key = key.toLowerCase();
+            if (tranTxt[this.lang] && tranTxt[this.lang][key]) {
+                return tranTxt[this.lang][key];
+            } else if (tranTxt[this.fallbackLang] && tranTxt[this.fallbackLang][key]) {
+                return tranTxt[this.fallbackLang][key];
+            } else if (standard[key]) {
+                return standard[key];
+            } else {
+                return key;
+            }
+        };
+    }
 }
 
 // abstract model for recognizing if valid translations are present
