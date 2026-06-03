@@ -35,20 +35,28 @@ class InfoPanel {
     }
 
     update() {
-        this.template.infoVersion.innerHTML = `v${DPLAYER_VERSION} ${GIT_HASH}`;
-        this.template.infoType.innerHTML = this.player.type;
-        this.template.infoUrl.innerHTML = this.player.options.video.url;
-        this.template.infoResolution.innerHTML = `${this.player.video.videoWidth} x ${this.player.video.videoHeight}`;
-        this.template.infoDuration.innerHTML = this.player.video.duration;
+        this.template.infoVersion.textContent = `v${DPLAYER_VERSION} ${GIT_HASH}`;
+        this.template.infoType.textContent = this.player.type;
+        this.template.infoUrl.textContent = this.player.options.video.url;
+        this.template.infoResolution.textContent = `${this.player.video.videoWidth} x ${this.player.video.videoHeight}`;
+        this.template.infoDuration.textContent = this.player.video.duration;
         if (this.player.options.danmaku) {
-            this.template.infoDanmakuId.innerHTML = this.player.options.danmaku.id;
-            this.template.infoDanmakuApi.innerHTML = this.player.options.danmaku.api;
-            this.template.infoDanmakuAmount.innerHTML = this.player.danmaku.dan.length;
+            this.template.infoDanmakuId.textContent = this.player.options.danmaku.id;
+            this.template.infoDanmakuApi.textContent = this.player.options.danmaku.api;
+            this.template.infoDanmakuAmount.textContent = this.player.danmaku.dan.length;
         }
     }
 
     fps(value) {
-        this.template.infoFPS.innerHTML = `${value.toFixed(1)}`;
+        this.template.infoFPS.textContent = `${value.toFixed(1)}`;
+    }
+
+    toggle() {
+        if (this.container.classList.contains('dplayer-info-panel-hide')) {
+            this.show();
+        } else {
+            this.hide();
+        }
     }
 }
 
