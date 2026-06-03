@@ -33,7 +33,7 @@ class DPlayer {
      * @constructor
      */
     constructor(options) {
-        this.options = handleOption({ preload: options.video.type === 'webtorrent' ? 'none' : 'metadata', ...options });
+        this.options = handleOption({ preload: options?.video?.type === 'webtorrent' ? 'none' : 'metadata', ...options });
 
         if (this.options.video.quality) {
             this.qualityIndex = this.options.video.defaultQuality;
@@ -208,8 +208,10 @@ class DPlayer {
             this.danmaku.seek();
         }
 
-        this.bar.set('played', time / this.video.duration, 'width');
-        this.template.ptime.innerHTML = utils.secondToTime(time);
+        if (this.video.duration && isFinite(this.video.duration)) {
+            this.bar.set('played', time / this.video.duration, 'width');
+        }
+        this.template.ptime.textContent = utils.secondToTime(time);
     }
 
     /**
@@ -382,7 +384,7 @@ class DPlayer {
                 this.type = 'normal';
             }
 
-            const src = this.quality.url; // 真实的视频 url, 用于切换清晰度时销毁实例
+            const src = (this.quality && this.quality.url) || video.src; // 真实的视频 url, 用于切换清晰度时销毁实例
             switch (this.type) {
                 // https://github.com/video-dev/hls.js
                 case 'hls':
@@ -393,16 +395,20 @@ class DPlayer {
                             this.plugins.hls = hls;
                             hls.loadSource(video.src);
                             hls.attachMedia(video);
-                            this.events.on('destroy', () => {
+                            const onHlsDestroy = () => {
                                 hls.destroy();
                                 delete this.plugins.hls;
-                            });
+                                this.events.off('destroy', onHlsDestroy);
+                            };
+                            this.events.on('destroy', onHlsDestroy);
                             // 切换清晰度时销毁实例
-                            this.events.on('quality_end', () => {
+                            const onHlsQualityEnd = () => {
                                 if (src !== this.quality.url) {
                                     hls.destroy();
                                 }
-                            });
+                                this.events.off('quality_end', onHlsQualityEnd);
+                            };
+                            this.events.on('quality_end', onHlsQualityEnd);
                         } else {
                             this.notice('Error: Hls is not supported.');
                         }
@@ -416,7 +422,7 @@ class DPlayer {
                     if (window.flvjs) {
                         if (window.flvjs.isSupported()) {
                             const flvPlayer = window.flvjs.createPlayer(
-                                Object.assign(this.options.pluginOptions.flv.mediaDataSource || {}, {
+                                Object.assign({}, this.options.pluginOptions.flv.mediaDataSource || {}, {
                                     type: 'flv',
                                     url: video.src,
                                 }),
@@ -425,20 +431,24 @@ class DPlayer {
                             this.plugins.flvjs = flvPlayer;
                             flvPlayer.attachMediaElement(video);
                             flvPlayer.load();
-                            this.events.on('destroy', () => {
+                            const onFlvDestroy = () => {
                                 flvPlayer.unload();
                                 flvPlayer.detachMediaElement();
                                 flvPlayer.destroy();
                                 delete this.plugins.flvjs;
-                            });
+                                this.events.off('destroy', onFlvDestroy);
+                            };
+                            this.events.on('destroy', onFlvDestroy);
                             // 切换清晰度时销毁实例
-                            this.events.on('quality_end', () => {
+                            const onFlvQualityEnd = () => {
                                 if (src !== this.quality.url) {
                                     flvPlayer.unload();
                                     flvPlayer.detachMediaElement();
                                     flvPlayer.destroy();
                                 }
-                            });
+                                this.events.off('quality_end', onFlvQualityEnd);
+                            };
+                            this.events.on('quality_end', onFlvQualityEnd);
                         } else {
                             this.notice('Error: flvjs is not supported.');
                         }
@@ -455,16 +465,20 @@ class DPlayer {
                         const options = this.options.pluginOptions.dash;
                         dashjsPlayer.updateSettings(options);
                         this.plugins.dash = dashjsPlayer;
-                        this.events.on('destroy', () => {
+                        const onDashDestroy = () => {
                             window.dashjs.MediaPlayer().reset();
                             delete this.plugins.dash;
-                        });
+                            this.events.off('destroy', onDashDestroy);
+                        };
+                        this.events.on('destroy', onDashDestroy);
                         // 切换清晰度时销毁实例
-                        this.events.on('quality_end', () => {
+                        const onDashQualityEnd = () => {
                             if (src !== this.quality.url) {
                                 window.dashjs.MediaPlayer().reset();
                             }
-                        });
+                            this.events.off('quality_end', onDashQualityEnd);
+                        };
+                        this.events.on('quality_end', onDashQualityEnd);
                     } else {
                         this.notice("Error: Can't find dashjs.");
                     }
@@ -483,24 +497,33 @@ class DPlayer {
                             video.preload = 'metadata';
                             video.addEventListener('durationchange', () => this.container.classList.remove('dplayer-loading'), { once: true });
                             client.add(torrentId, (torrent) => {
-                                const file = torrent.files.find((file) => file.name.endsWith('.mp4'));
+                                const videoExtensions = ['.mp4', '.webm', '.mkv', '.ogg'];
+                                const file = torrent.files.find((f) => videoExtensions.some((ext) => f.name.endsWith(ext)));
+                                if (!file) {
+                                    this.notice('Error: No supported video file found in torrent.');
+                                    return;
+                                }
                                 file.renderTo(this.video, {
                                     autoplay: this.options.autoplay,
                                     controls: false,
                                 });
                             });
-                            this.events.on('destroy', () => {
+                            const onWebtorrentDestroy = () => {
                                 client.remove(torrentId);
                                 client.destroy();
                                 delete this.plugins.webtorrent;
-                            });
+                                this.events.off('destroy', onWebtorrentDestroy);
+                            };
+                            this.events.on('destroy', onWebtorrentDestroy);
                             // 切换清晰度时销毁实例
-                            this.events.on('quality_end', () => {
+                            const onWebtorrentQualityEnd = () => {
                                 if (src !== this.quality.url) {
                                     client.remove(torrentId);
                                     client.destroy();
                                 }
-                            });
+                                this.events.off('quality_end', onWebtorrentQualityEnd);
+                            };
+                            this.events.on('quality_end', onWebtorrentQualityEnd);
                         } else {
                             this.notice('Error: Webtorrent is not supported.');
                         }
@@ -522,13 +545,13 @@ class DPlayer {
         this.on('durationchange', () => {
             // compatibility: Android browsers will output 1 or Infinity at first
             if (video.duration !== 1 && video.duration !== Infinity) {
-                this.template.dtime.innerHTML = utils.secondToTime(video.duration);
+                this.template.dtime.textContent = utils.secondToTime(video.duration);
             }
         });
 
         // show video loaded bar: to inform interested parties of progress downloading the media
         this.on('progress', () => {
-            const percentage = video.buffered.length ? video.buffered.end(video.buffered.length - 1) / video.duration : 0;
+            const percentage = video.buffered.length && video.duration && isFinite(video.duration) ? video.buffered.end(video.buffered.length - 1) / video.duration : 0;
             this.bar.set('loaded', percentage, 'width');
         });
 
@@ -568,12 +591,12 @@ class DPlayer {
         });
 
         this.on('timeupdate', () => {
-            if (!this.moveBar) {
+            if (!this.moveBar && this.video.duration && isFinite(this.video.duration)) {
                 this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
             }
             const currentTime = utils.secondToTime(this.video.currentTime);
-            if (this.template.ptime.innerHTML !== currentTime) {
-                this.template.ptime.innerHTML = currentTime;
+            if (this.template.ptime.textContent !== currentTime) {
+                this.template.ptime.textContent = currentTime;
             }
         });
 
@@ -608,7 +631,7 @@ class DPlayer {
         }
         this.switchingQuality = true;
         this.quality = this.options.video.quality[index];
-        this.template.qualityButton.innerHTML = this.quality.name;
+        this.template.qualityButton.textContent = this.quality.name;
 
         const paused = this.video.paused;
         this.video.pause();
@@ -629,7 +652,7 @@ class DPlayer {
         this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, -1, undefined, 'switch-quality');
         this.events.trigger('quality_start', this.quality);
 
-        this.on('canplay', () => {
+        const onCanplay = () => {
             if (this.prevVideo) {
                 if (this.video.currentTime !== this.prevVideo.currentTime) {
                     this.seek(this.prevVideo.currentTime);
@@ -646,9 +669,14 @@ class DPlayer {
 
                 this.events.trigger('quality_end');
             }
-        });
+        };
+        if (this._onCanplay) {
+            this.events.off('canplay', this._onCanplay);
+        }
+        this._onCanplay = onCanplay;
+        this.on('canplay', onCanplay);
 
-        this.on('error', () => {
+        const onQualityError = () => {
             if (!this.video.error) {
                 return;
             }
@@ -667,7 +695,12 @@ class DPlayer {
                 this.prevVideo = null;
                 this.switchingQuality = false;
             }
-        });
+        };
+        if (this._onQualityError) {
+            this.events.off('error', this._onQualityError);
+        }
+        this._onQualityError = onQualityError;
+        this.on('error', onQualityError);
     }
 
     notice(text, time = 2000, opacity = 0.8, id) {
@@ -675,7 +708,7 @@ class DPlayer {
         if (id) {
             oldNoticeEle = document.getElementById(`dplayer-notice-${id}`);
             if (oldNoticeEle) {
-                oldNoticeEle.innerHTML = text;
+                oldNoticeEle.textContent = text;
             }
             if (this.noticeList[id]) {
                 clearTimeout(this.noticeList[id]);
@@ -726,6 +759,9 @@ class DPlayer {
         this.pause();
         document.removeEventListener('click', this.docClickFun, true);
         this.container.removeEventListener('click', this.containerClickFun, true);
+        if (this.danmaku) {
+            this.danmaku.destroy();
+        }
         this.fullScreen.destroy();
         this.hotkey.destroy();
         this.contextmenu.destroy();
