@@ -59,10 +59,10 @@ class Controller {
             }
         } else {
             this.player.template.videoWrap.addEventListener('click', () => {
-                this.toggle();
+                this.player.toggle();
             });
             this.player.template.controllerMask.addEventListener('click', () => {
-                this.toggle();
+                this.player.toggle();
             });
         }
     }
@@ -82,7 +82,10 @@ class Controller {
                         const p = document.createElement('div');
                         p.classList.add('dplayer-highlight');
                         p.style.left = (this.player.options.highlight[i].time / this.player.video.duration) * 100 + '%';
-                        p.innerHTML = '<span class="dplayer-highlight-text">' + this.player.options.highlight[i].text + '</span>';
+                        const span = document.createElement('span');
+                        span.className = 'dplayer-highlight-text';
+                        span.textContent = this.player.options.highlight[i].text;
+                        p.appendChild(span);
                         this.player.template.playedBarWrap.insertBefore(p, this.player.template.playedBarTime);
                     }
                 }
@@ -111,7 +114,7 @@ class Controller {
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
-            this.player.template.ptime.innerHTML = utils.secondToTime(percentage * this.player.video.duration);
+            this.player.template.ptime.textContent = utils.secondToTime(percentage * this.player.video.duration);
         };
 
         const thumbUp = (e) => {
@@ -144,7 +147,7 @@ class Controller {
                 }
                 this.thumbnails && this.thumbnails.move(tx);
                 this.player.template.playedBarTime.style.left = `${tx - (time >= 3600 ? 25 : 20)}px`;
-                this.player.template.playedBarTime.innerText = utils.secondToTime(time);
+                this.player.template.playedBarTime.textContent = utils.secondToTime(time);
                 this.player.template.playedBarTime.classList.remove('hidden');
             }
         });
@@ -257,24 +260,22 @@ class Controller {
     initAirplayButton() {
         if (this.player.options.airplay) {
             if (window.WebKitPlaybackTargetAvailabilityEvent) {
+                this.airplayClickHandler = function () {
+                    this.video.webkitShowPlaybackTargetPicker();
+                }.bind(this.player);
+                this.player.template.airplayButton.addEventListener('click', this.airplayClickHandler);
+
                 this.player.video.addEventListener(
                     'webkitplaybacktargetavailabilitychanged',
                     function (event) {
                         switch (event.availability) {
                             case 'available':
-                                this.template.airplayButton.disable = false;
+                                this.template.airplayButton.disabled = false;
                                 break;
 
                             default:
-                                this.template.airplayButton.disable = true;
+                                this.template.airplayButton.disabled = true;
                         }
-
-                        this.template.airplayButton.addEventListener(
-                            'click',
-                            function () {
-                                this.video.webkitShowPlaybackTargetPicker();
-                            }.bind(this)
-                        );
                     }.bind(this.player)
                 );
             } else {
@@ -416,6 +417,9 @@ class Controller {
         if (!utils.isMobile) {
             this.player.container.removeEventListener('mousemove', this.setAutoHideHandler);
             this.player.container.removeEventListener('click', this.setAutoHideHandler);
+        }
+        if (this.airplayClickHandler) {
+            this.player.template.airplayButton.removeEventListener('click', this.airplayClickHandler);
         }
         clearTimeout(this.autoHideTimer);
     }

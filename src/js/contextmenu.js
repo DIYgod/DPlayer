@@ -12,6 +12,11 @@ class ContextMenu {
             }
         });
 
+        this.maskHideHandler = () => {
+            this.hide();
+        };
+        this.player.template.mask.addEventListener('click', this.maskHideHandler);
+
         this.contextmenuHandler = (e) => {
             if (this.shown) {
                 this.hide();
@@ -23,10 +28,6 @@ class ContextMenu {
 
             const clientRect = this.player.container.getBoundingClientRect();
             this.show(event.clientX - clientRect.left, event.clientY - clientRect.top);
-
-            this.player.template.mask.addEventListener('click', () => {
-                this.hide();
-            });
         };
         this.player.container.addEventListener('contextmenu', this.contextmenuHandler);
     }
@@ -66,6 +67,7 @@ class ContextMenu {
 
     destroy() {
         this.player.container.removeEventListener('contextmenu', this.contextmenuHandler);
+        this.player.template.mask.removeEventListener('click', this.maskHideHandler);
     }
 }
 

@@ -34,6 +34,8 @@ class Events {
             'danmaku_show',
             'danmaku_hide',
             'danmaku_clear',
+            'danmaku_load_start',
+            'danmaku_load_end',
             'danmaku_loaded',
             'danmaku_send',
             'danmaku_opacity',
@@ -61,6 +63,12 @@ class Events {
                 this.events[name] = [];
             }
             this.events[name].push(callback);
+        }
+    }
+
+    off(name, callback) {
+        if (this.events[name]) {
+            this.events[name] = this.events[name].filter((fn) => fn !== callback);
         }
     }
 
