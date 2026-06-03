@@ -20,8 +20,8 @@ class Bar {
         this.elements[type].style[direction] = percentage * 100 + '%';
     }
 
-    get(type) {
-        return parseFloat(this.elements[type].style.width) / 100;
+    get(type, direction = 'width') {
+        return parseFloat(this.elements[type].style[direction]) / 100;
     }
 }
 
