@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
 
 module.exports = {
@@ -54,7 +55,7 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
@@ -91,6 +92,9 @@ module.exports = {
     },
 
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].min.css',
+        }),
         new webpack.DefinePlugin({
             DPLAYER_VERSION: `"${require('../package.json').version}"`,
             GIT_HASH: JSON.stringify(gitRevisionPlugin.version()),

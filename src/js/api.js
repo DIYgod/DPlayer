@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
     send: (options) => {
         axios
-            .post(options.url, options.data)
+            .post(options.url, options.data, { timeout: 10000 })
             .then((response) => {
                 const data = response.data;
                 if (!data || data.code !== 0) {
@@ -20,7 +20,7 @@ export default {
 
     read: (options) => {
         axios
-            .get(options.url)
+            .get(options.url, { timeout: 10000 })
             .then((response) => {
                 const data = response.data;
                 if (!data || data.code !== 0) {
