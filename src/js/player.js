@@ -734,6 +734,9 @@ class DPlayer {
         this.video.src = '';
         this.container.innerHTML = '';
         this.events.trigger('destroy');
+        // Clearing src makes the video element fire events (e.g. `error`) after destroy,
+        // so drop all callbacks to keep them from reaching user listeners.
+        this.events.events = {};
     }
 
     static get version() {
