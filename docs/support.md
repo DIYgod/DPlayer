@@ -32,7 +32,7 @@ We accept donations via the following ways:
 ## Sponsors
 
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="222px" src="hhttps://player.dogecloud.com/img/logo_with_product3.png">
+    <img width="222px" src="https://player.dogecloud.com/img/logo_with_product3.png">
 </a>
 
 ## DPlayer contributors
