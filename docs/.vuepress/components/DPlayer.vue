@@ -71,12 +71,16 @@ export default {
     methods: {
         load: function () {
             this.options.container = this.$refs.dplayer;
-            this.dplayer = new window.DPlayer(this.options);
+            setTimeout(() => {
+                this.dplayer = new window.DPlayer(this.options);
+            }, 0);
         }
     },
     mounted: function () {
         if (this.immediate) {
-            this.dplayer = new window.DPlayer(this.options);
+            setTimeout(() => {
+                this.dplayer = new window.DPlayer(this.options);
+            }, 0);
         }
     },
     beforeDestroy: function () {

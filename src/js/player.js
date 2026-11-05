@@ -2,7 +2,7 @@ import Promise from 'promise-polyfill';
 
 import utils from './utils';
 import handleOption from './options';
-import i18n from './i18n';
+import { i18n } from './i18n';
 import Template from './template';
 import Icons from './icons';
 import Danmaku from './danmaku';
@@ -10,6 +10,7 @@ import Events from './events';
 import FullScreen from './fullscreen';
 import User from './user';
 import Subtitle from './subtitle';
+import Subtitles from './subtitles';
 import Bar from './bar';
 import Timer from './timer';
 import Bezel from './bezel';
@@ -42,6 +43,7 @@ class DPlayer {
         this.events = new Events();
         this.user = new User(this);
         this.container = this.options.container;
+        this.noticeList = {};
 
         this.container.classList.add('dplayer');
         if (!this.options.danmaku) {
@@ -58,6 +60,43 @@ class DPlayer {
         this.arrow = this.container.offsetWidth <= 500;
         if (this.arrow) {
             this.container.classList.add('dplayer-arrow');
+        }
+
+        // multi subtitles defaultSubtitle add index, off option
+        if (this.options.subtitle) {
+            if (Array.isArray(this.options.subtitle.url)) {
+                const offSubtitle = {
+                    subtitle: '',
+                    lang: 'off',
+                };
+                this.options.subtitle.url.push(offSubtitle);
+                if (this.options.subtitle.defaultSubtitle) {
+                    if (typeof this.options.subtitle.defaultSubtitle === 'string') {
+                        // defaultSubtitle is string, match in lang then name.
+                        this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) =>
+                            /* if (sub.lang === this.options.subtitle.defaultSubtitle) {
+                            return true;
+                        } else if (sub.name === this.options.subtitle.defaultSubtitle) {
+                            return true;
+                        } else {
+                            return false;
+                        } */
+                            sub.lang === this.options.subtitle.defaultSubtitle ? true : sub.name === this.options.subtitle.defaultSubtitle ? true : false
+                        );
+                    } else if (typeof this.options.subtitle.defaultSubtitle === 'number') {
+                        // defaultSubtitle is int, directly use for index
+                        this.options.subtitle.index = this.options.subtitle.defaultSubtitle;
+                    }
+                }
+                // defaultSubtitle not match or not exist or index bound(when defaultSubtitle is int), try browser language.
+                if (this.options.subtitle.index === -1 || !this.options.subtitle.index || this.options.subtitle.index > this.options.subtitle.url.length - 1) {
+                    this.options.subtitle.index = this.options.subtitle.url.findIndex((sub) => sub.lang === this.options.lang);
+                }
+                // browser language not match, default off title
+                if (this.options.subtitle.index === -1) {
+                    this.options.subtitle.index = this.options.subtitle.url.length - 1;
+                }
+            }
         }
 
         this.template = new Template({
@@ -79,6 +118,7 @@ class DPlayer {
 
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
+                player: this,
                 container: this.template.danmaku,
                 opacity: this.user.get('opacity'),
                 callback: () => {
@@ -106,6 +146,7 @@ class DPlayer {
                     maximum: this.options.danmaku.maximum,
                     addition: this.options.danmaku.addition,
                     user: this.options.danmaku.user,
+                    speedRate: this.options.danmaku.speedRate,
                 },
                 events: this.events,
                 tran: (msg) => this.tran(msg),
@@ -116,21 +157,14 @@ class DPlayer {
 
         this.setting = new Setting(this);
         this.plugins = {};
-
-        document.addEventListener(
-            'click',
-            () => {
-                this.focus = false;
-            },
-            true
-        );
-        this.container.addEventListener(
-            'click',
-            () => {
-                this.focus = true;
-            },
-            true
-        );
+        this.docClickFun = () => {
+            this.focus = false;
+        };
+        this.containerClickFun = () => {
+            this.focus = true;
+        };
+        document.addEventListener('click', this.docClickFun, true);
+        this.container.addEventListener('click', this.containerClickFun, true);
 
         this.paused = true;
 
@@ -148,6 +182,8 @@ class DPlayer {
             this.play();
         }
 
+        this.moveBar = false;
+
         index++;
         instances.push(this);
     }
@@ -161,9 +197,9 @@ class DPlayer {
             time = Math.min(time, this.video.duration);
         }
         if (this.video.currentTime < time) {
-            this.notice(`${this.tran('FF')} ${(time - this.video.currentTime).toFixed(0)} ${this.tran('s')}`);
+            this.notice(`${this.tran('ff').replace('%s', (time - this.video.currentTime).toFixed(0))}`);
         } else if (this.video.currentTime > time) {
-            this.notice(`${this.tran('REW')} ${(this.video.currentTime - time).toFixed(0)} ${this.tran('s')}`);
+            this.notice(`${this.tran('rew').replace('%s', (this.video.currentTime - time).toFixed(0))}`);
         }
 
         this.video.currentTime = time;
@@ -260,7 +296,7 @@ class DPlayer {
                 this.user.set('volume', percentage);
             }
             if (!nonotice) {
-                this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`);
+                this.notice(`${this.tran('volume')} ${(percentage * 100).toFixed(0)}%`, undefined, undefined, 'volume');
             }
 
             this.video.volume = percentage;
@@ -346,6 +382,7 @@ class DPlayer {
                 this.type = 'normal';
             }
 
+            const src = this.quality.url; // 真实的视频 url, 用于切换清晰度时销毁实例
             switch (this.type) {
                 // https://github.com/video-dev/hls.js
                 case 'hls':
@@ -359,6 +396,12 @@ class DPlayer {
                             this.events.on('destroy', () => {
                                 hls.destroy();
                                 delete this.plugins.hls;
+                            });
+                            // 切换清晰度时销毁实例
+                            this.events.on('quality_end', () => {
+                                if (src !== this.quality.url) {
+                                    hls.destroy();
+                                }
                             });
                         } else {
                             this.notice('Error: Hls is not supported.');
@@ -388,6 +431,14 @@ class DPlayer {
                                 flvPlayer.destroy();
                                 delete this.plugins.flvjs;
                             });
+                            // 切换清晰度时销毁实例
+                            this.events.on('quality_end', () => {
+                                if (src !== this.quality.url) {
+                                    flvPlayer.unload();
+                                    flvPlayer.detachMediaElement();
+                                    flvPlayer.destroy();
+                                }
+                            });
                         } else {
                             this.notice('Error: flvjs is not supported.');
                         }
@@ -399,13 +450,20 @@ class DPlayer {
                 // https://github.com/Dash-Industry-Forum/dash.js
                 case 'dash':
                     if (window.dashjs) {
-                        const dashjsPlayer = window.dashjs.MediaPlayer().create().initialize(video, video.src, false);
+                        const dashjsPlayer = window.dashjs.MediaPlayer().create();
+                        dashjsPlayer.initialize(video, video.src, false, 0);
                         const options = this.options.pluginOptions.dash;
                         dashjsPlayer.updateSettings(options);
                         this.plugins.dash = dashjsPlayer;
                         this.events.on('destroy', () => {
                             window.dashjs.MediaPlayer().reset();
                             delete this.plugins.dash;
+                        });
+                        // 切换清晰度时销毁实例
+                        this.events.on('quality_end', () => {
+                            if (src !== this.quality.url) {
+                                window.dashjs.MediaPlayer().reset();
+                            }
                         });
                     } else {
                         this.notice("Error: Can't find dashjs.");
@@ -435,6 +493,13 @@ class DPlayer {
                                 client.remove(torrentId);
                                 client.destroy();
                                 delete this.plugins.webtorrent;
+                            });
+                            // 切换清晰度时销毁实例
+                            this.events.on('quality_end', () => {
+                                if (src !== this.quality.url) {
+                                    client.remove(torrentId);
+                                    client.destroy();
+                                }
                             });
                         } else {
                             this.notice('Error: Webtorrent is not supported.');
@@ -473,7 +538,7 @@ class DPlayer {
                 // Not a video load error, may be poster load failed, see #307
                 return;
             }
-            this.tran && this.notice && this.type !== 'webtorrent' && this.notice(this.tran('Video load failed'), -1);
+            this.tran && this.notice && this.type !== 'webtorrent' && this.notice(this.tran('video-failed'));
         });
 
         // video end
@@ -503,7 +568,9 @@ class DPlayer {
         });
 
         this.on('timeupdate', () => {
-            this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
+            if (!this.moveBar) {
+                this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
+            }
             const currentTime = utils.secondToTime(this.video.currentTime);
             if (this.template.ptime.innerHTML !== currentTime) {
                 this.template.ptime.innerHTML = currentTime;
@@ -511,15 +578,20 @@ class DPlayer {
         });
 
         for (let i = 0; i < this.events.videoEvents.length; i++) {
-            video.addEventListener(this.events.videoEvents[i], () => {
-                this.events.trigger(this.events.videoEvents[i]);
+            video.addEventListener(this.events.videoEvents[i], (e) => {
+                this.events.trigger(this.events.videoEvents[i], e);
             });
         }
 
         this.volume(this.user.get('volume'), true, true);
 
         if (this.options.subtitle) {
+            // init old single subtitle function(sub show and style)
             this.subtitle = new Subtitle(this.template.subtitle, this.video, this.options.subtitle, this.events);
+            // init multi subtitles function(sub update)
+            if (Array.isArray(this.options.subtitle.url)) {
+                this.subtitles = new Subtitles(this);
+            }
             if (!this.user.get('subtitle')) {
                 this.subtitle.hide();
             }
@@ -531,6 +603,7 @@ class DPlayer {
         if (this.qualityIndex === index || this.switchingQuality) {
             return;
         } else {
+            this.prevIndex = this.qualityIndex;
             this.qualityIndex = index;
         }
         this.switchingQuality = true;
@@ -553,7 +626,7 @@ class DPlayer {
         this.video = videoEle;
         this.initVideo(this.video, this.quality.type || this.options.video.type);
         this.seek(this.prevVideo.currentTime);
-        this.notice(`${this.tran('Switching to')} ${this.quality.name} ${this.tran('quality')}`, -1);
+        this.notice(`${this.tran('switching-quality').replace('%q', this.quality.name)}`, -1, undefined, 'switch-quality');
         this.events.trigger('quality_start', this.quality);
 
         this.on('canplay', () => {
@@ -568,26 +641,69 @@ class DPlayer {
                     this.video.play();
                 }
                 this.prevVideo = null;
-                this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
+                this.notice(`${this.tran('switched-quality').replace('%q', this.quality.name)}`, undefined, undefined, 'switch-quality');
                 this.switchingQuality = false;
 
                 this.events.trigger('quality_end');
             }
         });
+
+        this.on('error', () => {
+            if (!this.video.error) {
+                return;
+            }
+            if (this.prevVideo) {
+                this.template.videoWrap.removeChild(this.video);
+                this.video = this.prevVideo;
+                if (!paused) {
+                    this.video.play();
+                }
+                this.qualityIndex = this.prevIndex;
+                this.quality = this.options.video.quality[this.qualityIndex];
+                this.noticeTime = setTimeout(() => {
+                    this.template.notice.style.opacity = 0;
+                    this.events.trigger('notice_hide');
+                }, 3000);
+                this.prevVideo = null;
+                this.switchingQuality = false;
+            }
+        });
     }
 
-    notice(text, time = 2000, opacity = 0.8) {
-        this.template.notice.innerHTML = text;
-        this.template.notice.style.opacity = opacity;
-        if (this.noticeTime) {
-            clearTimeout(this.noticeTime);
+    notice(text, time = 2000, opacity = 0.8, id) {
+        let oldNoticeEle;
+        if (id) {
+            oldNoticeEle = document.getElementById(`dplayer-notice-${id}`);
+            if (oldNoticeEle) {
+                oldNoticeEle.innerHTML = text;
+            }
+            if (this.noticeList[id]) {
+                clearTimeout(this.noticeList[id]);
+                this.noticeList[id] = null;
+            }
         }
-        this.events.trigger('notice_show', text);
+        if (!oldNoticeEle) {
+            const notice = Template.NewNotice(text, opacity, id);
+            this.template.noticeList.appendChild(notice);
+            oldNoticeEle = notice;
+        }
+
+        this.events.trigger('notice_show', oldNoticeEle);
+
         if (time > 0) {
-            this.noticeTime = setTimeout(() => {
-                this.template.notice.style.opacity = 0;
-                this.events.trigger('notice_hide');
-            }, time);
+            this.noticeList[id] = setTimeout(
+                (function (e, dp) {
+                    return () => {
+                        e.addEventListener('animationend', () => {
+                            dp.template.noticeList.removeChild(e);
+                        });
+                        e.classList.add('remove-notice');
+                        dp.events.trigger('notice_hide');
+                        dp.noticeList[id] = null;
+                    };
+                })(oldNoticeEle, this),
+                time
+            );
         }
     }
 
@@ -608,6 +724,11 @@ class DPlayer {
     destroy() {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
+        document.removeEventListener('click', this.docClickFun, true);
+        this.container.removeEventListener('click', this.containerClickFun, true);
+        this.fullScreen.destroy();
+        this.hotkey.destroy();
+        this.contextmenu.destroy();
         this.controller.destroy();
         this.timer.destroy();
         this.video.src = '';

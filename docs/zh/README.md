@@ -1,7 +1,7 @@
 ---
 home: true
 actionText: Get Started →
-actionLink: /guide/
+actionLink: /zh/guide/
 footer: MIT Licensed | Made with love by DIYgod
 ---
 
@@ -9,4 +9,4 @@ footer: MIT Licensed | Made with love by DIYgod
   <DPlayer :immediate="true"></DPlayer>
 </div>
 
-<div class="hero custom"><p class="action"><router-link to="/guide/" class="nav-link action-button">快速上手 →</router-link></p></div>
+<div class="hero custom"><p class="action"><router-link to="/zh/guide/" class="nav-link action-button">快速上手 →</router-link></p></div>

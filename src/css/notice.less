@@ -1,0 +1,53 @@
+.dplayer-notice-list{
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+
+    .dplayer-notice {
+        border-radius: 2px;
+        background: rgba(28, 28, 28, 0.9);
+        transition: all .3s ease-in-out;
+        overflow: hidden;
+        color: #fff;
+        display: table;
+        pointer-events: none;
+        animation: showNotice .3s ease 1 forwards;
+    }
+
+    .remove-notice{
+        animation: removeNotice .3s ease 1 forwards;
+    }
+}
+
+@keyframes showNotice {
+    from {
+        padding: 0;
+        font-size: 0;
+        margin-top: 0;
+    }
+    to {
+        padding: 7px 20px;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+}
+
+@keyframes removeNotice {
+    0%{
+        padding: 7px 20px;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    20%{
+        font-size: 12px;
+    }
+    21%{
+        font-size: 0;
+        padding: 7px 10px;
+    }
+    100%{
+        padding: 0;
+        margin-top: 0;
+        font-size: 0;
+    }
+}

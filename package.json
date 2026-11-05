@@ -1,18 +1,20 @@
 {
     "name": "dplayer",
-    "version": "1.26.0",
+    "version": "1.27.1",
     "description": "Wow, such a lovely HTML5 danmaku video player",
     "main": "dist/DPlayer.min.js",
     "scripts": {
         "start": "npm run dev",
-        "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
-        "test": "eslint src webpack",
-        "format": "eslint \"**/*.js\" --fix && prettier \"**/*.{js,json,md}\" --write",
-        "format:staged": "eslint \"**/*.js\" --fix && pretty-quick --staged --verbose --pattern \"**/*.{js,json,md}\"",
-        "format:check": "eslint \"**/*.js\" && prettier-check \"**/*.{js,json,md}\"",
+        "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress",
+        "dev": "cross-env NODE_ENV=development webpack serve --config webpack/dev.config.js",
+        "test": "",
+        "format": "prettier \"**/*.{js,json,md}\" --write",
         "docs:dev": "vuepress dev docs",
-        "docs:build": "vuepress build docs"
+        "docs:build": "vuepress build docs",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
     },
     "files": [
         "dist"
@@ -27,9 +29,6 @@
         "video",
         "html5"
     ],
-    "gitHooks": {
-        "pre-commit": "npm run format:staged"
-    },
     "author": "DIYgod",
     "license": "MIT",
     "bugs": {
@@ -37,46 +36,43 @@
     },
     "homepage": "https://github.com/DIYgod/DPlayer#readme",
     "devDependencies": {
-        "@babel/core": "^7.6.0",
-        "@babel/preset-env": "^7.4.5",
-        "@vuepress/plugin-back-to-top": "1.5.3",
-        "@vuepress/plugin-google-analytics": "1.5.3",
-        "@vuepress/plugin-pwa": "1.5.3",
+        "@babel/core": "^7.22.10",
+        "@babel/preset-env": "^7.22.10",
+        "@vuepress/plugin-pwa": "1.9.9",
         "art-template": "4.13.2",
         "art-template-loader": "1.4.3",
-        "autoprefixer": "^9.6.1",
-        "babel-loader": "^8.0.6",
+        "autoprefixer": "^10.4.15",
+        "babel-loader": "^9.1.3",
         "cross-env": "^7.0.0",
-        "css-loader": "^4.0.0",
-        "cssnano": "^4.1.10",
-        "eslint": "^7.0.0",
-        "eslint-config-prettier": "^6.3.0",
-        "eslint-loader": "^4.0.0",
-        "eslint-plugin-prettier": "^3.1.1",
-        "exports-loader": "^1.0.0",
+        "css-loader": "^6.8.1",
+        "cssnano": "^6.0.1",
+        "exports-loader": "^4.0.0",
         "file-loader": "^6.0.0",
-        "git-revision-webpack-plugin": "^3.0.3",
-        "mini-css-extract-plugin": "0.10.0",
-        "node-sass": "^4.12.0",
-        "postcss-loader": "^3.0.0",
-        "prettier": "^2.0.4",
+        "git-revision-webpack-plugin": "^5.0.0",
+        "husky": "^8.0.3",
+        "less": "^4.2.0",
+        "less-loader": "^11.1.3",
+        "lint-staged": "^13.3.0",
+        "mini-css-extract-plugin": "2.7.6",
+        "postcss": "^8.4.27",
+        "postcss-loader": "^7.3.3",
+        "postcss-preset-env": "^9.1.1",
+        "prettier": "^3.0.1",
         "prettier-check": "^2.0.0",
-        "pretty-quick": "^2.0.0",
-        "sass-loader": "^9.0.0",
+        "pretty-quick": "^3.0.0",
         "strip-loader": "^0.1.2",
-        "style-loader": "^1.0.0",
+        "style-loader": "^3.3.3",
         "svg-inline-loader": "0.8.2",
         "template-string-optimize-loader": "^3.0.0",
         "url-loader": "^4.1.0",
-        "vuepress": "1.5.3",
-        "webpack": "^4.40.2",
-        "webpack-cli": "3.3.12",
-        "webpack-dev-server": "^3.8.1",
+        "webpack": "^5.88.2",
+        "webpack-cli": "5.1.4",
+        "webpack-dev-server": "^4.15.1",
         "yorkie": "^2.0.0"
     },
     "dependencies": {
-        "axios": "0.19.2",
+        "axios": "1.4.0",
         "balloon-css": "^1.0.3",
-        "promise-polyfill": "8.1.3"
+        "promise-polyfill": "8.3.0"
     }
 }

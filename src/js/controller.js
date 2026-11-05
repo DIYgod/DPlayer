@@ -2,24 +2,21 @@ import utils from './utils';
 import Thumbnails from './thumbnails';
 import Icons from './icons';
 
+let cast;
+let runOnce = true;
+let isCasting = false;
+
 class Controller {
     constructor(player) {
         this.player = player;
 
         this.autoHideTimer = 0;
         if (!utils.isMobile) {
-            this.player.container.addEventListener('mousemove', () => {
-                this.setAutoHide();
-            });
-            this.player.container.addEventListener('click', () => {
-                this.setAutoHide();
-            });
-            this.player.on('play', () => {
-                this.setAutoHide();
-            });
-            this.player.on('pause', () => {
-                this.setAutoHide();
-            });
+            this.setAutoHideHandler = this.setAutoHide.bind(this);
+            this.player.container.addEventListener('mousemove', this.setAutoHideHandler);
+            this.player.container.addEventListener('click', this.setAutoHideHandler);
+            this.player.on('play', this.setAutoHideHandler);
+            this.player.on('pause', this.setAutoHideHandler);
         }
 
         this.initPlayButton();
@@ -28,9 +25,15 @@ class Controller {
         this.initFullButton();
         this.initQualityButton();
         this.initScreenshotButton();
-        this.initSubtitleButton();
+        // if subtitle url not array, not init old single subtitle button
+        if (this.player.options.subtitle) {
+            if (typeof this.player.options.subtitle.url === 'string') {
+                this.initSubtitleButton();
+            }
+        }
         this.initHighlights();
         this.initAirplayButton();
+        this.initChromecastButton();
         if (!utils.isMobile) {
             this.initVolumeButton();
         }
@@ -46,12 +49,14 @@ class Controller {
         });
 
         if (!utils.isMobile) {
-            this.player.template.videoWrap.addEventListener('click', () => {
-                this.player.toggle();
-            });
-            this.player.template.controllerMask.addEventListener('click', () => {
-                this.player.toggle();
-            });
+            if (!this.player.options.preventClickToggle) {
+                this.player.template.videoWrap.addEventListener('click', () => {
+                    this.player.toggle();
+                });
+                this.player.template.controllerMask.addEventListener('click', () => {
+                    this.player.toggle();
+                });
+            }
         } else {
             this.player.template.videoWrap.addEventListener('click', () => {
                 this.toggle();
@@ -66,7 +71,7 @@ class Controller {
         this.player.on('durationchange', () => {
             if (this.player.video.duration !== 1 && this.player.video.duration !== Infinity) {
                 if (this.player.options.highlight) {
-                    const highlights = document.querySelectorAll('.dplayer-highlight');
+                    const highlights = this.player.template.playedBarWrap.querySelectorAll('.dplayer-highlight');
                     [].slice.call(highlights, 0).forEach((item) => {
                         this.player.template.playedBarWrap.removeChild(item);
                     });
@@ -117,11 +122,11 @@ class Controller {
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
             this.player.seek(this.player.bar.get('played') * this.player.video.duration);
-            this.player.timer.enable('progress');
+            this.player.moveBar = false;
         };
 
         this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragStart, () => {
-            this.player.timer.disable('progress');
+            this.player.moveBar = true;
             document.addEventListener(utils.nameMap.dragMove, thumbMove);
             document.addEventListener(utils.nameMap.dragEnd, thumbUp);
         });
@@ -243,9 +248,8 @@ class Controller {
                     link.click();
                     document.body.removeChild(link);
                     URL.revokeObjectURL(dataURL);
+                    this.player.events.trigger('screenshot', dataURL);
                 });
-
-                this.player.events.trigger('screenshot', dataURL);
             });
         }
     }
@@ -279,23 +283,101 @@ class Controller {
         }
     }
 
-    initSubtitleButton() {
-        if (this.player.options.subtitle) {
-            this.player.events.on('subtitle_show', () => {
-                this.player.template.subtitleButton.dataset.balloon = this.player.tran('Hide subtitle');
-                this.player.template.subtitleButtonInner.style.opacity = '';
-                this.player.user.set('subtitle', 1);
-            });
-            this.player.events.on('subtitle_hide', () => {
-                this.player.template.subtitleButton.dataset.balloon = this.player.tran('Show subtitle');
-                this.player.template.subtitleButtonInner.style.opacity = '0.4';
-                this.player.user.set('subtitle', 0);
-            });
+    initChromecast() {
+        const script = window.document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        script.setAttribute('src', 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
+        window.document.body.appendChild(script);
 
-            this.player.template.subtitleButton.addEventListener('click', () => {
-                this.player.subtitle.toggle();
+        window.__onGCastApiAvailable = (isAvailable) => {
+            if (isAvailable) {
+                cast = window.chrome.cast;
+                const sessionRequest = new cast.SessionRequest(cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
+                const apiConfig = new cast.ApiConfig(
+                    sessionRequest,
+                    () => {},
+                    (status) => {
+                        if (status === cast.ReceiverAvailability.AVAILABLE) {
+                            console.log('chromecast: ', status);
+                        }
+                    }
+                );
+                cast.initialize(apiConfig, () => {});
+            }
+        };
+    }
+
+    initChromecastButton() {
+        if (this.player.options.chromecast) {
+            if (runOnce) {
+                runOnce = false;
+                this.initChromecast();
+            }
+            const discoverDevices = () => {
+                cast.requestSession(
+                    (s) => {
+                        this.session = s;
+                        launchMedia(this.player.options.video.url);
+                    },
+                    (err) => {
+                        if (err.code === 'cancel') {
+                            this.session = undefined;
+                        } else {
+                            console.error('Error selecting a cast device', err);
+                        }
+                    }
+                );
+            };
+
+            const launchMedia = (media) => {
+                const mediaInfo = new cast.media.MediaInfo(media);
+                const request = new cast.media.LoadRequest(mediaInfo);
+
+                if (!this.session) {
+                    window.open(media);
+                    return false;
+                }
+                this.session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError).play();
+                return true;
+            };
+
+            const onMediaDiscovered = (how, media) => {
+                this.currentMedia = media;
+            };
+
+            const onMediaError = (err) => {
+                console.error('Error launching media', err);
+            };
+
+            this.player.template.chromecastButton.addEventListener('click', () => {
+                if (isCasting) {
+                    isCasting = false;
+                    this.currentMedia.stop();
+                    this.session.stop();
+                    this.initChromecast();
+                } else {
+                    isCasting = true;
+                    discoverDevices();
+                }
             });
         }
+    }
+
+    initSubtitleButton() {
+        this.player.events.on('subtitle_show', () => {
+            this.player.template.subtitleButton.dataset.balloon = this.player.tran('hide-subs');
+            this.player.template.subtitleButtonInner.style.opacity = '';
+            this.player.user.set('subtitle', 1);
+        });
+        this.player.events.on('subtitle_hide', () => {
+            this.player.template.subtitleButton.dataset.balloon = this.player.tran('show-subs');
+            this.player.template.subtitleButtonInner.style.opacity = '0.4';
+            this.player.user.set('subtitle', 0);
+        });
+
+        this.player.template.subtitleButton.addEventListener('click', () => {
+            this.player.subtitle.toggle();
+        });
     }
 
     setAutoHide() {
@@ -331,6 +413,10 @@ class Controller {
     }
 
     destroy() {
+        if (!utils.isMobile) {
+            this.player.container.removeEventListener('mousemove', this.setAutoHideHandler);
+            this.player.container.removeEventListener('click', this.setAutoHideHandler);
+        }
         clearTimeout(this.autoHideTimer);
     }
 }

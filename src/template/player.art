@@ -6,14 +6,14 @@
         <img src="{{ options.logo }}">
     </div>
     {{ /if }}
-    <div class="dplayer-danmaku"{{ if options.danmaku && options.danmaku.bottm }} style="margin-bottom:{{ options.danmaku.bottm }}"{{ /if }}>
+    <div class="dplayer-danmaku"{{ if options.danmaku && options.danmaku.bottom }} style="margin-bottom:{{ options.danmaku.bottom }}"{{ /if }}>
         <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
     </div>
     <div class="dplayer-subtitle"></div>
     <div class="dplayer-bezel">
         <span class="dplayer-bezel-icon"></span>
         {{ if options.danmaku }}
-        <span class="dplayer-danloading">{{ tran('Danmaku is loading') }}</span>
+        <span class="dplayer-danloading">{{ tran('danmaku-loading') }}</span>
         {{ /if }}
         <span class="diplayer-loading-icon">{{@ icons.loading }}</span>
     </div>
@@ -21,12 +21,12 @@
 <div class="dplayer-controller-mask"></div>
 <div class="dplayer-controller">
     <div class="dplayer-icons dplayer-comment-box">
-        <button class="dplayer-icon dplayer-comment-setting-icon" data-balloon="{{ tran('Setting') }}" data-balloon-pos="up">
+        <button class="dplayer-icon dplayer-comment-setting-icon" data-balloon="{{ tran('setting') }}" data-balloon-pos="up">
             <span class="dplayer-icon-content">{{@ icons.pallette }}</span>
         </button>
         <div class="dplayer-comment-setting-box">
             <div class="dplayer-comment-setting-color">
-                <div class="dplayer-comment-setting-title">{{ tran('Set danmaku color') }}</div>
+                <div class="dplayer-comment-setting-title">{{ tran('set-danmaku-color') }}</div>
                 <label>
                     <input type="radio" name="dplayer-danmaku-color-{{ index }}" value="#fff" checked>
                     <span style="background: #fff;"></span>
@@ -53,23 +53,23 @@
                 </label>
             </div>
             <div class="dplayer-comment-setting-type">
-                <div class="dplayer-comment-setting-title">{{ tran('Set danmaku type') }}</div>
+                <div class="dplayer-comment-setting-title">{{ tran('set-danmaku-type') }}</div>
                 <label>
                     <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="1">
-                    <span>{{ tran('Top') }}</span>
+                    <span>{{ tran('top') }}</span>
                 </label>
                 <label>
                     <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="0" checked>
-                    <span>{{ tran('Rolling') }}</span>
+                    <span>{{ tran('rolling') }}</span>
                 </label>
                 <label>
                     <input type="radio" name="dplayer-danmaku-type-{{ index }}" value="2">
-                    <span>{{ tran('Bottom') }}</span>
+                    <span>{{ tran('bottom') }}</span>
                 </label>
             </div>
         </div>
-        <input class="dplayer-comment-input" type="text" placeholder="{{ tran('Input danmaku, hit Enter') }}" maxlength="30">
-        <button class="dplayer-icon dplayer-send-icon" data-balloon="{{ tran('Send') }}" data-balloon-pos="up">
+        <input class="dplayer-comment-input" type="text" placeholder="{{ tran('input-danmaku-enter') }}" maxlength="30">
+        <button class="dplayer-icon dplayer-send-icon" data-balloon="{{ tran('send') }}" data-balloon-pos="up">
             <span class="dplayer-icon-content">{{@ icons.send }}</span>
         </button>
     </div>
@@ -94,7 +94,7 @@
             <span class="dplayer-dtime">0:00</span>
         </span>
         {{ if options.live }}
-        <span class="dplayer-live-badge"><span class="dplayer-live-dot" style="background: {{ options.theme }};"></span>{{ tran('Live') }}</span>
+        <span class="dplayer-live-badge"><span class="dplayer-live-dot" style="background: {{ options.theme }};"></span>{{ tran('live') }}</span>
         {{ /if }}
     </div>
     <div class="dplayer-icons dplayer-icons-right">
@@ -111,60 +111,83 @@
         </div>
         {{ /if }}
         {{ if options.screenshot }}
-        <div class="dplayer-icon dplayer-camera-icon" data-balloon="{{ tran('Screenshot') }}" data-balloon-pos="up">
+        <div class="dplayer-icon dplayer-camera-icon" data-balloon="{{ tran('screenshot') }}" data-balloon-pos="up">
             <span class="dplayer-icon-content">{{@ icons.camera }}</span>
         </div>
         {{ /if }}
         {{ if options.airplay }}
-        <div class="dplayer-icon dplayer-airplay-icon" data-balloon="{{ tran('AirPlay') }}" data-balloon-pos="up">
+        <div class="dplayer-icon dplayer-airplay-icon" data-balloon="{{ tran('airplay') }}" data-balloon-pos="up">
             <span class="dplayer-icon-content">{{@ icons.airplay }}</span>
         </div>
         {{ /if }}
+        {{ if options.chromecast }}
+        <div class="dplayer-icon dplayer-chromecast-icon" data-balloon="{{ tran('chromecast') }}" data-balloon-pos="up">
+            <span class="dplayer-icon-content">{{@ icons.chromecast }}</span>
+        </div>
+        {{ /if }}
         <div class="dplayer-comment">
-            <button class="dplayer-icon dplayer-comment-icon" data-balloon="{{ tran('Send danmaku') }}" data-balloon-pos="up">
+            <button class="dplayer-icon dplayer-comment-icon" data-balloon="{{ tran('send-danmaku') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.comment }}</span>
             </button>
         </div>
         {{ if options.subtitle }}
+        {{ if (typeof options.subtitle.url === 'string') }}
         <div class="dplayer-subtitle-btn">
-            <button class="dplayer-icon dplayer-subtitle-icon" data-balloon="{{ tran('Hide subtitle') }}" data-balloon-pos="up">
+            <button class="dplayer-icon dplayer-subtitle-icon" data-balloon="{{ tran('hide-subs') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.subtitle }}</span>
             </button>
         </div>
+        {{ else }}
+        <div class="dplayer-subtitles">
+            <button class="dplayer-icon dplayer-subtitles-icon" data-balloon="{{ tran('subtitle') }}" data-balloon-pos="up">
+                <span class="dplayer-icon-content">{{@ icons.subtitle }}</span>
+            </button>
+            <div class="dplayer-subtitles-box">
+                <div class="dplayer-subtitles-panel">
+                    {{ each options.subtitle.url }}
+                        <div class="dplayer-subtitles-item" data-subtitle="{{ $value.url }}">
+                            <!-- if lang, show tran(lang). if lang and name, show name + (tran(lang)). if name, show name. off option use lang for translation. -->
+                            <span class="dplayer-label">{{ $value.lang ? $value.name ?  $value.name+' ('+tran($value.lang)+')' : tran($value.lang) : $value.name }}</span>
+                        </div>
+                    {{ /each }}
+                </div>
+            </div>
+        </div>
+        {{ /if }}
         {{ /if }}
         <div class="dplayer-setting">
-            <button class="dplayer-icon dplayer-setting-icon" data-balloon="{{ tran('Setting') }}" data-balloon-pos="up">
+            <button class="dplayer-icon dplayer-setting-icon" data-balloon="{{ tran('setting') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.setting }}</span>
             </button>
             <div class="dplayer-setting-box">
                 <div class="dplayer-setting-origin-panel">
                     <div class="dplayer-setting-item dplayer-setting-speed">
-                        <span class="dplayer-label">{{ tran('Speed') }}</span>
+                        <span class="dplayer-label">{{ tran('speed') }}</span>
                         <div class="dplayer-toggle">{{@ icons.right }}</div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-loop">
-                        <span class="dplayer-label">{{ tran('Loop') }}</span>
+                        <span class="dplayer-label">{{ tran('loop') }}</span>
                         <div class="dplayer-toggle">
                             <input class="dplayer-toggle-setting-input" type="checkbox" name="dplayer-toggle">
                             <label for="dplayer-toggle"></label>
                         </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-showdan">
-                        <span class="dplayer-label">{{ tran('Show danmaku') }}</span>
+                        <span class="dplayer-label">{{ tran('show-danmaku') }}</span>
                         <div class="dplayer-toggle">
                             <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan">
                             <label for="dplayer-toggle-dan"></label>
                         </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-danunlimit">
-                        <span class="dplayer-label">{{ tran('Unlimited danmaku') }}</span>
+                        <span class="dplayer-label">{{ tran('unlimited-danmaku') }}</span>
                         <div class="dplayer-toggle">
                             <input class="dplayer-danunlimit-setting-input" type="checkbox" name="dplayer-toggle-danunlimit">
                             <label for="dplayer-toggle-danunlimit"></label>
                         </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-danmaku">
-                        <span class="dplayer-label">{{ tran('Opacity for danmaku') }}</span>
+                        <span class="dplayer-label">{{ tran('opacity-danmaku') }}</span>
                         <div class="dplayer-danmaku-bar-wrap">
                             <div class="dplayer-danmaku-bar">
                                 <div class="dplayer-danmaku-bar-inner">
@@ -177,17 +200,17 @@
                 <div class="dplayer-setting-speed-panel">
                     {{ each options.playbackSpeed }}
                         <div class="dplayer-setting-speed-item" data-speed="{{ $value }}">
-                            <span class="dplayer-label">{{ $value === 1 ? tran('Normal') : $value }}</span>
+                            <span class="dplayer-label">{{ $value === 1 ? tran('normal') : $value }}</span>
                         </div>
                     {{ /each }}
                 </div>
             </div>
         </div>
         <div class="dplayer-full">
-            <button class="dplayer-icon dplayer-full-in-icon" data-balloon="{{ tran('Web full screen') }}" data-balloon-pos="up">
+            <button class="dplayer-icon dplayer-full-in-icon" data-balloon="{{ tran('web-fullscreen') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.fullWeb }}</span>
             </button>
-            <button class="dplayer-icon dplayer-full-icon" data-balloon="{{ tran('Full screen') }}" data-balloon-pos="up">
+            <button class="dplayer-icon dplayer-full-icon" data-balloon="{{ tran('fullscreen') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.full }}</span>
             </button>
         </div>
@@ -247,11 +270,11 @@
 <div class="dplayer-menu">
     {{ each options.contextmenu }}
         <div class="dplayer-menu-item">
-            <a{{ if $value.link }} target="_blank"{{ /if }} href="{{ $value.link || 'javascript:void(0);' }}">{{ tran($value.text) }}</a>
+            <a{{ if $value.link }} target="_blank"{{ /if }} href="{{ $value.link || 'javascript:void(0);' }}">{{ if $value.key }} {{ tran($value.key) }}{{ /if }}{{ if $value.text }} {{$value.text}}{{ /if }}</a>
         </div>
     {{ /each }}
 </div>
-<div class="dplayer-notice"></div>
+<div class="dplayer-notice-list"></div>
 <button class="dplayer-mobile-play">
     {{@ icons.play }}
 </button>

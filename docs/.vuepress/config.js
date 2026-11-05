@@ -1,22 +1,10 @@
 module.exports = {
     plugins: {
-        '@vuepress/google-analytics': {
-            ga: 'UA-48084758-9',
-        },
-        '@vuepress/pwa': {
-            serviceWorker: true,
-            updatePopup: {
-                '/zh/': {
-                    message: '发现新内容可用',
-                    buttonText: '刷新',
-                },
-                '/': {
-                    message: 'New content is available',
-                    buttonText: 'Refresh',
-                },
-            },
-        },
         '@vuepress/back-to-top': true,
+        umami: {
+            trackerUrl: 'https://umami.diygod.dev',
+            siteId: 'f3b469a2-8054-4bbb-8873-4035761aa4e3',
+        },
     },
     locales: {
         '/zh/': {
@@ -38,10 +26,11 @@ module.exports = {
         ['script', { src: 'https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js' }],
         ['script', { src: 'https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js' }],
     ],
+    theme: 'vuepress-theme-dplayer',
     themeConfig: {
         repo: 'MoePlayer/DPlayer',
         editLinks: true,
-        docsDir: 'docs',
+        docsDir: '.',
         locales: {
             '/zh/': {
                 lang: 'zh-CN',

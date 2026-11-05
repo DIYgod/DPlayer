@@ -12,6 +12,7 @@ export default (options) => {
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
         airplay: true,
+        chromecast: false,
         hotkey: true,
         preload: 'metadata',
         volume: 0.7,
@@ -21,6 +22,7 @@ export default (options) => {
         contextmenu: [],
         mutex: true,
         pluginOptions: { hls: {}, flv: {}, dash: {}, webtorrent: {} },
+        preventClickToggle: false,
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
@@ -50,13 +52,13 @@ export default (options) => {
 
     options.contextmenu = options.contextmenu.concat([
         {
-            text: 'Video info',
+            key: 'video-info',
             click: (player) => {
                 player.infoPanel.triggle();
             },
         },
         {
-            text: 'About author',
+            key: 'about-author',
             link: 'https://diygod.me',
         },
         {

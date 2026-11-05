@@ -408,6 +408,41 @@
             display: inline-block;
             height: 100%;
         }
+        .dplayer-subtitles {
+            display: inline-block;
+            height: 100%;
+            .dplayer-subtitles-box {
+                position: absolute;
+                right: 0;
+                bottom: 50px;
+                transform: scale(0);
+                width: fit-content;
+                max-width: 240px;
+                min-width: 120px;
+                border-radius: 2px;
+                background: rgba(28, 28, 28, 0.9);
+                padding: 7px 0;
+                transition: all .3s ease-in-out;
+                overflow: auto;
+                z-index: 2;
+                &.dplayer-subtitles-panel {
+                    display: block;
+                }
+                &.dplayer-subtitles-box-open {
+                    transform: scale(1);
+                }
+            }
+            .dplayer-subtitles-item {
+                height: 30px;
+                padding: 5px 10px;
+                box-sizing: border-box;
+                cursor: pointer;
+                position: relative;
+                &:hover {
+                    background-color: rgba(255, 255, 255, .1);
+                }
+            }
+        }
         .dplayer-setting {
             display: inline-block;
             height: 100%;

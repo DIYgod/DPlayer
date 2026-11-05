@@ -22,7 +22,8 @@ class Template {
                 current: true,
                 pic: this.options.video.pic,
                 screenshot: this.options.screenshot,
-                airplay: this.options.airplay,
+                airplay: utils.isSafari && !utils.isChrome ? this.options.airplay : false,
+                chromecast: this.options.chromecast,
                 preload: this.options.preload,
                 url: this.options.video.url,
                 subtitle: this.options.subtitle,
@@ -80,13 +81,18 @@ class Template {
         this.qualityList = this.container.querySelector('.dplayer-quality-list');
         this.camareButton = this.container.querySelector('.dplayer-camera-icon');
         this.airplayButton = this.container.querySelector('.dplayer-airplay-icon');
+        this.chromecastButton = this.container.querySelector('.dplayer-chromecast-icon');
         this.subtitleButton = this.container.querySelector('.dplayer-subtitle-icon');
         this.subtitleButtonInner = this.container.querySelector('.dplayer-subtitle-icon .dplayer-icon-content');
+        this.subtitlesButton = this.container.querySelector('.dplayer-subtitles-icon');
+        this.subtitlesBox = this.container.querySelector('.dplayer-subtitles-box');
+        this.subtitlesItem = this.container.querySelectorAll('.dplayer-subtitles-item');
         this.subtitle = this.container.querySelector('.dplayer-subtitle');
+        this.subtrack = this.container.querySelector('.dplayer-subtrack');
         this.qualityButton = this.container.querySelector('.dplayer-quality-icon');
         this.barPreview = this.container.querySelector('.dplayer-bar-preview');
         this.barWrap = this.container.querySelector('.dplayer-bar-wrap');
-        this.notice = this.container.querySelector('.dplayer-notice');
+        this.noticeList = this.container.querySelector('.dplayer-notice-list');
         this.infoPanel = this.container.querySelector('.dplayer-info-panel');
         this.infoPanelClose = this.container.querySelector('.dplayer-info-panel-close');
         this.infoVersion = this.container.querySelector('.dplayer-info-panel-item-version .dplayer-info-panel-item-data');
@@ -98,6 +104,17 @@ class Template {
         this.infoDanmakuId = this.container.querySelector('.dplayer-info-panel-item-danmaku-id .dplayer-info-panel-item-data');
         this.infoDanmakuApi = this.container.querySelector('.dplayer-info-panel-item-danmaku-api .dplayer-info-panel-item-data');
         this.infoDanmakuAmount = this.container.querySelector('.dplayer-info-panel-item-danmaku-amount .dplayer-info-panel-item-data');
+    }
+
+    static NewNotice(text, opacity, id) {
+        const notice = document.createElement('div');
+        notice.classList.add('dplayer-notice');
+        notice.style.opacity = opacity;
+        notice.innerText = text;
+        if (id) {
+            notice.id = `dplayer-notice-${id}`;
+        }
+        return notice;
     }
 }
 

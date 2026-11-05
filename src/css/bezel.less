@@ -60,11 +60,11 @@
             animation: diplayer-loading-dot-fade .8s ease infinite;
             opacity: 0;
             transform-origin: 4px 4px;
-            @for $i from 7 through 1 {
-                &.diplayer-loading-dot-#{$i} {
-                    animation-delay: .1s * $i;
+            each(range(7), {
+                &.diplayer-loading-dot-@{value} {
+                    animation-delay: (@value * 0.1s);
                 }
-            }
+            });
         }
         @keyframes diplayer-loading-dot-fade {
             0% {
