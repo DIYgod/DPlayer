@@ -15,7 +15,7 @@
         {{ if options.danmaku }}
         <span class="dplayer-danloading">{{ tran('danmaku-loading') }}</span>
         {{ /if }}
-        <span class="diplayer-loading-icon">{{@ icons.loading }}</span>
+        <span class="dplayer-loading-icon">{{@ icons.loading }}</span>
     </div>
 </div>
 <div class="dplayer-controller-mask"></div>
@@ -270,7 +270,7 @@
 <div class="dplayer-menu">
     {{ each options.contextmenu }}
         <div class="dplayer-menu-item">
-            <a{{ if $value.link }} target="_blank"{{ /if }} href="{{ $value.link || 'javascript:void(0);' }}">{{ if $value.key }} {{ tran($value.key) }}{{ /if }}{{ if $value.text }} {{$value.text}}{{ /if }}</a>
+            <a{{ if $value.link }} target="_blank" rel="noopener noreferrer"{{ /if }} href="{{ $value.link || '#' }}">{{ if $value.key }} {{ tran($value.key) }}{{ /if }}{{ if $value.text }} {{$value.text}}{{ /if }}</a>
         </div>
     {{ /each }}
 </div>
