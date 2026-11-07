@@ -20,13 +20,13 @@ class Subtitle {
                 const cue = track.activeCues[track.activeCues.length - 1];
                 this.container.innerHTML = '';
                 if (cue) {
-                    const template = document.createElement('div');
-                    template.appendChild(cue.getCueAsHTML());
-                    const trackHtml = template.innerHTML
-                        .split(/\r?\n/)
-                        .map((item) => `<p>${item}</p>`)
-                        .join('');
-                    this.container.innerHTML = trackHtml;
+                    const fragment = cue.getCueAsHTML();
+                    const lines = Array.from(fragment.childNodes);
+                    for (const node of lines) {
+                        const p = document.createElement('p');
+                        p.appendChild(node.cloneNode ? node.cloneNode(true) : document.createTextNode(node.textContent));
+                        this.container.appendChild(p);
+                    }
                 }
                 this.events.trigger('subtitle_change');
             };

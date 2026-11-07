@@ -93,7 +93,7 @@ const utils = {
 
     isChrome: /chrome/i.test(window.navigator.userAgent),
 
-    isSafari: /safari/i.test(window.navigator.userAgent),
+    isSafari: /safari/i.test(window.navigator.userAgent) && !/chrome/i.test(window.navigator.userAgent),
 
     storage: {
         set: (key, value) => {
@@ -116,7 +116,7 @@ const utils = {
         if (color.length === 3) {
             color = `${color[0]}${color[0]}${color[1]}${color[1]}${color[2]}${color[2]}`;
         }
-        return (parseInt(color, 16) + 0x000000) & 0xffffff;
+        return parseInt(color, 16) & 0xffffff;
     },
 
     number2Color: (number) => '#' + ('00000' + number.toString(16)).slice(-6),

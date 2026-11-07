@@ -2,6 +2,18 @@
 import defaultApiBackend from './api.js';
 
 export default (options) => {
+    // Clone to avoid mutating the caller's object
+    options = Object.assign({}, options);
+    if (options.video) {
+        options.video = Object.assign({}, options.video);
+    }
+    if (options.danmaku) {
+        options.danmaku = Object.assign({}, options.danmaku);
+    }
+    if (options.subtitle) {
+        options.subtitle = Object.assign({}, options.subtitle);
+    }
+
     // default options
     const defaultOption = {
         container: options.element || document.getElementsByClassName('dplayer')[0],
@@ -54,7 +66,7 @@ export default (options) => {
         {
             key: 'video-info',
             click: (player) => {
-                player.infoPanel.triggle();
+                player.infoPanel.toggle();
             },
         },
         {

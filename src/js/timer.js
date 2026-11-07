@@ -18,11 +18,10 @@ class Timer {
     }
 
     init() {
-        this.types.map((item) => {
+        this.types.forEach((item) => {
             if (item !== 'fps') {
                 this[`init${item}Checker`]();
             }
-            return item;
         });
     }
 
@@ -91,10 +90,9 @@ class Timer {
     }
 
     destroy() {
-        this.types.map((item) => {
+        this.types.forEach((item) => {
             this[`enable${item}Checker`] = false;
             this[`${item}Checker`] && clearInterval(this[`${item}Checker`]);
-            return item;
         });
     }
 }
