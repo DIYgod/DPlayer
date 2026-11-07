@@ -16,6 +16,7 @@ class Danmaku {
         this._opacity = this.options.opacity;
         this.events = this.options.events;
         this.unlimited = this.options.unlimited;
+        this._rafId = null;
         this._measure('');
 
         this.load();
@@ -124,7 +125,7 @@ class Danmaku {
             }
             this.draw(dan);
         }
-        window.requestAnimationFrame(() => {
+        this._rafId = window.requestAnimationFrame(() => {
             this.frame();
         });
     }
@@ -213,9 +214,9 @@ class Danmaku {
                 item.classList.add('dplayer-danmaku-item');
                 item.classList.add(`dplayer-danmaku-${dan[i].type}`);
                 if (dan[i].border) {
-                    item.innerHTML = `<span style="border:${dan[i].border}">${dan[i].text}</span>`;
+                    item.innerHTML = `<span style="border:${dan[i].border}">${this.htmlEncode(dan[i].text)}</span>`;
                 } else {
-                    item.innerHTML = dan[i].text;
+                    item.textContent = dan[i].text;
                 }
                 item.style.opacity = this._opacity;
                 item.style.color = utils.number2Color(dan[i].color);
@@ -278,9 +279,10 @@ class Danmaku {
 
     _measure(text) {
         if (!this.context) {
-            const measureStyle = getComputedStyle(this.container.getElementsByClassName('dplayer-danmaku-item')[0], null);
+            const existingItem = this.container.getElementsByClassName('dplayer-danmaku-item')[0];
+            const font = existingItem ? getComputedStyle(existingItem, null).getPropertyValue('font') : '14px sans-serif';
             this.context = document.createElement('canvas').getContext('2d');
-            this.context.font = measureStyle.getPropertyValue('font');
+            this.context.font = font;
         }
         return this.context.measureText(text).width;
     }
@@ -303,7 +305,7 @@ class Danmaku {
             bottom: {},
         };
         this.danIndex = 0;
-        this.options.container.innerHTML = '';
+        this.container.innerHTML = '';
 
         this.events && this.events.trigger('danmaku_clear');
     }
@@ -353,6 +355,14 @@ class Danmaku {
             bottom: `${(isFullScreen ? 6 : 4) / rate}s`,
         };
         return animations[position];
+    }
+
+    destroy() {
+        if (this._rafId) {
+            window.cancelAnimationFrame(this._rafId);
+            this._rafId = null;
+        }
+        this.clear();
     }
 }
 
